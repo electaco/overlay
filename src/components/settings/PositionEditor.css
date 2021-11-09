@@ -1,0 +1,11 @@
+.position-editor__input {
+    width: 4em;
+}
+.position-editor-title {
+    display:inline-block;
+    min-width: 7em;
+}
+.position-editor__label {
+    display:inline-block;
+    padding: 0 0.5em;
+}

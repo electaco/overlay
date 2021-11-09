@@ -1,0 +1,21 @@
+.editTextClick {
+    display: none;
+    opacity: 0.5;
+}
+
+.editText:hover .editTextClick {
+    display: inline;
+}
+
+.editText {
+    min-width: 5px;
+    display: inline-block;
+}
+
+.editableInput {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: none;
+    padding: 0px 4px;
+    border-radius: 4px;
+    width: auto;
+}

@@ -1,0 +1,13 @@
+.section .sectionTitle {
+    font-weight: bold;
+    font-size: 120%;
+    border-bottom: 1px solid #333;
+    padding-bottom: 3px;
+}
+.section .sectionContent {
+    padding: 5px;
+    padding-left: 15px;
+}
+.section {
+    width: 100%;
+}

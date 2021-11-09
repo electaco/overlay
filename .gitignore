@@ -1,0 +1,8 @@
+node_modules/
+build/
+*.7z
+release/
+public/electron/
+/markers/
+logs.txt
+out/

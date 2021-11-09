@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Menu</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                
+                overflow: hidden;
+            }
+            #header {
+                padding: 3px;
+                margin-left: auto;
+                margin-right: auto;
+                background-color: rgba(160, 121, 95, 0.657);
+                
+                border-radius: 12px;
+            }
+
+            .button:not(:last-child) {
+                border-bottom: 1px solid rgb(163, 132, 96);
+            }
+            #menu {
+                padding: 5px;
+                display: flex;
+                flex-direction: column;
+                background-color: rgb(156, 120, 85);
+                margin-top: 2px;
+                border-radius: 12px;
+            }
+            #app {
+                width: 110px;
+                text-align: center;
+            }
+            .red {
+                color: rgb(221, 29, 29);
+            }
+            .yellow {
+                color: rgb(194, 194, 16);
+            }
+            .green {
+                color: rgb(14, 209, 14);
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="basic.css"/>
+    </head>
+    <body>
+        <div id="app" >
+            <div id="header">
+                <span>Gw2 <span id="connstatus" class="red" title="Connection status">•</span></span>
+            </div>
+            <div id="menu">
+                <div onClick="openWindow('marks');" class="button">Markers</div>
+                <div onClick="openWindow('mounts');" class="button">Mounts</div>
+                <div onClick="openWindow('config');" class="button">Config</div>
+                <div onClick="openWindow('test');" class="button">Test window</div>
+                <div onClick="exit_program();" class="button">Exit overlay</div>
+            </div>
+        </div>
+        <script src="errorhandler.js"></script>
+        <script src="config_button.js"></script>
+    </body>
+</html>

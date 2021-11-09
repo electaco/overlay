@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "public/electron",
+        
+    },
+    "include": ["./ts_static/**/*"]
+}

@@ -1,0 +1,14 @@
+Run on node v14.15
+
+Live building of files (electron and react components):
+  npm run watch
+Start Electron:
+  npm run start
+Build:
+  npx electron-builder
+
+File structure:
+  src/ - React UI
+  ts_static/ - Electron files
+  gw2data/ - C# WebSocket server for fetching game data
+  public/ - Static files

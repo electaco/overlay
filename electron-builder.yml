@@ -1,0 +1,27 @@
+# https://www.electron.build/configuration/configuration
+appId: net.thelazy.electaco
+productName: Electaco
+extends: null
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+directories:
+  output: out
+files:
+- build
+extraFiles:
+- debug_electaco.bat
+- convert_from_taco.py
+- gw2data
+win:
+  target: nsis
+fileAssociations:
+  - ext: etmp
+    name: Electaco Marker Pack
+# https://github.com/electron-userland/electron-builder/issues/583
+# Apparently URL schemes in windows only work on perMachine: true apps.
+# So this won't work unless that's changed
+protocols:
+  - name: Electaco Marker Pack URL
+    schemes: ["etmp"]
+

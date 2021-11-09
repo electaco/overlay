@@ -1,0 +1,7 @@
+settings:
+    - name: Rendering
+      options:
+        - default: false
+          name: Show Debug Boxes
+          type: checkbox
+          path: "rendering.debugBoxes"

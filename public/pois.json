@@ -1,0 +1,22 @@
+{
+    "miningnodes": {
+        "name": "Mining nodes",
+        "icon": "marker1.webp",
+        "color": "#ffff00",
+        "pois": [{
+            "map": 15,
+            "x": -287.2272,
+            "y": 5.4903,
+            "z": -758.949,
+            "name": "Test 1"
+        },
+        {
+            "map": 15,
+            "x": -758.2272,
+            "y": 5.4903,
+            "z": -287.949,
+            "name": "Test 2"
+        }
+    ]
+    }
+}

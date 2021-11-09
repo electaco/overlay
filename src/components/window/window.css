@@ -1,0 +1,21 @@
+#app {
+    background-color: rgba(39, 21, 5, 0.801); 
+    color: #fff;
+    height: 100vh;
+    border-radius: 10px;
+    overflow: hidden;
+}
+#title {
+    display: flex;
+    padding: 3px;
+    border-bottom: 1px solid #666;
+    background-color: rgba(3, 3, 3, 0.644); 
+    color: #fff;
+}
+#titlebar {
+    flex-grow: 100;
+    -webkit-app-region: drag;
+}
+#content {
+    padding: 15px;
+}
