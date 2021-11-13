@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { ICameraPositionResult } from "./CameraPositionManager";
 import { Vector3 } from "three";
 import isEqual = require("lodash.isequal");
+import { runInThisContext } from "vm";
 
 export class MovieManager {
   video: HTMLVideoElement;
@@ -31,7 +32,7 @@ export class MovieManager {
     }
   }
 
-  CreateVideoMarker(ratio: [number, number]) {
+  GetVideoMarker(ratio: [number, number]) {
     if (this.movieScreen) {
       if (this.movieScreen.userData.ratio == ratio)
         return;
@@ -44,6 +45,7 @@ export class MovieManager {
     this.movieScreen.userData.SkipRemove = true;
     this.movieScreen.userData.ratio = ratio;
     this.scene.add(this.movieScreen);
+    console.log("Created video marker with ratio "+ ratio[0] + "x" + ratio[1]);
   }
 
   Stop() {
@@ -76,15 +78,41 @@ export class MovieManager {
     });
   }
 
-  ClearVideos() {
+  ClearMarkers() {
     this.videoMarks = [];
   }
 
+  SetVideoMarkers(markers: IVideoData[]) {
+    this.ClearMarkers();
+    for (let i = 0; i < markers.length; i++) {
+      this.AddVideo(markers[i]);
+    }
+    this.CheckMarkersList();
+  }
+
+  CheckMarkersList() {
+    if (this.activeVideoMark) {
+      let index = this.videoMarks.findIndex(x => isEqual(x.marker, this.activeVideoMark));
+      if (index == -1) {
+        this.UnloadMarker();
+      }
+    }
+  }
+
+  UnloadMarker() {
+    this.movieScreen.userData.onAfterRender = null;
+    this.activeVideoMark = null;
+    this.Stop();
+    this.SetVisibleStatus(false);
+  }
+
   CheckVideoDistance(camera: THREE.Camera) {
+    if (this.activeVideoMark) {
+      return;
+    }
     for (let i = 0; i < this.videoMarks.length; i++) {
       let data = this.videoMarks[i];
       if (data.marker.visibleDistance) {
-        
         let distance = data.pos.distanceTo(camera.position);
         if (distance < data.marker.visibleDistance) {
           this.PlayVideo(data.marker);
@@ -92,7 +120,6 @@ export class MovieManager {
         }
       }
     }
-    //this.SetVisibleStatus(false);
     this.Stop();
   }
 
@@ -109,11 +136,12 @@ export class MovieManager {
 
     this.activeVideoMark = data;
 
-    this.CreateVideoMarker(data.source.ratio);
+    this.GetVideoMarker(data.source.ratio);
 
     this.movieScreen.position.set(data.position.X, data.position.Y, data.position.Z);
     this.movieScreen.rotation.set(data.rotation.X, data.rotation.Y, data.rotation.Z);
     this.movieScreen.scale.set(data.scale, data.scale, data.scale);
+    this.SetVisibleStatus(true);
 
     this.movieScreen.userData.onAfterRender = (camerapos: ICameraPositionResult, scene: THREE.Scene) => {
       if (!this.movieScreen)
@@ -121,12 +149,15 @@ export class MovieManager {
 
       if (data.visibleDistance) {
         let distance = this.movieScreen.position.distanceTo(camerapos.playerposition);
-        this.movieScreen.visible = distance < data.visibleDistance;
+        if (distance > (data.visibleDistance+2)) {
+          this.UnloadMarker();
+          return;
+        }
 
-        this.vMaterial.visible = this.movieScreen.visible;
         if (data.fadeInDistance && this.movieScreen.visible) {
           if (distance > data.fadeInDistance) {
             let opacity = THREE.MathUtils.mapLinear(distance, data.fadeInDistance, data.visibleDistance, 1, 0);
+            opacity = Math.min(Math.max(opacity, 0), 1);
             this.vMaterial.opacity = opacity;
             this.video.volume = opacity;
           } else {
@@ -140,7 +171,6 @@ export class MovieManager {
       if (!this.movieScreen.visible && this.isPlaying)
         this.Stop();
     }
-
     return this.movieScreen;
   }
 }

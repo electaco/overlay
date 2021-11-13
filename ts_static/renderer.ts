@@ -76,7 +76,7 @@ function UpdateScene(renderData: IRenderData) {
 
     textSprites = [];
 
-    movieManager.ClearVideos();
+    let videoMarkers: Array<IVideoData> = [];
 
     renderData?.markers?.forEach((marker) => {
       if (marker.type == MarkerType.PositionMarker)
@@ -85,9 +85,12 @@ function UpdateScene(renderData: IRenderData) {
         const videoData = marker as IVideoData;
         videoData.visibleDistance = videoData.visibleDistance || 65;
         videoData.fadeInDistance = videoData.fadeInDistance || 50;
-        movieManager.AddVideo(videoData);
+        videoMarkers.push(videoData);
       }
     });
+
+    movieManager.SetVideoMarkers(videoMarkers);
+
   } catch (e) {
     logger("Error in UpdateScene: " + e);
   }
@@ -109,11 +112,11 @@ function render(timerarg = null) {
     }
     LASTTIME = timerarg;
   }
-
   positionManager.UpdateCameraPosition(camera);
   movieManager.CheckVideoDistance(camera);
-  renderer.render(scene, camera);
 
+  renderer.render(scene, camera);
+ 
   scene.children.forEach((child) => {
     if (child.userData.onAfterRender) {
       child.userData.onAfterRender(positionManager.GetPosition(), scene);
