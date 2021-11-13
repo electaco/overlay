@@ -7,8 +7,10 @@ export interface ISourceVideoData {
     ratio: [number, number];
 }
 
-export interface IVideoData extends IGenericMarker {
+export interface IVideoDataExtra {
     source: ISourceVideoData;
     rotation: IPosition;
     scale: number;
 }
+
+export interface IVideoData extends IVideoDataExtra, IGenericMarker {}

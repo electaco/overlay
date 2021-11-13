@@ -8,6 +8,7 @@ const { ipcRenderer } = window.require('electron')
 interface IProps {
     value: string,
     path: string,
+    defaultValue?: string,
 }
 interface IState {
     value: string,
@@ -18,7 +19,7 @@ class EditableText extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = { 
-            value: props.value, 
+            value: props.value,
             editing: false };
 
         this.saveState = this.saveState.bind(this);
@@ -76,7 +77,7 @@ class EditableText extends React.Component<IProps, IState> {
         }
         return <span className="editText">
                 <span className="editableText">
-                { this.props.value }
+                { this.props.value || <span className="notext">{ this.props.defaultValue || "No text.."}</span>}
                 </span>
                 <span className="button editTextClick pl-2" onClick={(e)=>{this.stopHandling(e);this.setEdit(true)}}>
                     <FontAwesomeIcon icon={faEdit} />

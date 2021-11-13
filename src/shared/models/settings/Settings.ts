@@ -65,15 +65,19 @@ export class Settings implements ISettings {
 
             markerGroup.markers[MapId]?.forEach((marker, markerIndex) => {
                 if (!marker.active) { return; }
-                console.log(`${marker.name}: ${marker.type}`)
                 
                 if (marker.type === MarkerType.VideoMarker && marker.extraData) {
+                    if (!marker.extraData?.source.url) {
+                        return;
+                    }
                     let videoMarker: IVideoData = {
                         type: MarkerType.VideoMarker,
                         position: marker.position,
                         rotation: marker.extraData.rotation,
                         source: marker.extraData.source,
                         scale: marker.extraData.scale,
+                        visibleDistance: marker.visibleDistance,
+                        fadeInDistance: marker.fadeInDistance,
                     }
                     data.markers.push(videoMarker);
                 } else if (marker.type === MarkerType.PositionMarker) {

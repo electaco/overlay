@@ -10,6 +10,7 @@ import Button from '../window/Button';
 import Section from '../window/section';
 import PositionEditor from '../settings/PositionEditor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import IMarkerTypeChange from '../../shared/interfaces/datatransfer/IMarkerTypeChange';
 
 const { ipcRenderer } = window.require('electron')
 
@@ -31,6 +32,16 @@ function MarkerPosition(props: IProps) {
         }
         ipcRenderer.send("removeMarker", markerInfo);
     }
+
+    function toVideoMarker() {
+        let markerInfo: IMarkerTypeChange =  {
+            type: 1,
+            id: props.index,
+            map: props.mapId,
+            markergroup: props.markergroupindex
+        }
+        ipcRenderer.send("markertype-change", markerInfo);
+    }
     return (
         <div className="marker d-flex">
             <Section title={
@@ -48,11 +59,12 @@ function MarkerPosition(props: IProps) {
                     />
                 }>
                 <Button onClick={removeMarker}>Remove marker</Button>
+                <Button onClick={toVideoMarker}>To Video marker</Button>
                 <div>
                     <PositionEditor title="Position" position={props.marker.position} path={props.path + "position"} />
                 </div>
                 <div>
-                    <EditableText path={props.path + "description"} value={props.marker.description} />
+                    <EditableText path={props.path + "description"} value={props.marker.description} defaultValue="No description"/>
                 </div>
             </Section>
         </div>

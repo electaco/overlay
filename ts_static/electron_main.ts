@@ -13,8 +13,10 @@ import { Position } from '../src/shared/models/Position';
 import { MarkerSettings } from '../src/shared/models/settings/MarkerSettings';
 import { MarkerGroupSettings } from '../src/shared/models/settings/MarkerGroupSettings';
 import { IMarkerRemovalInfo } from '../src/shared/interfaces/datatransfer/IMarkerRemovalInfo';
+import IMarkerTypeChange from '../src/shared/interfaces/datatransfer/IMarkerTypeChange';
 import { IWebSocketCommand } from '../src/shared/interfaces/datatransfer/IWebSocketCommand';
 import { TranslateMapId } from '../src/components/helpers/constants';
+import { MarkerType } from '../src/shared/interfaces/render/marker';
 
 const DEBUG = false;
 const configFolder = app.getPath("userData");
@@ -296,6 +298,27 @@ ipcMain.on("loadmarkergroup", (event, arg) => {
 
 })
 
+ipcMain.on("markertype-change", (event, arg:IMarkerTypeChange) => {
+  var mark = SETTINGS.marks[arg.markergroup].markers[arg.map][arg.id];
+  mark.type = arg.type;
+  if (mark.type == MarkerType.VideoMarker) {
+    mark.extraData = {
+      source: {
+        "type": "video/mp4",
+        "ratio": [16,9],
+        "url": ""
+      },
+      rotation: {X: 0, Y: 0, Z: 0},
+      scale: 1,
+    }
+    mark.visibleDistance = 100;
+    mark.fadeInDistance= 70;
+
+  }
+  SETTINGS.marks[arg.markergroup].markers[arg.map][arg.id] = mark;
+  configUpdated();
+});
+
 ipcMain.on("resize", (event, arg) => {
   configButton?.setSize(arg.w, arg.h);
 })
@@ -450,7 +473,6 @@ function onGameStopped() {
 }
 
 function onReady() {
-  console.log("Argv: "+ process.argv);
   onGameStarted();
 }
 
