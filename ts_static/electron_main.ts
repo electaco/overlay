@@ -483,10 +483,23 @@ ipcMain.on('restart_app', () => {
 });
 autoUpdater.on('update-available', () => {
   configButton.webContents.send('update_available');
+  log("updater", "Update available");
 });
 autoUpdater.on('update-downloaded', () => {
   configButton.webContents.send('update_downloaded');
+  log("updater", "Update downloaded");
 });
+
+autoUpdater.on('checking-for-update', () => {
+  log("updater", "Checking for update");
+})
+
+autoUpdater.on('update-not-available', (info) => {
+  log("updater", "Update not available");
+})
+autoUpdater.on('error', (err) => {
+  log("updater", "Error in auto-updater: " + err);
+})
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

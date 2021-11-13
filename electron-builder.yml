@@ -24,4 +24,5 @@ fileAssociations:
 protocols:
   - name: Electaco Marker Pack URL
     schemes: ["etmp"]
-
+publish:
+  provider: github
