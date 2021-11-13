@@ -45,13 +45,20 @@
             .green {
                 color: rgb(14, 209, 14);
             }
+            .hidden {
+                display: none;
+            }
         </style>
         <link rel="stylesheet" type="text/css" href="basic.css"/>
     </head>
     <body>
         <div id="app" >
             <div id="header">
-                <span>Gw2 <span id="connstatus" class="red" title="Connection status">•</span></span>
+                <span>Gw2 
+                    <span id="updatestatus" class="hidden" onClick="restart_app();"
+                    title="A new update is available. Click to update now">
+                    ⟳
+                    </span> <span id="connstatus" class="red" title="Connection status">•</span></span>
             </div>
             <div id="menu">
                 <div onClick="openWindow('marks');" class="button">Markers</div>

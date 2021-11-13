@@ -24,6 +24,10 @@ function exit_program() {
     ipcRenderer.send("exit", "");
 }
 
+function restart_app() {
+    ipcRenderer.send("restart_app", "");
+}
+
 function openWindow(name) {
     ipcRenderer.send("show-page", {path: name, show:true});
 }
@@ -31,4 +35,8 @@ function openWindow(name) {
 ipcRenderer.on("connstatus", (evt, arg)=> {
     let item = document.getElementById("connstatus");
     item.className = arg;
+});
+
+ipcRenderer.on("update_downloaded", (evt, arg)=> {
+
 });

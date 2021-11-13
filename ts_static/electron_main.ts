@@ -7,6 +7,7 @@ const { spawn } = require('child_process')
 const fs = require('fs');
 const path = require('path');
 const WebSocket = require("ws");
+const { autoUpdater } = require('electron-updater');
 
 import { Settings } from '../src/shared/models/settings/Settings';
 import { Position } from '../src/shared/models/Position';
@@ -474,7 +475,18 @@ function onGameStopped() {
 
 function onReady() {
   onGameStarted();
+  autoUpdater.checkForUpdatesAndNotify();
 }
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
+});
+autoUpdater.on('update-available', () => {
+  configButton.webContents.send('update_available');
+});
+autoUpdater.on('update-downloaded', () => {
+  configButton.webContents.send('update_downloaded');
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
