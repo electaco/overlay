@@ -4,9 +4,10 @@ Live building of files (electron and react components):
   yarn watch
 Start Electron:
   yarn start
-Build:
-  npx electron-builder
-
+Build installer:
+  yarn build
+Create new github release:
+  yarn deploy
 File structure:
   src/ - React UI
   ts_static/ - Electron files
