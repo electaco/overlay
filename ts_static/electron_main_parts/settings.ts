@@ -31,6 +31,30 @@ export function GetSettings() {
     return SETTINGS;
 }
 
+// Process command line arguments
+export function LoadMarkerPacksFromCommandLine(argv: string[], workingDirectory: string) {
+    argv = argv.slice(1);
+    if (argv.length > 0) {
+        for (let i = 0; i < argv.length; i++) {
+            // Check if it's a file
+            if (fs.existsSync(argv[i]) && fs.statSync(argv[i]).isFile()) {
+                log("Main", "Loading marker file: " + argv[i]);
+                let data = fs.readFileSync(argv[i]);
+                GetSettings().addMarkerGroupFromJson(data);
+            }
+            // Check if starts with emtp:
+            else if (argv[i].startsWith("emtp:")) {
+                log("Main", "Loading marker URL: " + argv[i]);
+                //Load data from url
+                let url = argv[i].substring(5);
+                let data = fs.readFileSync(url);
+                GetSettings().addMarkerGroupFromJson(data);
+            }
+        }
+        configUpdated();
+    }
+}
+
 function addMarker(markerSetNum: number) {
     let mapid: number = getMapId(getLastPosition());
     if (mapid == null) { return; }
