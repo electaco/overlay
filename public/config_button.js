@@ -38,5 +38,5 @@ ipcRenderer.on("connstatus", (evt, arg)=> {
 });
 
 ipcRenderer.on("update_downloaded", (evt, arg)=> {
-
+    document.getElementById("updatestatus").className = "";
 });
