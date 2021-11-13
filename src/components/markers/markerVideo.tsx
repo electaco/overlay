@@ -57,7 +57,7 @@ function MarkerVideo(props: IProps) {
                 </div>
                 {props.marker.extraData?.rotation && 
                     <div>
-                        <PositionEditor title="Rotation" position={props.marker.extraData?.rotation} path={props.path + "extraData.rotation"} />
+                        <PositionEditor title="Rotation" position={props.marker.extraData?.rotation} path={props.path + "extraData.rotation"} step={0.1}/>
                     </div>
                 }
                 {props.marker.extraData?.scale && 

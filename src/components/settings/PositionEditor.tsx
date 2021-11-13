@@ -8,6 +8,7 @@ function PositionEditor(props: {
   position: IPosition;
   path: string;
   title: string;
+  step?: number;
 }) {
   const [x, setX] = useState(props.position.X);
   const [y, setY] = useState(props.position.Y);
@@ -36,11 +37,11 @@ function PositionEditor(props: {
     <span className="position-editor">
       <span className="position-editor-title">{props.title}</span>
         <span className="position-editor__label">X</span>
-        <input className="position-editor__input" type="number" value={x} onChange={onChangeX} />
+        <input className="position-editor__input" type="number" value={x} onChange={onChangeX} step={props.step}/>
         <span className="position-editor__label">Y</span>
-        <input className="position-editor__input" type="number" value={y} onChange={onChangeY} />
+        <input className="position-editor__input" type="number" value={y} onChange={onChangeY} step={props.step}/>
         <span className="position-editor__label">Z</span>
-        <input className="position-editor__input" type="number" value={z} onChange={onChangeZ} />
+        <input className="position-editor__input" type="number" value={z} onChange={onChangeZ} step={props.step}/>
     </span>
   );
 
