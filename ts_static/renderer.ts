@@ -25,6 +25,9 @@ const logger = function (text) {
   ipcRenderer.send("log", "Render", text);
 }
 
+const movieManager = new MovieManager(scene, vPlayer);
+const positionManager = new CameraPositionManager(render);
+
 let textSprites: Array<Object3D> = [];
 
 function CreateMarker(marker: IPositionMarker) {
@@ -60,25 +63,34 @@ function UpdateScene(renderData: IRenderData) {
 
   ISUPDATING = true;
   try {
+    let toRemove = [];
     scene.children.forEach((child) => {
       if (child.userData.onRemove) {
         child.userData.onRemove(scene);
       }
+      if (!child.userData.SkipRemove) {
+        toRemove.push(child);
+      }
     });
-    scene.remove(...scene.children);
+    scene.remove(...toRemove);
+
     textSprites = [];
+
+    let videoMarkers: Array<IVideoData> = [];
 
     renderData?.markers?.forEach((marker) => {
       if (marker.type == MarkerType.PositionMarker)
         scene.add(CreateMarker(marker as IPositionMarker));
       if (marker.type == MarkerType.VideoMarker) {
         const videoData = marker as IVideoData;
-        marker.visibleDistance = 65;
-        marker.fadeInDistance = 50;
-        const videoMarker = movieManager.PlayVideo(videoData, false);
-        scene.add(videoMarker);
+        videoData.visibleDistance = videoData.visibleDistance || 65;
+        videoData.fadeInDistance = videoData.fadeInDistance || 50;
+        videoMarkers.push(videoData);
       }
     });
+
+    movieManager.SetVideoMarkers(videoMarkers);
+
   } catch (e) {
     logger("Error in UpdateScene: " + e);
   }
@@ -100,10 +112,11 @@ function render(timerarg = null) {
     }
     LASTTIME = timerarg;
   }
-
   positionManager.UpdateCameraPosition(camera);
-  renderer.render(scene, camera);
+  movieManager.CheckVideoDistance(camera);
 
+  renderer.render(scene, camera);
+ 
   scene.children.forEach((child) => {
     if (child.userData.onAfterRender) {
       child.userData.onAfterRender(positionManager.GetPosition(), scene);
@@ -123,9 +136,6 @@ function render(timerarg = null) {
     requestAnimationFrame(render);
   }
 }
-
-const movieManager = new MovieManager(scene, vPlayer);
-const positionManager = new CameraPositionManager(render);
 
 ipcRenderer.on('render', function (event, data: IRenderData) {
   RenderData = data;
@@ -206,6 +216,7 @@ const WS_CLIENT = "ws://localhost:19939/position";
 let webSocket = new WebSocket(WS_CLIENT);
 webSocket.onopen = function (event) {
   logger("Connected to web socket");
+  ipcRenderer.send('connstatus', "yellow");
 }
 webSocket.onclose = function (event) {
   logger("Disconnected from web socket");
@@ -220,7 +231,7 @@ let got_position = false;
 webSocket.onmessage = function (event) {
 
   var msg = JSON.parse(event.data);
-  if (msg) {
+  if (msg?.identity?.FovDegrees) {
     if (!got_position) {
       got_position = true;
       logger("Got first position from websocket");

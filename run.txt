@@ -1,9 +1,9 @@
 Run on node v14.15
 
 Live building of files (electron and react components):
-  npm run watch
+  yarn watch
 Start Electron:
-  npm run start
+  yarn start
 Build:
   npx electron-builder
 

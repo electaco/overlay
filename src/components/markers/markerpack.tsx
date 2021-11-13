@@ -67,7 +67,7 @@ function Markerpack(props: IProps) {
                     <FontAwesomeIcon icon={faFileExport} title="Save Marker Group to file" />
                 </span>
             </div>
-            Description: <EditableText path={props.path + "description"} value={props.pack.description} />
+            Description: <EditableText path={props.path + "description"} value={props.pack.description} defaultValue="No description"/>
             <div className="markerpack" >
                 {Object.keys(props.pack.markers)?.map((markerMap) =>
                     <Section title={maps[markerMap]?.map_name ?? "<Map " + markerMap + ">"}

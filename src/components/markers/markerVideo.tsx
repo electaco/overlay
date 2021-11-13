@@ -40,27 +40,27 @@ function MarkerVideo(props: IProps) {
                     <FontAwesomeIcon icon={faFilm} className="mr-2" style={{ width: "1em" }} />
                     <EditableText path={props.path + "name"} value={props.marker.name} />
                 </div>
-            } 
-            visible={false}
-            plusOnRightSide={true}
-            rightside={
-                <Checkbox
-                    setting={getSetting(props.settings, "", props.path + "active")}
-                    iconChecked={faEye}
-                    iconUnchecked={faEyeSlash}
-                />
             }
+                visible={false}
+                plusOnRightSide={true}
+                rightside={
+                    <Checkbox
+                        setting={getSetting(props.settings, "", props.path + "active")}
+                        iconChecked={faEye}
+                        iconUnchecked={faEyeSlash}
+                    />
+                }
             >
                 <Button onClick={removeMarker}>Remove marker</Button>
                 <div>
                     <PositionEditor title="Position" position={props.marker.position} path={props.path + "position"} />
                 </div>
-                {props.marker.extraData?.rotation && 
+                {props.marker.extraData?.rotation &&
                     <div>
-                        <PositionEditor title="Rotation" position={props.marker.extraData?.rotation} path={props.path + "extraData.rotation"} />
+                        <PositionEditor title="Rotation" position={props.marker.extraData?.rotation} path={props.path + "extraData.rotation"} step={0.1} />
                     </div>
                 }
-                {props.marker.extraData?.scale && 
+                {props.marker.extraData?.scale &&
                     <div>
                         Scale: <NumberEditor
                             path={props.path + "extraData.scale"}
@@ -72,34 +72,49 @@ function MarkerVideo(props: IProps) {
                     </div>
                 }
 
-                {props.marker.extraData?.source.url && 
+                {props.marker.extraData?.source &&
                     <div>
-                        URL: <EditableText path={props.path + "extraData.source.url"} value={props.marker.extraData.source.url} />
-                    </div>                    
-                }
-                {props.marker.extraData?.source.type && 
-                    <div>
-                        Type: <EditableText path={props.path + "extraData.source.type"} value={props.marker.extraData.source.type} />
+                        <div>
+                            URL: <EditableText path={props.path + "extraData.source.url"} value={props.marker.extraData.source.url} />
+                        </div>
+                        <div>
+                            Type: <EditableText path={props.path + "extraData.source.type"} value={props.marker.extraData.source.type} />
+                        </div>
+                        <div>
+                            Ratio: <NumberEditor
+                                path={props.path + "extraData.source.ratio.0"}
+                                value={props.marker.extraData?.source.ratio[0] || 0}
+                                step={1}
+                                min={1}
+                                max={20}
+                            /> /
+                            <NumberEditor
+                                path={props.path + "extraData.source.ratio.1"}
+                                value={props.marker.extraData?.source.ratio[1] || 0}
+                                step={1}
+                                min={1}
+                                max={20}
+                            />
+                        </div>
                     </div>
                 }
-                {props.marker.extraData?.source.ratio && 
                 <div>
-                    Ratio: <NumberEditor
-                        path={props.path + "extraData.source.ratio.0"}
-                        value={props.marker.extraData.source.ratio[0]}
-                        step={1}
-                        min={1}
-                        max={20}
-                    /> / 
-                    <NumberEditor
-                        path={props.path + "extraData.source.ratio.1"}
-                        value={props.marker.extraData.source.ratio[1]}
-                        step={1}
-                        min={1}
-                        max={20}
-                    />
+                    Visible distance: <NumberEditor
+                                path={props.path + "visibleDistance"}
+                                value={props.marker.visibleDistance || 0}
+                                step={1}
+                                min={1}
+                                max={200}
+                            />
+                            </div><div>
+                    Fadein distance: <NumberEditor
+                                path={props.path + "fadeInDistance"}
+                                value={props.marker.fadeInDistance || 0}
+                                step={1}
+                                min={1}
+                                max={200}
+                            />
                 </div>
-                }
             </Section>
 
         </div>

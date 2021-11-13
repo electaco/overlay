@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
-import EventButton from './components/window/EventButton';
 import Section from './components/window/section';
 import Window from './components/window/window';
-import {ISourceVideoData} from './shared/interfaces/datatransfer/IVideoData'
 //import MouseDebug from './components/mouse';
 
-interface IMovieInfo {
-  data: ISourceVideoData;
-  name: string;
-}
-
 function App() {
-
-
   return (
     <Window title="Test window" path="test">
       <Section title="Overlay Performance Tips" visible={false}>
