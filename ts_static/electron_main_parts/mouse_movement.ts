@@ -1,3 +1,7 @@
+// For class-transformer
+import 'reflect-metadata';
+
+const { screen } = require('electron')
 import { getRenderWindow } from "./windows";
 
 var mousePoint = { x: 0, y: 0 };
@@ -7,18 +11,16 @@ var transformRange = (value, r2) => {
   return (value * scale) - 1;
 }
 
-let myscreen = null;
 
-export function InitializeMouseMove(ascreen) {
-  myscreen = ascreen;
+export function InitializeMouseMove() {
   mouseCursorCheckInterval = setInterval(getMouseCursorPosition, 300);
 }
 
 function getMouseCursorPosition() {
-  var point = myscreen.getCursorScreenPoint();
+  var point = screen.getCursorScreenPoint();
 
   if (point.x != mousePoint.x || point.y != mousePoint.y) {
-    let display = myscreen.getPrimaryDisplay();
+    let display = screen.getPrimaryDisplay();
     var boundRect = display.bounds;
     if (point.x > boundRect.x && point.x < boundRect.width) {
       var np = {
@@ -29,7 +31,6 @@ function getMouseCursorPosition() {
     }
     mousePoint = point;
   }
-
 }
 
 let mouseCursorCheckInterval = null;

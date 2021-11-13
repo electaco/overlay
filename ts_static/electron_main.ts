@@ -1,7 +1,7 @@
 // For class-transformer
 import 'reflect-metadata';
 
-const { app, screen } = require('electron')
+const { app } = require('electron')
 const { ipcMain } = require('electron')
 const fs = require('fs');
 
@@ -76,7 +76,7 @@ ipcMain.on("exit", (event, arg) => {
 function onGameStarted() {
   createRenderWindow();
   createConfigButtonWindow();
-  InitializeMouseMove(screen);
+  InitializeMouseMove();
   InitAutoUpdate();
 }
 
