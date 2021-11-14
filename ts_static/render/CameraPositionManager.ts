@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { IPosition } from '../../src/shared/interfaces/common';
+import { IGw2MumbleLinkData } from '../../src/shared/interfaces/datatransfer/IGw2MumbleLinkData';
 
 export interface ICameraPositionManager {
     SetPosition(coordinates): void;
@@ -13,7 +15,7 @@ export interface ICameraPositionResult {
     fov: number;
 }
 
-function v3ize(data) {
+function v3ize(data: IPosition) {
   return new THREE.Vector3(data.Z, data.Y, data.X);
 }
 
@@ -37,7 +39,7 @@ export class CameraPositionManager implements ICameraPositionManager {
       }
     }
   
-    SetPosition(result) {
+    SetPosition(result: IGw2MumbleLinkData) {
       this.last_received_position = v3ize(result.coordinates.cameraPosition);
       this.last_received_target = this.last_received_position.clone().add(v3ize(result.coordinates.cameraAngle));
       this.last_received_player_position = v3ize(result.coordinates.playerPosition);

@@ -1,16 +1,17 @@
 import { TranslateMapId } from "../../src/components/helpers/constants";
+import { IGw2MumbleLinkData } from "../../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
 import { configUpdated } from "./settings";
 import { getConfigButtonWindow } from "./windows";
 const { ipcMain } = require('electron')
 
-let LASTPOS = null;
+let LASTPOS: IGw2MumbleLinkData | null = null;
 
-export function getMapId(position): number {
+export function getMapId(position: IGw2MumbleLinkData): number {
     if (!position || !position?.coordinates?.MapId) { return null; }
     return TranslateMapId(position.coordinates.MapId);
 }
 
-ipcMain.on("gw2data", (event, arg) => {
+ipcMain.on("gw2data", (event, arg: IGw2MumbleLinkData) => {
     if (getMapId(LASTPOS) != getMapId(arg)) {
         LASTPOS = arg;
         configUpdated();
@@ -18,7 +19,7 @@ ipcMain.on("gw2data", (event, arg) => {
     LASTPOS = arg;
 });
 
-export function getLastPosition(): any {
+export function getLastPosition(): IGw2MumbleLinkData {
     return LASTPOS;
 }
 

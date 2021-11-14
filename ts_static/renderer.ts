@@ -7,6 +7,7 @@ import { makeTextSprite3 } from './render/textsprite';
 import { MovieManager } from './render/VideoMarker';
 import { CameraPositionManager } from './render/CameraPositionManager';
 import { createMarkerIcon } from './render/MarkerIcon';
+import { IGw2MumbleLinkData } from "../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
 
 declare var ipcRenderer: any;
 declare var vPlayer: any;
@@ -147,7 +148,7 @@ ipcRenderer.on('video', function (event, data: IVideoData) {
   movieManager.PlayVideo(data);
 });
 
-ipcRenderer.on('gw2data', function (event, data) {
+ipcRenderer.on('gw2data', function (event, data: IGw2MumbleLinkData) {
   updateGw2Data(data);
 });
 
@@ -182,7 +183,7 @@ ipcRenderer.on('mousemove', function (event, mouse) {
 });
 
 let isMap = false;
-function updateGw2Data(data) {
+function updateGw2Data(data: IGw2MumbleLinkData) {
   if (data.context.UiFlags !== undefined && data.context.UiFlags.indexOf("MapOpen") != -1) {
     if (!isMap) {
       UpdateScene(null);
