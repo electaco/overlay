@@ -1,14 +1,25 @@
 import { IPosition } from "../common";
 
-export interface IGw2Coordinates {
-    playerPosition: IPosition
-    cameraPosition: IPosition
-    cameraAngle: IPosition
-    playerViewAngle: IPosition
-    playerTop: IPosition
-    cameraTop: IPosition
-    WorldId: number
-    MapId: number
+
+export enum UiState {
+    MapOpen = 1,
+    CompassTopRight = 2,
+    CompassRotationEnabled = 4,
+    GameHasFocus = 8,
+    CompetetiveMode = 16,
+    TextBoxInFocus = 32
+}
+
+export enum Mount {
+    None,
+    Jackal,
+    Griffon,
+    Springer,
+    Skimmer,
+    Raptor,
+    RollerBeetle,
+    Warclaw,
+    Skyscale,
 }
 
 export enum GW2Profession {
@@ -49,27 +60,6 @@ export interface IGw2Identity {
     FovDegrees: number
 }
 
-export enum UiState {
-    MapOpen = 1,
-    CompassTopRight = 2,
-    CompassRotationEnabled = 4,
-    GameHasFocus = 8,
-    CompetetiveMode = 16,
-    TextBoxInFocus = 32
-}
-
-export enum Mount {
-    None,
-    Jackal,
-    Griffon,
-    Springer,
-    Skimmer,
-    Raptor,
-    RollerBeetle,
-    Warclaw,
-    Skyscale,
-}
-
 export interface IGw2Context {
     ServerAddress: Uint8Array
     MapId: number
@@ -91,6 +81,16 @@ export interface IGw2Context {
     UiFlags: string[]
 }
 
+export interface IGw2Coordinates {
+    playerPosition: IPosition
+    cameraPosition: IPosition
+    cameraAngle: IPosition
+    playerViewAngle: IPosition
+    playerTop: IPosition
+    cameraTop: IPosition
+    WorldId: number
+    MapId: number
+}
 export interface IGw2MumbleLinkData {
     coordinates: IGw2Coordinates
     identity: IGw2Identity

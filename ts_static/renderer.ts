@@ -2,12 +2,10 @@ import * as THREE from 'three';
 import { IRenderData } from '../src/shared/interfaces/render/renderdata';
 import { IVideoData } from '../src/shared/interfaces/datatransfer/IVideoData';
 import { IPositionMarker, MarkerType } from '../src/shared/interfaces/render/marker';
-import { Object3D } from 'three';
-import { makeTextSprite3 } from './render/textsprite';
 import { MovieManager } from './render/VideoMarker';
 import { CameraPositionManager } from './render/CameraPositionManager';
-import { createMarkerIcon } from './render/MarkerIcon';
-import { IGw2MumbleLinkData } from "../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
+import { IGw2MumbleLinkData, UiState } from "../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
+import { CreateMarker } from './render/PositionMarker';
 
 declare var ipcRenderer: any;
 declare var vPlayer: any;
@@ -27,37 +25,13 @@ const logger = function (text) {
 }
 
 const movieManager = new MovieManager(scene, vPlayer);
-const positionManager = new CameraPositionManager(render);
+const positionManager = new CameraPositionManager(RenderScene);
 
-let textSprites: Array<Object3D> = [];
-
-function CreateMarker(marker: IPositionMarker) {
-  const markerGroup = new THREE.Group();
-  markerGroup.position.set(marker.position.X, marker.position.Y, marker.position.Z);
-  markerGroup.name = "Hello world";
-  if (marker.icon) {
-    let icon = createMarkerIcon(marker.icon);
-    markerGroup.add(icon);
-
-  }
-
-  if (marker.text) {
-    var sprite = makeTextSprite3(marker.text);
-    sprite.position.set(marker.text.offset.X, marker.text.offset.Y, marker.text.offset.Z);
-    markerGroup.add(sprite);
-    textSprites.push(sprite);
-  }
-  markerGroup.userData = {
-    mouseover: marker.markerMouseoverData,
-    autoScale: true
-  }
-  return markerGroup;
-}
 let ISUPDATING = false;
 
 
-function UpdateScene(renderData: IRenderData) {
-  logger("UpdateScene called");
+function UpdateSceneData(renderData: IRenderData) {
+  logger("UpdateSceneData called");
   if (ISUPDATING) {
     return;
   }
@@ -74,8 +48,6 @@ function UpdateScene(renderData: IRenderData) {
       }
     });
     scene.remove(...toRemove);
-
-    textSprites = [];
 
     let videoMarkers: Array<IVideoData> = [];
 
@@ -99,16 +71,17 @@ function UpdateScene(renderData: IRenderData) {
 }
 let LASTTIME = 0;
 
-function render(timerarg = null) {
+
+function RenderScene(timerarg = null) {
   if (ISUPDATING) {
-    requestAnimationFrame(render);
+    requestAnimationFrame(RenderScene);
     return;
   }
 
   if (timerarg) {
     //console.log("Timer: " + timerarg + " - " + LASTTIME);
     if (timerarg == null || timerarg - LASTTIME < 21) {
-      requestAnimationFrame(render);
+      requestAnimationFrame(RenderScene);
       return;
     }
     LASTTIME = timerarg;
@@ -134,14 +107,14 @@ function render(timerarg = null) {
   })
 
   if (timerarg) {
-    requestAnimationFrame(render);
+    requestAnimationFrame(RenderScene);
   }
 }
 
 ipcRenderer.on('render', function (event, data: IRenderData) {
   RenderData = data;
-  UpdateScene(RenderData);
-  render();
+  UpdateSceneData(RenderData);
+  RenderScene();
 });
 
 ipcRenderer.on('video', function (event, data: IVideoData) {
@@ -184,17 +157,19 @@ ipcRenderer.on('mousemove', function (event, mouse) {
 
 let isMap = false;
 function updateGw2Data(data: IGw2MumbleLinkData) {
-  if (data.context.UiFlags !== undefined && data.context.UiFlags.indexOf("MapOpen") != -1) {
+  if (data.context.UiState & UiState.MapOpen) {
     if (!isMap) {
-      UpdateScene(null);
+      UpdateSceneData(null);
       positionManager.SetPosition(data);
     }
+    logger(`Map data: ${JSON.stringify(data.context, null, 2)}`)
+    logger(`Linear mapping: ${THREE.MathUtils.mapLinear(data.context.MapPlayerX, 15232, 17664, -27648, 30720)}`)
     isMap = true;
     return;
   }
 
   if (isMap) {
-    UpdateScene(RenderData);
+    UpdateSceneData(RenderData);
     isMap = false;
   }
 
@@ -242,4 +217,4 @@ webSocket.onmessage = function (event) {
   }
 }
 
-requestAnimationFrame(render);
+requestAnimationFrame(RenderScene);
