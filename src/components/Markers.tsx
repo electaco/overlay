@@ -1,12 +1,12 @@
 import React from 'react';
 import Window from './window/window';
-import EventButton from './window/EventButton';
 import Markerpack from './markers/markerpack';
 import { ISettings } from '../shared/interfaces/settings';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolderPlus, faFileImport, faSearchLocation } from '@fortawesome/free-solid-svg-icons'
-
+import { SortArray, ByActive } from './helpers/sorting';
+import { IMarkerGroupSettings } from '../shared/interfaces/settings/IMarkerGroupSettings';
 const { ipcRenderer } = window.require('electron')
 
 function log(data: string) {
@@ -47,6 +47,16 @@ class App extends React.Component<IProps, IState>{
     ipcRenderer.send("show-page", {path: "get_markers", show:true});
   }
 
+  indexOf(markerpack: IMarkerGroupSettings) {
+    var elementIndex = -1;
+    this.state.settings?.marks.forEach((element, index) => {
+      if (element.id == markerpack.id) {
+        elementIndex = index;
+      }
+    });
+    return elementIndex;
+  }
+
   render() {
     return (
       <Window title="Markers" path="marks" titleextra={
@@ -62,8 +72,8 @@ class App extends React.Component<IProps, IState>{
           </span>
         </div>
       }>
-        {this.state.settings?.marks?.map((markerpack, index) =>
-          <Markerpack pack={markerpack} path={"marks." + index + "."} settings={this.state.settings} index={index} />
+        {SortArray(this.state.settings?.marks, ByActive)?.map((markerpack) =>
+          <Markerpack pack={markerpack} path={"marks." + this.indexOf(markerpack) + "."} settings={this.state.settings} index={this.indexOf(markerpack)} />
         )}
       </Window>
     );

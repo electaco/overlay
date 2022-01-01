@@ -44,12 +44,13 @@ class App extends React.Component<IProps, IState> {
             <Checkbox setting={getSetting(this.state.settings, 'Show debug boxes', "render.debugBoxes", false)}/>
             <Checkbox setting={getSetting(this.state.settings, 'Show marker names', "render.showMarkerNames", false)}/>
           </Section>
-          <Section title="Development">
+          <Section title="Development" expanded={false}>
             <Section title="Dev tools">
                 <EventButton text="Renderer" event="debugrenderer" value="true"/>
-                <EventButton text="Markers" event="debug-window" value="config"/>
+                <EventButton text="Configuration" event="debug-window" value="config" />
+                <EventButton text="Markers" event="debug-window" value="marks"/>
               </Section>
-              <Section title="Experimental">
+              <Section title="Experimental" expanded={false}>
                 <EventButton text="Reload renderer" event="reloadRender" value="true"/>
                 <EventButton text="Restart overlay" event="restart" value="true"/>
               </Section>
