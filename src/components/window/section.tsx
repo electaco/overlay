@@ -4,7 +4,7 @@ import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import './section.css';
 
 interface IProps {
-    visible?: boolean;
+    expanded?: boolean;
     title: React.ReactNode;
     rightside?: React.ReactNode;
     children?: React.ReactNode;
@@ -12,7 +12,7 @@ interface IProps {
 }
 
 function Section(props:IProps) {
-    let start = props.visible !== undefined ? props.visible : true;
+    let start = props.expanded !== undefined ? props.expanded : true;
     const [visible, setVisible] = useState(start);
     let icon = visible ? faMinus : faPlus;
     return  <div className="section">

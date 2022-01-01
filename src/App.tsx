@@ -7,7 +7,7 @@ import Window from './components/window/window';
 function App() {
   return (
     <Window title="Test window" path="test">
-      <Section title="Overlay Performance Tips" visible={false}>
+      <Section title="Overlay Performance Tips" expanded={false}>
           <ul>
             <li>Turn on Frame Limiter in Guild Wars 2, under Graphics Options</li>
             <li>Turn on Vsync in Guild Wars 2, under Graphics Options</li>
@@ -15,7 +15,7 @@ function App() {
             <li>Tune down graphics options in Guild Wars 2</li>
             <li>Turn off Game Mode in Windows</li>
           </ul>
-          <Section title="Explanation" visible={false}>
+          <Section title="Explanation" expanded={false}>
 
           
           <i>The overlay use very little resources, 

@@ -49,7 +49,7 @@ function MarkerPosition(props: IProps) {
                     <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" style={{ width: "1em" }} />
                     <EditableText path={props.path + "name"} value={props.marker.name} />
                 </div>} 
-                visible={false} 
+                expanded={false} 
                 plusOnRightSide={true} 
                 rightside={
                     <Checkbox

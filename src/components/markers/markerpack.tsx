@@ -40,7 +40,7 @@ function Markerpack(props: IProps) {
 
     return (
         <Section
-            visible={false}
+            expanded={false}
             title={
                 <EditableText path={props.path + "name"} value={props.pack.name} />
             }
@@ -71,7 +71,7 @@ function Markerpack(props: IProps) {
             <div className="markerpack" >
                 {Object.keys(props.pack.markers)?.map((markerMap) =>
                     <Section title={maps[markerMap]?.map_name ?? "<Map " + markerMap + ">"}
-                        visible={false}
+                        expanded={false}
                     >
                         {props.pack.markers[markerMap].map((marker, index) => 
                             <Marker
