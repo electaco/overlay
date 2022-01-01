@@ -3,11 +3,12 @@ export function ByActive(a, b) {
 }
 
 export function ByActiveMap(mapid: string) {
+    console.log("Active map: " + mapid);
     return (a, b) => {
-        if (a.mapid === mapid) {
+        if (a === mapid) {
         return -1;
         }
-        if (b.mapid === mapid) {
+        if (b === mapid) {
         return 1;
         }
         return 0;

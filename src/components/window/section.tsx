@@ -18,7 +18,7 @@ function Section(props:IProps) {
     return  <div className="section">
             <div className="sectionTitle d-flex align-items-center">
                 {!props.plusOnRightSide && <FontAwesomeIcon icon={icon} className="button" onClick={() => setVisible(!visible)} />}
-                <div className="flex-grow-1">
+                <div className="flex-grow-1 title">
                     {props.title}
                 </div>
                 <div className="rightside">

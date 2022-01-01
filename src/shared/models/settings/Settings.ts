@@ -16,7 +16,7 @@ export class Settings implements ISettings {
     @Type(() => MarkerGroupSettings)
     marks: Array<MarkerGroupSettings> = new Array<MarkerGroupSettings>();
 
-    private configFile: string;
+    configFile: string;
 
     runtimeData: IRuntimeSettings = {map: null};
 

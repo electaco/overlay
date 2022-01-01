@@ -15,13 +15,15 @@ import { Marker } from './marker';
 import "./markerpack.css";
 import { IMarkerSettings } from '../../shared/interfaces/settings/IMarkerSettings';
 import { SortArray, ByActive, ByActiveMap } from '../helpers/sorting';
+import { Settings } from '../../shared/models/settings/Settings';
+import { ISettings } from '../../shared/interfaces/settings';
 
 const { ipcRenderer } = window.require('electron')
 
 interface IProps {
     pack: IMarkerGroupSettings,
     path: string,
-    settings: any,
+    settings: ISettings,
     index: number
 }
 
@@ -41,9 +43,9 @@ function Markerpack(props: IProps) {
     function indexOf(markerMap: string, marker: IMarkerSettings) {
         var elementIndex = -1;
         props.pack.markers[markerMap].forEach((element, index) => {
-          if (element.id == marker.id) {
-            elementIndex = index;
-          }
+            if (element.id == marker.id) {
+                elementIndex = index;
+            }
         });
         return elementIndex;
     }
@@ -73,31 +75,33 @@ function Markerpack(props: IProps) {
                     </div>
                 }
                 key={props.pack.id}>
-                
+
                 <div className="float-right">
                     <span className="button" onClick={exportMarkerGroup}>
                         <FontAwesomeIcon icon={faFileExport} title="Save Marker Group to file" />
                     </span>
                 </div>
-                
+
                 Description: <EditableText path={props.path + "description"} value={props.pack.description} defaultValue="No description" />
                 <div className="markerpack" >
-                    {Object.keys(props.pack.markers)?.map((markerMap) =>
-                        <Section title={maps[markerMap]?.map_name ?? "<Map " + markerMap + ">"}
-                            expanded={false}
-                        >
-                            {SortArray(props.pack.markers[markerMap], ByActive).map((marker) =>
-                                <Marker
-                                    settings={props.settings}
-                                    path={props.path + "markers." + markerMap + "." + indexOf(markerMap, marker) + "."}
-                                    key={marker.id}
-                                    marker={marker}
-                                    index={indexOf(markerMap, marker)}
-                                    mapId={markerMap}
-                                    markergroupindex={props.index}
-                                />
-                            )}
-                        </Section>
+                    {SortArray(Object.keys(props.pack.markers), ByActiveMap(props.settings.runtimeData?.map ?? ""))?.map((markerMap) =>
+                        <div className={"map " + (props.settings.runtimeData?.map === markerMap ? "active": "")}>
+                            <Section title={maps[markerMap]?.map_name ?? "<Map " + markerMap + ">"}
+                                expanded={false}
+                            >
+                                {SortArray(props.pack.markers[markerMap], ByActive).map((marker) =>
+                                    <Marker
+                                        settings={props.settings}
+                                        path={props.path + "markers." + markerMap + "." + indexOf(markerMap, marker) + "."}
+                                        key={marker.id}
+                                        marker={marker}
+                                        index={indexOf(markerMap, marker)}
+                                        mapId={markerMap}
+                                        markergroupindex={props.index}
+                                    />
+                                )}
+                            </Section>
+                        </div>
                     )}
                 </div>
             </Section>
