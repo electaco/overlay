@@ -16285,9 +16285,9 @@ export const maps = {
     }
 }
 
-const mapMap= {}
+const mapMap: { [index: string]: string } = {}
 
-export function TranslateMapId(mapId) {
+export function TranslateMapId(mapId: string) {
     if (mapMap[mapId]) {
         return mapMap[mapId]
     }

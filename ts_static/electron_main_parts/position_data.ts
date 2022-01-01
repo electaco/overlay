@@ -6,13 +6,14 @@ const { ipcMain } = require('electron')
 
 let LASTPOS: IGw2MumbleLinkData | null = null;
 
-export function getMapId(position: IGw2MumbleLinkData): number {
+export function getMapId(position: IGw2MumbleLinkData): string {
     if (!position || !position?.coordinates?.MapId) { return null; }
     return TranslateMapId(position.coordinates.MapId);
 }
 
 ipcMain.on("gw2data", (event, arg: IGw2MumbleLinkData) => {
     if (getMapId(LASTPOS) != getMapId(arg)) {
+
         LASTPOS = arg;
         configUpdated();
     }

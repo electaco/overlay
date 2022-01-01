@@ -1,4 +1,4 @@
-import { ISettings } from "../../interfaces/settings";
+import { IRuntimeSettings, ISettings } from "../../interfaces/settings";
 import { IRenderSettings } from "../../interfaces/settings/IRenderSettings";
 import { IRenderData } from "../../interfaces/render/renderdata";
 import { MarkerGroupSettings } from "./MarkerGroupSettings";
@@ -18,12 +18,18 @@ export class Settings implements ISettings {
 
     private configFile: string;
 
+    runtimeData: IRuntimeSettings = {map: null};
+
     constructor(configFile: string) {
         this.configFile = configFile?.trim();
     }
 
     saveConfig() {
-        fs.writeFileSync(this.configFile, JSON.stringify(this));
+
+        fs.writeFileSync(this.configFile, JSON.stringify({
+            render: this.render,
+            marks: this.marks
+        }));
     }
 
     addMarkerGroupFromJson(json: string): void {
@@ -42,6 +48,10 @@ export class Settings implements ISettings {
         return new Settings(filename);
     }
 
+    setMap(mapId: string) {
+        this.runtimeData.map = mapId;
+    }
+
     addMarkerGroup(markerGroup: MarkerGroupSettings): void {
         this.marks.push(markerGroup);
     }
@@ -55,7 +65,7 @@ export class Settings implements ISettings {
     }
 
     // Translate marker data from settings to render ready data
-    createRenderData(MapId: number): IRenderData {
+    createRenderData(MapId: string): IRenderData {
         let data: IRenderData = { markers: [] };
 
         this.marks.forEach((markerGroup, index) => {

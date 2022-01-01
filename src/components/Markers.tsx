@@ -31,7 +31,7 @@ class App extends React.Component<IProps, IState>{
     ipcRenderer.removeAllListeners(['setsettings']);
   }
 
-  settingsListener(event: any, data: any) {
+  settingsListener(event: any, data: ISettings) {
     this.setState({ settings: data });
   }
 

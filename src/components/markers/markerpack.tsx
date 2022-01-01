@@ -14,7 +14,7 @@ import { IMarkerGroupSettings } from "../../shared/interfaces/settings/IMarkerGr
 import { Marker } from './marker';
 import "./markerpack.css";
 import { IMarkerSettings } from '../../shared/interfaces/settings/IMarkerSettings';
-import { SortArray, ByActive } from '../helpers/sorting';
+import { SortArray, ByActive, ByActiveMap } from '../helpers/sorting';
 
 const { ipcRenderer } = window.require('electron')
 
@@ -73,11 +73,13 @@ function Markerpack(props: IProps) {
                     </div>
                 }
                 key={props.pack.id}>
+                
                 <div className="float-right">
                     <span className="button" onClick={exportMarkerGroup}>
                         <FontAwesomeIcon icon={faFileExport} title="Save Marker Group to file" />
                     </span>
                 </div>
+                
                 Description: <EditableText path={props.path + "description"} value={props.pack.description} defaultValue="No description" />
                 <div className="markerpack" >
                     {Object.keys(props.pack.markers)?.map((markerMap) =>

@@ -21,7 +21,8 @@
     },
     "electron-build": {
       "patterns": [
-        "ts_static"
+        "ts_static",
+        "src/shared"
       ],
       "extensions": [
         "js,ts,html,css,scss"
@@ -33,6 +34,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "electron-build": "tsc -p tsconfig-electron.json",
+    "build-all": "npm run electron-build && npm run react-build",
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "deploy": "electron-builder --publish always",
