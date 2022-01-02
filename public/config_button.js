@@ -24,6 +24,11 @@ function exit_program() {
     ipcRenderer.send("exit", "");
 }
 
+function download_update() {
+    ipcRenderer.send("download_update", "");
+    document.getElementById("updatestatus_download").className = "hidden";
+}
+
 function restart_app() {
     ipcRenderer.send("restart_app", "");
 }
@@ -39,4 +44,8 @@ ipcRenderer.on("connstatus", (evt, arg)=> {
 
 ipcRenderer.on("update_downloaded", (evt, arg)=> {
     document.getElementById("updatestatus").className = "";
+});
+
+ipcRenderer.on("update_available", (evt, arg)=> {
+    document.getElementById("updatestatus_download").className = "";
 });

@@ -43,6 +43,10 @@ class App extends React.Component<IProps, IState> {
           <Section title="Rendering">
             <Checkbox setting={getSetting(this.state.settings, 'Show debug boxes', "render.debugBoxes", false)}/>
             <Checkbox setting={getSetting(this.state.settings, 'Show marker names', "render.showMarkerNames", false)}/>
+        </Section>
+        <Section title="Overlay">
+          <Checkbox setting={getSetting(this.state.settings, 'Check for new versions', "overlaySettings.checkForUpdates", true)} />
+          <Checkbox setting={getSetting(this.state.settings, 'Automatically update to new versions', "overlaySettings.autoUpdate", true)}/>
           </Section>
           <Section title="Development" expanded={false}>
             <Section title="Dev tools">

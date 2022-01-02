@@ -6,6 +6,8 @@ import { RenderSettings } from "./RenderSettings";
 import { deserialize, Type } from 'class-transformer';
 import { IPositionMarker, MarkerType } from "../../interfaces/render/marker";
 import { IVideoData } from "../../interfaces/datatransfer/IVideoData";
+import { IOverlaySettings } from "../../interfaces/settings/IOverlaySettings";
+import { OverlaySettings } from "./OverlaySettings";
 
 const fs = require('fs');
 
@@ -15,6 +17,9 @@ export class Settings implements ISettings {
 
     @Type(() => MarkerGroupSettings)
     marks: Array<MarkerGroupSettings> = new Array<MarkerGroupSettings>();
+
+    @Type(() => OverlaySettings)
+    overlaySettings: IOverlaySettings = new OverlaySettings();
 
     configFile: string;
 
@@ -28,7 +33,8 @@ export class Settings implements ISettings {
 
         fs.writeFileSync(this.configFile, JSON.stringify({
             render: this.render,
-            marks: this.marks
+            marks: this.marks,
+            overlaySettings: this.overlaySettings
         }));
     }
 
