@@ -5,7 +5,7 @@ import { ISettings } from '../shared/interfaces/settings';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolderPlus, faFileImport, faSearchLocation } from '@fortawesome/free-solid-svg-icons'
-import { SortArray, ByActive } from './helpers/sorting';
+import { SortArray, ByActive, CompoundSort, MarkerPackHasMap } from './helpers/sorting';
 import { IMarkerGroupSettings } from '../shared/interfaces/settings/IMarkerGroupSettings';
 import { Settings } from '../shared/models/settings/Settings';
 const { ipcRenderer } = window.require('electron')
@@ -81,7 +81,10 @@ class App extends React.Component<IProps, IState>{
         </div>
       }>
         
-        {this.state.settings && SortArray(this.state.settings.marks, ByActive).map((markerpack) =>
+        {this.state.settings
+          && SortArray(this.state.settings.marks,
+            CompoundSort([ByActive, MarkerPackHasMap(this.getSettings().runtimeData?.map || "")]))
+            .map((markerpack) =>
           <Markerpack pack={markerpack} path={"marks." + this.indexOf(markerpack) + "."} settings={this.getSettings()} index={this.indexOf(markerpack)} />
         )}
       </Window>

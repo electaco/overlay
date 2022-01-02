@@ -95,12 +95,6 @@ function RenderScene(timerarg = null) {
     if (child.userData.onAfterRender) {
       child.userData.onAfterRender(positionManager.GetPosition(), scene);
     }
-    if (child.userData.autoScale) {
-      var distance = child.position.distanceTo(camera.position);
-      distance = THREE.MathUtils.clamp(distance, 100, 1000);
-      var scale = THREE.MathUtils.mapLinear(distance, 5, 2000, 1.4, 0.1);
-      child.scale.set(scale, scale, scale);
-    }
     if (child.userData.showDistance) {
       child.visible = child.parent.position.distanceTo(camera.position) < child.userData.showDistance;
     }
@@ -137,22 +131,21 @@ var intersected = null;
 ipcRenderer.on('mousemove', function (event, mouse) {
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(scene.children, true);
+  let intersect = intersects.length > 0 ? intersects[0].object.parent : null;
 
   /*scene.remove ( arrow );
   arrow = new THREE.ArrowHelper( raycaster.ray.direction, raycaster.ray.origin, 100, Math.random() * 0xffffff );
   scene.add( arrow );*/
+  if (intersect !== intersected) {
+    if (intersected &&  intersected.userData.onMouseOverExit) {
+      intersected.userData.onMouseOverExit();
+    }
 
-  if (intersected) {
-    intersected.children[1].userData.showDistance = intersected.children[1].userData.oldShowDistance;
+    if (intersect && intersect.userData.onMouseOverEnter) {
+      intersect.userData.onMouseOverEnter();
+    }
   }
-
-  intersected = null;
-
-  if (intersects.length > 0) {
-    intersected = intersects[0].object.parent;
-    intersected.children[1].userData.oldShowDistance = intersects[0].object.parent.children[1].userData.showDistance;
-    intersected.children[1].userData.showDistance = 99999999;
-  }
+  intersected = intersect;
 });
 
 let isMap = false;

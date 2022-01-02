@@ -7,3 +7,4 @@ public/electron/
 logs.txt
 out/
 *.ipynb
+*.etmp

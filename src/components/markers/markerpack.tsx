@@ -40,6 +40,8 @@ function Markerpack(props: IProps) {
         ipcRenderer.send("savemarkergroup", props.index);
     }
 
+
+
     function indexOf(markerMap: string, marker: IMarkerSettings) {
         var elementIndex = -1;
         props.pack.markers[markerMap].forEach((element, index) => {
@@ -51,7 +53,7 @@ function Markerpack(props: IProps) {
     }
 
     return (
-        <div className={"markerpack " + (props.pack.active ? "active" : "inactive")}>
+        <div className={"markerpack " + (props.pack.active ? "active " : "inactive ") + (props.pack.markers[props.settings.runtimeData?.map || ""] ? "activemap": "")}>
             <Section
                 expanded={false}
                 title={
@@ -87,7 +89,7 @@ function Markerpack(props: IProps) {
                     {SortArray(Object.keys(props.pack.markers), ByActiveMap(props.settings.runtimeData?.map ?? ""))?.map((markerMap) =>
                         <div className={"map " + (props.settings.runtimeData?.map === markerMap ? "active": "")}>
                             <Section title={maps[markerMap]?.map_name ?? "<Map " + markerMap + ">"}
-                                expanded={false}
+                                expanded={markerMap === props.settings.runtimeData?.map}
                             >
                                 {SortArray(props.pack.markers[markerMap], ByActive).map((marker) =>
                                     <Marker
