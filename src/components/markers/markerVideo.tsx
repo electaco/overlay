@@ -41,7 +41,7 @@ function MarkerVideo(props: IProps) {
                     <EditableText path={props.path + "name"} value={props.marker.name} />
                 </div>
             }
-                visible={false}
+                expanded={false}
                 plusOnRightSide={true}
                 rightside={
                     <Checkbox

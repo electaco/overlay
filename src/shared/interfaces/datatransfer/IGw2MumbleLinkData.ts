@@ -89,7 +89,7 @@ export interface IGw2Coordinates {
     playerTop: IPosition
     cameraTop: IPosition
     WorldId: number
-    MapId: number
+    MapId: string
 }
 export interface IGw2MumbleLinkData {
     coordinates: IGw2Coordinates

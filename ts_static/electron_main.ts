@@ -16,17 +16,16 @@ if (!fs.existsSync("gw2data/WebSocketServerNetFramework.exe")) {
   process.chdir(app.getPath("exe").substring(0, app.getPath("exe").lastIndexOf("\\")));
 }
 
-InitSettings();
-
 const gotTheLock = app.requestSingleInstanceLock()
 
 if (!gotTheLock) {
   app.quit()
 } else {
   app.on('second-instance', (event, commandLine, workingDirectory) => {
-    // Someone tried to run a second instance, we should focus our window.
+    // Someone tried to run a second instance
     LoadMarkerPacksFromCommandLine(commandLine, workingDirectory);
   });
+  InitSettings();
   LoadMarkerPacksFromCommandLine(process.argv, process.cwd());
 }
 

@@ -1,0 +1,9 @@
+.inactive {
+    color: rgb(141, 141, 141);
+}
+.map.active > .section > .sectionTitle > .title {
+    color: rgb(255, 250, 183);
+}
+.markerpack.activemap > .section > .sectionTitle > .title {
+    color: rgb(255, 250, 183);
+}

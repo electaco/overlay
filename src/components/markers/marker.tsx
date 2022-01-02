@@ -16,9 +16,9 @@ interface IProps {
 
 export function Marker(props: IProps) {
     return (
-        <div>
-        {props.marker.type === MarkerType.PositionMarker && <MarkerPosition {...props} />}
-        {props.marker.type === MarkerType.VideoMarker && <MarkerVideo {...props} />}
+        <div className={"marker " + (props.marker.active ? "active": "inactive")}>
+            {props.marker.type === MarkerType.PositionMarker && <MarkerPosition {...props} />}
+            {props.marker.type === MarkerType.VideoMarker && <MarkerVideo {...props} />}
         </div>
     )
 }

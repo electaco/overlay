@@ -1,3 +1,4 @@
+import { IGw2MumbleLinkData } from "../../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
 import { IMarkerRemovalInfo } from "../../src/shared/interfaces/datatransfer/IMarkerRemovalInfo";
 import IMarkerTypeChange from "../../src/shared/interfaces/datatransfer/IMarkerTypeChange";
 import { MarkerType } from "../../src/shared/interfaces/render/marker";
@@ -14,7 +15,7 @@ const { app, ipcMain, dialog } = require('electron')
 const fs = require('fs');
 const path = require('path');
 
-let SETTINGS = null;
+let SETTINGS:Settings|null = null;
 
 export function InitSettings(): Settings {
     const configFolder = app.getPath("userData");
@@ -56,7 +57,7 @@ export function LoadMarkerPacksFromCommandLine(argv: string[], workingDirectory:
 }
 
 function addMarker(markerSetNum: number) {
-    let mapid: number = getMapId(getLastPosition());
+    let mapid: string = getMapId(getLastPosition());
     if (mapid == null) { return; }
 
     if (!SETTINGS.marks[markerSetNum]) {
@@ -190,3 +191,11 @@ export function configUpdated() {
 ipcMain.on("getrender", (event, arg) => {
     sendRenderData(SETTINGS);
 })
+
+ipcMain.on("gw2data", (event, arg: IGw2MumbleLinkData) => {
+    let mapid = getMapId(arg);
+    if (mapid != SETTINGS.runtimeData.map) {
+        SETTINGS.setMap(mapid);
+        configUpdated();
+    }
+});

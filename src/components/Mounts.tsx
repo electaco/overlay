@@ -16,7 +16,7 @@ function App() {
           <EventButton event="sendkeys" value="16,17,117">Griffon</EventButton>
           <EventButton event="sendkeys" value="16,17,118">Skyscale</EventButton>
           <EventButton event="sendkeys" value="16,17,119">Warclaw</EventButton>
-          <Section title="Setup" visible={false}>
+          <Section title="Setup" expanded={false}>
               <ul>
                   <li>Go to GW2 Options</li>
                   <li>Go to Control Options tab</li>

@@ -13,21 +13,31 @@ export function CreateMarker(marker: IPositionMarker) {
       markerGroup.add(icon);
   
     }
-  
+
     if (marker.text) {
-      var sprite = makeTextSprite3(marker.text);
-      sprite.position.set(marker.text.offset.X, marker.text.offset.Y, marker.text.offset.Z);
-      markerGroup.add(sprite);
-    }
+      var textSprite = makeTextSprite3(marker.text);
+      textSprite.position.set(marker.text.offset.X, marker.text.offset.Y, marker.text.offset.Z);
+      markerGroup.add(textSprite);
+  }
+  
+  let showMarkerName = false;
     markerGroup.userData = {
       mouseover: marker.markerMouseoverData,
-        autoScale: true,
-        
-    }
-    if (marker.text) {
-        markerGroup.userData.onAfterRender = (camerapos: ICameraPositionResult, scene: THREE.Scene) => {
-            sprite.visible = markerGroup.position.distanceTo(camerapos.playerposition) < 200;
+      onMouseOverEnter: () => {
+        showMarkerName = true;
+      },
+      onMouseOverExit: () => {
+        showMarkerName = false;
+      },
+      onAfterRender: (camerapos: ICameraPositionResult, scene: THREE.Scene) => {
+        var distance = markerGroup.position.distanceTo(camerapos.playerposition);
+        if (marker.text?.showDistance) {
+          textSprite.visible = distance < marker.text.showDistance || showMarkerName;
         }
+        distance = THREE.MathUtils.clamp(distance, 10, 1500);
+        var scale = THREE.MathUtils.mapLinear(distance, 5, 1500, 1.4, 0.0001);
+        markerGroup.scale.set(scale, scale, scale);
+      }
     }
     return markerGroup;
   }

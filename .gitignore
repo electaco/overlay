@@ -6,3 +6,5 @@ public/electron/
 /markers/
 logs.txt
 out/
+*.ipynb
+*.etmp

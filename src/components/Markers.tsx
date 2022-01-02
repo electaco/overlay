@@ -1,12 +1,13 @@
 import React from 'react';
 import Window from './window/window';
-import EventButton from './window/EventButton';
 import Markerpack from './markers/markerpack';
 import { ISettings } from '../shared/interfaces/settings';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolderPlus, faFileImport, faSearchLocation } from '@fortawesome/free-solid-svg-icons'
-
+import { SortArray, ByActive, CompoundSort, MarkerPackHasMap } from './helpers/sorting';
+import { IMarkerGroupSettings } from '../shared/interfaces/settings/IMarkerGroupSettings';
+import { Settings } from '../shared/models/settings/Settings';
 const { ipcRenderer } = window.require('electron')
 
 function log(data: string) {
@@ -31,7 +32,7 @@ class App extends React.Component<IProps, IState>{
     ipcRenderer.removeAllListeners(['setsettings']);
   }
 
-  settingsListener(event: any, data: any) {
+  settingsListener(event: any, data: ISettings) {
     this.setState({ settings: data });
   }
 
@@ -45,6 +46,23 @@ class App extends React.Component<IProps, IState>{
 
   openSearchPage() {
     ipcRenderer.send("show-page", {path: "get_markers", show:true});
+  }
+
+  getSettings(): ISettings {
+    if (!this.state.settings) {
+      throw new Error("Settings not loaded");
+    }
+    return this.state.settings;
+  }
+
+  indexOf(markerpack: IMarkerGroupSettings) {
+    var elementIndex = -1;
+    this.state.settings?.marks.forEach((element, index) => {
+      if (element.id == markerpack.id) {
+        elementIndex = index;
+      }
+    });
+    return elementIndex;
   }
 
   render() {
@@ -62,8 +80,12 @@ class App extends React.Component<IProps, IState>{
           </span>
         </div>
       }>
-        {this.state.settings?.marks?.map((markerpack, index) =>
-          <Markerpack pack={markerpack} path={"marks." + index + "."} settings={this.state.settings} index={index} />
+        
+        {this.state.settings
+          && SortArray(this.state.settings.marks,
+            CompoundSort([ByActive, MarkerPackHasMap(this.getSettings().runtimeData?.map || "")]))
+            .map((markerpack) =>
+          <Markerpack pack={markerpack} path={"marks." + this.indexOf(markerpack) + "."} settings={this.getSettings()} index={this.indexOf(markerpack)} />
         )}
       </Window>
     );
