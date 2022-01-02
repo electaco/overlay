@@ -16,8 +16,13 @@ export class MarkerGroupSettings implements IMarkerGroupSettings {
     }
 
     RemoveMarker(index: number, map: string): void {
-        if (this.markers[map])
+        if (this.markers[map]) {
             this.markers[map].splice(index, 1);
+            if (this.markers[map].length === 0) {
+                delete this.markers[map];
+            }
+        }
+        
     }
 
     name: string = "New Marker Group";
