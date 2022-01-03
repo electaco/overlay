@@ -9,14 +9,15 @@ import Configuration from './components/Configuration';
 import Markers from './components/Markers';
 import Mounts from './components/Mounts';
 import SearchMarkers from './components/SearchMarkers';
-import App from './App';
+import Speedometer from './components/Speedometer';
+import TestPage from './App';
 
 export default function BasicExample() {
   return (
     <Router>
         <Switch>
           <Route exact path="/test">
-            <App />
+            <TestPage />
           </Route>
           <Route path="/config">
             <Configuration />
@@ -29,7 +30,10 @@ export default function BasicExample() {
           </Route>
           <Route path="/get_markers">
             <SearchMarkers />
-          </Route>           
+        </Route>
+        <Route path="/speedometer">
+            <Speedometer />
+        </Route>          
         </Switch>
     </Router>
   );
