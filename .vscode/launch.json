@@ -1,0 +1,58 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Build Electron & React on changes",
+      "request": "launch",
+      "runtimeArgs": [
+        "run-script",
+        "watch"
+      ],
+      "runtimeExecutable": "npm",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "pwa-node",
+      "restart": false
+    },
+    {
+      "name": "Run Electron",
+      "type": "pwa-node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "restart": true,
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",        //use source maps for files in workspace folder
+        "!**/node_modules/**"           //but ignore everything in the node_modules folder
+      ],
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+      "windows": {
+        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+      },
+      "args" : [
+        ".",
+        "--remote-debugging-port=9222"
+      ],
+      "outputCapture": "std"
+    },
+    {
+      "type": "chrome",
+      "restart": true,
+      "request": "attach",
+      "name": "Attach debugger",
+      "port": 9222,
+      "webRoot": "${workspaceRoot}/html"
+    },
+  ],
+  "compounds": [
+    {
+        "name": "Electron: All",
+        "configurations": [
+          "Run Electron",
+          "Attach debugger",
+          "Build Electron & React on changes"
+        ]
+    }
+  ]
+}
