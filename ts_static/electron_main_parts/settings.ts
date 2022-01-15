@@ -9,6 +9,7 @@ import { Settings } from "../../src/shared/models/settings/Settings";
 import { log } from "./logging";
 import { getLastPosition, getMapId } from "./position_data";
 import { getRenderWindow, getWindows as getOpenWindows } from "./windows";
+import { IPC } from '../../src/shared/IPC';
 
 var objectPath = require("object-path");
 const { app, ipcMain, dialog } = require('electron')
@@ -78,34 +79,34 @@ function addMarker(markerSetNum: number) {
     configUpdated();
 }
 
-ipcMain.on("addMarker", (event, arg) => {
+ipcMain.on(IPC.Marker.Add, (event, arg) => {
     log("Main", "MarkerAdd");
     addMarker(arg);
 });
 
-ipcMain.on("removeMarker", (event, arg: IMarkerRemovalInfo) => {
+ipcMain.on(IPC.Marker.Remove, (event, arg: IMarkerRemovalInfo) => {
     SETTINGS.marks[arg.markerpack].RemoveMarker(arg.index, arg.map);
     configUpdated();
 });
 
 
-ipcMain.on("newMarkerGroup", (event, arg) => {
+ipcMain.on(IPC.Marker.NewGroup, (event, arg) => {
     log("Main", "new marker group added");
     SETTINGS.addMarkerGroup(new MarkerGroupSettings());
     configUpdated();
 });
 
-ipcMain.on("removeMarkerGroup", (event, arg: number) => {
+ipcMain.on(IPC.Marker.RemoveGroup, (event, arg: number) => {
     SETTINGS.removeMarkerGroup(arg);
     configUpdated();
 });
 
-ipcMain.on("getsettings", (event, arg) => {
-    event.sender.send("setsettings", SETTINGS);
+ipcMain.on(IPC.Settings.Get, (event, arg) => {
+    event.sender.send(IPC.Settings.Set, SETTINGS);
 })
 
 
-ipcMain.on("savemarkergroup", (event, arg) => {
+ipcMain.on(IPC.Marker.SaveGroup, (event, arg) => {
     log("savemarkergroup", arg);
     var markers = SETTINGS.getMarkerGroup(arg);
     dialog.showSaveDialog({
@@ -122,12 +123,12 @@ ipcMain.on("savemarkergroup", (event, arg) => {
     })
 })
 
-ipcMain.on("loadmarkergroup_json", (event, arg) => {
+ipcMain.on(IPC.Marker.LoadJson, (event, arg) => {
     SETTINGS.addMarkerGroup(arg);
     configUpdated();
 });
 
-ipcMain.on("loadmarkergroup", (event, arg) => {
+ipcMain.on(IPC.Marker.LoadGroup, (event, arg) => {
     dialog.showOpenDialog({
         properties: ['openFile'],
         title: "Load marker group",
@@ -145,7 +146,7 @@ ipcMain.on("loadmarkergroup", (event, arg) => {
 
 })
 
-ipcMain.on("markertype-change", (event, arg: IMarkerTypeChange) => {
+ipcMain.on(IPC.Marker.ChangeType, (event, arg: IMarkerTypeChange) => {
     var mark = SETTINGS.marks[arg.markergroup].markers[arg.map][arg.id];
     mark.type = arg.type;
     if (mark.type == MarkerType.VideoMarker) {
@@ -167,7 +168,7 @@ ipcMain.on("markertype-change", (event, arg: IMarkerTypeChange) => {
 });
 
 
-ipcMain.on("updateconfig", (event, arg) => {
+ipcMain.on(IPC.Settings.Update, (event, arg) => {
     objectPath.set(SETTINGS, arg.path, arg.value);
     log("MAIN", "Config updated: " + arg.path + " = " + arg.value);
     configUpdated();
@@ -175,7 +176,7 @@ ipcMain.on("updateconfig", (event, arg) => {
 
 function sendRenderData(settings: Settings) {
     let rd = settings.createRenderData(getMapId(getLastPosition()));
-    getRenderWindow()?.webContents.send("render", rd);
+    getRenderWindow()?.webContents.send(IPC.Render, rd);
 }
 
 export function configUpdated() {
@@ -184,15 +185,15 @@ export function configUpdated() {
     sendRenderData(SETTINGS);
     let windows = getOpenWindows();
     for (var key of Object.keys(windows)) {
-        windows[key]?.webContents.send("setsettings", SETTINGS);
+        windows[key]?.webContents.send(IPC.Settings.Set, SETTINGS);
     }
 }
 
-ipcMain.on("getrender", (event, arg) => {
+ipcMain.on(IPC.GetRender, (event, arg) => {
     sendRenderData(SETTINGS);
 })
 
-ipcMain.on("gw2data", (event, arg: IGw2MumbleLinkData) => {
+ipcMain.on(IPC.Gw2Data, (event, arg: IGw2MumbleLinkData) => {
     let mapid = getMapId(arg);
     if (mapid != SETTINGS.runtimeData.map) {
         SETTINGS.setMap(mapid);

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import EventButton from './window/EventButton';
-import Section from './window/section';
 import Window from './window/window';
 import { IMarkerSearchResult } from '../shared/interfaces/datatransfer/IMarkerSearchResult';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolderPlus, faFileImport } from '@fortawesome/free-solid-svg-icons'
+import { IPC } from '../shared/ipc';
 const { ipcRenderer } = window.require('electron')
 
 const ROOT = "https://elec.k.thelazy.net/";
@@ -21,7 +20,7 @@ function SearchMarkerResult(props: markerProps) {
         .then(res => res.json())
         .then(
           (result) => {
-            ipcRenderer.send("loadmarkergroup_json", result);
+            ipcRenderer.send(IPC.Marker.LoadJson, result);
           },
           (error) => {
           }

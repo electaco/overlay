@@ -9,7 +9,7 @@ interface IProps {
     children?: React.ReactNode;
 }
 
-function EventButton(props: IProps) {
+function EventButton(props: IProps) { // TODO: Update references with IPC
     function click() {
         ipcRenderer.send(props.event, props.value);
     }

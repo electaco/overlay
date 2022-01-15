@@ -1,3 +1,5 @@
+import { IPC } from "../../src/shared/IPC";
+
 const path = require('path');
 const { app, ipcMain } = require('electron')
 const fs = require('fs');
@@ -25,11 +27,11 @@ export function log(source, message) {
 }
 
 
-ipcMain.on("log", (event, sender, arg) => {
+ipcMain.on(IPC.Log, (event, sender, arg) => {
     log(sender, arg);
 });
 
-ipcMain.on("error", (event, arg) => {
+ipcMain.on(IPC.Error, (event, arg) => {
     log("Unknown", arg);
   });
   

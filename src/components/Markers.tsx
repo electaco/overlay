@@ -7,11 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolderPlus, faFileImport, faSearchLocation } from '@fortawesome/free-solid-svg-icons'
 import { SortArray, ByActive, CompoundSort, MarkerPackHasMap } from './helpers/sorting';
 import { IMarkerGroupSettings } from '../shared/interfaces/settings/IMarkerGroupSettings';
-import { Settings } from '../shared/models/settings/Settings';
+import { IPC } from '../shared/ipc';
 const { ipcRenderer } = window.require('electron')
 
 function log(data: string) {
-  ipcRenderer.send("log", "Markers", data);
+  ipcRenderer.send(IPC.Log, "Markers", data);
 }
 
 interface IProps { }
@@ -24,12 +24,12 @@ class App extends React.Component<IProps, IState>{
       settings: null
     };
     this.settingsListener = this.settingsListener.bind(this);
-    ipcRenderer.on('setsettings', this.settingsListener);
-    ipcRenderer.send('getsettings', true);
+    ipcRenderer.on(IPC.Settings.Set, this.settingsListener);
+    ipcRenderer.send(IPC.Settings.Get, true);
   }
 
   componentWillUnmount() {
-    ipcRenderer.removeAllListeners(['setsettings']);
+    ipcRenderer.removeAllListeners([IPC.Settings.Set]);
   }
 
   settingsListener(event: any, data: ISettings) {
@@ -37,15 +37,15 @@ class App extends React.Component<IProps, IState>{
   }
 
   newMarkerGroup() {
-    ipcRenderer.send("newMarkerGroup", true);
+    ipcRenderer.send(IPC.Marker.NewGroup, true);
   }
 
   loadMarkerGroup() {
-    ipcRenderer.send("loadmarkergroup", true);
+    ipcRenderer.send(IPC.Marker.LoadGroup, true);
   }
 
   openSearchPage() {
-    ipcRenderer.send("show-page", {path: "get_markers", show:true});
+    ipcRenderer.send(IPC.Window.Open, {path: "get_markers", show:true});
   }
 
   getSettings(): ISettings {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IPosition } from '../../shared/interfaces/common';
+import { IPC } from '../../shared/ipc';
 import './PositionEditor.css'
 const { ipcRenderer } = window.require('electron')
 
@@ -30,7 +31,7 @@ function PositionEditor(props: {
   };
 
   const onchange = (position: IPosition) => {
-    ipcRenderer.send("updateconfig", { path: props.path, value: position });
+    ipcRenderer.send(IPC.Settings.Update, { path: props.path, value: position });
     };
 
   return (

@@ -5,6 +5,7 @@ import Checkbox from './settings/IconCheckbox';
 
 import getSetting from './helpers/getSetting';
 import EventButton from './window/EventButton';
+import { IPC } from '../shared/ipc';
 
 const { ipcRenderer } = window.require('electron')
 
@@ -25,12 +26,12 @@ class App extends React.Component<IProps, IState> {
       }
     };
     this.settingsListener = this.settingsListener.bind(this);
-    ipcRenderer.on('setsettings', this.settingsListener);
-    ipcRenderer.send('getsettings', true);
+    ipcRenderer.on(IPC.Settings.Set, this.settingsListener);
+    ipcRenderer.send(IPC.Settings.Get, true);
   }
 
   componentWillUnmount() {
-    ipcRenderer.removeAllListeners('setsettings');
+    ipcRenderer.removeAllListeners(IPC.Settings.Set);
   }
 
   settingsListener(event: any, data: any) {
@@ -50,13 +51,13 @@ class App extends React.Component<IProps, IState> {
           </Section>
           <Section title="Development" expanded={false}>
             <Section title="Dev tools">
-                <EventButton text="Renderer" event="debugrenderer" value="true"/>
-                <EventButton text="Configuration" event="debug-window" value="config" />
-                <EventButton text="Markers" event="debug-window" value="marks"/>
+                <EventButton text="Renderer" event={IPC.Debug.DebugWindowRender} value="true"/>
+                <EventButton text="Configuration" event={IPC.Debug.DebugWindow} value="config" />
+                <EventButton text="Markers" event={IPC.Debug.DebugWindow} value="marks"/>
               </Section>
               <Section title="Experimental" expanded={false}>
-                <EventButton text="Reload renderer" event="reloadRender" value="true"/>
-                <EventButton text="Restart overlay" event="restart" value="true"/>
+                <EventButton text="Reload renderer" event={IPC.Debug.ReloadRender} value="true"/>
+                <EventButton text="Restart overlay" event={IPC.Restart} value="true"/>
               </Section>
           </Section>
         </Window>

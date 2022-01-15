@@ -11,6 +11,7 @@ import Section from '../window/section';
 import PositionEditor from '../settings/PositionEditor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import IMarkerTypeChange from '../../shared/interfaces/datatransfer/IMarkerTypeChange';
+import { IPC } from '../../shared/ipc';
 
 const { ipcRenderer } = window.require('electron')
 
@@ -30,7 +31,7 @@ function MarkerPosition(props: IProps) {
             map: props.mapId,
             markerpack: props.markergroupindex
         }
-        ipcRenderer.send("removeMarker", markerInfo);
+        ipcRenderer.send(IPC.Marker.Remove, markerInfo);
     }
 
     function toVideoMarker() {
@@ -40,7 +41,7 @@ function MarkerPosition(props: IProps) {
             map: props.mapId,
             markergroup: props.markergroupindex
         }
-        ipcRenderer.send("markertype-change", markerInfo);
+        ipcRenderer.send(IPC.Marker.ChangeType, markerInfo);
     }
     return (
         <div className="marker d-flex">

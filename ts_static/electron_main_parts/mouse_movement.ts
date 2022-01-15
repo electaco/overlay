@@ -1,5 +1,6 @@
 // For class-transformer
 import 'reflect-metadata';
+import { IPC } from '../../src/shared/IPC';
 
 const { screen } = require('electron')
 import { getRenderWindow } from "./windows";
@@ -27,7 +28,7 @@ function getMouseCursorPosition() {
         x: transformRange(point.x, boundRect.width),
         y: transformRange(point.y, boundRect.height) * -1,
       };
-      getRenderWindow()?.webContents.send("mousemove", np);
+      getRenderWindow()?.webContents.send(IPC.MouseMove, np);
     }
     mousePoint = point;
   }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons'
+import { IPC } from '../../shared/ipc';
 const { ipcRenderer } = window.require('electron')
 
 function IconCheckbox(props) {
@@ -9,7 +10,7 @@ function IconCheckbox(props) {
     let icon = props.setting.value ? checkedIcon : unCheckedIcon;
 
     function toggleCheck() {
-        ipcRenderer.send("updateconfig", {path: props.setting.path, value: !props.setting.value})
+        ipcRenderer.send(IPC.Settings.Update, {path: props.setting.path, value: !props.setting.value})
     }
 
     return (

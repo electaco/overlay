@@ -1,6 +1,7 @@
 // For class-transformer
 import 'reflect-metadata';
 import { IWebSocketCommand } from '../../src/shared/interfaces/datatransfer/IWebSocketCommand';
+import { IPC } from '../../src/shared/IPC';
 import { log } from './logging';
 import { getRenderWindow } from './windows';
 
@@ -33,7 +34,7 @@ export function SetupBackgroundService() {
     });
 }
 
-ipcMain.on('fallback_positionupdate', (event) => {
+ipcMain.on(IPC.UseFallbackPositionUpdate, (event) => {
     log("Main", "Fallback position activating");
     if (bat)
         bat.kill();
@@ -46,7 +47,7 @@ ipcMain.on('fallback_positionupdate', (event) => {
             var decoded = JSON.parse(json);
             if (!decoded?.coordinates) { return; }
             // Send new position data to render window
-            getRenderWindow()?.webContents.send("gw2data", decoded);
+            getRenderWindow()?.webContents.send(IPC.Gw2Data, decoded);
         } catch {
             return;
         }
@@ -54,7 +55,7 @@ ipcMain.on('fallback_positionupdate', (event) => {
 });
 
 
-ipcMain.on("sendkeys", (event, arg) => {
+ipcMain.on(IPC.SendKeys, (event, arg) => {
     let msg: IWebSocketCommand = {
         Data: arg,
         Type: "keys",

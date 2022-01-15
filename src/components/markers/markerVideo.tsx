@@ -11,6 +11,7 @@ import Section from '../window/section';
 import PositionEditor from '../settings/PositionEditor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NumberEditor } from '../settings/NumberEditor';
+import { IPC } from '../../shared/ipc';
 
 const { ipcRenderer } = window.require('electron')
 
@@ -30,7 +31,7 @@ function MarkerVideo(props: IProps) {
             map: props.mapId,
             markerpack: props.markergroupindex
         }
-        ipcRenderer.send("removeMarker", markerInfo);
+        ipcRenderer.send(IPC.Marker.Remove, markerInfo);
     }
 
     return (

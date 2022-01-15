@@ -1,4 +1,4 @@
-import { Settings } from "../../src/shared/models/settings/Settings";
+import { IPC } from "../../src/shared/IPC";
 import { log } from "./logging";
 import { GetSettings } from "./settings";
 import { getConfigButtonWindow } from "./windows";
@@ -14,34 +14,34 @@ export function InitAutoUpdate() {
     }
 }
 
-ipcMain.on('restart_app', () => {
+ipcMain.on(IPC.RestartApp, () => {
     autoUpdater.quitAndInstall(true, true);
 });
 
-ipcMain.on('download_update', () => {
+ipcMain.on(IPC.DownloadUpdate, () => {
     autoUpdater.downloadUpdate();
 });
 
-autoUpdater.on('update-available', () => {
+autoUpdater.on(IPC.AutoUpdate.UpdateAvailable, () => {
     if (!GetSettings().overlaySettings.autoUpdate) {
-        getConfigButtonWindow().webContents.send('update_available');
+        getConfigButtonWindow().webContents.send(IPC.UpdateAvailable);
     }
     log("updater", "Update available");
 });
 
-autoUpdater.on('update-downloaded', () => {
-    getConfigButtonWindow().webContents.send('update_downloaded');
+autoUpdater.on(IPC.AutoUpdate.UpdateDownloaded, () => {
+    getConfigButtonWindow().webContents.send(IPC.UpdateDownloaded);
     log("updater", "Update downloaded");
 });
 
-autoUpdater.on('checking-for-update', () => {
+autoUpdater.on(IPC.AutoUpdate.CheckingForUpdate, () => {
     log("updater", "Checking for update");
 })
 
-autoUpdater.on('update-not-available', (info) => {
+autoUpdater.on(IPC.AutoUpdate.UpdateNotAvailable, (info) => {
     log("updater", "Update not available");
 })
 
-autoUpdater.on('error', (err) => {
+autoUpdater.on(IPC.AutoUpdate.Error, (err) => {
     log("updater", "Error in auto-updater: " + err);
 })

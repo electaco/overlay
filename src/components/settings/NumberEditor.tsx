@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { IPC } from '../../shared/ipc';
 
 const { ipcRenderer } = window.require('electron')
 
@@ -17,7 +18,7 @@ export function NumberEditor(props: {
             return;
         }
         setValue(newValue);
-        ipcRenderer.send("updateconfig", { path: props.path, value: newValue });
+        ipcRenderer.send(IPC.Settings.Update, { path: props.path, value: newValue });
     };
 
     return (

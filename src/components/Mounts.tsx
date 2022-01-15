@@ -1,4 +1,5 @@
 import React from 'react';
+import { IPC } from '../shared/ipc';
 import EventButton from './window/EventButton';
 import Section from './window/section';
 import Window from './window/window';
@@ -7,15 +8,15 @@ import Window from './window/window';
 function App() {
   return (
     <Window title="Mounts" path="mounts">
-          <EventButton event="sendkeys" value="16,17,112">Raptor</EventButton>
-          <EventButton event="sendkeys" value="16,17,113">Springer</EventButton>
-          <EventButton event="sendkeys" value="16,17,114">Skimmer</EventButton>
-          <EventButton event="sendkeys" value="16,17,115">Jackal</EventButton>
+          <EventButton event={IPC.SendKeys} value="16,17,112">Raptor</EventButton>
+          <EventButton event={IPC.SendKeys} value="16,17,113">Springer</EventButton>
+          <EventButton event={IPC.SendKeys} value="16,17,114">Skimmer</EventButton>
+          <EventButton event={IPC.SendKeys} value="16,17,115">Jackal</EventButton>
 
-          <EventButton event="sendkeys" value="16,17,116">Roller Beetle</EventButton>
-          <EventButton event="sendkeys" value="16,17,117">Griffon</EventButton>
-          <EventButton event="sendkeys" value="16,17,118">Skyscale</EventButton>
-          <EventButton event="sendkeys" value="16,17,119">Warclaw</EventButton>
+          <EventButton event={IPC.SendKeys} value="16,17,116">Roller Beetle</EventButton>
+          <EventButton event={IPC.SendKeys} value="16,17,117">Griffon</EventButton>
+          <EventButton event={IPC.SendKeys} value="16,17,118">Skyscale</EventButton>
+          <EventButton event={IPC.SendKeys} value="16,17,119">Warclaw</EventButton>
           <Section title="Setup" expanded={false}>
               <ul>
                   <li>Go to GW2 Options</li>

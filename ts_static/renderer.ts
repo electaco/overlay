@@ -6,6 +6,7 @@ import { MovieManager } from './render/VideoMarker';
 import { CameraPositionManager } from './render/CameraPositionManager';
 import { IGw2MumbleLinkData, UiState } from "../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
 import { CreateMarker } from './render/PositionMarker';
+import { IPC } from '../src/shared/IPC';
 
 declare var ipcRenderer: any;
 declare var vPlayer: any;
@@ -21,7 +22,7 @@ renderer.setSize(window.innerWidth, window.innerHeight, false);
 document.body.appendChild(renderer.domElement);
 
 const logger = function (text) {
-  ipcRenderer.send("log", "Render", text);
+  ipcRenderer.send(IPC.Log, "Render", text);
 }
 
 const movieManager = new MovieManager(scene, vPlayer);
@@ -105,30 +106,25 @@ function RenderScene(timerarg = null) {
   }
 }
 
-ipcRenderer.on('render', function (event, data: IRenderData) {
+ipcRenderer.on(IPC.Render, function (event, data: IRenderData) {
   RenderData = data;
   UpdateSceneData(RenderData);
   RenderScene();
 });
 
-ipcRenderer.on('video', function (event, data: IVideoData) {
+ipcRenderer.on(IPC.Video, function (event, data: IVideoData) {
   movieManager.PlayVideo(data);
 });
 
-ipcRenderer.on('gw2data', function (event, data: IGw2MumbleLinkData) {
+ipcRenderer.on(IPC.Gw2Data, function (event, data: IGw2MumbleLinkData) {
   updateGw2Data(data);
-});
-
-ipcRenderer.on('cleanup', function (event, data) {
-  movieManager.Cleanup();
-  ipcRenderer.send("cleanup-done");
 });
 
 var raycaster = new THREE.Raycaster();
 raycaster.layers.set(2);
-var intersected = null;
+var intersected : THREE.Object3D | null = null;
 
-ipcRenderer.on('mousemove', function (event, mouse) {
+ipcRenderer.on(IPC.MouseMove, function (event, mouse) {
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(scene.children, true);
   let intersect = intersects.length > 0 ? intersects[0].object.parent : null;
@@ -170,7 +166,7 @@ function updateGw2Data(data: IGw2MumbleLinkData) {
 
   try {
     if ((performance.now() - LAST_MAIN_UPDATE) > 500) {
-      ipcRenderer.send('gw2data', data);
+      ipcRenderer.send(IPC.Gw2Data, data);
       LAST_MAIN_UPDATE = performance.now();
     }
   } catch (e) {
@@ -178,18 +174,18 @@ function updateGw2Data(data: IGw2MumbleLinkData) {
   }
 }
 
-ipcRenderer.send('getrender', true);
+ipcRenderer.send(IPC.GetRender, true);
 
 let LAST_MAIN_UPDATE = 0;
 const WS_CLIENT = "ws://localhost:19939/position";
 let webSocket = new WebSocket(WS_CLIENT);
 webSocket.onopen = function (event) {
   logger("Connected to web socket");
-  ipcRenderer.send('connstatus', "yellow");
+  ipcRenderer.send(IPC.ConnectionStatus, "yellow");
 }
 webSocket.onclose = function (event) {
   logger("Disconnected from web socket");
-  ipcRenderer.send('fallback_positionupdate', "msg");
+  ipcRenderer.send(IPC.UseFallbackPositionUpdate, "msg");
 }
 webSocket.onerror = function (event) {
   console.log("Error on web socket", event);
@@ -204,7 +200,7 @@ webSocket.onmessage = function (event) {
     if (!got_position) {
       got_position = true;
       logger("Got first position from websocket");
-      ipcRenderer.send('connstatus', "green");
+      ipcRenderer.send(IPC.ConnectionStatus, "green");
     }
     updateGw2Data(msg);
   }

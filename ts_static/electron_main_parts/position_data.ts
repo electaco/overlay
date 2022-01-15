@@ -1,5 +1,6 @@
 import { TranslateMapId } from "../../src/components/helpers/constants";
 import { IGw2MumbleLinkData } from "../../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
+import { IPC } from "../../src/shared/IPC";
 import { configUpdated } from "./settings";
 import { getConfigButtonWindow } from "./windows";
 const { ipcMain } = require('electron')
@@ -11,7 +12,7 @@ export function getMapId(position: IGw2MumbleLinkData): string {
     return TranslateMapId(position.coordinates.MapId);
 }
 
-ipcMain.on("gw2data", (event, arg: IGw2MumbleLinkData) => {
+ipcMain.on(IPC.Gw2Data, (event, arg: IGw2MumbleLinkData) => {
     if (getMapId(LASTPOS) != getMapId(arg)) {
 
         LASTPOS = arg;
@@ -24,6 +25,6 @@ export function getLastPosition(): IGw2MumbleLinkData {
     return LASTPOS;
 }
 
-ipcMain.on("connstatus", (event, arg) => {
-    getConfigButtonWindow().webContents.send("connstatus", arg);
+ipcMain.on(IPC.ConnectionStatus, (event, arg) => {
+    getConfigButtonWindow().webContents.send(IPC.ConnectionStatus, arg);
 });

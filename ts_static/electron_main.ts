@@ -10,6 +10,7 @@ import { InitAutoUpdate } from './electron_main_parts/auto_update';
 import { LoadMarkerPacksFromCommandLine, InitSettings } from './electron_main_parts/settings';
 import { createConfigButtonWindow, createRenderWindow, getConfigButtonWindow, getRenderWindow } from './electron_main_parts/windows';
 import { SetupBackgroundService } from './electron_main_parts/background_service';
+import { IPC } from '../src/shared/IPC';
 
 // If we're in wrong folder, we need to change folder to the app's folder
 if (!fs.existsSync("gw2data/WebSocketServerNetFramework.exe")) {
@@ -31,12 +32,12 @@ if (!gotTheLock) {
 
 SetupBackgroundService();
 
-ipcMain.on("restart", (event, arg) => {
+ipcMain.on(IPC.Restart, (event, arg) => {
   app.relaunch();
   app.exit(0);
 });
 
-ipcMain.on("exit", (event, arg) => {
+ipcMain.on(IPC.Exit, (event, arg) => {
   app.quit();
 })
 

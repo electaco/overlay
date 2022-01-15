@@ -1,3 +1,4 @@
+import { IPC } from "../../src/shared/IPC";
 import { configUpdated, GetSettings } from "./settings";
 
 const { BrowserWindow, ipcMain } = require('electron')
@@ -6,23 +7,19 @@ let rendererWindow = null;
 let configButton = null;
 let openWindows: { [path: string]: typeof BrowserWindow } = {};
 
-ipcMain.on("debugrenderer", (event, arg) => {
+ipcMain.on(IPC.Debug.DebugWindowRender, (event, arg) => {
     //renderer.setIgnoreMouseEvents(false);
     rendererWindow.webContents.openDevTools({ mode: 'detach' });
 });
 
-ipcMain.on("debug-window", (event, arg: string) => {
+ipcMain.on(IPC.Debug.DebugWindow, (event, arg: string) => {
     //renderer.setIgnoreMouseEvents(false);
     openWindows[arg]?.webContents.openDevTools({ mode: 'detach' });
 });
 
 
-ipcMain.on("reloadRender", (event, arg) => {
+ipcMain.on(IPC.Debug.ReloadRender, (event, arg) => {
     rendererWindow.setIgnoreMouseEvents(true);
-    rendererWindow.reload();
-});
-
-ipcMain.on("cleanup-done", (event, arg) => {
     rendererWindow.reload();
 });
 
@@ -54,7 +51,7 @@ export function createRenderWindow(): typeof BrowserWindow {
     return win;
 }
 
-ipcMain.on("resize", (event, arg) => {
+ipcMain.on(IPC.Window.ResizeConfig, (event, arg) => {
     configButton?.setSize(arg.w, arg.h);
 })
 
@@ -102,7 +99,7 @@ function createWindow(parent, path: string) {
     cwin.setAlwaysOnTop(true, "screen-saver");
     cwin.loadFile('build/index.html', { hash: "/" + path });
 
-    cwin.webContents.send("setsettings", GetSettings());
+    cwin.webContents.send(IPC.Settings.Set, GetSettings());
     
     return cwin;
 }
@@ -122,7 +119,7 @@ export function getWindows() {
     return openWindows;
 }
 
-ipcMain.on("show-page", (event, arg: { show: boolean, path: string }) => {
+ipcMain.on(IPC.Window.Open, (event, arg: { show: boolean, path: string }) => {
     if (arg.show) {
         if (!openWindows[arg.path]) {
             openWindows[arg.path] = createWindow(rendererWindow, arg.path);

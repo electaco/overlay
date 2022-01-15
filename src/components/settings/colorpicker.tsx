@@ -1,4 +1,5 @@
 import React from 'react';
+import { IPC } from '../../shared/ipc';
 import './colorpicker.css';
 const { ipcRenderer } = window.require('electron')
 
@@ -15,7 +16,7 @@ class Colorbox extends React.Component<IProps> {
     
       handleInputChange(event: any) {
         const target = event.target;
-        ipcRenderer.send("updateconfig", {path: this.props.setting.path, value: target.value})
+        ipcRenderer.send(IPC.Settings.Update, {path: this.props.setting.path, value: target.value})
       }
       render() {
         return <div title={this.props.popup}>
