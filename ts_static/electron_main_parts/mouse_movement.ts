@@ -12,26 +12,40 @@ var transformRange = (value, r2) => {
   return (value * scale) - 1;
 }
 
-
-export function InitializeMouseMove() {
-  mouseCursorCheckInterval = setInterval(getMouseCursorPosition, 300);
+export function OnMouseClick() {
+  let np = getMouseCursorPosition(screen.getCursorScreenPoint());
+  if (np) {
+    getRenderWindow()?.webContents.send(IPC.MouseClick, np);
+    console.log("Mouse click: ",np);
+  }
 }
 
-function getMouseCursorPosition() {
-  var point = screen.getCursorScreenPoint();
+export function InitializeMouseMove() {
+  mouseCursorCheckInterval = setInterval(MouseOver, 300);
+}
 
-  if (point.x != mousePoint.x || point.y != mousePoint.y) {
-    let display = screen.getPrimaryDisplay();
-    var boundRect = display.bounds;
-    if (point.x > boundRect.x && point.x < boundRect.width) {
-      var np = {
-        x: transformRange(point.x, boundRect.width),
-        y: transformRange(point.y, boundRect.height) * -1,
-      };
-      getRenderWindow()?.webContents.send(IPC.MouseMove, np);
-    }
-    mousePoint = point;
+function MouseOver() {
+  var point = screen.getCursorScreenPoint();
+  if (point.x == mousePoint.x || point.y == mousePoint.y) return;
+  let np = getMouseCursorPosition(point);
+  if (np) {
+    getRenderWindow()?.webContents.send(IPC.MouseMove, np);
   }
+  mousePoint = point;
+}
+
+function getMouseCursorPosition(point) {
+  let np = null;
+  let display = screen.getPrimaryDisplay();
+  var boundRect = display.bounds;
+  if (point.x > boundRect.x && point.x < boundRect.width) {
+    np = {
+      x: transformRange(point.x, boundRect.width),
+      y: transformRange(point.y, boundRect.height) * -1,
+    };
+    
+  }
+  return np;
 }
 
 let mouseCursorCheckInterval = null;

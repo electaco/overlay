@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import { IWebSocketCommand } from '../../src/shared/interfaces/datatransfer/IWebSocketCommand';
 import { IPC } from '../../src/shared/IPC';
 import { log } from './logging';
+import { OnMouseClick } from './mouse_movement';
 import { getRenderWindow } from './windows';
 
 const { ipcMain } = require('electron')
@@ -19,9 +20,14 @@ let bat = null;
 let bat_prefix = "";
 const TD = new TextDecoder("utf-8");
 
-export function SetupBackgroundService() {
+export function SetupBackgroundService(debug = false) {
+    if (debug) {
+        if (webSocket == null) {
+            setupWebSocket();
+        }
+        return
+    }
     bat = spawn(bat_prefix + BACKGROUND_SERVICE_PATH);
-
     bat.stdout.on("data", (data) => {
         if (webSocket == null) {
             setupWebSocket();
@@ -85,6 +91,9 @@ function setupWebSocket() {
         log("Main", "Got ws message: " + event.data);
         if (msg.Type == "gamerunning") {
             setGameState(msg.Data == "True");
+        }
+        if (msg.Type == "mouseclick") { 
+            OnMouseClick();
         }
     }
 }

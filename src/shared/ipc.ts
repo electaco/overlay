@@ -35,6 +35,7 @@ export const IPC = {
     Video: "video",
     Gw2Data: "gw2data",
     MouseMove: "mousemove",
+    MouseClick: "mouseclick",
     ConnectionStatus: "connstatus",
     UseFallbackPositionUpdate: "fallback_positionupate",
     UpdateDownloaded: "update_downloaded",
