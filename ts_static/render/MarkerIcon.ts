@@ -1,5 +1,6 @@
 import { IMarkerIcon } from "../../src/shared/interfaces/render/marker";
 import * as THREE from 'three';
+import { IUserData } from "./IUserData";
 
 const materialMap: Array<THREE.SpriteMaterial> = [];
 
@@ -22,5 +23,18 @@ export function createMarkerIcon(icon: IMarkerIcon) {
   const spriteScale = 0.02;
   sprite.scale.set(spriteScale, spriteScale, spriteScale);
   sprite.layers.enable(2);
+  let ud: IUserData = {
+    onMouseOverEnter: () => {
+      if (sprite.parent.userData.onMouseOverEnter) {
+        sprite.parent.userData.onMouseOverEnter();
+      }
+    },
+    onMouseOverExit: () => {
+      if (sprite.parent.userData.onMouseOverExit) {
+        sprite.parent.userData.onMouseOverExit();
+      }
+    }
+  }
+  sprite.userData = ud;
   return sprite;
 }

@@ -7,6 +7,7 @@ import { CameraPositionManager } from './render/CameraPositionManager';
 import { IGw2MumbleLinkData, UiState } from "../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
 import { CreateMarker } from './render/PositionMarker';
 import { IPC } from '../src/shared/IPC';
+import { UiElementManager } from './render/ui_element';
 
 declare var ipcRenderer: any;
 declare var vPlayer: any;
@@ -27,9 +28,9 @@ const logger = function (text) {
 
 const movieManager = new MovieManager(scene, vPlayer);
 const positionManager = new CameraPositionManager(RenderScene);
+const UiManager = new UiElementManager(camera, scene);
 
 let ISUPDATING = false;
-
 
 function UpdateSceneData(renderData: IRenderData) {
   logger("UpdateSceneData called");
@@ -79,6 +80,8 @@ function RenderScene(timerarg = null) {
     return;
   }
 
+
+
   if (timerarg) {
     //console.log("Timer: " + timerarg + " - " + LASTTIME);
     if (timerarg == null || timerarg - LASTTIME < 21) {
@@ -88,6 +91,7 @@ function RenderScene(timerarg = null) {
     LASTTIME = timerarg;
   }
   positionManager.UpdateCameraPosition(camera);
+  UiManager.UpdatePosition();
   movieManager.CheckVideoDistance(camera);
 
   renderer.render(scene, camera);
@@ -127,7 +131,7 @@ var intersected : THREE.Object3D | null = null;
 ipcRenderer.on(IPC.MouseMove, function (event, mouse) {
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(scene.children, true);
-  let intersect = intersects.length > 0 ? intersects[0].object.parent : null;
+  let intersect = intersects.length > 0 ? intersects[0].object : null;
 
   /*scene.remove ( arrow );
   arrow = new THREE.ArrowHelper( raycaster.ray.direction, raycaster.ray.origin, 100, Math.random() * 0xffffff );

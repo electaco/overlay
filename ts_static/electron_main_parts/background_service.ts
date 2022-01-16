@@ -61,6 +61,18 @@ ipcMain.on(IPC.UseFallbackPositionUpdate, (event) => {
 });
 
 
+ipcMain.on(IPC.UI.OnClick, (event, arg: {event: string, data: string}) => {
+    if (arg.event = "mount") {
+        let msg: IWebSocketCommand = {
+            Data: `16,17,${arg.data}`,
+            Type: "keys",
+        }
+        if (webSocket) {
+            webSocket.send(JSON.stringify(msg));
+        }
+    }
+});
+
 ipcMain.on(IPC.SendKeys, (event, arg) => {
     let msg: IWebSocketCommand = {
         Data: arg,
@@ -93,7 +105,7 @@ function setupWebSocket() {
             setGameState(msg.Data == "True");
         }
         if (msg.Type == "mouseclick") { 
-            OnMouseClick();
+            OnMouseClick(msg.Data);
         }
     }
 }

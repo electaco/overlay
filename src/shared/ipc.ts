@@ -3,6 +3,11 @@
 // they are the same.
 
 export const IPC = {
+    UI: {
+        AddElement: 'UI_AddElement',
+        RemoveElement: 'UI_RemoveElement',
+        OnClick: 'UI_OnClick',
+    },
     Marker: {
         Add: "addMarker",
         Remove: "removeMarker",

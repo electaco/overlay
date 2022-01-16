@@ -12,9 +12,10 @@ var transformRange = (value, r2) => {
   return (value * scale) - 1;
 }
 
-export function OnMouseClick() {
+export function OnMouseClick(button:string) {
   let np = getMouseCursorPosition(screen.getCursorScreenPoint());
   if (np) {
+    np.button = button;
     getRenderWindow()?.webContents.send(IPC.MouseClick, np);
     console.log("Mouse click: ",np);
   }
