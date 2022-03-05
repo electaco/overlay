@@ -1,16289 +1,31326 @@
-export const maps = {
+// https://api.guildwars2.com/v2/maps?ids=all
+
+export interface IMap {
+    map_name: string;
+    min_level: number;
+    max_level: number;
+    default_floor: number;
+    type: string;
+    floors: number[];
+    region_id?: number;
+    region_name?: string;
+    continent_id?: number;
+    continent_name?: string;
+    map_rect: any;
+    continent_rect: any;
+}
+export interface IMaps {
+    [id: string]: IMap;
+}
+
+export const maps: IMaps = {
     "15": {
-        "map_name": "Queensdale",
         "min_level": 1,
         "max_level": 15,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            65,
+            3,
+            2,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "Queensdale"
     },
     "17": {
-        "map_name": "Harathi Hinterlands",
         "min_level": 35,
         "max_level": 45,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            65,
+            3,
+            2,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -33792],
-            [39936, 33792]
+            [
+                -36864,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [13440, 9472],
-            [16640, 12288]
-        ]
+            [
+                46208,
+                25856
+            ],
+            [
+                49408,
+                28672
+            ]
+        ],
+        "map_name": "Harathi Hinterlands"
     },
     "18": {
-        "map_name": "Divinity's Reach",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            65,
+            3,
+            2,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Divinity's Reach"
     },
     "19": {
-        "map_name": "Plains of Ashford",
         "min_level": 1,
         "max_level": 15,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Plains of Ashford"
     },
     "20": {
-        "map_name": "Blazeridge Steppes",
         "min_level": 40,
         "max_level": 50,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [29184, 12160],
-            [31232, 16256]
-        ]
+            [
+                61952,
+                28544
+            ],
+            [
+                64000,
+                32640
+            ]
+        ],
+        "map_name": "Blazeridge Steppes"
     },
     "21": {
-        "map_name": "Fields of Ruin",
         "min_level": 30,
         "max_level": 40,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [28672, 16256],
-            [31744, 19328]
-        ]
+            [
+                61440,
+                32640
+            ],
+            [
+                64512,
+                35712
+            ]
+        ],
+        "map_name": "Fields of Ruin"
     },
     "22": {
-        "map_name": "Fireheart Rise",
         "min_level": 60,
         "max_level": 70,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [23808, 8448],
-            [27136, 11264]
-        ]
+            [
+                56576,
+                24832
+            ],
+            [
+                59904,
+                27648
+            ]
+        ],
+        "map_name": "Fireheart Rise"
     },
     "23": {
-        "map_name": "Kessex Hills",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            57,
+            3,
+            2,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Kessex Hills"
     },
     "24": {
-        "map_name": "Gendarran Fields",
         "min_level": 25,
         "max_level": 35,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Gendarran Fields"
     },
     "25": {
-        "map_name": "Iron Marches",
         "min_level": 50,
         "max_level": 60,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            67,
+            3,
+            2,
+            0
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [27136, 9472],
-            [29184, 13568]
-        ]
+            [
+                59904,
+                25856
+            ],
+            [
+                61952,
+                29952
+            ]
+        ],
+        "map_name": "Iron Marches"
     },
     "26": {
-        "map_name": "Dredgehaunt Cliffs",
         "min_level": 40,
         "max_level": 50,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [19456, 14976],
-            [21760, 18176]
-        ]
+            [
+                52224,
+                31360
+            ],
+            [
+                54528,
+                34560
+            ]
+        ],
+        "map_name": "Dredgehaunt Cliffs"
     },
     "27": {
-        "map_name": "Lornar's Pass",
         "min_level": 25,
         "max_level": 40,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Lornar's Pass"
     },
     "28": {
-        "map_name": "Wayfarer Foothills",
         "min_level": 1,
         "max_level": 15,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            58,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Wayfarer Foothills"
     },
     "29": {
-        "map_name": "Timberline Falls",
         "min_level": 50,
         "max_level": 60,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [18944, 18176],
-            [21248, 21376]
-        ]
+            [
+                51712,
+                34560
+            ],
+            [
+                54016,
+                37760
+            ]
+        ],
+        "map_name": "Timberline Falls"
     },
     "30": {
-        "map_name": "Frostgorge Sound",
         "min_level": 70,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [20736, 8192],
-            [23808, 11264]
-        ]
+            [
+                53504,
+                24576
+            ],
+            [
+                56576,
+                27648
+            ]
+        ],
+        "map_name": "Frostgorge Sound"
     },
     "31": {
-        "map_name": "Snowden Drifts",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Snowden Drifts"
     },
     "32": {
-        "map_name": "Diessa Plateau",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 27648]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                27648
+            ]
         ],
         "continent_rect": [
-            [23552, 11264],
-            [27136, 13568]
-        ]
+            [
+                56320,
+                27648
+            ],
+            [
+                59904,
+                29952
+            ]
+        ],
+        "map_name": "Diessa Plateau"
     },
     "33": {
-        "map_name": "Ascalonian Catacombs",
         "min_level": 30,
         "max_level": 32,
         "default_floor": -2,
         "type": "Instance",
-        "floors": [-2],
+        "floors": [
+            -2
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -12288],
-            [15360, 12288]
+            [
+                -15360,
+                -12288
+            ],
+            [
+                15360,
+                12288
+            ]
         ],
         "continent_rect": [
-            [27648, 13056],
-            [28928, 14080]
-        ]
+            [
+                60416,
+                29440
+            ],
+            [
+                61696,
+                30464
+            ]
+        ],
+        "map_name": "Ascalonian Catacombs"
     },
     "34": {
-        "map_name": "Caledon Forest",
         "min_level": 1,
         "max_level": 15,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Caledon Forest"
     },
     "35": {
-        "map_name": "Metrica Province",
         "min_level": 1,
         "max_level": 15,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            56,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Metrica Province"
     },
     "36": {
-        "map_name": "Ascalonian Catacombs",
         "min_level": 35,
         "max_level": 35,
         "default_floor": -2,
         "type": "Instance",
-        "floors": [-2],
+        "floors": [
+            -2
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -12288],
-            [15360, 12288]
+            [
+                -15360,
+                -12288
+            ],
+            [
+                15360,
+                12288
+            ]
         ],
         "continent_rect": [
-            [27648, 13056],
-            [28928, 14080]
-        ]
+            [
+                60416,
+                29440
+            ],
+            [
+                61696,
+                30464
+            ]
+        ],
+        "map_name": "Ascalonian Catacombs"
     },
     "37": {
-        "map_name": "Arson at the Orphanage",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Arson at the Orphanage"
     },
     "38": {
-        "map_name": "Eternal Battlegrounds",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 3,
         "type": "Center",
-        "floors": [1, 3],
+        "floors": [
+            1,
+            3
+        ],
         "region_id": 7,
         "region_name": "World vs. World",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [8958, 12798],
-            [12030, 15870]
-        ]
+            [
+                8958,
+                12798
+            ],
+            [
+                12030,
+                15870
+            ]
+        ],
+        "map_name": "Eternal Battlegrounds"
     },
     "39": {
-        "map_name": "Mount Maelstrom",
         "min_level": 60,
         "max_level": 70,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Mount Maelstrom"
     },
     "50": {
-        "map_name": "Lion's Arch",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            2,
+            0,
+            64,
+            3,
+            66
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Lion's Arch"
     },
     "51": {
-        "map_name": "Straits of Devastation",
         "min_level": 70,
         "max_level": 75,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "Straits of Devastation"
     },
     "53": {
-        "map_name": "Sparkfly Fen",
         "min_level": 55,
         "max_level": 65,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -39936],
-            [30720, 39936]
+            [
+                -30720,
+                -39936
+            ],
+            [
+                30720,
+                39936
+            ]
         ],
         "continent_rect": [
-            [15232, 19072],
-            [17792, 22400]
-        ]
+            [
+                48000,
+                35456
+            ],
+            [
+                50560,
+                38784
+            ]
+        ],
+        "map_name": "Sparkfly Fen"
     },
     "54": {
-        "map_name": "Brisban Wildlands",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            56,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Brisban Wildlands"
     },
     "55": {
-        "map_name": "The Hospital in Jeopardy",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Hospital in Jeopardy"
     },
     "61": {
-        "map_name": "Infiltration",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "Infiltration"
     },
     "62": {
-        "map_name": "Cursed Shore",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [10112, 25216],
-            [12160, 29312]
-        ]
+            [
+                42880,
+                41600
+            ],
+            [
+                44928,
+                45696
+            ]
+        ],
+        "map_name": "Cursed Shore"
     },
     "63": {
-        "map_name": "Sorrow's Embrace",
         "min_level": 60,
         "max_level": 62,
         "default_floor": -7,
         "type": "Instance",
-        "floors": [-7],
+        "floors": [
+            -7
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -18432],
-            [18432, 18432]
+            [
+                -18432,
+                -18432
+            ],
+            [
+                18432,
+                18432
+            ]
         ],
         "continent_rect": [
-            [19328, 17408],
-            [20864, 18944]
-        ]
+            [
+                52096,
+                33792
+            ],
+            [
+                53632,
+                35328
+            ]
+        ],
+        "map_name": "Sorrow's Embrace"
     },
     "64": {
-        "map_name": "Sorrow's Embrace",
         "min_level": 65,
         "max_level": 65,
         "default_floor": -7,
         "type": "Instance",
-        "floors": [-7],
+        "floors": [
+            -7
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -18432],
-            [18432, 18432]
+            [
+                -18432,
+                -18432
+            ],
+            [
+                18432,
+                18432
+            ]
         ],
         "continent_rect": [
-            [19328, 17408],
-            [20864, 18944]
-        ]
+            [
+                52096,
+                33792
+            ],
+            [
+                53632,
+                35328
+            ]
+        ],
+        "map_name": "Sorrow's Embrace"
     },
     "65": {
-        "map_name": "Malchor's Leap",
         "min_level": 75,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [10368, 23168],
-            [14464, 25216]
-        ]
+            [
+                43136,
+                39552
+            ],
+            [
+                47232,
+                41600
+            ]
+        ],
+        "map_name": "Malchor's Leap"
     },
     "66": {
-        "map_name": "Citadel of Flame",
         "min_level": 70,
         "max_level": 72,
         "default_floor": -10,
         "type": "Instance",
-        "floors": [-10],
+        "floors": [
+            -10
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [26624, 7680],
-            [27904, 8960]
-        ]
+            [
+                59392,
+                24064
+            ],
+            [
+                60672,
+                25344
+            ]
+        ],
+        "map_name": "Citadel of Flame"
     },
     "67": {
-        "map_name": "Twilight Arbor",
         "min_level": 55,
         "max_level": 80,
         "default_floor": -9,
         "type": "Instance",
-        "floors": [-5, -9],
+        "floors": [
+            -5,
+            -9
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -12288],
-            [15360, 12288]
+            [
+                -15360,
+                -12288
+            ],
+            [
+                15360,
+                12288
+            ]
         ],
         "continent_rect": [
-            [8704, 16000],
-            [9984, 17024]
-        ]
+            [
+                41472,
+                32384
+            ],
+            [
+                42752,
+                33408
+            ]
+        ],
+        "map_name": "Twilight Arbor"
     },
     "68": {
-        "map_name": "Twilight Arbor",
         "min_level": 50,
         "max_level": 52,
         "default_floor": -6,
         "type": "Instance",
-        "floors": [-6],
+        "floors": [
+            -6
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -12288],
-            [15360, 12288]
+            [
+                -15360,
+                -12288
+            ],
+            [
+                15360,
+                12288
+            ]
         ],
         "continent_rect": [
-            [8704, 16000],
-            [9984, 17024]
-        ]
+            [
+                41472,
+                32384
+            ],
+            [
+                42752,
+                33408
+            ]
+        ],
+        "map_name": "Twilight Arbor"
     },
     "69": {
-        "map_name": "Citadel of Flame",
         "min_level": 75,
         "max_level": 75,
         "default_floor": -10,
         "type": "Instance",
-        "floors": [-10],
+        "floors": [
+            -10
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [26624, 7680],
-            [27904, 8960]
-        ]
+            [
+                59392,
+                24064
+            ],
+            [
+                60672,
+                25344
+            ]
+        ],
+        "map_name": "Citadel of Flame"
     },
     "70": {
-        "map_name": "Honor of the Waves",
         "min_level": 76,
         "max_level": 78,
         "default_floor": 8,
         "type": "Instance",
-        "floors": [7, 6, 8],
+        "floors": [
+            7,
+            6,
+            8
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -12288],
-            [15360, 15360]
+            [
+                -15360,
+                -12288
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [21760, 8064],
-            [23040, 9216]
-        ]
+            [
+                54528,
+                24448
+            ],
+            [
+                55808,
+                25600
+            ]
+        ],
+        "map_name": "Honor of the Waves"
     },
     "71": {
-        "map_name": "Honor of the Waves",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 8,
         "type": "Instance",
-        "floors": [7, 6, 8],
+        "floors": [
+            7,
+            6,
+            8
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -12288],
-            [15360, 15360]
+            [
+                -15360,
+                -12288
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [21760, 8064],
-            [23040, 9216]
-        ]
+            [
+                54528,
+                24448
+            ],
+            [
+                55808,
+                25600
+            ]
+        ],
+        "map_name": "Honor of the Waves"
     },
     "73": {
-        "map_name": "Bloodtide Coast",
         "min_level": 45,
         "max_level": 55,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [30720, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                30720,
+                39936
+            ]
         ],
         "continent_rect": [
-            [15232, 15872],
-            [17664, 19072]
-        ]
+            [
+                48000,
+                32256
+            ],
+            [
+                50432,
+                35456
+            ]
+        ],
+        "map_name": "Bloodtide Coast"
     },
     "75": {
-        "map_name": "Caudecus's Manor",
         "min_level": 40,
         "max_level": 42,
         "default_floor": 4,
         "type": "Instance",
-        "floors": [5, -4, 4],
+        "floors": [
+            5,
+            -4,
+            4
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [12416, 11392],
-            [13440, 12416]
-        ]
+            [
+                45184,
+                27776
+            ],
+            [
+                46208,
+                28800
+            ]
+        ],
+        "map_name": "Caudecus's Manor"
     },
     "76": {
-        "map_name": "Caudecus's Manor",
         "min_level": 45,
         "max_level": 45,
         "default_floor": 4,
         "type": "Instance",
-        "floors": [5, -4, 4],
+        "floors": [
+            5,
+            -4,
+            4
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [12416, 11392],
-            [13440, 12416]
-        ]
+            [
+                45184,
+                27776
+            ],
+            [
+                46208,
+                28800
+            ]
+        ],
+        "map_name": "Caudecus's Manor"
     },
     "77": {
-        "map_name": "Search the Premises",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Search the Premises"
     },
     "79": {
-        "map_name": "The Informant",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Informant"
     },
     "80": {
-        "map_name": "A Society Function",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "A Society Function"
     },
     "81": {
-        "map_name": "Crucible of Eternity",
         "min_level": 78,
         "max_level": 80,
         "default_floor": -11,
         "type": "Instance",
-        "floors": [-11],
+        "floors": [
+            -11
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -15360],
-            [12288, 15360]
+            [
+                -12288,
+                -15360
+            ],
+            [
+                12288,
+                15360
+            ]
         ],
         "continent_rect": [
-            [20416, 21312],
-            [21440, 22592]
-        ]
+            [
+                53184,
+                37696
+            ],
+            [
+                54208,
+                38976
+            ]
+        ],
+        "map_name": "Crucible of Eternity"
     },
     "82": {
-        "map_name": "Crucible of Eternity",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -11,
         "type": "Instance",
-        "floors": [-11],
+        "floors": [
+            -11
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -15360],
-            [12288, 15360]
+            [
+                -12288,
+                -15360
+            ],
+            [
+                12288,
+                15360
+            ]
         ],
         "continent_rect": [
-            [20416, 21312],
-            [21440, 22592]
-        ]
+            [
+                53184,
+                37696
+            ],
+            [
+                54208,
+                38976
+            ]
+        ],
+        "map_name": "Crucible of Eternity"
     },
     "89": {
-        "map_name": "Chasing the Culprits",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "Chasing the Culprits"
     },
     "91": {
-        "map_name": "The Grove",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "The Grove"
     },
     "92": {
-        "map_name": "The Trial of Julius Zamon",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Trial of Julius Zamon"
     },
     "95": {
-        "map_name": " Alpine Borderlands",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 3,
         "type": "GreenHome",
-        "floors": [1, 3],
+        "floors": [
+            1,
+            3
+        ],
         "region_id": 7,
         "region_name": "World vs. World",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-30720, -43008],
-            [30720, 43008]
+            [
+                -30720,
+                -43008
+            ],
+            [
+                30720,
+                43008
+            ]
         ],
         "continent_rect": [
-            [5630, 11518],
-            [8190, 15102]
-        ]
+            [
+                5630,
+                11518
+            ],
+            [
+                8190,
+                15102
+            ]
+        ],
+        "map_name": " Alpine Borderlands"
     },
     "96": {
-        "map_name": " Alpine Borderlands",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 3,
         "type": "BlueHome",
-        "floors": [1, 3],
+        "floors": [
+            1,
+            3
+        ],
         "region_id": 7,
         "region_name": "World vs. World",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-30720, -43008],
-            [30720, 43008]
+            [
+                -30720,
+                -43008
+            ],
+            [
+                30720,
+                43008
+            ]
         ],
         "continent_rect": [
-            [12798, 10878],
-            [15358, 14462]
-        ]
+            [
+                12798,
+                10878
+            ],
+            [
+                15358,
+                14462
+            ]
+        ],
+        "map_name": " Alpine Borderlands"
     },
     "97": {
-        "map_name": "Infiltration",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Infiltration"
     },
     "110": {
-        "map_name": "The Perils of Friendship",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Perils of Friendship"
     },
     "111": {
-        "map_name": "Victory or Death",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 10,
         "type": "Instance",
-        "floors": [11, 10],
+        "floors": [
+            11,
+            10
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [12160, 27136],
-            [15488, 29952]
-        ]
+            [
+                44928,
+                43520
+            ],
+            [
+                48256,
+                46336
+            ]
+        ],
+        "map_name": "Victory or Death"
     },
     "112": {
-        "map_name": "The Ruined City of Arah",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 9,
         "type": "Instance",
-        "floors": [9],
+        "floors": [
+            9
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -24576],
-            [24576, 24576]
+            [
+                -24576,
+                -24576
+            ],
+            [
+                24576,
+                24576
+            ]
         ],
         "continent_rect": [
-            [12160, 26496],
-            [14208, 28544]
-        ]
+            [
+                44928,
+                42880
+            ],
+            [
+                46976,
+                44928
+            ]
+        ],
+        "map_name": "The Ruined City of Arah"
     },
     "113": {
-        "map_name": "Desperate Medicine",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "Desperate Medicine"
     },
     "120": {
-        "map_name": "The Commander",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Commander"
     },
     "138": {
-        "map_name": "Defense of Shaemoor",
         "min_level": 1,
         "max_level": 1,
         "default_floor": 1,
         "type": "Tutorial",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "Defense of Shaemoor"
     },
     "139": {
-        "map_name": "Rata Sum",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            55,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Rata Sum"
     },
     "140": {
-        "map_name": "The Apothecary",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "The Apothecary"
     },
     "142": {
-        "map_name": "Going Undercover",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "Going Undercover"
     },
     "143": {
-        "map_name": "Going Undercover",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Going Undercover"
     },
     "144": {
-        "map_name": "The Greater Good",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Greater Good"
     },
     "145": {
-        "map_name": "The Rescue",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "The Rescue"
     },
     "147": {
-        "map_name": "Breaking the Blade",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Breaking the Blade"
     },
     "148": {
-        "map_name": "The Fall of Falcon Company",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Fall of Falcon Company"
     },
     "149": {
-        "map_name": "The Fall of Falcon Company",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "The Fall of Falcon Company"
     },
     "152": {
-        "map_name": "Confronting Captain Tervelan",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "Confronting Captain Tervelan"
     },
     "153": {
-        "map_name": "Seek Logan's Aid",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Seek Logan's Aid"
     },
     "154": {
-        "map_name": "Seek Logan's Aid",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "Seek Logan's Aid"
     },
     "157": {
-        "map_name": "Accusation",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Accusation"
     },
     "159": {
-        "map_name": "Accusation",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Accusation"
     },
     "161": {
-        "map_name": "Liberation",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Liberation"
     },
     "162": {
-        "map_name": "Voices From the Past",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Voices From the Past"
     },
     "163": {
-        "map_name": "Voices From the Past",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Voices From the Past"
     },
     "171": {
-        "map_name": "Rending the Mantle",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "Rending the Mantle"
     },
     "172": {
-        "map_name": "Rending the Mantle",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Rending the Mantle"
     },
     "178": {
-        "map_name": "The Floating Grizwhirl",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Floating Grizwhirl"
     },
     "179": {
-        "map_name": "The Floating Grizwhirl",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Floating Grizwhirl"
     },
     "180": {
-        "map_name": "The Floating Grizwhirl",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Floating Grizwhirl"
     },
     "182": {
-        "map_name": "Clown College",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "Clown College"
     },
     "184": {
-        "map_name": "The Artist's Workshop",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "The Artist's Workshop"
     },
     "185": {
-        "map_name": "Into the Woods",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Into the Woods"
     },
     "186": {
-        "map_name": "The Ringmaster",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Ringmaster"
     },
     "190": {
-        "map_name": "The Orders of Tyria",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Orders of Tyria"
     },
     "191": {
-        "map_name": "The Orders of Tyria",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "The Orders of Tyria"
     },
     "192": {
-        "map_name": "Brute Force",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Brute Force"
     },
     "193": {
-        "map_name": "Mortus Virge",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Mortus Virge"
     },
     "195": {
-        "map_name": "Triskell Quay",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Triskell Quay"
     },
     "196": {
-        "map_name": "Track the Seraph",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Track the Seraph"
     },
     "198": {
-        "map_name": "Speaker of the Dead",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Speaker of the Dead"
     },
     "199": {
-        "map_name": "The Sad Tale of the \"Ravenous\"",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "The Sad Tale of the \"Ravenous\""
     },
     "201": {
-        "map_name": "Kellach's Attack",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Kellach's Attack"
     },
     "202": {
-        "map_name": "The Queen's Justice",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Queen's Justice"
     },
     "203": {
-        "map_name": "The Trap",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Trap"
     },
     "211": {
-        "map_name": "Best Laid Plans",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Best Laid Plans"
     },
     "212": {
-        "map_name": "Welcome Home",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Welcome Home"
     },
     "215": {
-        "map_name": "The Tribune's Call",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "The Tribune's Call"
     },
     "216": {
-        "map_name": "The Tribune's Call",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "The Tribune's Call"
     },
     "217": {
-        "map_name": "The Tribune's Call",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "The Tribune's Call"
     },
     "218": {
-        "map_name": "Black Citadel",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Black Citadel"
     },
     "222": {
-        "map_name": "A Spy for a Spy",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "A Spy for a Spy"
     },
     "224": {
-        "map_name": "Scrapyard Dogs",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Scrapyard Dogs"
     },
     "225": {
-        "map_name": "A Spy for a Spy",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "A Spy for a Spy"
     },
     "226": {
-        "map_name": "On the Mend",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "On the Mend"
     },
     "232": {
-        "map_name": "Spilled Blood",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Spilled Blood"
     },
     "234": {
-        "map_name": "Ghostbore Musket",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Ghostbore Musket"
     },
     "237": {
-        "map_name": "Iron Grip of the Legion",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Iron Grip of the Legion"
     },
     "238": {
-        "map_name": "The Flame Advances",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "The Flame Advances"
     },
     "239": {
-        "map_name": "The Flame Advances",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "The Flame Advances"
     },
     "242": {
-        "map_name": "Test Your Metal",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Test Your Metal"
     },
     "244": {
-        "map_name": "Quick and Quiet",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Quick and Quiet"
     },
     "248": {
-        "map_name": "Salma District (Home)",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Salma District (Home)"
     },
     "249": {
-        "map_name": "An Unusual Inheritance",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "An Unusual Inheritance"
     },
     "250": {
-        "map_name": "Windrock Maze",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Windrock Maze"
     },
     "251": {
-        "map_name": "Mired Deep",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Mired Deep"
     },
     "252": {
-        "map_name": "Mired Deep",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Mired Deep"
     },
     "254": {
-        "map_name": "Deadly Force",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Deadly Force"
     },
     "255": {
-        "map_name": "Ghostbore Artillery",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Ghostbore Artillery"
     },
     "256": {
-        "map_name": "No Negotiations",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 27648]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                27648
+            ]
         ],
         "continent_rect": [
-            [23552, 11264],
-            [27136, 13568]
-        ]
+            [
+                56320,
+                27648
+            ],
+            [
+                59904,
+                29952
+            ]
+        ],
+        "map_name": "No Negotiations"
     },
     "257": {
-        "map_name": "Salvaging Scrap",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 27648]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                27648
+            ]
         ],
         "continent_rect": [
-            [23552, 11264],
-            [27136, 13568]
-        ]
+            [
+                56320,
+                27648
+            ],
+            [
+                59904,
+                29952
+            ]
+        ],
+        "map_name": "Salvaging Scrap"
     },
     "258": {
-        "map_name": "Salvaging Scrap",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 27648]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                27648
+            ]
         ],
         "continent_rect": [
-            [23552, 11264],
-            [27136, 13568]
-        ]
+            [
+                56320,
+                27648
+            ],
+            [
+                59904,
+                29952
+            ]
+        ],
+        "map_name": "Salvaging Scrap"
     },
     "259": {
-        "map_name": "In the Ruins",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "In the Ruins"
     },
     "260": {
-        "map_name": "In the Ruins",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 27648]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                27648
+            ]
         ],
         "continent_rect": [
-            [23552, 11264],
-            [27136, 13568]
-        ]
+            [
+                56320,
+                27648
+            ],
+            [
+                59904,
+                29952
+            ]
+        ],
+        "map_name": "In the Ruins"
     },
     "262": {
-        "map_name": "Chain of Command",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Chain of Command"
     },
     "263": {
-        "map_name": "Chain of Command",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Chain of Command"
     },
     "264": {
-        "map_name": "Time for a Promotion",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Time for a Promotion"
     },
     "267": {
-        "map_name": "The End of the Line",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "The End of the Line"
     },
     "269": {
-        "map_name": "Magic Users",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Magic Users"
     },
     "271": {
-        "map_name": "Rage Suppression",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Rage Suppression"
     },
     "272": {
-        "map_name": "Rage Suppression",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Rage Suppression"
     },
     "274": {
-        "map_name": "Operation: Bulwark",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Operation: Bulwark"
     },
     "275": {
-        "map_name": "AWOL",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "AWOL"
     },
     "276": {
-        "map_name": "Human's Lament",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Human's Lament"
     },
     "282": {
-        "map_name": "Misplaced Faith",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 27648]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                27648
+            ]
         ],
         "continent_rect": [
-            [23552, 11264],
-            [27136, 13568]
-        ]
+            [
+                56320,
+                27648
+            ],
+            [
+                59904,
+                29952
+            ]
+        ],
+        "map_name": "Misplaced Faith"
     },
     "283": {
-        "map_name": "Thicker Than Water",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Thicker Than Water"
     },
     "284": {
-        "map_name": "Dishonorable Discharge",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Dishonorable Discharge"
     },
     "287": {
-        "map_name": "Searching for the Truth",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Searching for the Truth"
     },
     "288": {
-        "map_name": "Lighting the Beacons",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Lighting the Beacons"
     },
     "290": {
-        "map_name": "Stoking the Flame",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Stoking the Flame"
     },
     "294": {
-        "map_name": "A Fork in the Road",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 27648]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                27648
+            ]
         ],
         "continent_rect": [
-            [23552, 11264],
-            [27136, 13568]
-        ]
+            [
+                56320,
+                27648
+            ],
+            [
+                59904,
+                29952
+            ]
+        ],
+        "map_name": "A Fork in the Road"
     },
     "295": {
-        "map_name": "Sins of the Father",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Sins of the Father"
     },
     "297": {
-        "map_name": "Graveyard Ornaments",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Graveyard Ornaments"
     },
     "326": {
-        "map_name": "Hoelbrak",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            58,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Hoelbrak"
     },
     "327": {
-        "map_name": "Desperate Medicine",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Desperate Medicine"
     },
     "330": {
-        "map_name": "Seraph Headquarters",
         "min_level": 0,
         "max_level": 15,
         "default_floor": 2,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Seraph Headquarters"
     },
     "334": {
-        "map_name": "Keg Brawl",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Pvp",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Keg Brawl"
     },
     "335": {
-        "map_name": "Claw Island",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -18432],
-            [18432, 18432]
+            [
+                -18432,
+                -18432
+            ],
+            [
+                18432,
+                18432
+            ]
         ],
         "continent_rect": [
-            [13952, 15872],
-            [15488, 17408]
-        ]
+            [
+                46720,
+                32256
+            ],
+            [
+                48256,
+                33792
+            ]
+        ],
+        "map_name": "Claw Island"
     },
     "336": {
-        "map_name": "Chantry of Secrets",
         "min_level": 45,
         "max_level": 55,
         "default_floor": -3,
         "type": "Instance",
-        "floors": [-3, 1],
+        "floors": [
+            -3,
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [16000, 16000],
-            [17024, 17024]
-        ]
+            [
+                48768,
+                32384
+            ],
+            [
+                49792,
+                33408
+            ]
+        ],
+        "map_name": "Chantry of Secrets"
     },
     "350": {
-        "map_name": "Heart of the Mists",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [4865, 6398],
-            [6145, 7678]
-        ]
+            [
+                4865,
+                6398
+            ],
+            [
+                6145,
+                7678
+            ]
+        ],
+        "map_name": "Heart of the Mists"
     },
     "363": {
-        "map_name": "The Sting",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "The Sting"
     },
     "364": {
-        "map_name": "Drawing Out the Cult",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Drawing Out the Cult"
     },
     "365": {
-        "map_name": "Ashes of the Past",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Ashes of the Past"
     },
     "371": {
-        "map_name": "Hero's Canton (Home)",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Hero's Canton (Home)"
     },
     "372": {
-        "map_name": "Blood Tribune Quarters",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Blood Tribune Quarters"
     },
     "373": {
-        "map_name": "The Command Core",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "The Command Core"
     },
     "374": {
-        "map_name": "Knut Whitebear's Loft",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 2,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Knut Whitebear's Loft"
     },
     "375": {
-        "map_name": "Hunter's Hearth (Home)",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 2,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Hunter's Hearth (Home)"
     },
     "376": {
-        "map_name": "Stonewright's Steading",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Stonewright's Steading"
     },
     "378": {
-        "map_name": "Queen's Throne Room",
         "min_level": 0,
         "max_level": 15,
         "default_floor": 2,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Queen's Throne Room"
     },
     "379": {
-        "map_name": "The Great Hunt",
         "min_level": 1,
         "max_level": 1,
         "default_floor": 1,
         "type": "Tutorial",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "The Great Hunt"
     },
     "380": {
-        "map_name": "A Weapon of Legend",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "A Weapon of Legend"
     },
     "381": {
-        "map_name": "The Last of the Giant-Kings",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "The Last of the Giant-Kings"
     },
     "382": {
-        "map_name": "Disciples of the Dragon",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Disciples of the Dragon"
     },
     "385": {
-        "map_name": "A Weapon of Legend",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "A Weapon of Legend"
     },
     "386": {
-        "map_name": "Echoes of Ages Past",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Echoes of Ages Past"
     },
     "387": {
-        "map_name": "Wild Spirits",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Wild Spirits"
     },
     "388": {
-        "map_name": "Out of the Skies",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Out of the Skies"
     },
     "389": {
-        "map_name": "Echoes of Ages Past",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Echoes of Ages Past"
     },
     "390": {
-        "map_name": "Twilight of the Wolf",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Twilight of the Wolf"
     },
     "391": {
-        "map_name": "Rage of the Minotaurs",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Rage of the Minotaurs"
     },
     "392": {
-        "map_name": "A Pup's Illness",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "A Pup's Illness"
     },
     "393": {
-        "map_name": "Through the Veil",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Through the Veil"
     },
     "394": {
-        "map_name": "A Trap Foiled",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "A Trap Foiled"
     },
     "396": {
-        "map_name": "Raven's Revered",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Raven's Revered"
     },
     "397": {
-        "map_name": "One Good Drink Deserves Another",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "One Good Drink Deserves Another"
     },
     "399": {
-        "map_name": "Shape of the Spirit",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Shape of the Spirit"
     },
     "400": {
-        "map_name": "Into the Mists",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Into the Mists"
     },
     "401": {
-        "map_name": "Through the Veil",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Through the Veil"
     },
     "405": {
-        "map_name": "Blessed of Bear",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Blessed of Bear"
     },
     "407": {
-        "map_name": "The Wolf Havroun",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "The Wolf Havroun"
     },
     "410": {
-        "map_name": "Minotaur Rampant",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Minotaur Rampant"
     },
     "411": {
-        "map_name": "Minotaur Rampant",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Minotaur Rampant"
     },
     "412": {
-        "map_name": "Unexpected Visitors",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Unexpected Visitors"
     },
     "413": {
-        "map_name": "Rumors of Trouble",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Rumors of Trouble"
     },
     "414": {
-        "map_name": "A New Challenger",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "A New Challenger"
     },
     "415": {
-        "map_name": "Unexpected Visitors",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Unexpected Visitors"
     },
     "416": {
-        "map_name": "Roadblock",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 27648]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                27648
+            ]
         ],
         "continent_rect": [
-            [23552, 11264],
-            [27136, 13568]
-        ]
+            [
+                56320,
+                27648
+            ],
+            [
+                59904,
+                29952
+            ]
+        ],
+        "map_name": "Roadblock"
     },
     "417": {
-        "map_name": "Assault on Moledavia",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 27648]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                27648
+            ]
         ],
         "continent_rect": [
-            [23552, 11264],
-            [27136, 13568]
-        ]
+            [
+                56320,
+                27648
+            ],
+            [
+                59904,
+                29952
+            ]
+        ],
+        "map_name": "Assault on Moledavia"
     },
     "418": {
-        "map_name": "Don't Leave Your Toys Out",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Don't Leave Your Toys Out"
     },
     "419": {
-        "map_name": "A New Challenger",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "A New Challenger"
     },
     "420": {
-        "map_name": "First Attack",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "First Attack"
     },
     "421": {
-        "map_name": "The Finishing Blow",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "The Finishing Blow"
     },
     "422": {
-        "map_name": "The Semifinals",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 27648]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                27648
+            ]
         ],
         "continent_rect": [
-            [23552, 11264],
-            [27136, 13568]
-        ]
+            [
+                56320,
+                27648
+            ],
+            [
+                59904,
+                29952
+            ]
+        ],
+        "map_name": "The Semifinals"
     },
     "423": {
-        "map_name": "The Championship Fight",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "The Championship Fight"
     },
     "424": {
-        "map_name": "The Championship Fight",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "The Championship Fight"
     },
     "425": {
-        "map_name": "The Machine in Action",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 27648]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                27648
+            ]
         ],
         "continent_rect": [
-            [23552, 11264],
-            [27136, 13568]
-        ]
+            [
+                56320,
+                27648
+            ],
+            [
+                59904,
+                29952
+            ]
+        ],
+        "map_name": "The Machine in Action"
     },
     "427": {
-        "map_name": "Among the Kodan",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Among the Kodan"
     },
     "428": {
-        "map_name": "Rumors of Trouble",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "Rumors of Trouble"
     },
     "429": {
-        "map_name": "Rage of the Minotaurs",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Rage of the Minotaurs"
     },
     "430": {
-        "map_name": "Darkness at Drakentelt",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Darkness at Drakentelt"
     },
     "432": {
-        "map_name": "Fighting the Nightmare",
         "min_level": 1,
         "max_level": 1,
         "default_floor": -15,
         "type": "Tutorial",
-        "floors": [-15],
+        "floors": [
+            -15
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Fighting the Nightmare"
     },
     "434": {
-        "map_name": "Preserving the Balance",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Preserving the Balance"
     },
     "435": {
-        "map_name": "Means to an End",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Means to an End"
     },
     "436": {
-        "map_name": "Dredge Technology",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Dredge Technology"
     },
     "439": {
-        "map_name": "Underground Scholar",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Underground Scholar"
     },
     "440": {
-        "map_name": "Dredge Assault",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Dredge Assault"
     },
     "441": {
-        "map_name": "The Dredge Hideout",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "The Dredge Hideout"
     },
     "444": {
-        "map_name": "Sabotage",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Sabotage"
     },
     "447": {
-        "map_name": "Codebreaker",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Codebreaker"
     },
     "449": {
-        "map_name": "Armaments",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Armaments"
     },
     "453": {
-        "map_name": "Assault the Hill",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Assault the Hill"
     },
     "454": {
-        "map_name": "Silent Warfare",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Silent Warfare"
     },
     "455": {
-        "map_name": "Sever the Head",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Sever the Head"
     },
     "458": {
-        "map_name": "Fury of the Dead",
         "min_level": 1,
         "max_level": 1,
         "default_floor": 1,
         "type": "Tutorial",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Fury of the Dead"
     },
     "459": {
-        "map_name": "A Fork in the Road",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "A Fork in the Road"
     },
     "460": {
-        "map_name": "Citadel Stockade",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Citadel Stockade"
     },
     "464": {
-        "map_name": "Tribunes in Effigy",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Tribunes in Effigy"
     },
     "465": {
-        "map_name": "Sins of the Father",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Sins of the Father"
     },
     "466": {
-        "map_name": "Misplaced Faith",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Misplaced Faith"
     },
     "470": {
-        "map_name": "Graveyard Ornaments",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Graveyard Ornaments"
     },
     "471": {
-        "map_name": "Undead Infestation",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Undead Infestation"
     },
     "474": {
-        "map_name": "Whispers in the Dark",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Whispers in the Dark"
     },
     "476": {
-        "map_name": "Dangerous Research",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Dangerous Research"
     },
     "477": {
-        "map_name": "Digging Up Answers",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Digging Up Answers"
     },
     "480": {
-        "map_name": "Defending the Keep",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Defending the Keep"
     },
     "481": {
-        "map_name": "Undead Detection",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Undead Detection"
     },
     "483": {
-        "map_name": "Ever Vigilant",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Ever Vigilant"
     },
     "485": {
-        "map_name": "Research and Destroy",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Research and Destroy"
     },
     "487": {
-        "map_name": "Whispers of Vengeance",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Whispers of Vengeance"
     },
     "488": {
-        "map_name": "Killer Instinct",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [28672, 16256],
-            [31744, 19328]
-        ]
+            [
+                61440,
+                32640
+            ],
+            [
+                64512,
+                35712
+            ]
+        ],
+        "map_name": "Killer Instinct"
     },
     "489": {
-        "map_name": "Meeting my Mentor",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Meeting my Mentor"
     },
     "490": {
-        "map_name": "A Fragile Peace",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [28672, 16256],
-            [31744, 19328]
-        ]
+            [
+                61440,
+                32640
+            ],
+            [
+                64512,
+                35712
+            ]
+        ],
+        "map_name": "A Fragile Peace"
     },
     "492": {
-        "map_name": "Don't Shoot the Messenger",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [28672, 16256],
-            [31744, 19328]
-        ]
+            [
+                61440,
+                32640
+            ],
+            [
+                64512,
+                35712
+            ]
+        ],
+        "map_name": "Don't Shoot the Messenger"
     },
     "496": {
-        "map_name": "Meeting my Mentor",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Meeting my Mentor"
     },
     "497": {
-        "map_name": "Dredging Up the Past",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Dredging Up the Past"
     },
     "498": {
-        "map_name": "Dredging Up the Past",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Dredging Up the Past"
     },
     "499": {
-        "map_name": "Scrapyard Dogs",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Scrapyard Dogs"
     },
     "502": {
-        "map_name": "Quaestor's Siege",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [28672, 16256],
-            [31744, 19328]
-        ]
+            [
+                61440,
+                32640
+            ],
+            [
+                64512,
+                35712
+            ]
+        ],
+        "map_name": "Quaestor's Siege"
     },
     "503": {
-        "map_name": "Minister's Defense",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [28672, 16256],
-            [31744, 19328]
-        ]
+            [
+                61440,
+                32640
+            ],
+            [
+                64512,
+                35712
+            ]
+        ],
+        "map_name": "Minister's Defense"
     },
     "504": {
-        "map_name": "Called to Service",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "Called to Service"
     },
     "505": {
-        "map_name": "Called to Service",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Called to Service"
     },
     "507": {
-        "map_name": "Mockery of Death",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "Mockery of Death"
     },
     "509": {
-        "map_name": "Discovering Darkness",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Discovering Darkness"
     },
     "511": {
-        "map_name": "Hounds and the Hunted",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Hounds and the Hunted"
     },
     "512": {
-        "map_name": "Hounds and the Hunted",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "Hounds and the Hunted"
     },
     "513": {
-        "map_name": "Loved and Lost",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Loved and Lost"
     },
     "514": {
-        "map_name": "Saving the Stag",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Saving the Stag"
     },
     "515": {
-        "map_name": "Hidden in Darkness",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Hidden in Darkness"
     },
     "516": {
-        "map_name": "Good Work Spoiled",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Good Work Spoiled"
     },
     "517": {
-        "map_name": "Black Night, White Stag",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "Black Night, White Stag"
     },
     "518": {
-        "map_name": "The Omphalos Chamber",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "The Omphalos Chamber"
     },
     "519": {
-        "map_name": "Weakness of the Heart",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Weakness of the Heart"
     },
     "520": {
-        "map_name": "Awakening",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "Awakening"
     },
     "521": {
-        "map_name": "Holding Back the Darkness",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Holding Back the Darkness"
     },
     "522": {
-        "map_name": "A Sly Trick",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "A Sly Trick"
     },
     "523": {
-        "map_name": "Deep Tangled Roots",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Deep Tangled Roots"
     },
     "524": {
-        "map_name": "The Heart of Nightmare",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "The Heart of Nightmare"
     },
     "525": {
-        "map_name": "Beneath a Cold Moon",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Beneath a Cold Moon"
     },
     "527": {
-        "map_name": "The Knight's Duel",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "The Knight's Duel"
     },
     "528": {
-        "map_name": "Hammer and Steel",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Hammer and Steel"
     },
     "529": {
-        "map_name": "Where Life Goes",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Where Life Goes"
     },
     "532": {
-        "map_name": "After the Storm",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "After the Storm"
     },
     "533": {
-        "map_name": "After the Storm",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "After the Storm"
     },
     "534": {
-        "map_name": "Beneath the Waves",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Beneath the Waves"
     },
     "535": {
-        "map_name": "Mirror, Mirror",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Mirror, Mirror"
     },
     "536": {
-        "map_name": "A Vision of Darkness",
         "min_level": 20,
         "max_level": 20,
         "default_floor": -16,
         "type": "Instance",
-        "floors": [1, -16, 3, 2, 0],
+        "floors": [
+            1,
+            -16,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-33792, -24576],
-            [33792, 24576]
+            [
+                -33792,
+                -24576
+            ],
+            [
+                33792,
+                24576
+            ]
         ],
         "continent_rect": [
-            [8320, 20096],
-            [11136, 22144]
-        ]
+            [
+                41088,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "A Vision of Darkness"
     },
     "537": {
-        "map_name": "Shattered Light",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 0],
+        "floors": [
+            1,
+            3,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "Shattered Light"
     },
     "538": {
-        "map_name": "An Unknown Soul",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "An Unknown Soul"
     },
     "539": {
-        "map_name": "An Unknown Soul",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "An Unknown Soul"
     },
     "540": {
-        "map_name": "Where Life Goes",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "Where Life Goes"
     },
     "542": {
-        "map_name": "Source of the Issue",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Source of the Issue"
     },
     "543": {
-        "map_name": "Wild Growth",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "Wild Growth"
     },
     "544": {
-        "map_name": "Wild Growth",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Wild Growth"
     },
     "545": {
-        "map_name": "Seeking the Zalisco",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Seeking the Zalisco"
     },
     "546": {
-        "map_name": "The Direct Approach",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "The Direct Approach"
     },
     "547": {
-        "map_name": "Trading Trickery",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Trading Trickery"
     },
     "548": {
-        "map_name": "Eye of the Sun",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "Eye of the Sun"
     },
     "549": {
-        "map_name": "Battle of Kyhlo",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 6,
         "type": "Pvp",
-        "floors": [1, 6],
+        "floors": [
+            1,
+            6
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [3326, 5374],
-            [4094, 6142]
-        ]
+            [
+                3326,
+                5374
+            ],
+            [
+                4094,
+                6142
+            ]
+        ],
+        "map_name": "Battle of Kyhlo"
     },
     "552": {
-        "map_name": "Seeking the Zalisco",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "Seeking the Zalisco"
     },
     "554": {
-        "map_name": "Forest of Niflhel",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 5,
         "type": "Pvp",
-        "floors": [1, 5],
+        "floors": [
+            1,
+            5
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-12288, -6144],
-            [12288, 9216]
+            [
+                -12288,
+                -6144
+            ],
+            [
+                12288,
+                9216
+            ]
         ],
         "continent_rect": [
-            [7038, 4860],
-            [8062, 5500]
-        ]
+            [
+                7038,
+                4860
+            ],
+            [
+                8062,
+                5500
+            ]
+        ],
+        "map_name": "Forest of Niflhel"
     },
     "556": {
-        "map_name": "A Different Dream",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "A Different Dream"
     },
     "557": {
-        "map_name": "A Splinter in the Flesh",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "A Splinter in the Flesh"
     },
     "558": {
-        "map_name": "Shadow of the Tree",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Shadow of the Tree"
     },
     "559": {
-        "map_name": "Eye of the Sun",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Eye of the Sun"
     },
     "560": {
-        "map_name": "Sharpened Thorns",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Sharpened Thorns"
     },
     "561": {
-        "map_name": "Bramble Walls",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Bramble Walls"
     },
     "563": {
-        "map_name": "Secrets in the Earth",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Secrets in the Earth"
     },
     "564": {
-        "map_name": "The Blossom of Youth",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "The Blossom of Youth"
     },
     "566": {
-        "map_name": "The Bad Apple",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "The Bad Apple"
     },
     "567": {
-        "map_name": "Trouble at the Roots",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Trouble at the Roots"
     },
     "569": {
-        "map_name": "Flower of Death",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Flower of Death"
     },
     "570": {
-        "map_name": "Dead of Winter",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Dead of Winter"
     },
     "571": {
-        "map_name": "A Tangle of Weeds",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "A Tangle of Weeds"
     },
     "573": {
-        "map_name": "Explosive Intellect",
         "min_level": 1,
         "max_level": 1,
         "default_floor": 1,
         "type": "Tutorial",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Explosive Intellect"
     },
     "574": {
-        "map_name": "In Snaff's Footsteps",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "In Snaff's Footsteps"
     },
     "575": {
-        "map_name": "Golem Positioning System",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Golem Positioning System"
     },
     "576": {
-        "map_name": "Monkey Wrench",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Monkey Wrench"
     },
     "577": {
-        "map_name": "Defusing the Problem",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Defusing the Problem"
     },
     "578": {
-        "map_name": "The Things We Do For Love",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "The Things We Do For Love"
     },
     "579": {
-        "map_name": "The Snaff Prize",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "The Snaff Prize"
     },
     "581": {
-        "map_name": "A Sparkling Rescue",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "A Sparkling Rescue"
     },
     "582": {
-        "map_name": "High Maintenance",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "High Maintenance"
     },
     "583": {
-        "map_name": "Snaff Would Be Proud",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Snaff Would Be Proud"
     },
     "584": {
-        "map_name": "Taking Credit Back",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Taking Credit Back"
     },
     "586": {
-        "map_name": "Political Homicide",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Political Homicide"
     },
     "587": {
-        "map_name": "Here, There, Everywhere",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Here, There, Everywhere"
     },
     "588": {
-        "map_name": "Piece Negotiations",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Piece Negotiations"
     },
     "589": {
-        "map_name": "Readings On the Rise",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Readings On the Rise"
     },
     "590": {
-        "map_name": "Snaff Would Be Proud",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Snaff Would Be Proud"
     },
     "591": {
-        "map_name": "Readings On the Rise",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Readings On the Rise"
     },
     "592": {
-        "map_name": "Unscheduled Delay",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Unscheduled Delay"
     },
     "594": {
-        "map_name": "Stand By Your Krewe",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Stand By Your Krewe"
     },
     "595": {
-        "map_name": "Unwelcome Visitors",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Unwelcome Visitors"
     },
     "596": {
-        "map_name": "Where Credit Is Due",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Where Credit Is Due"
     },
     "597": {
-        "map_name": "Where Credit Is Due",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Where Credit Is Due"
     },
     "598": {
-        "map_name": "Short Fuse",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Short Fuse"
     },
     "599": {
-        "map_name": "Short Fuse",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Short Fuse"
     },
     "606": {
-        "map_name": "Salt in the Wound",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Salt in the Wound"
     },
     "607": {
-        "map_name": "Free Rein",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Free Rein"
     },
     "608": {
-        "map_name": "Serving Up Trouble",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Serving Up Trouble"
     },
     "609": {
-        "map_name": "Serving Up Trouble",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Serving Up Trouble"
     },
     "610": {
-        "map_name": "Flash Flood",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Flash Flood"
     },
     "611": {
-        "map_name": "I Smell a Rat",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "I Smell a Rat"
     },
     "613": {
-        "map_name": "Magnum Opus",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2],
+        "floors": [
+            1,
+            3,
+            2
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Magnum Opus"
     },
     "614": {
-        "map_name": "Magnum Opus",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Magnum Opus"
     },
     "617": {
-        "map_name": "Bad Business",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Bad Business"
     },
     "618": {
-        "map_name": "Beta Test",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Beta Test"
     },
     "619": {
-        "map_name": "Beta Test",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Beta Test"
     },
     "620": {
-        "map_name": "Any Sufficiently Advanced Science",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Any Sufficiently Advanced Science"
     },
     "621": {
-        "map_name": "Any Sufficiently Advanced Science",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Any Sufficiently Advanced Science"
     },
     "622": {
-        "map_name": "Bad Forecast",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Bad Forecast"
     },
     "623": {
-        "map_name": "Industrial Espionage",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Industrial Espionage"
     },
     "624": {
-        "map_name": "Split Second",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Split Second"
     },
     "625": {
-        "map_name": "Carry a Big Stick",
         "min_level": 20,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Carry a Big Stick"
     },
     "627": {
-        "map_name": "Meeting my Mentor",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Meeting my Mentor"
     },
     "628": {
-        "map_name": "Stealing Secrets",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Stealing Secrets"
     },
     "629": {
-        "map_name": "A Bold New Theory",
         "min_level": 30,
         "max_level": 35,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "A Bold New Theory"
     },
     "630": {
-        "map_name": "Forging Permission",
         "min_level": 30,
         "max_level": 35,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Forging Permission"
     },
     "631": {
-        "map_name": "Forging Permission",
         "min_level": 30,
         "max_level": 35,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Forging Permission"
     },
     "633": {
-        "map_name": "Setting the Stage",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Setting the Stage"
     },
     "634": {
-        "map_name": "Containment",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Containment"
     },
     "635": {
-        "map_name": "Containment",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Containment"
     },
     "636": {
-        "map_name": "Hazardous Environment",
         "min_level": 30,
         "max_level": 35,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Hazardous Environment"
     },
     "638": {
-        "map_name": "Down the Hatch",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Down the Hatch"
     },
     "639": {
-        "map_name": "Down the Hatch",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Down the Hatch"
     },
     "642": {
-        "map_name": "The Stone Sheath",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "The Stone Sheath"
     },
     "643": {
-        "map_name": "Bad Blood",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Bad Blood"
     },
     "644": {
-        "map_name": "Test Subject",
         "min_level": 30,
         "max_level": 35,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Test Subject"
     },
     "645": {
-        "map_name": "Field Test",
         "min_level": 30,
         "max_level": 35,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Field Test"
     },
     "646": {
-        "map_name": "The House of Caithe",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 3,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "The House of Caithe"
     },
     "647": {
-        "map_name": "Dreamer's Terrace (Home)",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 3,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "Dreamer's Terrace (Home)"
     },
     "648": {
-        "map_name": "The Omphalos Chamber",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 2,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "The Omphalos Chamber"
     },
     "649": {
-        "map_name": "Snaff Memorial Lab",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Snaff Memorial Lab"
     },
     "650": {
-        "map_name": "Applied Development Lab (Home)",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Applied Development Lab (Home)"
     },
     "651": {
-        "map_name": "Council Level",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 2,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Council Level"
     },
     "652": {
-        "map_name": "A Meeting of the Minds",
         "min_level": 30,
         "max_level": 35,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "A Meeting of the Minds"
     },
     "653": {
-        "map_name": "Mightier than the Sword",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Mightier than the Sword"
     },
     "654": {
-        "map_name": "They Went Thataway",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "They Went Thataway"
     },
     "655": {
-        "map_name": "Lines of Communication",
         "min_level": 30,
         "max_level": 35,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Lines of Communication"
     },
     "656": {
-        "map_name": "Untamed Wilds",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [29184, 12160],
-            [31232, 16256]
-        ]
+            [
+                61952,
+                28544
+            ],
+            [
+                64000,
+                32640
+            ]
+        ],
+        "map_name": "Untamed Wilds"
     },
     "657": {
-        "map_name": "An Apple a Day",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [30720, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                30720,
+                39936
+            ]
         ],
         "continent_rect": [
-            [15232, 15872],
-            [17664, 19072]
-        ]
+            [
+                48000,
+                32256
+            ],
+            [
+                50432,
+                35456
+            ]
+        ],
+        "map_name": "An Apple a Day"
     },
     "658": {
-        "map_name": "Base of Operations",
         "min_level": 40,
         "max_level": 40,
         "default_floor": -3,
         "type": "Instance",
-        "floors": [-3, 1],
+        "floors": [
+            -3,
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [16000, 16000],
-            [17024, 17024]
-        ]
+            [
+                48768,
+                32384
+            ],
+            [
+                49792,
+                33408
+            ]
+        ],
+        "map_name": "Base of Operations"
     },
     "659": {
-        "map_name": "The Lost Chieftain's Return",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [29184, 12160],
-            [31232, 16256]
-        ]
+            [
+                61952,
+                28544
+            ],
+            [
+                64000,
+                32640
+            ]
+        ],
+        "map_name": "The Lost Chieftain's Return"
     },
     "660": {
-        "map_name": "Thrown Off Guard",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Thrown Off Guard"
     },
     "662": {
-        "map_name": "Pets and Walls Make Stronger Kraals",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [29184, 12160],
-            [31232, 16256]
-        ]
+            [
+                61952,
+                28544
+            ],
+            [
+                64000,
+                32640
+            ]
+        ],
+        "map_name": "Pets and Walls Make Stronger Kraals"
     },
     "663": {
-        "map_name": "Doubt",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [19456, 14976],
-            [21760, 18176]
-        ]
+            [
+                52224,
+                31360
+            ],
+            [
+                54528,
+                34560
+            ]
+        ],
+        "map_name": "Doubt"
     },
     "664": {
-        "map_name": "The False God's Lair",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [19456, 14976],
-            [21760, 18176]
-        ]
+            [
+                52224,
+                31360
+            ],
+            [
+                54528,
+                34560
+            ]
+        ],
+        "map_name": "The False God's Lair"
     },
     "666": {
-        "map_name": "Bad Ice",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [19456, 14976],
-            [21760, 18176]
-        ]
+            [
+                52224,
+                31360
+            ],
+            [
+                54528,
+                34560
+            ]
+        ],
+        "map_name": "Bad Ice"
     },
     "667": {
-        "map_name": "Bad Ice",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [19456, 14976],
-            [21760, 18176]
-        ]
+            [
+                52224,
+                31360
+            ],
+            [
+                54528,
+                34560
+            ]
+        ],
+        "map_name": "Bad Ice"
     },
     "668": {
-        "map_name": "Pets and Walls Make Stronger Kraals",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [29184, 12160],
-            [31232, 16256]
-        ]
+            [
+                61952,
+                28544
+            ],
+            [
+                64000,
+                32640
+            ]
+        ],
+        "map_name": "Pets and Walls Make Stronger Kraals"
     },
     "669": {
-        "map_name": "Attempted Deicide",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [19456, 14976],
-            [21760, 18176]
-        ]
+            [
+                52224,
+                31360
+            ],
+            [
+                54528,
+                34560
+            ]
+        ],
+        "map_name": "Attempted Deicide"
     },
     "670": {
-        "map_name": "Doubt",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [19456, 14976],
-            [21760, 18176]
-        ]
+            [
+                52224,
+                31360
+            ],
+            [
+                54528,
+                34560
+            ]
+        ],
+        "map_name": "Doubt"
     },
     "672": {
-        "map_name": "Rat-Tastrophe",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -33792],
-            [39936, 33792]
+            [
+                -36864,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [13440, 9472],
-            [16640, 12288]
-        ]
+            [
+                46208,
+                25856
+            ],
+            [
+                49408,
+                28672
+            ]
+        ],
+        "map_name": "Rat-Tastrophe"
     },
     "673": {
-        "map_name": "Salvation Through Heresy",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [19456, 14976],
-            [21760, 18176]
-        ]
+            [
+                52224,
+                31360
+            ],
+            [
+                54528,
+                34560
+            ]
+        ],
+        "map_name": "Salvation Through Heresy"
     },
     "674": {
-        "map_name": "Enraged and Unashamed",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [19456, 14976],
-            [21760, 18176]
-        ]
+            [
+                52224,
+                31360
+            ],
+            [
+                54528,
+                34560
+            ]
+        ],
+        "map_name": "Enraged and Unashamed"
     },
     "675": {
-        "map_name": "Pastkeeper",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [19456, 14976],
-            [21760, 18176]
-        ]
+            [
+                52224,
+                31360
+            ],
+            [
+                54528,
+                34560
+            ]
+        ],
+        "map_name": "Pastkeeper"
     },
     "676": {
-        "map_name": "Protest Too Much",
         "min_level": 30,
         "max_level": 35,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Protest Too Much"
     },
     "677": {
-        "map_name": "Prying the Eye Open",
         "min_level": 30,
         "max_level": 35,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Prying the Eye Open"
     },
     "678": {
-        "map_name": "The Hatchery",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -33792],
-            [39936, 33792]
+            [
+                -36864,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [13440, 9472],
-            [16640, 12288]
-        ]
+            [
+                46208,
+                25856
+            ],
+            [
+                49408,
+                28672
+            ]
+        ],
+        "map_name": "The Hatchery"
     },
     "680": {
-        "map_name": "Convincing the Faithful",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [30720, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                30720,
+                39936
+            ]
         ],
         "continent_rect": [
-            [15232, 15872],
-            [17664, 19072]
-        ]
+            [
+                48000,
+                32256
+            ],
+            [
+                50432,
+                35456
+            ]
+        ],
+        "map_name": "Convincing the Faithful"
     },
     "681": {
-        "map_name": "Evacuation",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [19456, 14976],
-            [21760, 18176]
-        ]
+            [
+                52224,
+                31360
+            ],
+            [
+                54528,
+                34560
+            ]
+        ],
+        "map_name": "Evacuation"
     },
     "682": {
-        "map_name": "Untamed Wilds",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [29184, 12160],
-            [31232, 16256]
-        ]
+            [
+                61952,
+                28544
+            ],
+            [
+                64000,
+                32640
+            ]
+        ],
+        "map_name": "Untamed Wilds"
     },
     "683": {
-        "map_name": "Champion's Sacrifice",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [30720, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                30720,
+                39936
+            ]
         ],
         "continent_rect": [
-            [15232, 15872],
-            [17664, 19072]
-        ]
+            [
+                48000,
+                32256
+            ],
+            [
+                50432,
+                35456
+            ]
+        ],
+        "map_name": "Champion's Sacrifice"
     },
     "684": {
-        "map_name": "Thieving from Thieves",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -33792],
-            [39936, 33792]
+            [
+                -36864,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [13440, 9472],
-            [16640, 12288]
-        ]
+            [
+                46208,
+                25856
+            ],
+            [
+                49408,
+                28672
+            ]
+        ],
+        "map_name": "Thieving from Thieves"
     },
     "685": {
-        "map_name": "Crusader's Return",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Crusader's Return"
     },
     "686": {
-        "map_name": "Unholy Grounds",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [30720, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                30720,
+                39936
+            ]
         ],
         "continent_rect": [
-            [15232, 15872],
-            [17664, 19072]
-        ]
+            [
+                48000,
+                32256
+            ],
+            [
+                50432,
+                35456
+            ]
+        ],
+        "map_name": "Unholy Grounds"
     },
     "687": {
-        "map_name": "Chosen of the Sun",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [30720, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                30720,
+                39936
+            ]
         ],
         "continent_rect": [
-            [15232, 15872],
-            [17664, 19072]
-        ]
+            [
+                48000,
+                32256
+            ],
+            [
+                50432,
+                35456
+            ]
+        ],
+        "map_name": "Chosen of the Sun"
     },
     "691": {
-        "map_name": "Set to Blow",
         "min_level": 50,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -33792],
-            [39936, 33792]
+            [
+                -36864,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [13440, 9472],
-            [16640, 12288]
-        ]
+            [
+                46208,
+                25856
+            ],
+            [
+                49408,
+                28672
+            ]
+        ],
+        "map_name": "Set to Blow"
     },
     "692": {
-        "map_name": "Gadd's Last Gizmo",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Gadd's Last Gizmo"
     },
     "693": {
-        "map_name": "Library Science",
         "min_level": 40,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Library Science"
     },
     "694": {
-        "map_name": "Rakt and Ruin",
         "min_level": 30,
         "max_level": 35,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Rakt and Ruin"
     },
     "695": {
-        "map_name": "Suspicious Activity",
         "min_level": 60,
         "max_level": 60,
         "default_floor": -3,
         "type": "Instance",
-        "floors": [-3],
+        "floors": [
+            -3
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [16000, 16000],
-            [17024, 17024]
-        ]
+            [
+                48768,
+                32384
+            ],
+            [
+                49792,
+                33408
+            ]
+        ],
+        "map_name": "Suspicious Activity"
     },
     "696": {
-        "map_name": "Reconnaissance",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Reconnaissance"
     },
     "697": {
-        "map_name": "Critical Blowback",
         "min_level": 60,
         "max_level": 60,
         "default_floor": -3,
         "type": "Instance",
-        "floors": [-3, 1],
+        "floors": [
+            -3,
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [16000, 16000],
-            [17024, 17024]
-        ]
+            [
+                48768,
+                32384
+            ],
+            [
+                49792,
+                33408
+            ]
+        ],
+        "map_name": "Critical Blowback"
     },
     "698": {
-        "map_name": "The Battle of Claw Island",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -18432],
-            [18432, 18432]
+            [
+                -18432,
+                -18432
+            ],
+            [
+                18432,
+                18432
+            ]
         ],
         "continent_rect": [
-            [13952, 15872],
-            [15488, 17408]
-        ]
+            [
+                46720,
+                32256
+            ],
+            [
+                48256,
+                33792
+            ]
+        ],
+        "map_name": "The Battle of Claw Island"
     },
     "699": {
-        "map_name": "Suspicious Activity",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Suspicious Activity"
     },
     "700": {
-        "map_name": "Priory Library",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Priory Library"
     },
     "701": {
-        "map_name": "On Red Alert",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "On Red Alert"
     },
     "702": {
-        "map_name": "Forearmed Is Forewarned",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Forearmed Is Forewarned"
     },
     "703": {
-        "map_name": "The Oratory",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "The Oratory"
     },
     "704": {
-        "map_name": "Killing Fields",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Killing Fields"
     },
     "705": {
-        "map_name": "The Ghost Rite",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "The Ghost Rite"
     },
     "706": {
-        "map_name": "The Good Fight",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [18944, 18176],
-            [21248, 21376]
-        ]
+            [
+                51712,
+                34560
+            ],
+            [
+                54016,
+                37760
+            ]
+        ],
+        "map_name": "The Good Fight"
     },
     "707": {
-        "map_name": "Defense Contract",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [27136, 9472],
-            [29184, 13568]
-        ]
+            [
+                59904,
+                25856
+            ],
+            [
+                61952,
+                29952
+            ]
+        ],
+        "map_name": "Defense Contract"
     },
     "708": {
-        "map_name": "Shards of Orr",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [30720, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                30720,
+                39936
+            ]
         ],
         "continent_rect": [
-            [15232, 15872],
-            [17664, 19072]
-        ]
+            [
+                48000,
+                32256
+            ],
+            [
+                50432,
+                35456
+            ]
+        ],
+        "map_name": "Shards of Orr"
     },
     "709": {
-        "map_name": "The Sound of Psi-Lance",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [18944, 18176],
-            [21248, 21376]
-        ]
+            [
+                51712,
+                34560
+            ],
+            [
+                54016,
+                37760
+            ]
+        ],
+        "map_name": "The Sound of Psi-Lance"
     },
     "710": {
-        "map_name": "Early Parole",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "Early Parole"
     },
     "711": {
-        "map_name": "Magic Sucks",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4608, 19710],
-            [7168, 22270]
-        ]
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Magic Sucks"
     },
     "712": {
-        "map_name": "A Light in the Darkness",
         "min_level": 60,
         "max_level": 60,
         "default_floor": -16,
         "type": "Instance",
-        "floors": [1, -16, 3, 2, 0],
+        "floors": [
+            1,
+            -16,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-33792, -24576],
-            [33792, 24576]
+            [
+                -33792,
+                -24576
+            ],
+            [
+                33792,
+                24576
+            ]
         ],
         "continent_rect": [
-            [8320, 20096],
-            [11136, 22144]
-        ]
+            [
+                41088,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "A Light in the Darkness"
     },
     "713": {
-        "map_name": "The Priory Assailed",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "The Priory Assailed"
     },
     "714": {
-        "map_name": "Under Siege",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Under Siege"
     },
     "715": {
-        "map_name": "Retribution",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -18432],
-            [18432, 18432]
+            [
+                -18432,
+                -18432
+            ],
+            [
+                18432,
+                18432
+            ]
         ],
         "continent_rect": [
-            [13952, 15872],
-            [15488, 17408]
-        ]
+            [
+                46720,
+                32256
+            ],
+            [
+                48256,
+                33792
+            ]
+        ],
+        "map_name": "Retribution"
     },
     "716": {
-        "map_name": "Retribution",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 43,
         "type": "Instance",
-        "floors": [43],
+        "floors": [
+            43
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Retribution"
     },
     "719": {
-        "map_name": "The Sound of Psi-Lance",
         "min_level": 60,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [18944, 18176],
-            [21248, 21376]
-        ]
+            [
+                51712,
+                34560
+            ],
+            [
+                54016,
+                37760
+            ]
+        ],
+        "map_name": "The Sound of Psi-Lance"
     },
     "726": {
-        "map_name": "Wet Work",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Wet Work"
     },
     "727": {
-        "map_name": "Shell Shock",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Shell Shock"
     },
     "728": {
-        "map_name": "Volcanic Extraction",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Volcanic Extraction"
     },
     "729": {
-        "map_name": "Munition Acquisition",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Munition Acquisition"
     },
     "730": {
-        "map_name": "To the Core",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "To the Core"
     },
     "731": {
-        "map_name": "The Battle of Fort Trinity",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "The Battle of Fort Trinity"
     },
     "732": {
-        "map_name": "Tower Down",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -39936],
-            [30720, 39936]
+            [
+                -30720,
+                -39936
+            ],
+            [
+                30720,
+                39936
+            ]
         ],
         "continent_rect": [
-            [15232, 19072],
-            [17792, 22400]
-        ]
+            [
+                48000,
+                35456
+            ],
+            [
+                50560,
+                38784
+            ]
+        ],
+        "map_name": "Tower Down"
     },
     "733": {
-        "map_name": "Forging the Pact",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [18944, 18176],
-            [21248, 21376]
-        ]
+            [
+                51712,
+                34560
+            ],
+            [
+                54016,
+                37760
+            ]
+        ],
+        "map_name": "Forging the Pact"
     },
     "735": {
-        "map_name": "Willing Captives",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Willing Captives"
     },
     "736": {
-        "map_name": "Marshaling the Truth",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Marshaling the Truth"
     },
     "737": {
-        "map_name": "Breaking the Bone Ship",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Breaking the Bone Ship"
     },
     "738": {
-        "map_name": "Liberating Apatia",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Liberating Apatia"
     },
     "739": {
-        "map_name": "Liberating Apatia",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Liberating Apatia"
     },
     "743": {
-        "map_name": "Fixing the Blame",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [23808, 8448],
-            [27136, 11264]
-        ]
+            [
+                56576,
+                24832
+            ],
+            [
+                59904,
+                27648
+            ]
+        ],
+        "map_name": "Fixing the Blame"
     },
     "744": {
-        "map_name": "A Sad Duty",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "A Sad Duty"
     },
     "745": {
-        "map_name": "Striking off the Chains",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [18944, 18176],
-            [21248, 21376]
-        ]
+            [
+                51712,
+                34560
+            ],
+            [
+                54016,
+                37760
+            ]
+        ],
+        "map_name": "Striking off the Chains"
     },
     "746": {
-        "map_name": "Delivering Justice",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "Delivering Justice"
     },
     "747": {
-        "map_name": "Intercepting the Orb",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Intercepting the Orb"
     },
     "750": {
-        "map_name": "Close the Eye",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "Close the Eye"
     },
     "751": {
-        "map_name": "Through the Looking Glass",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "Through the Looking Glass"
     },
     "758": {
-        "map_name": "The Cathedral of Silence",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [10112, 25216],
-            [12160, 29312]
-        ]
+            [
+                42880,
+                41600
+            ],
+            [
+                44928,
+                45696
+            ]
+        ],
+        "map_name": "The Cathedral of Silence"
     },
     "760": {
-        "map_name": "Starving the Beast",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [10368, 23168],
-            [14464, 25216]
-        ]
+            [
+                43136,
+                39552
+            ],
+            [
+                47232,
+                41600
+            ]
+        ],
+        "map_name": "Starving the Beast"
     },
     "761": {
-        "map_name": "Stealing Light",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [10368, 23168],
-            [14464, 25216]
-        ]
+            [
+                43136,
+                39552
+            ],
+            [
+                47232,
+                41600
+            ]
+        ],
+        "map_name": "Stealing Light"
     },
     "762": {
-        "map_name": "Hunters and Prey",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [10368, 23168],
-            [14464, 25216]
-        ]
+            [
+                43136,
+                39552
+            ],
+            [
+                47232,
+                41600
+            ]
+        ],
+        "map_name": "Hunters and Prey"
     },
     "763": {
-        "map_name": "Romke's Final Voyage",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [10112, 25216],
-            [12160, 29312]
-        ]
+            [
+                42880,
+                41600
+            ],
+            [
+                44928,
+                45696
+            ]
+        ],
+        "map_name": "Romke's Final Voyage"
     },
     "764": {
-        "map_name": "Marching Orders",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [10368, 23168],
-            [14464, 25216]
-        ]
+            [
+                43136,
+                39552
+            ],
+            [
+                47232,
+                41600
+            ]
+        ],
+        "map_name": "Marching Orders"
     },
     "766": {
-        "map_name": "Air Drop",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [10368, 23168],
-            [14464, 25216]
-        ]
+            [
+                43136,
+                39552
+            ],
+            [
+                47232,
+                41600
+            ]
+        ],
+        "map_name": "Air Drop"
     },
     "767": {
-        "map_name": "Estate of Decay",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [10368, 23168],
-            [14464, 25216]
-        ]
+            [
+                43136,
+                39552
+            ],
+            [
+                47232,
+                41600
+            ]
+        ],
+        "map_name": "Estate of Decay"
     },
     "768": {
-        "map_name": "What the Eye Beholds",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "What the Eye Beholds"
     },
     "769": {
-        "map_name": "Conscript the Dead Ships",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [10368, 23168],
-            [14464, 25216]
-        ]
+            [
+                43136,
+                39552
+            ],
+            [
+                47232,
+                41600
+            ]
+        ],
+        "map_name": "Conscript the Dead Ships"
     },
     "772": {
-        "map_name": "Ossuary of Unquiet Dead",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [10368, 23168],
-            [14464, 25216]
-        ]
+            [
+                43136,
+                39552
+            ],
+            [
+                47232,
+                41600
+            ]
+        ],
+        "map_name": "Ossuary of Unquiet Dead"
     },
     "775": {
-        "map_name": "Temple of the Forgotten God",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "Temple of the Forgotten God"
     },
     "776": {
-        "map_name": "Temple of the Forgotten God",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -8,
         "type": "Instance",
-        "floors": [1, -8],
+        "floors": [
+            1,
+            -8
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-6144, -6144],
-            [9216, 9216]
+            [
+                -6144,
+                -6144
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [15232, 22528],
-            [15872, 23168]
-        ]
+            [
+                48000,
+                38912
+            ],
+            [
+                48640,
+                39552
+            ]
+        ],
+        "map_name": "Temple of the Forgotten God"
     },
     "777": {
-        "map_name": "Temple of the Forgotten God",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "Temple of the Forgotten God"
     },
     "778": {
-        "map_name": "Through the Looking Glass",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "Through the Looking Glass"
     },
     "779": {
-        "map_name": "Starving the Beast",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "Starving the Beast"
     },
     "780": {
-        "map_name": "Against the Corruption",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [10112, 25216],
-            [12160, 29312]
-        ]
+            [
+                42880,
+                41600
+            ],
+            [
+                44928,
+                45696
+            ]
+        ],
+        "map_name": "Against the Corruption"
     },
     "781": {
-        "map_name": "The Source of Orr",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [10112, 25216],
-            [12160, 29312]
-        ]
+            [
+                42880,
+                41600
+            ],
+            [
+                44928,
+                45696
+            ]
+        ],
+        "map_name": "The Source of Orr"
     },
     "782": {
-        "map_name": "Armor Guard",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [10368, 23168],
-            [14464, 25216]
-        ]
+            [
+                43136,
+                39552
+            ],
+            [
+                47232,
+                41600
+            ]
+        ],
+        "map_name": "Armor Guard"
     },
     "783": {
-        "map_name": "Blast from the Past",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [10112, 25216],
-            [12160, 29312]
-        ]
+            [
+                42880,
+                41600
+            ],
+            [
+                44928,
+                45696
+            ]
+        ],
+        "map_name": "Blast from the Past"
     },
     "784": {
-        "map_name": "The Steel Tide",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [10112, 25216],
-            [12160, 29312]
-        ]
+            [
+                42880,
+                41600
+            ],
+            [
+                44928,
+                45696
+            ]
+        ],
+        "map_name": "The Steel Tide"
     },
     "785": {
-        "map_name": "Further Into Orr",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [10368, 23168],
-            [14464, 25216]
-        ]
+            [
+                43136,
+                39552
+            ],
+            [
+                47232,
+                41600
+            ]
+        ],
+        "map_name": "Further Into Orr"
     },
     "786": {
-        "map_name": "Ships of the Line",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [10112, 25216],
-            [12160, 29312]
-        ]
+            [
+                42880,
+                41600
+            ],
+            [
+                44928,
+                45696
+            ]
+        ],
+        "map_name": "Ships of the Line"
     },
     "787": {
-        "map_name": "Source of Orr",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "Source of Orr"
     },
     "788": {
-        "map_name": "Victory or Death",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "Victory or Death"
     },
     "789": {
-        "map_name": "A Grisly Shipment",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [10368, 23168],
-            [14464, 25216]
-        ]
+            [
+                43136,
+                39552
+            ],
+            [
+                47232,
+                41600
+            ]
+        ],
+        "map_name": "A Grisly Shipment"
     },
     "790": {
-        "map_name": "Blast from the Past",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [10112, 25216],
-            [12160, 29312]
-        ]
+            [
+                42880,
+                41600
+            ],
+            [
+                44928,
+                45696
+            ]
+        ],
+        "map_name": "Blast from the Past"
     },
     "792": {
-        "map_name": "A Pup's Illness",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -55296],
-            [21504, 55296]
+            [
+                -21504,
+                -55296
+            ],
+            [
+                21504,
+                55296
+            ]
         ],
         "continent_rect": [
-            [21760, 11264],
-            [23552, 15872]
-        ]
+            [
+                54528,
+                27648
+            ],
+            [
+                56320,
+                32256
+            ]
+        ],
+        "map_name": "A Pup's Illness"
     },
     "793": {
-        "map_name": "Hunters and Prey",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "Hunters and Prey"
     },
     "795": {
-        "map_name": "Legacy of the Foefire",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 7,
         "type": "Pvp",
-        "floors": [1, 7],
+        "floors": [
+            1,
+            7
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -12288],
-            [12288, 15360]
+            [
+                -9216,
+                -12288
+            ],
+            [
+                12288,
+                15360
+            ]
         ],
         "continent_rect": [
-            [2558, 8190],
-            [3454, 9342]
-        ]
+            [
+                2558,
+                8190
+            ],
+            [
+                3454,
+                9342
+            ]
+        ],
+        "map_name": "Legacy of the Foefire"
     },
     "796": {
-        "map_name": "The Informant",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 30720]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                30720
+            ]
         ],
         "continent_rect": [
-            [9856, 11648],
-            [13440, 14080]
-        ]
+            [
+                42624,
+                28032
+            ],
+            [
+                46208,
+                30464
+            ]
+        ],
+        "map_name": "The Informant"
     },
     "797": {
-        "map_name": "A Traitor's Testimony",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "A Traitor's Testimony"
     },
     "799": {
-        "map_name": "Follow the Trail",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Follow the Trail"
     },
     "806": {
-        "map_name": "Awakening",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -46080],
-            [24576, 49152]
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [9344, 16128],
-            [11264, 20096]
-        ]
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Awakening"
     },
     "807": {
-        "map_name": "Eye of the North",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [24576, 4864],
-            [25856, 6144]
-        ]
+            [
+                57344,
+                21248
+            ],
+            [
+                58624,
+                22528
+            ]
+        ],
+        "map_name": "Eye of the North"
     },
     "820": {
-        "map_name": "The Omphalos Chamber",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "The Omphalos Chamber"
     },
     "821": {
-        "map_name": "The Omphalos Chamber",
         "min_level": 10,
         "max_level": 10,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "The Omphalos Chamber"
     },
     "825": {
-        "map_name": "Codebreaker",
         "min_level": 30,
         "max_level": 30,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Codebreaker"
     },
     "827": {
-        "map_name": "Caer Aval",
         "min_level": 70,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "Caer Aval"
     },
     "828": {
-        "map_name": "The Durmand Priory",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "The Durmand Priory"
     },
     "830": {
-        "map_name": "Vigil Headquarters",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Vigil Headquarters"
     },
     "833": {
-        "map_name": "Ash Tribune Quarters",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2],
+        "floors": [
+            1,
+            3,
+            2
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [23552, 13568],
-            [25088, 15616]
-        ]
+            [
+                56320,
+                29952
+            ],
+            [
+                57856,
+                32000
+            ]
+        ],
+        "map_name": "Ash Tribune Quarters"
     },
     "845": {
-        "map_name": "Shattered Light",
         "min_level": 20,
         "max_level": 20,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "Shattered Light"
     },
     "862": {
-        "map_name": "Reaper's Rumble",
         "min_level": 0,
         "max_level": 0,
         "default_floor": -32,
         "type": "Pvp",
-        "floors": [-32, -27],
+        "floors": [
+            -32,
+            -27
+        ],
         "region_id": 25,
         "region_name": "Mad King's Realm",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [2944, 13440],
-            [3712, 14208]
-        ]
+            [
+                2944,
+                13440
+            ],
+            [
+                3712,
+                14208
+            ]
+        ],
+        "map_name": "Reaper's Rumble"
     },
     "863": {
-        "map_name": "Ascent to Madness",
         "min_level": 2,
         "max_level": 80,
         "default_floor": -28,
         "type": "Instance",
-        "floors": [-28, -27],
+        "floors": [
+            -28,
+            -27
+        ],
         "region_id": 25,
         "region_name": "Mad King's Realm",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [2688, 14208],
-            [3456, 14976]
-        ]
+            [
+                2688,
+                14208
+            ],
+            [
+                3456,
+                14976
+            ]
+        ],
+        "map_name": "Ascent to Madness"
     },
     "864": {
-        "map_name": "Lunatic Inquisition",
         "min_level": 0,
         "max_level": 0,
         "default_floor": -33,
         "type": "Pvp",
-        "floors": [-33],
+        "floors": [
+            -33
+        ],
         "region_id": 25,
         "region_name": "Mad King's Realm",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [1792, 13696],
-            [2560, 14464]
-        ]
+            [
+                1792,
+                13696
+            ],
+            [
+                2560,
+                14464
+            ]
+        ],
+        "map_name": "Lunatic Inquisition"
     },
     "865": {
-        "map_name": "Mad King's Clock Tower",
         "min_level": 0,
         "max_level": 80,
         "default_floor": -30,
         "type": "Pvp",
-        "floors": [-29, -31, -30, -27],
+        "floors": [
+            -29,
+            -31,
+            -30,
+            -27
+        ],
         "region_id": 25,
         "region_name": "Mad King's Realm",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [1408, 12544],
-            [2176, 13312]
-        ]
+            [
+                1408,
+                12544
+            ],
+            [
+                2176,
+                13312
+            ]
+        ],
+        "map_name": "Mad King's Clock Tower"
     },
     "866": {
-        "map_name": "Mad King's Labyrinth",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -27,
         "type": "Public",
-        "floors": [-27],
+        "floors": [
+            -27
+        ],
         "region_id": 25,
         "region_name": "Mad King's Realm",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [1792, 13696],
-            [2560, 14464]
-        ]
+            [
+                1792,
+                13696
+            ],
+            [
+                2560,
+                14464
+            ]
+        ],
+        "map_name": "Mad King's Labyrinth"
     },
     "872": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 10,
         "type": "Instance",
-        "floors": [10],
+        "floors": [
+            10
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [12288, 12288]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [11716, 4346],
-            [12612, 5242]
-        ]
+            [
+                11716,
+                4346
+            ],
+            [
+                12612,
+                5242
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "873": {
-        "map_name": "Southsun Cove",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -21504],
-            [33792, 21504]
+            [
+                -30720,
+                -21504
+            ],
+            [
+                33792,
+                21504
+            ]
         ],
         "continent_rect": [
-            [11520, 18944],
-            [14208, 20736]
-        ]
+            [
+                44288,
+                35328
+            ],
+            [
+                46976,
+                37120
+            ]
+        ],
+        "map_name": "Southsun Cove"
     },
     "875": {
-        "map_name": "Temple of the Silent Storm",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 9,
         "type": "Pvp",
-        "floors": [1, 9],
+        "floors": [
+            1,
+            9
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-12288, -6144],
-            [12288, 9216]
+            [
+                -12288,
+                -6144
+            ],
+            [
+                12288,
+                9216
+            ]
         ],
         "continent_rect": [
-            [4096, 9344],
-            [5120, 9984]
-        ]
+            [
+                4096,
+                9344
+            ],
+            [
+                5120,
+                9984
+            ]
+        ],
+        "map_name": "Temple of the Silent Storm"
     },
     "877": {
-        "map_name": "Snowball Mayhem",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 12,
         "type": "Pvp",
-        "floors": [12],
+        "floors": [
+            12
+        ],
         "region_id": 27,
         "region_name": "Wintersday Celebration",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [8240, 10356],
-            [9008, 11124]
-        ]
+            [
+                41008,
+                26740
+            ],
+            [
+                41776,
+                27508
+            ]
+        ],
+        "map_name": "Snowball Mayhem"
     },
     "878": {
-        "map_name": "Tixx's Infinirarium",
         "min_level": 2,
         "max_level": 80,
         "default_floor": 13,
         "type": "Instance",
-        "floors": [13],
+        "floors": [
+            13
+        ],
         "region_id": 27,
         "region_name": "Wintersday Celebration",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [10240, 10356],
-            [11008, 11124]
-        ]
+            [
+                43008,
+                26740
+            ],
+            [
+                43776,
+                27508
+            ]
+        ],
+        "map_name": "Tixx's Infinirarium"
     },
     "880": {
-        "map_name": "Toypocalypse",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 14,
         "type": "Pvp",
-        "floors": [14],
+        "floors": [
+            14
+        ],
         "region_id": 27,
         "region_name": "Wintersday Celebration",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [10240, 10356],
-            [11008, 11124]
-        ]
+            [
+                43008,
+                26740
+            ],
+            [
+                43776,
+                27508
+            ]
+        ],
+        "map_name": "Toypocalypse"
     },
     "881": {
-        "map_name": "Bell Choir Ensemble",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 15,
         "type": "Pvp",
-        "floors": [15],
+        "floors": [
+            15
+        ],
         "region_id": 27,
         "region_name": "Wintersday Celebration",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [8240, 10356],
-            [9008, 11124]
-        ]
+            [
+                41008,
+                26740
+            ],
+            [
+                41776,
+                27508
+            ]
+        ],
+        "map_name": "Bell Choir Ensemble"
     },
     "882": {
-        "map_name": "Winter Wonderland",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 16,
         "type": "Pvp",
-        "floors": [16],
+        "floors": [
+            16
+        ],
         "region_id": 27,
         "region_name": "Wintersday Celebration",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [8240, 10356],
-            [9008, 11124]
-        ]
+            [
+                41008,
+                26740
+            ],
+            [
+                41776,
+                27508
+            ]
+        ],
+        "map_name": "Winter Wonderland"
     },
     "894": {
-        "map_name": "Spirit Watch",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 26,
         "type": "Pvp",
-        "floors": [1, 26],
+        "floors": [
+            1,
+            26
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [1920, 5248],
-            [2944, 6272]
-        ]
+            [
+                1920,
+                5248
+            ],
+            [
+                2944,
+                6272
+            ]
+        ],
+        "map_name": "Spirit Watch"
     },
     "895": {
-        "map_name": "Super Adventure Box",
         "min_level": 1,
         "max_level": 80,
         "default_floor": 21,
         "type": "Instance",
-        "floors": [23, 25, 24, 22, 21],
+        "floors": [
+            23,
+            25,
+            24,
+            22,
+            21
+        ],
         "region_id": 29,
         "region_name": "Super Adventure Box",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-61440, -21504],
-            [61440, 21504]
+            [
+                -61440,
+                -21504
+            ],
+            [
+                61440,
+                21504
+            ]
         ],
         "continent_rect": [
-            [2176, 7296],
-            [3456, 9856]
-        ]
+            [
+                2176,
+                7296
+            ],
+            [
+                3456,
+                9856
+            ]
+        ],
+        "map_name": "Super Adventure Box"
     },
     "896": {
-        "map_name": "North Nolan Hatchery",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 27648]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                27648
+            ]
         ],
         "continent_rect": [
-            [23552, 11264],
-            [27136, 13568]
-        ]
+            [
+                56320,
+                27648
+            ],
+            [
+                59904,
+                29952
+            ]
+        ],
+        "map_name": "North Nolan Hatchery"
     },
     "897": {
-        "map_name": "Cragstead",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [22528, 9984],
-            [25088, 12544]
-        ]
+            [
+                55296,
+                26368
+            ],
+            [
+                57856,
+                28928
+            ]
+        ],
+        "map_name": "Cragstead"
     },
     "899": {
-        "map_name": "Obsidian Sanctum",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 3,
         "type": "JumpPuzzle",
-        "floors": [3],
+        "floors": [
+            3
+        ],
         "region_id": 7,
         "region_name": "World vs. World",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [8958, 12798],
-            [12030, 15870]
-        ]
+            [
+                8958,
+                12798
+            ],
+            [
+                12030,
+                15870
+            ]
+        ],
+        "map_name": "Obsidian Sanctum"
     },
     "900": {
-        "map_name": "Skyhammer",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 27,
         "type": "Pvp",
-        "floors": [1, 27],
+        "floors": [
+            1,
+            27
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-12288, -6144],
-            [12288, 9216]
+            [
+                -12288,
+                -6144
+            ],
+            [
+                12288,
+                9216
+            ]
         ],
         "continent_rect": [
-            [7168, 7422],
-            [8192, 8062]
-        ]
+            [
+                7168,
+                7422
+            ],
+            [
+                8192,
+                8062
+            ]
+        ],
+        "map_name": "Skyhammer"
     },
     "905": {
-        "map_name": "Crab Toss",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Pvp",
-        "floors": [1, 0],
+        "floors": [
+            1,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -21504],
-            [33792, 21504]
+            [
+                -30720,
+                -21504
+            ],
+            [
+                33792,
+                21504
+            ]
         ],
         "continent_rect": [
-            [11520, 18944],
-            [14208, 20736]
-        ]
+            [
+                44288,
+                35328
+            ],
+            [
+                46976,
+                37120
+            ]
+        ],
+        "map_name": "Crab Toss"
     },
     "911": {
-        "map_name": "Dragon Ball Arena",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 26,
         "type": "Pvp",
-        "floors": [26],
+        "floors": [
+            26
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [15744, 14208],
-            [16768, 15232]
-        ]
+            [
+                48512,
+                30592
+            ],
+            [
+                49536,
+                31616
+            ]
+        ],
+        "map_name": "Dragon Ball Arena"
     },
     "914": {
-        "map_name": "The Dead End",
         "min_level": 1,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Dead End"
     },
     "918": {
-        "map_name": "Aspect Arena",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 36,
         "type": "Pvp",
-        "floors": [36],
+        "floors": [
+            36
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [512, 512],
-            [1536, 1536]
-        ]
+            [
+                33280,
+                16896
+            ],
+            [
+                34304,
+                17920
+            ]
+        ],
+        "map_name": "Aspect Arena"
     },
     "919": {
-        "map_name": "Sanctum Sprint",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 34,
         "type": "Pvp",
-        "floors": [34],
+        "floors": [
+            34
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [22784, 22270],
-            [23808, 23294]
-        ]
+            [
+                55552,
+                38654
+            ],
+            [
+                56576,
+                39678
+            ]
+        ],
+        "map_name": "Sanctum Sprint"
     },
     "920": {
-        "map_name": "Southsun Survival",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 37,
         "type": "Pvp",
-        "floors": [37],
+        "floors": [
+            37
+        ],
         "region_id": 9,
         "region_name": "Sea of Sorrows",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -21504],
-            [33792, 21504]
+            [
+                -30720,
+                -21504
+            ],
+            [
+                33792,
+                21504
+            ]
         ],
         "continent_rect": [
-            [11520, 18944],
-            [14208, 20736]
-        ]
+            [
+                44288,
+                35328
+            ],
+            [
+                46976,
+                37120
+            ]
+        ],
+        "map_name": "Southsun Survival"
     },
     "922": {
-        "map_name": "Labyrinthine Cliffs",
         "min_level": 1,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -18432],
-            [18432, 18432]
+            [
+                -18432,
+                -18432
+            ],
+            [
+                18432,
+                18432
+            ]
         ],
         "continent_rect": [
-            [22190, 22264],
-            [23726, 23800]
-        ]
+            [
+                54958,
+                38648
+            ],
+            [
+                56494,
+                40184
+            ]
+        ],
+        "map_name": "Labyrinthine Cliffs"
     },
     "924": {
-        "map_name": "Grandmaster of Om",
         "min_level": 1,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [52224, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 12288],
-            [17664, 14336]
-        ]
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Grandmaster of Om"
     },
     "929": {
-        "map_name": "The Crown Pavilion",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 38,
         "type": "Public",
-        "floors": [38],
+        "floors": [
+            38
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [10266, 10496],
-            [11034, 11264]
-        ]
+            [
+                43034,
+                26880
+            ],
+            [
+                43802,
+                27648
+            ]
+        ],
+        "map_name": "The Crown Pavilion"
     },
     "934": {
-        "map_name": "Super Adventure Box",
         "min_level": 1,
         "max_level": 80,
         "default_floor": 28,
         "type": "Instance",
-        "floors": [29, 28, 42],
+        "floors": [
+            29,
+            28,
+            42
+        ],
         "region_id": 29,
         "region_name": "Super Adventure Box",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [4290, 5120],
-            [5570, 7680]
-        ]
+            [
+                4290,
+                5120
+            ],
+            [
+                5570,
+                7680
+            ]
+        ],
+        "map_name": "Super Adventure Box"
     },
     "935": {
-        "map_name": "Super Adventure Box",
         "min_level": 1,
         "max_level": 80,
         "default_floor": 20,
         "type": "Public",
-        "floors": [20],
+        "floors": [
+            20
+        ],
         "region_id": 29,
         "region_name": "Super Adventure Box",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-15360, -30720],
-            [15360, 30720]
+            [
+                -15360,
+                -30720
+            ],
+            [
+                15360,
+                30720
+            ]
         ],
         "continent_rect": [
-            [1574, 5972],
-            [2854, 8532]
-        ]
+            [
+                1574,
+                5972
+            ],
+            [
+                2854,
+                8532
+            ]
+        ],
+        "map_name": "Super Adventure Box"
     },
     "943": {
-        "map_name": "Tower of Nightmares",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 40,
         "type": "Public",
-        "floors": [40],
+        "floors": [
+            40
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [8576, 13952],
-            [12672, 16000]
-        ]
+            [
+                41344,
+                30336
+            ],
+            [
+                45440,
+                32384
+            ]
+        ],
+        "map_name": "Tower of Nightmares"
     },
     "947": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 23,
         "type": "Instance",
-        "floors": [23],
+        "floors": [
+            23
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [10880, 3328],
-            [13952, 6400]
-        ]
+            [
+                10880,
+                3328
+            ],
+            [
+                13952,
+                6400
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "948": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 19,
         "type": "Instance",
-        "floors": [19],
+        "floors": [
+            19
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [11804, 4414],
-            [12572, 5182]
-        ]
+            [
+                11804,
+                4414
+            ],
+            [
+                12572,
+                5182
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "949": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 21,
         "type": "Instance",
-        "floors": [21],
+        "floors": [
+            21
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [11804, 4414],
-            [12572, 5182]
-        ]
+            [
+                11804,
+                4414
+            ],
+            [
+                12572,
+                5182
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "950": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 13,
         "type": "Instance",
-        "floors": [13],
+        "floors": [
+            13
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [10880, 3328],
-            [13952, 6400]
-        ]
+            [
+                10880,
+                3328
+            ],
+            [
+                13952,
+                6400
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "951": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 24,
         "type": "Instance",
-        "floors": [24],
+        "floors": [
+            24
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [10880, 3328],
-            [11648, 4096]
-        ]
+            [
+                10880,
+                3328
+            ],
+            [
+                11648,
+                4096
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "952": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 22,
         "type": "Instance",
-        "floors": [22],
+        "floors": [
+            22
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [11804, 4414],
-            [12572, 5182]
-        ]
+            [
+                11804,
+                4414
+            ],
+            [
+                12572,
+                5182
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "953": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 18,
         "type": "Instance",
-        "floors": [18],
+        "floors": [
+            18
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [10880, 3328],
-            [13952, 6400]
-        ]
+            [
+                10880,
+                3328
+            ],
+            [
+                13952,
+                6400
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "954": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 25,
         "type": "Instance",
-        "floors": [25],
+        "floors": [
+            25
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [10880, 3328],
-            [13952, 6400]
-        ]
+            [
+                10880,
+                3328
+            ],
+            [
+                13952,
+                6400
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "955": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 29,
         "type": "Instance",
-        "floors": [29],
+        "floors": [
+            29
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-12288, -9216],
-            [12288, 9216]
+            [
+                -12288,
+                -9216
+            ],
+            [
+                12288,
+                9216
+            ]
         ],
         "continent_rect": [
-            [11690, 4414],
-            [12714, 5182]
-        ]
+            [
+                11690,
+                4414
+            ],
+            [
+                12714,
+                5182
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "956": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 28,
         "type": "Instance",
-        "floors": [28],
+        "floors": [
+            28
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-6144, -9216],
-            [6144, 9216]
+            [
+                -6144,
+                -9216
+            ],
+            [
+                6144,
+                9216
+            ]
         ],
         "continent_rect": [
-            [11970, 4414],
-            [12482, 5182]
-        ]
+            [
+                11970,
+                4414
+            ],
+            [
+                12482,
+                5182
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "957": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 30,
         "type": "Instance",
-        "floors": [30],
+        "floors": [
+            30
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [11804, 4414],
-            [12572, 5182]
-        ]
+            [
+                11804,
+                4414
+            ],
+            [
+                12572,
+                5182
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "958": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 14,
         "type": "Instance",
-        "floors": [14],
+        "floors": [
+            14
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [10880, 3328],
-            [13952, 6400]
-        ]
+            [
+                10880,
+                3328
+            ],
+            [
+                13952,
+                6400
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "959": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 29,
         "type": "Instance",
-        "floors": [29],
+        "floors": [
+            29
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-12288, -9216],
-            [12288, 9216]
+            [
+                -12288,
+                -9216
+            ],
+            [
+                12288,
+                9216
+            ]
         ],
         "continent_rect": [
-            [11690, 4414],
-            [12714, 5182]
-        ]
+            [
+                11690,
+                4414
+            ],
+            [
+                12714,
+                5182
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "960": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 28,
         "type": "Instance",
-        "floors": [28],
+        "floors": [
+            28
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-6144, -9216],
-            [6144, 9216]
+            [
+                -6144,
+                -9216
+            ],
+            [
+                6144,
+                9216
+            ]
         ],
         "continent_rect": [
-            [11970, 4414],
-            [12482, 5182]
-        ]
+            [
+                11970,
+                4414
+            ],
+            [
+                12482,
+                5182
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "964": {
-        "map_name": "Scarlet's Secret Lair",
         "min_level": 1,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -58368],
-            [21504, 58368]
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
         ],
         "continent_rect": [
-            [17664, 13312],
-            [19456, 18176]
-        ]
+            [
+                50432,
+                29696
+            ],
+            [
+                52224,
+                34560
+            ]
+        ],
+        "map_name": "Scarlet's Secret Lair"
     },
     "968": {
-        "map_name": "Edge of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 3,
         "type": "EdgeOfTheMists",
-        "floors": [1, 3],
+        "floors": [
+            1,
+            3
+        ],
         "region_id": 7,
         "region_name": "World vs. World",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [5994, 8446],
-            [9066, 11518]
-        ]
+            [
+                5994,
+                8446
+            ],
+            [
+                9066,
+                11518
+            ]
+        ],
+        "map_name": "Edge of the Mists"
     },
     "984": {
-        "map_name": "Courtyard",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 32,
         "type": "Pvp",
-        "floors": [1, 32],
+        "floors": [
+            1,
+            32
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [2048, 7040],
-            [3072, 8064]
-        ]
+            [
+                2048,
+                7040
+            ],
+            [
+                3072,
+                8064
+            ]
+        ],
+        "map_name": "Courtyard"
     },
     "988": {
-        "map_name": "Dry Top",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -30720],
-            [24576, 30720]
+            [
+                -24576,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
         ],
         "continent_rect": [
-            [3840, 14592],
-            [5888, 17152]
-        ]
+            [
+                36608,
+                30976
+            ],
+            [
+                38656,
+                33536
+            ]
+        ],
+        "map_name": "Dry Top"
     },
     "989": {
-        "map_name": "Prosperity's Mystery",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -30720],
-            [24576, 30720]
+            [
+                -24576,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
         ],
         "continent_rect": [
-            [3840, 14592],
-            [5888, 17152]
-        ]
+            [
+                36608,
+                30976
+            ],
+            [
+                38656,
+                33536
+            ]
+        ],
+        "map_name": "Prosperity's Mystery"
     },
     "990": {
-        "map_name": "Cornered",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -30720],
-            [24576, 30720]
+            [
+                -24576,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
         ],
         "continent_rect": [
-            [3840, 14592],
-            [5888, 17152]
-        ]
+            [
+                36608,
+                30976
+            ],
+            [
+                38656,
+                33536
+            ]
+        ],
+        "map_name": "Cornered"
     },
     "991": {
-        "map_name": "Disturbance in Brisban Wildlands",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Disturbance in Brisban Wildlands"
     },
     "992": {
-        "map_name": "Fallen Hopes",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -30720],
-            [24576, 30720]
+            [
+                -24576,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
         ],
         "continent_rect": [
-            [3840, 14592],
-            [5888, 17152]
-        ]
+            [
+                36608,
+                30976
+            ],
+            [
+                38656,
+                33536
+            ]
+        ],
+        "map_name": "Fallen Hopes"
     },
     "993": {
-        "map_name": "Scarlet's Secret Room",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -30720],
-            [24576, 30720]
+            [
+                -24576,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
         ],
         "continent_rect": [
-            [3840, 14592],
-            [5888, 17152]
-        ]
+            [
+                36608,
+                30976
+            ],
+            [
+                38656,
+                33536
+            ]
+        ],
+        "map_name": "Scarlet's Secret Room"
     },
     "994": {
-        "map_name": "The Concordia Incident",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [18944, 18176],
-            [21248, 21376]
-        ]
+            [
+                51712,
+                34560
+            ],
+            [
+                54016,
+                37760
+            ]
+        ],
+        "map_name": "The Concordia Incident"
     },
     "997": {
-        "map_name": "Discovering Scarlet's Breakthrough",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "map_rect": [
-            [-24576, -30720],
-            [24576, 30720]
+            [
+                -24576,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
         ],
         "continent_rect": [
-            [3840, 14592],
-            [5888, 17152]
-        ]
+            [
+                36608,
+                30976
+            ],
+            [
+                38656,
+                33536
+            ]
+        ],
+        "map_name": "Discovering Scarlet's Breakthrough"
     },
     "998": {
-        "map_name": "The Machine",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "map_rect": [
-            [-24576, -30720],
-            [24576, 30720]
+            [
+                -24576,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
         ],
         "continent_rect": [
-            [3840, 14592],
-            [5888, 17152]
-        ]
+            [
+                36608,
+                30976
+            ],
+            [
+                38656,
+                33536
+            ]
+        ],
+        "map_name": "The Machine"
     },
     "999": {
-        "map_name": "Trouble at Fort Salma",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "Trouble at Fort Salma"
     },
     "1000": {
-        "map_name": "The Waypoint Conundrum",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -30720],
-            [24576, 30720]
+            [
+                -24576,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
         ],
         "continent_rect": [
-            [3840, 14592],
-            [5888, 17152]
-        ]
+            [
+                36608,
+                30976
+            ],
+            [
+                38656,
+                33536
+            ]
+        ],
+        "map_name": "The Waypoint Conundrum"
     },
     "1001": {
-        "map_name": "Summit Invitations",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 2],
+        "floors": [
+            1,
+            2
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Summit Invitations"
     },
     "1002": {
-        "map_name": "Mission Accomplished",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [20736, 8192],
-            [23808, 11264]
-        ]
+            [
+                53504,
+                24576
+            ],
+            [
+                56576,
+                27648
+            ]
+        ],
+        "map_name": "Mission Accomplished"
     },
     "1003": {
-        "map_name": "Rallying Call",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 2,
         "type": "Instance",
-        "floors": [2],
+        "floors": [
+            2
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "Rallying Call"
     },
     "1004": {
-        "map_name": "Plan of Attack",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Plan of Attack"
     },
     "1005": {
-        "map_name": "Party Politics",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Party Politics"
     },
     "1006": {
-        "map_name": "Foefire Cleansing",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Foefire Cleansing"
     },
     "1007": {
-        "map_name": "Recalibrating the Waypoints",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -30720],
-            [24576, 30720]
+            [
+                -24576,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
         ],
         "continent_rect": [
-            [3840, 14592],
-            [5888, 17152]
-        ]
+            [
+                36608,
+                30976
+            ],
+            [
+                38656,
+                33536
+            ]
+        ],
+        "map_name": "Recalibrating the Waypoints"
     },
     "1008": {
-        "map_name": "The Ghosts of Fort Salma",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "The Ghosts of Fort Salma"
     },
     "1009": {
-        "map_name": "Taimi's Device",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -30720],
-            [24576, 30720]
+            [
+                -24576,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
         ],
         "continent_rect": [
-            [3840, 14592],
-            [5888, 17152]
-        ]
+            [
+                36608,
+                30976
+            ],
+            [
+                38656,
+                33536
+            ]
+        ],
+        "map_name": "Taimi's Device"
     },
     "1010": {
-        "map_name": "The World Summit",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "The World Summit"
     },
     "1011": {
-        "map_name": "Battle of Champion's Dusk",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 35,
         "type": "Pvp",
-        "floors": [1, 35],
+        "floors": [
+            1,
+            35
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-12288, -6144],
-            [12288, 9216]
+            [
+                -12288,
+                -6144
+            ],
+            [
+                12288,
+                9216
+            ]
         ],
         "continent_rect": [
-            [8448, 7680],
-            [9472, 8320]
-        ]
+            [
+                8448,
+                7680
+            ],
+            [
+                9472,
+                8320
+            ]
+        ],
+        "map_name": "Battle of Champion's Dusk"
     },
     "1015": {
-        "map_name": "The Silverwastes",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -18432],
-            [24576, 18432]
+            [
+                -24576,
+                -18432
+            ],
+            [
+                24576,
+                18432
+            ]
         ],
         "continent_rect": [
-            [3840, 14208],
-            [5888, 15744]
-        ]
+            [
+                36608,
+                30592
+            ],
+            [
+                38656,
+                32128
+            ]
+        ],
+        "map_name": "The Silverwastes"
     },
     "1016": {
-        "map_name": "Hidden Arcana",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, -14, -13],
+        "floors": [
+            1,
+            -14,
+            -13
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [16898, 14336],
-            [19330, 15872]
-        ]
+            [
+                49666,
+                30720
+            ],
+            [
+                52098,
+                32256
+            ]
+        ],
+        "map_name": "Hidden Arcana"
     },
     "1017": {
-        "map_name": "Reunion with the Pact",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -18432],
-            [24576, 18432]
+            [
+                -24576,
+                -18432
+            ],
+            [
+                24576,
+                18432
+            ]
         ],
         "continent_rect": [
-            [3840, 14208],
-            [5888, 15744]
-        ]
+            [
+                36608,
+                30592
+            ],
+            [
+                38656,
+                32128
+            ]
+        ],
+        "map_name": "Reunion with the Pact"
     },
     "1018": {
-        "map_name": "Caithe's Reconnaissance Squad",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -18432],
-            [24576, 18432]
+            [
+                -24576,
+                -18432
+            ],
+            [
+                24576,
+                18432
+            ]
         ],
         "continent_rect": [
-            [3840, 14208],
-            [5888, 15744]
-        ]
+            [
+                36608,
+                30592
+            ],
+            [
+                38656,
+                32128
+            ]
+        ],
+        "map_name": "Caithe's Reconnaissance Squad"
     },
     "1019": {
-        "map_name": "Fort Trinity",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [39936, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
         ],
         "continent_rect": [
-            [14464, 22400],
-            [17792, 25216]
-        ]
+            [
+                47232,
+                38784
+            ],
+            [
+                50560,
+                41600
+            ]
+        ],
+        "map_name": "Fort Trinity"
     },
     "1021": {
-        "map_name": "Into the Labyrinth",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "map_rect": [
-            [-24576, -18432],
-            [24576, 18432]
+            [
+                -24576,
+                -18432
+            ],
+            [
+                24576,
+                18432
+            ]
         ],
         "continent_rect": [
-            [3840, 14208],
-            [5888, 15744]
-        ]
+            [
+                36608,
+                30592
+            ],
+            [
+                38656,
+                32128
+            ]
+        ],
+        "map_name": "Into the Labyrinth"
     },
     "1022": {
-        "map_name": "Return to Camp Resolve",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -18432],
-            [24576, 18432]
+            [
+                -24576,
+                -18432
+            ],
+            [
+                24576,
+                18432
+            ]
         ],
         "continent_rect": [
-            [3840, 14208],
-            [5888, 15744]
-        ]
+            [
+                36608,
+                30592
+            ],
+            [
+                38656,
+                32128
+            ]
+        ],
+        "map_name": "Return to Camp Resolve"
     },
     "1023": {
-        "map_name": "Tracking the Aspect Masters",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "map_rect": [
-            [-24576, -18432],
-            [24576, 18432]
+            [
+                -24576,
+                -18432
+            ],
+            [
+                24576,
+                18432
+            ]
         ],
         "continent_rect": [
-            [3840, 14208],
-            [5888, 15744]
-        ]
+            [
+                36608,
+                30592
+            ],
+            [
+                38656,
+                32128
+            ]
+        ],
+        "map_name": "Tracking the Aspect Masters"
     },
     "1024": {
-        "map_name": "No Refuge",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -18432],
-            [24576, 18432]
+            [
+                -24576,
+                -18432
+            ],
+            [
+                24576,
+                18432
+            ]
         ],
         "continent_rect": [
-            [3840, 14208],
-            [5888, 15744]
-        ]
+            [
+                36608,
+                30592
+            ],
+            [
+                38656,
+                32128
+            ]
+        ],
+        "map_name": "No Refuge"
     },
     "1025": {
-        "map_name": "The Newly Awakened",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [18432, 24576]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9728, 20096],
-            [11136, 22144]
-        ]
+            [
+                42496,
+                36480
+            ],
+            [
+                43904,
+                38528
+            ]
+        ],
+        "map_name": "The Newly Awakened"
     },
     "1026": {
-        "map_name": "Meeting the Asura",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -39936],
-            [27648, 39936]
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [7168, 17152],
-            [9344, 20480]
-        ]
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Meeting the Asura"
     },
     "1027": {
-        "map_name": "Pact Assaulted",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -18432],
-            [24576, 18432]
+            [
+                -24576,
+                -18432
+            ],
+            [
+                24576,
+                18432
+            ]
         ],
         "continent_rect": [
-            [3840, 14208],
-            [5888, 15744]
-        ]
+            [
+                36608,
+                30592
+            ],
+            [
+                38656,
+                32128
+            ]
+        ],
+        "map_name": "Pact Assaulted"
     },
     "1028": {
-        "map_name": "The Mystery Cave",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -18432],
-            [24576, 18432]
+            [
+                -24576,
+                -18432
+            ],
+            [
+                24576,
+                18432
+            ]
         ],
         "continent_rect": [
-            [3840, 14208],
-            [5888, 15744]
-        ]
+            [
+                36608,
+                30592
+            ],
+            [
+                38656,
+                32128
+            ]
+        ],
+        "map_name": "The Mystery Cave"
     },
     "1029": {
-        "map_name": "Arcana Obscura",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, -13],
+        "floors": [
+            1,
+            -13
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [16898, 14336],
-            [19330, 15872]
-        ]
+            [
+                49666,
+                30720
+            ],
+            [
+                52098,
+                32256
+            ]
+        ],
+        "map_name": "Arcana Obscura"
     },
     "1032": {
-        "map_name": "Prized Possessions",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -33792],
-            [24576, 33792]
+            [
+                -24576,
+                -33792
+            ],
+            [
+                24576,
+                33792
+            ]
         ],
         "continent_rect": [
-            [512, 16128],
-            [2560, 18944]
-        ]
+            [
+                33280,
+                32512
+            ],
+            [
+                35328,
+                35328
+            ]
+        ],
+        "map_name": "Prized Possessions"
     },
     "1033": {
-        "map_name": "Buried Insight",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 0,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -27648],
-            [39936, 27648]
+            [
+                -39936,
+                -27648
+            ],
+            [
+                39936,
+                27648
+            ]
         ],
         "continent_rect": [
-            [2560, 17408],
-            [5888, 19712]
-        ]
+            [
+                35328,
+                33792
+            ],
+            [
+                38656,
+                36096
+            ]
+        ],
+        "map_name": "Buried Insight"
     },
     "1037": {
-        "map_name": "The Jungle Provides",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -18432],
-            [39936, 18432]
+            [
+                -36864,
+                -18432
+            ],
+            [
+                39936,
+                18432
+            ]
         ],
         "continent_rect": [
-            [640, 14592],
-            [3840, 16128]
-        ]
+            [
+                33408,
+                30976
+            ],
+            [
+                36608,
+                32512
+            ]
+        ],
+        "map_name": "The Jungle Provides"
     },
     "1040": {
-        "map_name": "Hearts and Minds",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -18,
         "type": "Instance",
-        "floors": [-20, -21, -19, -18],
+        "floors": [
+            -20,
+            -21,
+            -19,
+            -18
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [15360, 15360]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [1280, 20944],
-            [2432, 22096]
-        ]
+            [
+                34048,
+                37328
+            ],
+            [
+                35200,
+                38480
+            ]
+        ],
+        "map_name": "Hearts and Minds"
     },
     "1041": {
-        "map_name": "Dragon's Stand",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -30720],
-            [36864, 33792]
+            [
+                -36864,
+                -30720
+            ],
+            [
+                36864,
+                33792
+            ]
         ],
         "continent_rect": [
-            [1280, 19712],
-            [4352, 22400]
-        ]
+            [
+                34048,
+                36096
+            ],
+            [
+                37120,
+                38784
+            ]
+        ],
+        "map_name": "Dragon's Stand"
     },
     "1042": {
-        "map_name": "Verdant Brink",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 46,
         "type": "Public",
-        "floors": [46],
+        "floors": [
+            46
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [1440, 14274],
-            [4512, 17346]
-        ]
+            [
+                34208,
+                30658
+            ],
+            [
+                37280,
+                33730
+            ]
+        ],
+        "map_name": "Verdant Brink"
     },
     "1043": {
-        "map_name": "Auric Basin",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -33792],
-            [24576, 33792]
+            [
+                -24576,
+                -33792
+            ],
+            [
+                24576,
+                33792
+            ]
         ],
         "continent_rect": [
-            [512, 16128],
-            [2560, 18944]
-        ]
+            [
+                33280,
+                32512
+            ],
+            [
+                35328,
+                35328
+            ]
+        ],
+        "map_name": "Auric Basin"
     },
     "1045": {
-        "map_name": "Tangled Depths",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -27648],
-            [39936, 27648]
+            [
+                -39936,
+                -27648
+            ],
+            [
+                39936,
+                27648
+            ]
         ],
         "continent_rect": [
-            [2560, 17408],
-            [5888, 19712]
-        ]
+            [
+                35328,
+                33792
+            ],
+            [
+                38656,
+                36096
+            ]
+        ],
+        "map_name": "Tangled Depths"
     },
     "1046": {
-        "map_name": "Roots of Terror",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -27648],
-            [39936, 27648]
+            [
+                -39936,
+                -27648
+            ],
+            [
+                39936,
+                27648
+            ]
         ],
         "continent_rect": [
-            [2560, 17408],
-            [5888, 19712]
-        ]
+            [
+                35328,
+                33792
+            ],
+            [
+                38656,
+                36096
+            ]
+        ],
+        "map_name": "Roots of Terror"
     },
     "1048": {
-        "map_name": "City of Hope",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -33792],
-            [24576, 33792]
+            [
+                -24576,
+                -33792
+            ],
+            [
+                24576,
+                33792
+            ]
         ],
         "continent_rect": [
-            [512, 16128],
-            [2560, 18944]
-        ]
+            [
+                33280,
+                32512
+            ],
+            [
+                35328,
+                35328
+            ]
+        ],
+        "map_name": "City of Hope"
     },
     "1050": {
-        "map_name": "Torn from the Sky",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -18432],
-            [39936, 18432]
+            [
+                -36864,
+                -18432
+            ],
+            [
+                39936,
+                18432
+            ]
         ],
         "continent_rect": [
-            [640, 14592],
-            [3840, 16128]
-        ]
+            [
+                33408,
+                30976
+            ],
+            [
+                36608,
+                32512
+            ]
+        ],
+        "map_name": "Torn from the Sky"
     },
     "1051": {
-        "map_name": "Prisoners of the Dragon",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -18432],
-            [39936, 18432]
+            [
+                -36864,
+                -18432
+            ],
+            [
+                39936,
+                18432
+            ]
         ],
         "continent_rect": [
-            [640, 14592],
-            [3840, 16128]
-        ]
+            [
+                33408,
+                30976
+            ],
+            [
+                36608,
+                32512
+            ]
+        ],
+        "map_name": "Prisoners of the Dragon"
     },
     "1052": {
-        "map_name": "Verdant Brink",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -18432],
-            [39936, 18432]
+            [
+                -36864,
+                -18432
+            ],
+            [
+                39936,
+                18432
+            ]
         ],
         "continent_rect": [
-            [640, 14592],
-            [3840, 16128]
-        ]
+            [
+                33408,
+                30976
+            ],
+            [
+                36608,
+                32512
+            ]
+        ],
+        "map_name": "Verdant Brink"
     },
     "1054": {
-        "map_name": "Bitter Harvest",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -30720],
-            [36864, 33792]
+            [
+                -36864,
+                -30720
+            ],
+            [
+                36864,
+                33792
+            ]
         ],
         "continent_rect": [
-            [1280, 19712],
-            [4352, 22400]
-        ]
+            [
+                34048,
+                36096
+            ],
+            [
+                37120,
+                38784
+            ]
+        ],
+        "map_name": "Bitter Harvest"
     },
     "1057": {
-        "map_name": "Strange Observations",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -33792],
-            [24576, 33792]
+            [
+                -24576,
+                -33792
+            ],
+            [
+                24576,
+                33792
+            ]
         ],
         "continent_rect": [
-            [512, 16128],
-            [2560, 18944]
-        ]
+            [
+                33280,
+                32512
+            ],
+            [
+                35328,
+                35328
+            ]
+        ],
+        "map_name": "Strange Observations"
     },
     "1058": {
-        "map_name": "Prologue: Rally to Maguuma",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Tutorial",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 11,
         "region_name": "Maguuma Wastes",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -18432],
-            [24576, 18432]
+            [
+                -24576,
+                -18432
+            ],
+            [
+                24576,
+                18432
+            ]
         ],
         "continent_rect": [
-            [3840, 14208],
-            [5888, 15744]
-        ]
+            [
+                36608,
+                30592
+            ],
+            [
+                38656,
+                32128
+            ]
+        ],
+        "map_name": "Prologue: Rally to Maguuma"
     },
     "1062": {
-        "map_name": "Spirit Vale",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -36864],
-            [15360, 39936]
+            [
+                -15360,
+                -36864
+            ],
+            [
+                15360,
+                39936
+            ]
         ],
         "continent_rect": [
-            [3456, 11012],
-            [4736, 14212]
-        ]
+            [
+                36224,
+                27396
+            ],
+            [
+                37504,
+                30596
+            ]
+        ],
+        "map_name": "Spirit Vale"
     },
     "1063": {
-        "map_name": "Southsun Crab Toss",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -21504],
-            [33792, 21504]
+            [
+                -30720,
+                -21504
+            ],
+            [
+                33792,
+                21504
+            ]
         ],
         "continent_rect": [
-            [11520, 18944],
-            [14208, 20736]
-        ]
+            [
+                44288,
+                35328
+            ],
+            [
+                46976,
+                37120
+            ]
+        ],
+        "map_name": "Southsun Crab Toss"
     },
     "1064": {
-        "map_name": "Claiming the Lost Precipice",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 48,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [768, 13312],
-            [2048, 14592]
-        ]
+            [
+                33536,
+                29696
+            ],
+            [
+                34816,
+                30976
+            ]
+        ],
+        "map_name": "Claiming the Lost Precipice"
     },
     "1065": {
-        "map_name": "Angvar's Trove",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Angvar's Trove"
+    },
+    "1066": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 47,
+        "type": "Instance",
+        "floors": [
+            47,
+            0
+        ],
+        "region_id": 10,
+        "region_name": "Heart of Maguuma",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
+        ],
+        "continent_rect": [
+            [
+                35328,
+                32512
+            ],
+            [
+                36608,
+                33792
+            ]
+        ],
+        "map_name": "Claiming the Gilded Hollow"
     },
     "1067": {
-        "map_name": "Angvar's Trove",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Angvar's Trove"
     },
     "1068": {
-        "map_name": "Gilded Hollow",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 0,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [2560, 16128],
-            [3840, 17408]
-        ]
+            [
+                35328,
+                32512
+            ],
+            [
+                36608,
+                33792
+            ]
+        ],
+        "map_name": "Gilded Hollow"
     },
     "1069": {
-        "map_name": "Lost Precipice",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [768, 13312],
-            [2048, 14592]
-        ]
+            [
+                33536,
+                29696
+            ],
+            [
+                34816,
+                30976
+            ]
+        ],
+        "map_name": "Lost Precipice"
     },
     "1070": {
-        "map_name": "Claiming the Lost Precipice",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 48,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [768, 13312],
-            [2048, 14592]
-        ]
+            [
+                33536,
+                29696
+            ],
+            [
+                34816,
+                30976
+            ]
+        ],
+        "map_name": "Claiming the Lost Precipice"
     },
     "1071": {
-        "map_name": "Lost Precipice",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [768, 13312],
-            [2048, 14592]
-        ]
+            [
+                33536,
+                29696
+            ],
+            [
+                34816,
+                30976
+            ]
+        ],
+        "map_name": "Lost Precipice"
     },
     "1072": {
-        "map_name": "Southsun Crab Toss",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -21504],
-            [33792, 21504]
+            [
+                -30720,
+                -21504
+            ],
+            [
+                33792,
+                21504
+            ]
         ],
         "continent_rect": [
-            [11520, 18944],
-            [14208, 20736]
-        ]
+            [
+                44288,
+                35328
+            ],
+            [
+                46976,
+                37120
+            ]
+        ],
+        "map_name": "Southsun Crab Toss"
     },
     "1073": {
-        "map_name": "Guild Initiative Office",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Guild Initiative Office"
     },
     "1074": {
-        "map_name": "Blightwater Shatterstrike",
         "min_level": 40,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [29184, 12160],
-            [31232, 16256]
-        ]
+            [
+                61952,
+                28544
+            ],
+            [
+                64000,
+                32640
+            ]
+        ],
+        "map_name": "Blightwater Shatterstrike"
     },
     "1075": {
-        "map_name": "Proxemics Lab",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Proxemics Lab"
     },
     "1076": {
-        "map_name": "Lost Precipice",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [768, 13312],
-            [2048, 14592]
-        ]
+            [
+                33536,
+                29696
+            ],
+            [
+                34816,
+                30976
+            ]
+        ],
+        "map_name": "Lost Precipice"
     },
     "1078": {
-        "map_name": "Claiming the Gilded Hollow",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 47,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [2560, 16128],
-            [3840, 17408]
-        ]
+            [
+                35328,
+                32512
+            ],
+            [
+                36608,
+                33792
+            ]
+        ],
+        "map_name": "Claiming the Gilded Hollow"
     },
     "1079": {
-        "map_name": "Deep Trouble",
         "min_level": 60,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Deep Trouble"
     },
     "1080": {
-        "map_name": "Branded for Termination",
         "min_level": 30,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [28672, 16256],
-            [31744, 19328]
-        ]
+            [
+                61440,
+                32640
+            ],
+            [
+                64512,
+                35712
+            ]
+        ],
+        "map_name": "Branded for Termination"
     },
     "1081": {
-        "map_name": "Langmar Estate",
         "min_level": 1,
         "max_level": 15,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Langmar Estate"
     },
     "1082": {
-        "map_name": "Langmar Estate",
         "min_level": 1,
         "max_level": 15,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Langmar Estate"
     },
     "1083": {
-        "map_name": "Deep Trouble",
         "min_level": 60,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Deep Trouble"
     },
     "1084": {
-        "map_name": "Southsun Crab Toss",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -21504],
-            [33792, 21504]
+            [
+                -30720,
+                -21504
+            ],
+            [
+                33792,
+                21504
+            ]
         ],
         "continent_rect": [
-            [11520, 18944],
-            [14208, 20736]
-        ]
+            [
+                44288,
+                35328
+            ],
+            [
+                46976,
+                37120
+            ]
+        ],
+        "map_name": "Southsun Crab Toss"
     },
     "1086": {
-        "map_name": "Save Our Supplies",
         "min_level": 50,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [27136, 9472],
-            [29184, 13568]
-        ]
+            [
+                59904,
+                25856
+            ],
+            [
+                61952,
+                29952
+            ]
+        ],
+        "map_name": "Save Our Supplies"
     },
     "1087": {
-        "map_name": "Proxemics Lab",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Proxemics Lab"
     },
     "1088": {
-        "map_name": "Claiming the Gilded Hollow",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 47,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [2560, 16128],
-            [3840, 17408]
-        ]
+            [
+                35328,
+                32512
+            ],
+            [
+                36608,
+                33792
+            ]
+        ],
+        "map_name": "Claiming the Gilded Hollow"
     },
     "1089": {
-        "map_name": "Angvar's Trove",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Angvar's Trove"
     },
     "1090": {
-        "map_name": "Langmar Estate",
         "min_level": 1,
         "max_level": 15,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Langmar Estate"
     },
     "1091": {
-        "map_name": "Save Our Supplies",
         "min_level": 50,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [27136, 9472],
-            [29184, 13568]
-        ]
+            [
+                59904,
+                25856
+            ],
+            [
+                61952,
+                29952
+            ]
+        ],
+        "map_name": "Save Our Supplies"
     },
     "1092": {
-        "map_name": "Scratch Sentry Defense",
         "min_level": 50,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [18944, 18176],
-            [21248, 21376]
-        ]
+            [
+                51712,
+                34560
+            ],
+            [
+                54016,
+                37760
+            ]
+        ],
+        "map_name": "Scratch Sentry Defense"
     },
     "1093": {
-        "map_name": "Angvar's Trove",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Angvar's Trove"
     },
     "1094": {
-        "map_name": "Save Our Supplies",
         "min_level": 50,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [27136, 9472],
-            [29184, 13568]
-        ]
+            [
+                59904,
+                25856
+            ],
+            [
+                61952,
+                29952
+            ]
+        ],
+        "map_name": "Save Our Supplies"
     },
     "1095": {
-        "map_name": "Dragon's Stand (Heart of Thorns)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -30720],
-            [36864, 33792]
+            [
+                -36864,
+                -30720
+            ],
+            [
+                36864,
+                33792
+            ]
         ],
         "continent_rect": [
-            [1280, 19712],
-            [4352, 22400]
-        ]
+            [
+                34048,
+                36096
+            ],
+            [
+                37120,
+                38784
+            ]
+        ],
+        "map_name": "Dragon's Stand (Heart of Thorns)"
     },
     "1097": {
-        "map_name": "Proxemics Lab",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Proxemics Lab"
     },
     "1098": {
-        "map_name": "Claiming the Gilded Hollow",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 47,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [2560, 16128],
-            [3840, 17408]
-        ]
+            [
+                35328,
+                32512
+            ],
+            [
+                36608,
+                33792
+            ]
+        ],
+        "map_name": "Claiming the Gilded Hollow"
     },
     "1099": {
-        "map_name": " Desert Borderlands",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 3,
         "type": "RedHome",
-        "floors": [1, 3],
+        "floors": [
+            1,
+            3
+        ],
         "region_id": 7,
         "region_name": "World vs. World",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [9214, 8958],
-            [12286, 12030]
-        ]
+            [
+                9214,
+                8958
+            ],
+            [
+                12286,
+                12030
+            ]
+        ],
+        "map_name": " Desert Borderlands"
     },
     "1100": {
-        "map_name": "Scratch Sentry Defense",
         "min_level": 50,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [18944, 18176],
-            [21248, 21376]
-        ]
+            [
+                51712,
+                34560
+            ],
+            [
+                54016,
+                37760
+            ]
+        ],
+        "map_name": "Scratch Sentry Defense"
     },
     "1101": {
-        "map_name": "Gilded Hollow",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 0,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [2560, 16128],
-            [3840, 17408]
-        ]
+            [
+                35328,
+                32512
+            ],
+            [
+                36608,
+                33792
+            ]
+        ],
+        "map_name": "Gilded Hollow"
     },
     "1104": {
-        "map_name": "Lost Precipice",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [768, 13312],
-            [2048, 14592]
-        ]
+            [
+                33536,
+                29696
+            ],
+            [
+                34816,
+                30976
+            ]
+        ],
+        "map_name": "Lost Precipice"
     },
     "1105": {
-        "map_name": "Langmar Estate",
         "min_level": 1,
         "max_level": 15,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Langmar Estate"
     },
     "1106": {
-        "map_name": "Deep Trouble",
         "min_level": 60,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Deep Trouble"
     },
     "1107": {
-        "map_name": "Gilded Hollow",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 0,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [2560, 16128],
-            [3840, 17408]
-        ]
+            [
+                35328,
+                32512
+            ],
+            [
+                36608,
+                33792
+            ]
+        ],
+        "map_name": "Gilded Hollow"
     },
     "1108": {
-        "map_name": "Gilded Hollow",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 0,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [2560, 16128],
-            [3840, 17408]
-        ]
+            [
+                35328,
+                32512
+            ],
+            [
+                36608,
+                33792
+            ]
+        ],
+        "map_name": "Gilded Hollow"
     },
     "1109": {
-        "map_name": "Angvar's Trove",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [17664, 11264],
-            [21760, 13312]
-        ]
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Angvar's Trove"
     },
     "1110": {
-        "map_name": "Scrap Rifle Field Test",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 0,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -27648],
-            [39936, 27648]
+            [
+                -39936,
+                -27648
+            ],
+            [
+                39936,
+                27648
+            ]
         ],
         "continent_rect": [
-            [2560, 17408],
-            [5888, 19712]
-        ]
+            [
+                35328,
+                33792
+            ],
+            [
+                38656,
+                36096
+            ]
+        ],
+        "map_name": "Scrap Rifle Field Test"
     },
     "1111": {
-        "map_name": "Scratch Sentry Defense",
         "min_level": 50,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [18944, 18176],
-            [21248, 21376]
-        ]
+            [
+                51712,
+                34560
+            ],
+            [
+                54016,
+                37760
+            ]
+        ],
+        "map_name": "Scratch Sentry Defense"
     },
     "1112": {
-        "map_name": "Branded for Termination",
         "min_level": 30,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [28672, 16256],
-            [31744, 19328]
-        ]
+            [
+                61440,
+                32640
+            ],
+            [
+                64512,
+                35712
+            ]
+        ],
+        "map_name": "Branded for Termination"
     },
     "1113": {
-        "map_name": "Scratch Sentry Defense",
         "min_level": 50,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [18944, 18176],
-            [21248, 21376]
-        ]
+            [
+                51712,
+                34560
+            ],
+            [
+                54016,
+                37760
+            ]
+        ],
+        "map_name": "Scratch Sentry Defense"
     },
     "1115": {
-        "map_name": "Haywire Punch-o-Matic Battle",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 0,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -27648],
-            [39936, 27648]
+            [
+                -39936,
+                -27648
+            ],
+            [
+                39936,
+                27648
+            ]
         ],
         "continent_rect": [
-            [2560, 17408],
-            [5888, 19712]
-        ]
+            [
+                35328,
+                33792
+            ],
+            [
+                38656,
+                36096
+            ]
+        ],
+        "map_name": "Haywire Punch-o-Matic Battle"
     },
     "1116": {
-        "map_name": "Deep Trouble",
         "min_level": 60,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Deep Trouble"
     },
     "1117": {
-        "map_name": "Claiming the Lost Precipice",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 48,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [768, 13312],
-            [2048, 14592]
-        ]
+            [
+                33536,
+                29696
+            ],
+            [
+                34816,
+                30976
+            ]
+        ],
+        "map_name": "Claiming the Lost Precipice"
     },
     "1118": {
-        "map_name": "Save Our Supplies",
         "min_level": 50,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [27136, 9472],
-            [29184, 13568]
-        ]
+            [
+                59904,
+                25856
+            ],
+            [
+                61952,
+                29952
+            ]
+        ],
+        "map_name": "Save Our Supplies"
     },
     "1121": {
-        "map_name": "Gilded Hollow",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 0,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [2560, 16128],
-            [3840, 17408]
-        ]
+            [
+                35328,
+                32512
+            ],
+            [
+                36608,
+                33792
+            ]
+        ],
+        "map_name": "Gilded Hollow"
     },
     "1122": {
-        "map_name": "Claiming the Gilded Hollow",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 47,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [2560, 16128],
-            [3840, 17408]
-        ]
+            [
+                35328,
+                32512
+            ],
+            [
+                36608,
+                33792
+            ]
+        ],
+        "map_name": "Claiming the Gilded Hollow"
     },
     "1123": {
-        "map_name": "Blightwater Shatterstrike",
         "min_level": 40,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [29184, 12160],
-            [31232, 16256]
-        ]
+            [
+                61952,
+                28544
+            ],
+            [
+                64000,
+                32640
+            ]
+        ],
+        "map_name": "Blightwater Shatterstrike"
     },
     "1124": {
-        "map_name": "Lost Precipice",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [768, 13312],
-            [2048, 14592]
-        ]
+            [
+                33536,
+                29696
+            ],
+            [
+                34816,
+                30976
+            ]
+        ],
+        "map_name": "Lost Precipice"
     },
     "1126": {
-        "map_name": "Southsun Crab Toss",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -21504],
-            [33792, 21504]
+            [
+                -30720,
+                -21504
+            ],
+            [
+                33792,
+                21504
+            ]
         ],
         "continent_rect": [
-            [11520, 18944],
-            [14208, 20736]
-        ]
+            [
+                44288,
+                35328
+            ],
+            [
+                46976,
+                37120
+            ]
+        ],
+        "map_name": "Southsun Crab Toss"
     },
     "1128": {
-        "map_name": "Scratch Sentry Defense",
         "min_level": 50,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -36864],
-            [27648, 39936]
+            [
+                -27648,
+                -36864
+            ],
+            [
+                27648,
+                39936
+            ]
         ],
         "continent_rect": [
-            [18944, 18176],
-            [21248, 21376]
-        ]
+            [
+                51712,
+                34560
+            ],
+            [
+                54016,
+                37760
+            ]
+        ],
+        "map_name": "Scratch Sentry Defense"
     },
     "1129": {
-        "map_name": "Langmar Estate",
         "min_level": 1,
         "max_level": 15,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [25088, 13568],
-            [29184, 15616]
-        ]
+            [
+                57856,
+                29952
+            ],
+            [
+                61952,
+                32000
+            ]
+        ],
+        "map_name": "Langmar Estate"
     },
     "1130": {
-        "map_name": "Deep Trouble",
         "min_level": 60,
         "max_level": 70,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Deep Trouble"
     },
     "1131": {
-        "map_name": "Blightwater Shatterstrike",
         "min_level": 40,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [29184, 12160],
-            [31232, 16256]
-        ]
+            [
+                61952,
+                28544
+            ],
+            [
+                64000,
+                32640
+            ]
+        ],
+        "map_name": "Blightwater Shatterstrike"
     },
     "1132": {
-        "map_name": "Claiming the Lost Precipice",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 48,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [768, 13312],
-            [2048, 14592]
-        ]
+            [
+                33536,
+                29696
+            ],
+            [
+                34816,
+                30976
+            ]
+        ],
+        "map_name": "Claiming the Lost Precipice"
     },
     "1133": {
-        "map_name": "Branded for Termination",
         "min_level": 30,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [28672, 16256],
-            [31744, 19328]
-        ]
+            [
+                61440,
+                32640
+            ],
+            [
+                64512,
+                35712
+            ]
+        ],
+        "map_name": "Branded for Termination"
     },
     "1134": {
-        "map_name": "Blightwater Shatterstrike",
         "min_level": 40,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [29184, 12160],
-            [31232, 16256]
-        ]
+            [
+                61952,
+                28544
+            ],
+            [
+                64000,
+                32640
+            ]
+        ],
+        "map_name": "Blightwater Shatterstrike"
     },
     "1135": {
-        "map_name": "Branded for Termination",
         "min_level": 30,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [28672, 16256],
-            [31744, 19328]
-        ]
+            [
+                61440,
+                32640
+            ],
+            [
+                64512,
+                35712
+            ]
+        ],
+        "map_name": "Branded for Termination"
     },
     "1136": {
-        "map_name": "Proxemics Lab",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Proxemics Lab"
     },
     "1137": {
-        "map_name": "Proxemics Lab",
         "min_level": 15,
         "max_level": 25,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -30720],
-            [43008, 33792]
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [9344, 17152]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Proxemics Lab"
     },
     "1138": {
-        "map_name": "Save Our Supplies",
         "min_level": 50,
         "max_level": 60,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [27136, 9472],
-            [29184, 13568]
-        ]
+            [
+                59904,
+                25856
+            ],
+            [
+                61952,
+                29952
+            ]
+        ],
+        "map_name": "Save Our Supplies"
     },
     "1139": {
-        "map_name": "Southsun Crab Toss",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -21504],
-            [33792, 21504]
+            [
+                -30720,
+                -21504
+            ],
+            [
+                33792,
+                21504
+            ]
         ],
         "continent_rect": [
-            [11520, 18944],
-            [14208, 20736]
-        ]
+            [
+                44288,
+                35328
+            ],
+            [
+                46976,
+                37120
+            ]
+        ],
+        "map_name": "Southsun Crab Toss"
     },
     "1140": {
-        "map_name": "Claiming the Lost Precipice",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 48,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [768, 13312],
-            [2048, 14592]
-        ]
+            [
+                33536,
+                29696
+            ],
+            [
+                34816,
+                30976
+            ]
+        ],
+        "map_name": "Claiming the Lost Precipice"
     },
     "1142": {
-        "map_name": "Blightwater Shatterstrike",
         "min_level": 40,
         "max_level": 50,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [29184, 12160],
-            [31232, 16256]
-        ]
+            [
+                61952,
+                28544
+            ],
+            [
+                64000,
+                32640
+            ]
+        ],
+        "map_name": "Blightwater Shatterstrike"
     },
     "1146": {
-        "map_name": "Branded for Termination",
         "min_level": 30,
         "max_level": 40,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [28672, 16256],
-            [31744, 19328]
-        ]
+            [
+                61440,
+                32640
+            ],
+            [
+                64512,
+                35712
+            ]
+        ],
+        "map_name": "Branded for Termination"
     },
     "1147": {
-        "map_name": "Spirit Vale",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -36864],
-            [15360, 39936]
+            [
+                -15360,
+                -36864
+            ],
+            [
+                15360,
+                39936
+            ]
         ],
         "continent_rect": [
-            [3456, 11012],
-            [4736, 14212]
-        ]
+            [
+                36224,
+                27396
+            ],
+            [
+                37504,
+                30596
+            ]
+        ],
+        "map_name": "Spirit Vale"
     },
     "1149": {
-        "map_name": "Salvation Pass",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -27648],
-            [12288, 27648]
+            [
+                -12288,
+                -27648
+            ],
+            [
+                12288,
+                27648
+            ]
         ],
         "continent_rect": [
-            [2688, 11906],
-            [3712, 14210]
-        ]
+            [
+                35456,
+                28290
+            ],
+            [
+                36480,
+                30594
+            ]
+        ],
+        "map_name": "Salvation Pass"
     },
     "1153": {
-        "map_name": "Tiger Den",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "Tiger Den"
     },
     "1154": {
-        "map_name": "Special Forces Training Area",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -22,
         "type": "Instance",
-        "floors": [-22],
+        "floors": [
+            -22
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14462],
-            [17664, 15998]
-        ]
+            [
+                48000,
+                30846
+            ],
+            [
+                50432,
+                32382
+            ]
+        ],
+        "map_name": "Special Forces Training Area"
     },
     "1155": {
-        "map_name": "Lion's Arch Aerodrome",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15196, 14422],
-            [17628, 15958]
-        ]
+            [
+                47964,
+                30806
+            ],
+            [
+                50396,
+                32342
+            ]
+        ],
+        "map_name": "Lion's Arch Aerodrome"
     },
     "1156": {
-        "map_name": "Stronghold of the Faithful",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -27648],
-            [12288, 27648]
+            [
+                -12288,
+                -27648
+            ],
+            [
+                12288,
+                27648
+            ]
         ],
         "continent_rect": [
-            [1920, 12160],
-            [2944, 14464]
-        ]
+            [
+                34688,
+                28544
+            ],
+            [
+                35712,
+                30848
+            ]
+        ],
+        "map_name": "Stronghold of the Faithful"
     },
     "1158": {
-        "map_name": "Noble's Folly",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -18432],
-            [39936, 18432]
+            [
+                -36864,
+                -18432
+            ],
+            [
+                39936,
+                18432
+            ]
         ],
         "continent_rect": [
-            [640, 14592],
-            [3840, 16128]
-        ]
+            [
+                33408,
+                30976
+            ],
+            [
+                36608,
+                32512
+            ]
+        ],
+        "map_name": "Noble's Folly"
     },
     "1159": {
-        "map_name": "Research in Rata Novus",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -27648],
-            [39936, 27648]
+            [
+                -39936,
+                -27648
+            ],
+            [
+                39936,
+                27648
+            ]
         ],
         "continent_rect": [
-            [2560, 17408],
-            [5888, 19712]
-        ]
+            [
+                35328,
+                33792
+            ],
+            [
+                38656,
+                36096
+            ]
+        ],
+        "map_name": "Research in Rata Novus"
     },
     "1161": {
-        "map_name": "Eir's Homestead",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Eir's Homestead"
     },
     "1163": {
-        "map_name": "Revenge of the Capricorn",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 8,
         "type": "Pvp",
-        "floors": [1, 8],
+        "floors": [
+            1,
+            8
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [7950, 6545],
-            [8718, 7313]
-        ]
+            [
+                7950,
+                6545
+            ],
+            [
+                8718,
+                7313
+            ]
+        ],
+        "map_name": "Revenge of the Capricorn"
     },
     "1164": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 20,
         "type": "Instance",
-        "floors": [20],
+        "floors": [
+            20
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-18432, -12288],
-            [18432, 12288]
+            [
+                -18432,
+                -12288
+            ],
+            [
+                18432,
+                12288
+            ]
         ],
         "continent_rect": [
-            [11804, 4414],
-            [13340, 5438]
-        ]
+            [
+                11804,
+                4414
+            ],
+            [
+                13340,
+                5438
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "1165": {
-        "map_name": "Bloodstone Fen",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 2,
         "type": "Public",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -6144],
-            [18432, 9216]
+            [
+                -18432,
+                -6144
+            ],
+            [
+                18432,
+                9216
+            ]
         ],
         "continent_rect": [
-            [2048, 13954],
-            [3584, 14594]
-        ]
+            [
+                34816,
+                30338
+            ],
+            [
+                36352,
+                30978
+            ]
+        ],
+        "map_name": "Bloodstone Fen"
     },
     "1166": {
-        "map_name": "In Pursuit of Caudecus",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 2,
         "type": "Instance",
-        "floors": [2],
+        "floors": [
+            2
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -6144],
-            [18432, 9216]
+            [
+                -18432,
+                -6144
+            ],
+            [
+                18432,
+                9216
+            ]
         ],
         "continent_rect": [
-            [2048, 13954],
-            [3584, 14594]
-        ]
+            [
+                34816,
+                30338
+            ],
+            [
+                36352,
+                30978
+            ]
+        ],
+        "map_name": "Confessor's Stronghold"
     },
     "1167": {
-        "map_name": "A Shadow's Deeds",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 0,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -6144],
-            [18432, 9216]
+            [
+                -18432,
+                -6144
+            ],
+            [
+                18432,
+                9216
+            ]
         ],
         "continent_rect": [
-            [2048, 13954],
-            [3584, 14594]
-        ]
+            [
+                34816,
+                30338
+            ],
+            [
+                36352,
+                30978
+            ]
+        ],
+        "map_name": "A Shadow's Deeds"
     },
     "1169": {
-        "map_name": "Rata Novus",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, -7, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            -7,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -27648],
-            [39936, 27648]
+            [
+                -39936,
+                -27648
+            ],
+            [
+                39936,
+                27648
+            ]
         ],
         "continent_rect": [
-            [2560, 17408],
-            [5888, 19712]
-        ]
+            [
+                35328,
+                33792
+            ],
+            [
+                38656,
+                36096
+            ]
+        ],
+        "map_name": "Rata Novus"
     },
     "1170": {
-        "map_name": "Taimi's Game",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -27648],
-            [39936, 27648]
+            [
+                -39936,
+                -27648
+            ],
+            [
+                39936,
+                27648
+            ]
         ],
         "continent_rect": [
-            [2560, 17408],
-            [5888, 19712]
-        ]
+            [
+                35328,
+                33792
+            ],
+            [
+                38656,
+                36096
+            ]
+        ],
+        "map_name": "Taimi's Game"
     },
     "1171": {
-        "map_name": "Eternal Coliseum",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 37,
         "type": "Pvp",
-        "floors": [1, 37],
+        "floors": [
+            1,
+            37
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-12288, -9216],
-            [12288, 9216]
+            [
+                -12288,
+                -9216
+            ],
+            [
+                12288,
+                9216
+            ]
         ],
         "continent_rect": [
-            [10268, 6812],
-            [11292, 7580]
-        ]
+            [
+                10268,
+                6812
+            ],
+            [
+                11292,
+                7580
+            ]
+        ],
+        "map_name": "Eternal Coliseum"
     },
     "1172": {
-        "map_name": "Dragon Vigil",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -33792],
-            [24576, 33792]
+            [
+                -24576,
+                -33792
+            ],
+            [
+                24576,
+                33792
+            ]
         ],
         "continent_rect": [
-            [512, 16128],
-            [2560, 18944]
-        ]
+            [
+                33280,
+                32512
+            ],
+            [
+                35328,
+                35328
+            ]
+        ],
+        "map_name": "Dragon Vigil"
     },
     "1173": {
-        "map_name": "Taimi's Game",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -24,
         "type": "Instance",
-        "floors": [-24],
+        "floors": [
+            -24
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [4736, 18048],
-            [5504, 18816]
-        ]
+            [
+                37504,
+                34432
+            ],
+            [
+                38272,
+                35200
+            ]
+        ],
+        "map_name": "Taimi's Game"
     },
     "1175": {
-        "map_name": "Ember Bay",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -46080],
-            [46080, 46080]
+            [
+                -46080,
+                -46080
+            ],
+            [
+                46080,
+                46080
+            ]
         ],
         "continent_rect": [
-            [4606, 27134],
-            [8446, 30974]
-        ]
+            [
+                37374,
+                43518
+            ],
+            [
+                41214,
+                47358
+            ]
+        ],
+        "map_name": "Ember Bay"
     },
     "1176": {
-        "map_name": "Taimi's Game",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -27648],
-            [39936, 27648]
+            [
+                -39936,
+                -27648
+            ],
+            [
+                39936,
+                27648
+            ]
         ],
         "continent_rect": [
-            [2560, 17408],
-            [5888, 19712]
-        ]
+            [
+                35328,
+                33792
+            ],
+            [
+                38656,
+                36096
+            ]
+        ],
+        "map_name": "Taimi's Game"
     },
     "1177": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 16,
         "type": "Instance",
-        "floors": [16],
+        "floors": [
+            16
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-6144, -6144],
-            [9216, 9216]
+            [
+                -6144,
+                -6144
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [11804, 4414],
-            [12444, 5054]
-        ]
+            [
+                11804,
+                4414
+            ],
+            [
+                12444,
+                5054
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "1178": {
-        "map_name": "Bitterfrost Frontier",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -18432],
-            [36864, 18432]
+            [
+                -36864,
+                -18432
+            ],
+            [
+                36864,
+                18432
+            ]
         ],
         "continent_rect": [
-            [20736, 6656],
-            [23808, 8192]
-        ]
+            [
+                53504,
+                23040
+            ],
+            [
+                56576,
+                24576
+            ]
+        ],
+        "map_name": "Bitterfrost Frontier"
     },
     "1180": {
-        "map_name": "The Bitter Cold",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -18432],
-            [36864, 18432]
+            [
+                -36864,
+                -18432
+            ],
+            [
+                36864,
+                18432
+            ]
         ],
         "continent_rect": [
-            [20736, 6656],
-            [23808, 8192]
-        ]
+            [
+                53504,
+                23040
+            ],
+            [
+                56576,
+                24576
+            ]
+        ],
+        "map_name": "The Bitter Cold"
     },
     "1181": {
-        "map_name": "Frozen Out",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -18432],
-            [36864, 18432]
+            [
+                -36864,
+                -18432
+            ],
+            [
+                36864,
+                18432
+            ]
         ],
         "continent_rect": [
-            [20736, 6656],
-            [23808, 8192]
-        ]
+            [
+                53504,
+                23040
+            ],
+            [
+                56576,
+                24576
+            ]
+        ],
+        "map_name": "Frozen Out"
     },
     "1182": {
-        "map_name": "Precocious Aurene",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 0,
         "type": "Instance",
-        "floors": [47, 0],
+        "floors": [
+            47,
+            0
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -33792],
-            [24576, 33792]
+            [
+                -24576,
+                -33792
+            ],
+            [
+                24576,
+                33792
+            ]
         ],
         "continent_rect": [
-            [512, 16128],
-            [2560, 18944]
-        ]
+            [
+                33280,
+                32512
+            ],
+            [
+                35328,
+                35328
+            ]
+        ],
+        "map_name": "Precocious Aurene"
     },
     "1185": {
-        "map_name": "Lake Doric",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -30720],
-            [15360, 30720]
+            [
+                -15360,
+                -30720
+            ],
+            [
+                15360,
+                30720
+            ]
         ],
         "continent_rect": [
-            [12160, 9088],
-            [13440, 11648]
-        ]
+            [
+                44928,
+                25472
+            ],
+            [
+                46208,
+                28032
+            ]
+        ],
+        "map_name": "Lake Doric"
     },
     "1188": {
-        "map_name": "Bastion of the Penitent",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -9216],
-            [27648, 12288]
+            [
+                -27648,
+                -9216
+            ],
+            [
+                27648,
+                12288
+            ]
         ],
         "continent_rect": [
-            [11774, 4480],
-            [14078, 5376]
-        ]
+            [
+                44542,
+                20864
+            ],
+            [
+                46846,
+                21760
+            ]
+        ],
+        "map_name": "Bastion of the Penitent"
     },
     "1189": {
-        "map_name": "Regrouping with the Queen",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 2,
         "type": "Instance",
-        "floors": [2],
+        "floors": [
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Regrouping with the Queen"
     },
     "1190": {
-        "map_name": "A Meeting of Ministers",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 2,
         "type": "Instance",
-        "floors": [2],
+        "floors": [
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "A Meeting of Ministers"
     },
     "1191": {
-        "map_name": "Beetlestone Manor",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 4,
         "type": "Instance",
-        "floors": [5, -4, 4],
+        "floors": [
+            5,
+            -4,
+            4
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [12416, 11392],
-            [13440, 12416]
-        ]
+            [
+                45184,
+                27776
+            ],
+            [
+                46208,
+                28800
+            ]
+        ],
+        "map_name": "Confessor's End"
     },
     "1192": {
-        "map_name": "The Second Vision",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 2,
         "type": "Instance",
-        "floors": [2],
+        "floors": [
+            2
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -18432],
-            [39936, 18432]
+            [
+                -36864,
+                -18432
+            ],
+            [
+                39936,
+                18432
+            ]
         ],
         "continent_rect": [
-            [640, 14592],
-            [3840, 16128]
-        ]
+            [
+                33408,
+                30976
+            ],
+            [
+                36608,
+                32512
+            ]
+        ],
+        "map_name": "The Second Vision"
     },
     "1193": {
-        "map_name": "The First Vision",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [9344, 14080],
-            [13440, 16128]
-        ]
+            [
+                42112,
+                30464
+            ],
+            [
+                46208,
+                32512
+            ]
+        ],
+        "map_name": "The First Vision"
     },
     "1194": {
-        "map_name": "The Sword Regrown",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -49152],
-            [24576, 49152]
+            [
+                -24576,
+                -49152
+            ],
+            [
+                24576,
+                49152
+            ]
         ],
         "continent_rect": [
-            [10112, 25216],
-            [12160, 29312]
-        ]
+            [
+                42880,
+                41600
+            ],
+            [
+                44928,
+                45696
+            ]
+        ],
+        "map_name": "The Sword Regrown"
     },
     "1195": {
-        "map_name": "Draconis Mons",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 20,
         "region_name": "Ring of Fire",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -46080],
-            [46080, 46080]
+            [
+                -46080,
+                -46080
+            ],
+            [
+                46080,
+                46080
+            ]
         ],
         "continent_rect": [
-            [1950, 22900],
-            [5790, 26740]
-        ]
+            [
+                34718,
+                39284
+            ],
+            [
+                38558,
+                43124
+            ]
+        ],
+        "map_name": "Draconis Mons"
     },
     "1196": {
-        "map_name": "Heart of the Volcano",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -28,
         "type": "Instance",
-        "floors": [-28, -26, -27],
+        "floors": [
+            -28,
+            -26,
+            -27
+        ],
         "region_id": 20,
         "region_name": "Ring of Fire",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -46080],
-            [46080, 46080]
+            [
+                -46080,
+                -46080
+            ],
+            [
+                46080,
+                46080
+            ]
         ],
         "continent_rect": [
-            [1950, 22900],
-            [5790, 26740]
-        ]
+            [
+                34718,
+                39284
+            ],
+            [
+                38558,
+                43124
+            ]
+        ],
+        "map_name": "Heart of the Volcano"
     },
     "1198": {
-        "map_name": "Taimi's Pet Project",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 47, 2, 0, 48, 3],
+        "floors": [
+            1,
+            47,
+            2,
+            0,
+            48,
+            3
+        ],
         "region_id": 10,
         "region_name": "Heart of Maguuma",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -27648],
-            [39936, 27648]
+            [
+                -39936,
+                -27648
+            ],
+            [
+                39936,
+                27648
+            ]
         ],
         "continent_rect": [
-            [2560, 17408],
-            [5888, 19712]
-        ]
+            [
+                35328,
+                33792
+            ],
+            [
+                38656,
+                36096
+            ]
+        ],
+        "map_name": "Taimi's Pet Project"
     },
     "1200": {
-        "map_name": "Hall of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 39,
         "type": "Pvp",
-        "floors": [1, 39],
+        "floors": [
+            1,
+            39
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-6144, -6144],
-            [9216, 9216]
+            [
+                -6144,
+                -6144
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [5172, 4370],
-            [5812, 5010]
-        ]
+            [
+                5172,
+                4370
+            ],
+            [
+                5812,
+                5010
+            ]
+        ],
+        "map_name": "Hall of the Mists"
     },
     "1201": {
-        "map_name": "Asura Arena",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 40,
         "type": "Pvp",
-        "floors": [1, 40],
+        "floors": [
+            1,
+            40
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-6144, -6144],
-            [9216, 9216]
+            [
+                -6144,
+                -6144
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [4448, 4908],
-            [4768, 5228]
-        ]
+            [
+                4448,
+                4908
+            ],
+            [
+                4768,
+                5228
+            ]
+        ],
+        "map_name": "Asura Arena"
     },
     "1202": {
-        "map_name": "White Mantle Hideout",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -34,
         "type": "Instance",
-        "floors": [-34],
+        "floors": [
+            -34
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -27648],
-            [12288, 27648]
+            [
+                -12288,
+                -27648
+            ],
+            [
+                12288,
+                27648
+            ]
         ],
         "continent_rect": [
-            [5888, 14464],
-            [6912, 16768]
-        ]
+            [
+                38656,
+                30848
+            ],
+            [
+                39680,
+                33152
+            ]
+        ],
+        "map_name": "White Mantle Hideout"
     },
     "1203": {
-        "map_name": "Siren's Landing",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -15360],
-            [39936, 15360]
+            [
+                -39936,
+                -15360
+            ],
+            [
+                39936,
+                15360
+            ]
         ],
         "continent_rect": [
-            [14234, 25216],
-            [17562, 26496]
-        ]
+            [
+                47002,
+                41600
+            ],
+            [
+                50330,
+                42880
+            ]
+        ],
+        "map_name": "Siren's Landing"
     },
     "1204": {
-        "map_name": "Palace Temple",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 2,
         "type": "Instance",
-        "floors": [2],
+        "floors": [
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Palace Temple"
     },
     "1205": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 15,
         "type": "Instance",
-        "floors": [15],
+        "floors": [
+            15
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-24576, -24576],
-            [24576, 24576]
+            [
+                -24576,
+                -24576
+            ],
+            [
+                24576,
+                24576
+            ]
         ],
         "continent_rect": [
-            [11204, 4414],
-            [13252, 6462]
-        ]
+            [
+                11204,
+                4414
+            ],
+            [
+                13252,
+                6462
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "1206": {
-        "map_name": "Mistlock Sanctuary",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -31,
         "type": "Public",
-        "floors": [-31],
+        "floors": [
+            -31
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [13600, 17136],
-            [15648, 19184]
-        ]
+            [
+                46368,
+                33520
+            ],
+            [
+                48416,
+                35568
+            ]
+        ],
+        "map_name": "Mistlock Sanctuary"
     },
     "1207": {
-        "map_name": "The Last Chance",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 3,
         "region_name": "Ruins of Orr",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -15360],
-            [39936, 15360]
+            [
+                -39936,
+                -15360
+            ],
+            [
+                39936,
+                15360
+            ]
         ],
         "continent_rect": [
-            [14234, 25216],
-            [17562, 26496]
-        ]
+            [
+                47002,
+                41600
+            ],
+            [
+                50330,
+                42880
+            ]
+        ],
+        "map_name": "The Last Chance"
     },
     "1208": {
-        "map_name": "Shining Blade Headquarters",
         "min_level": 0,
         "max_level": 80,
         "default_floor": -33,
         "type": "Instance",
-        "floors": [-33],
+        "floors": [
+            -33
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [11240, 10056],
-            [12008, 10824]
-        ]
+            [
+                44008,
+                26440
+            ],
+            [
+                44776,
+                27208
+            ]
+        ],
+        "map_name": "Shining Blade Headquarters"
     },
     "1209": {
-        "map_name": "The Sacrifice",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-61440, -30720],
-            [61440, 30720]
+            [
+                -61440,
+                -30720
+            ],
+            [
+                61440,
+                30720
+            ]
         ],
         "continent_rect": [
-            [24488, 23360],
-            [29608, 25920]
-        ]
+            [
+                57256,
+                39744
+            ],
+            [
+                62376,
+                42304
+            ]
+        ],
+        "map_name": "The Sacrifice"
     },
     "1210": {
-        "map_name": "Crystal Oasis",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-61440, -30720],
-            [61440, 30720]
+            [
+                -61440,
+                -30720
+            ],
+            [
+                61440,
+                30720
+            ]
         ],
         "continent_rect": [
-            [24488, 25920],
-            [29608, 28480]
-        ]
+            [
+                57256,
+                42304
+            ],
+            [
+                62376,
+                44864
+            ]
+        ],
+        "map_name": "Crystal Oasis"
     },
     "1211": {
-        "map_name": "Desert Highlands",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-61440, -30720],
-            [61440, 30720]
+            [
+                -61440,
+                -30720
+            ],
+            [
+                61440,
+                30720
+            ]
         ],
         "continent_rect": [
-            [24488, 23360],
-            [29608, 25920]
-        ]
+            [
+                57256,
+                39744
+            ],
+            [
+                62376,
+                42304
+            ]
+        ],
+        "map_name": "Desert Highlands"
     },
     "1212": {
-        "map_name": "Office of the Chief Councilor",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-61440, -30720],
-            [61440, 30720]
+            [
+                -61440,
+                -30720
+            ],
+            [
+                61440,
+                30720
+            ]
         ],
         "continent_rect": [
-            [24488, 25920],
-            [29608, 28480]
-        ]
+            [
+                57256,
+                42304
+            ],
+            [
+                62376,
+                44864
+            ]
+        ],
+        "map_name": "Office of the Chief Councilor"
     },
     "1214": {
-        "map_name": "Windswept Haven",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [31248, 34688],
-            [32528, 35968]
-        ]
+            [
+                64016,
+                51072
+            ],
+            [
+                65296,
+                52352
+            ]
+        ],
+        "map_name": "Windswept Haven"
     },
     "1215": {
-        "map_name": "Windswept Haven",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [31248, 34688],
-            [32528, 35968]
-        ]
+            [
+                64016,
+                51072
+            ],
+            [
+                65296,
+                52352
+            ]
+        ],
+        "map_name": "Windswept Haven"
     },
     "1217": {
-        "map_name": "Sparking the Flame",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-61440, -30720],
-            [61440, 30720]
+            [
+                -61440,
+                -30720
+            ],
+            [
+                61440,
+                30720
+            ]
         ],
         "continent_rect": [
-            [24488, 25920],
-            [29608, 28480]
-        ]
+            [
+                57256,
+                42304
+            ],
+            [
+                62376,
+                44864
+            ]
+        ],
+        "map_name": "Sparking the Flame"
     },
     "1219": {
-        "map_name": "Enemy of My Enemy: The Beastmarshal",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "map_rect": [
-            [-58368, -36864],
-            [58368, 39936]
+            [
+                -58368,
+                -36864
+            ],
+            [
+                58368,
+                39936
+            ]
         ],
         "continent_rect": [
-            [30848, 35968],
-            [35712, 39168]
-        ]
+            [
+                63616,
+                52352
+            ],
+            [
+                68480,
+                55552
+            ]
+        ],
+        "map_name": "Enemy of My Enemy: The Beastmarshal"
     },
     "1220": {
-        "map_name": "Sparking the Flame (Prologue)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Sparking the Flame (Prologue)"
     },
     "1221": {
-        "map_name": "The Way Forward",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -30,
         "type": "Instance",
-        "floors": [-30],
+        "floors": [
+            -30
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-33792, -27648],
-            [36864, 30720]
+            [
+                -33792,
+                -27648
+            ],
+            [
+                36864,
+                30720
+            ]
         ],
         "continent_rect": [
-            [25200, 28100],
-            [28144, 30532]
-        ]
+            [
+                57968,
+                44484
+            ],
+            [
+                60912,
+                46916
+            ]
+        ],
+        "map_name": "The Way Forward"
     },
     "1222": {
-        "map_name": "Claiming Windswept Haven",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 49,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [31248, 34688],
-            [32528, 35968]
-        ]
+            [
+                64016,
+                51072
+            ],
+            [
+                65296,
+                52352
+            ]
+        ],
+        "map_name": "Claiming Windswept Haven"
     },
     "1223": {
-        "map_name": "Small Victory (Epilogue)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-61440, -30720],
-            [61440, 30720]
+            [
+                -61440,
+                -30720
+            ],
+            [
+                61440,
+                30720
+            ]
         ],
         "continent_rect": [
-            [24488, 25920],
-            [29608, 28480]
-        ]
+            [
+                57256,
+                42304
+            ],
+            [
+                62376,
+                44864
+            ]
+        ],
+        "map_name": "Small Victory (Epilogue)"
     },
     "1224": {
-        "map_name": "Windswept Haven",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [31248, 34688],
-            [32528, 35968]
-        ]
+            [
+                64016,
+                51072
+            ],
+            [
+                65296,
+                52352
+            ]
+        ],
+        "map_name": "Windswept Haven"
     },
     "1226": {
-        "map_name": "The Desolation",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -61440],
-            [43008, 61440]
+            [
+                -43008,
+                -61440
+            ],
+            [
+                43008,
+                61440
+            ]
         ],
         "continent_rect": [
-            [25472, 31808],
-            [29056, 36928]
-        ]
+            [
+                58240,
+                48192
+            ],
+            [
+                61824,
+                53312
+            ]
+        ],
+        "map_name": "The Desolation"
     },
     "1227": {
-        "map_name": "Hallowed Ground: Tomb of Primeval Kings",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-61440, -30720],
-            [61440, 30720]
+            [
+                -61440,
+                -30720
+            ],
+            [
+                61440,
+                30720
+            ]
         ],
         "continent_rect": [
-            [24488, 23360],
-            [29608, 25920]
-        ]
+            [
+                57256,
+                39744
+            ],
+            [
+                62376,
+                42304
+            ]
+        ],
+        "map_name": "Hallowed Ground: Tomb of Primeval Kings"
     },
     "1228": {
-        "map_name": "Elon Riverlands",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -39936],
-            [43008, 43008]
+            [
+                -43008,
+                -39936
+            ],
+            [
+                43008,
+                43008
+            ]
         ],
         "continent_rect": [
-            [25472, 28352],
-            [29056, 31808]
-        ]
+            [
+                58240,
+                44736
+            ],
+            [
+                61824,
+                48192
+            ]
+        ],
+        "map_name": "Elon Riverlands"
     },
     "1230": {
-        "map_name": "Facing the Truth: The Sanctum",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -35,
         "type": "Instance",
-        "floors": [-36, -35],
+        "floors": [
+            -36,
+            -35
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -30720],
-            [46080, 30720]
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [28000, 21000],
-            [31840, 23560]
-        ]
+            [
+                60768,
+                37384
+            ],
+            [
+                64608,
+                39944
+            ]
+        ],
+        "map_name": "Facing the Truth: The Sanctum"
     },
     "1231": {
-        "map_name": "Claiming Windswept Haven",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 49,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [31248, 34688],
-            [32528, 35968]
-        ]
+            [
+                64016,
+                51072
+            ],
+            [
+                65296,
+                52352
+            ]
+        ],
+        "map_name": "Claiming Windswept Haven"
     },
     "1232": {
-        "map_name": "Windswept Haven",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [31248, 34688],
-            [32528, 35968]
-        ]
+            [
+                64016,
+                51072
+            ],
+            [
+                65296,
+                52352
+            ]
+        ],
+        "map_name": "Windswept Haven"
     },
     "1234": {
-        "map_name": "To Kill a God",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-58368, -36864],
-            [58368, 39936]
+            [
+                -58368,
+                -36864
+            ],
+            [
+                58368,
+                39936
+            ]
         ],
         "continent_rect": [
-            [30848, 35968],
-            [35712, 39168]
-        ]
+            [
+                63616,
+                52352
+            ],
+            [
+                68480,
+                55552
+            ]
+        ],
+        "map_name": "To Kill a God"
     },
     "1236": {
-        "map_name": "Claiming Windswept Haven",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 49,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [31248, 34688],
-            [32528, 35968]
-        ]
+            [
+                64016,
+                51072
+            ],
+            [
+                65296,
+                52352
+            ]
+        ],
+        "map_name": "Claiming Windswept Haven"
     },
     "1240": {
-        "map_name": "Blazing a Trail",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-61440, -30720],
-            [61440, 30720]
+            [
+                -61440,
+                -30720
+            ],
+            [
+                61440,
+                30720
+            ]
         ],
         "continent_rect": [
-            [24488, 25920],
-            [29608, 28480]
-        ]
+            [
+                57256,
+                42304
+            ],
+            [
+                62376,
+                44864
+            ]
+        ],
+        "map_name": "Blazing a Trail"
     },
     "1241": {
-        "map_name": "Night of Fires",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-61440, -30720],
-            [61440, 30720]
+            [
+                -61440,
+                -30720
+            ],
+            [
+                61440,
+                30720
+            ]
         ],
         "continent_rect": [
-            [24488, 25920],
-            [29608, 28480]
-        ]
+            [
+                57256,
+                42304
+            ],
+            [
+                62376,
+                44864
+            ]
+        ],
+        "map_name": "Night of Fires"
     },
     "1242": {
-        "map_name": "Zalambur's Office",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-61440, -30720],
-            [61440, 30720]
+            [
+                -61440,
+                -30720
+            ],
+            [
+                61440,
+                30720
+            ]
         ],
         "continent_rect": [
-            [24488, 25920],
-            [29608, 28480]
-        ]
+            [
+                57256,
+                42304
+            ],
+            [
+                62376,
+                44864
+            ]
+        ],
+        "map_name": "Zalambur's Office"
     },
     "1243": {
-        "map_name": "Windswept Haven",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [31248, 34688],
-            [32528, 35968]
-        ]
+            [
+                64016,
+                51072
+            ],
+            [
+                65296,
+                52352
+            ]
+        ],
+        "map_name": "Windswept Haven"
     },
     "1244": {
-        "map_name": "Claiming Windswept Haven",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 49,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [31248, 34688],
-            [32528, 35968]
-        ]
+            [
+                64016,
+                51072
+            ],
+            [
+                65296,
+                52352
+            ]
+        ],
+        "map_name": "Claiming Windswept Haven"
     },
     "1245": {
-        "map_name": "The Departing",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 41, 2, 0, 3, 49],
+        "floors": [
+            1,
+            41,
+            2,
+            0,
+            3,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-33792, -27648],
-            [36864, 30720]
+            [
+                -33792,
+                -27648
+            ],
+            [
+                36864,
+                30720
+            ]
         ],
         "continent_rect": [
-            [24195, 29890],
-            [27139, 32322]
-        ]
+            [
+                56963,
+                46274
+            ],
+            [
+                59907,
+                48706
+            ]
+        ],
+        "map_name": "The Departing"
     },
     "1246": {
-        "map_name": "Captain Kiel's Office",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [30720, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                30720,
+                18432
+            ]
         ],
         "continent_rect": [
-            [15232, 14336],
-            [17664, 15872]
-        ]
+            [
+                48000,
+                30720
+            ],
+            [
+                50432,
+                32256
+            ]
+        ],
+        "map_name": "Captain Kiel's Office"
     },
     "1247": {
-        "map_name": "Enemy of My Enemy",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "map_rect": [
-            [-43008, -61440],
-            [43008, 61440]
+            [
+                -43008,
+                -61440
+            ],
+            [
+                43008,
+                61440
+            ]
         ],
         "continent_rect": [
-            [25472, 31808],
-            [29056, 36928]
-        ]
+            [
+                58240,
+                48192
+            ],
+            [
+                61824,
+                53312
+            ]
+        ],
+        "map_name": "Enemy of My Enemy"
     },
     "1248": {
-        "map_name": "Domain of Vabbi",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-58368, -36864],
-            [58368, 39936]
+            [
+                -58368,
+                -36864
+            ],
+            [
+                58368,
+                39936
+            ]
         ],
         "continent_rect": [
-            [30848, 35968],
-            [35712, 39168]
-        ]
+            [
+                63616,
+                52352
+            ],
+            [
+                68480,
+                55552
+            ]
+        ],
+        "map_name": "Domain of Vabbi"
     },
     "1250": {
-        "map_name": "Windswept Haven",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [31248, 34688],
-            [32528, 35968]
-        ]
+            [
+                64016,
+                51072
+            ],
+            [
+                65296,
+                52352
+            ]
+        ],
+        "map_name": "Windswept Haven"
     },
     "1252": {
-        "map_name": "Crystalline Memories",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [-29, 1, 2, 0, 3, 49],
+        "floors": [
+            -29,
+            1,
+            2,
+            0,
+            3,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-61440, -30720],
-            [61440, 30720]
+            [
+                -61440,
+                -30720
+            ],
+            [
+                61440,
+                30720
+            ]
         ],
         "continent_rect": [
-            [24488, 23360],
-            [29608, 25920]
-        ]
+            [
+                57256,
+                39744
+            ],
+            [
+                62376,
+                42304
+            ]
+        ],
+        "map_name": "Crystalline Memories"
     },
     "1253": {
-        "map_name": "Beast of War",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-58368, -36864],
-            [58368, 39936]
+            [
+                -58368,
+                -36864
+            ],
+            [
+                58368,
+                39936
+            ]
         ],
         "continent_rect": [
-            [30848, 35968],
-            [35712, 39168]
-        ]
+            [
+                63616,
+                52352
+            ],
+            [
+                68480,
+                55552
+            ]
+        ],
+        "map_name": "Beast of War"
     },
     "1255": {
-        "map_name": "Enemy of My Enemy: The Troopmarshal",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "map_rect": [
-            [-58368, -36864],
-            [58368, 39936]
+            [
+                -58368,
+                -36864
+            ],
+            [
+                58368,
+                39936
+            ]
         ],
         "continent_rect": [
-            [30848, 35968],
-            [35712, 39168]
-        ]
+            [
+                63616,
+                52352
+            ],
+            [
+                68480,
+                55552
+            ]
+        ],
+        "map_name": "Enemy of My Enemy: The Troopmarshal"
     },
     "1256": {
-        "map_name": "The Dark Library",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -36,
         "type": "Instance",
-        "floors": [-36],
+        "floors": [
+            -36
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -30720],
-            [46080, 30720]
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [28000, 21000],
-            [31840, 23560]
-        ]
+            [
+                60768,
+                37384
+            ],
+            [
+                64608,
+                39944
+            ]
+        ],
+        "map_name": "The Dark Library"
     },
     "1257": {
-        "map_name": "Spearmarshal's Lament",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-58368, -36864],
-            [58368, 39936]
+            [
+                -58368,
+                -36864
+            ],
+            [
+                58368,
+                39936
+            ]
         ],
         "continent_rect": [
-            [30848, 35968],
-            [35712, 39168]
-        ]
+            [
+                63616,
+                52352
+            ],
+            [
+                68480,
+                55552
+            ]
+        ],
+        "map_name": "Spearmarshal's Lament"
     },
     "1260": {
-        "map_name": "Eye of the Brandstorm",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -21504],
-            [30720, 21504]
+            [
+                -30720,
+                -21504
+            ],
+            [
+                30720,
+                21504
+            ]
         ],
         "continent_rect": [
-            [25000, 26685],
-            [27560, 28477]
-        ]
+            [
+                57768,
+                43069
+            ],
+            [
+                60328,
+                44861
+            ]
+        ],
+        "map_name": "Eye of the Brandstorm"
     },
     "1263": {
-        "map_name": "Domain of Istan",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -46080],
-            [46080, 46080]
+            [
+                -46080,
+                -46080
+            ],
+            [
+                46080,
+                46080
+            ]
         ],
         "continent_rect": [
-            [22550, 43532],
-            [26390, 47372]
-        ]
+            [
+                55318,
+                59916
+            ],
+            [
+                59158,
+                63756
+            ]
+        ],
+        "map_name": "Domain of Istan"
     },
     "1264": {
-        "map_name": "Hall of Chains",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -32,
         "type": "Instance",
-        "floors": [-32],
+        "floors": [
+            -32
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -12288],
-            [24576, 12288]
+            [
+                -21504,
+                -12288
+            ],
+            [
+                24576,
+                12288
+            ]
         ],
         "continent_rect": [
-            [19072, 15484],
-            [20992, 16508]
-        ]
+            [
+                51840,
+                31868
+            ],
+            [
+                53760,
+                32892
+            ]
+        ],
+        "map_name": "Hall of Chains"
     },
     "1265": {
-        "map_name": "The Hero of Istan",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49, 0],
+        "floors": [
+            1,
+            49,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -46080],
-            [46080, 46080]
+            [
+                -46080,
+                -46080
+            ],
+            [
+                46080,
+                46080
+            ]
         ],
         "continent_rect": [
-            [22550, 43532],
-            [26390, 47372]
-        ]
+            [
+                55318,
+                59916
+            ],
+            [
+                59158,
+                63756
+            ]
+        ],
+        "map_name": "The Hero of Istan"
     },
     "1266": {
-        "map_name": "Cave of the Sunspear Champion",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49, 0],
+        "floors": [
+            1,
+            49,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -46080],
-            [46080, 46080]
+            [
+                -46080,
+                -46080
+            ],
+            [
+                46080,
+                46080
+            ]
         ],
         "continent_rect": [
-            [22550, 43532],
-            [26390, 47372]
-        ]
+            [
+                55318,
+                59916
+            ],
+            [
+                59158,
+                63756
+            ]
+        ],
+        "map_name": "Cave of the Sunspear Champion"
     },
     "1267": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 12,
         "type": "Instance",
-        "floors": [12],
+        "floors": [
+            12
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [11716, 4346],
-            [13764, 6394]
-        ]
+            [
+                11716,
+                4346
+            ],
+            [
+                13764,
+                6394
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "1268": {
-        "map_name": "Fahranur, the First City",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 0],
+        "floors": [
+            1,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [19536, 45104],
-            [20816, 46384]
-        ]
+            [
+                52304,
+                61488
+            ],
+            [
+                53584,
+                62768
+            ]
+        ],
+        "map_name": "Fahranur, the First City"
     },
     "1270": {
-        "map_name": "Toypocalypse",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 17,
         "type": "Instance",
-        "floors": [17],
+        "floors": [
+            17
+        ],
         "region_id": 27,
         "region_name": "Wintersday Celebration",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [10240, 10356],
-            [11008, 11124]
-        ]
+            [
+                43008,
+                26740
+            ],
+            [
+                43776,
+                27508
+            ]
+        ],
+        "map_name": "Toypocalypse"
     },
     "1271": {
-        "map_name": "Sandswept Isles",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -52224],
-            [39936, 52224]
+            [
+                -36864,
+                -52224
+            ],
+            [
+                39936,
+                52224
+            ]
         ],
         "continent_rect": [
-            [19226, 39018],
-            [22426, 43370]
-        ]
+            [
+                51994,
+                55402
+            ],
+            [
+                55194,
+                59754
+            ]
+        ],
+        "map_name": "Sandswept Isles"
     },
     "1274": {
-        "map_name": "The Charge",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 50,
         "type": "Instance",
-        "floors": [50],
+        "floors": [
+            50
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -52224],
-            [39936, 52224]
+            [
+                -36864,
+                -52224
+            ],
+            [
+                39936,
+                52224
+            ]
         ],
         "continent_rect": [
-            [19226, 39018],
-            [22426, 43370]
-        ]
+            [
+                51994,
+                55402
+            ],
+            [
+                55194,
+                59754
+            ]
+        ],
+        "map_name": "The Charge"
     },
     "1275": {
-        "map_name": "Courtyard",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 32,
         "type": "Pvp",
-        "floors": [32],
+        "floors": [
+            32
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [2048, 7040],
-            [3072, 8064]
-        ]
+            [
+                2048,
+                7040
+            ],
+            [
+                3072,
+                8064
+            ]
+        ],
+        "map_name": "Courtyard"
     },
     "1276": {
-        "map_name": "The Test Subject",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -52224],
-            [39936, 52224]
+            [
+                -36864,
+                -52224
+            ],
+            [
+                39936,
+                52224
+            ]
         ],
         "continent_rect": [
-            [19226, 39018],
-            [22426, 43370]
-        ]
+            [
+                51994,
+                55402
+            ],
+            [
+                55194,
+                59754
+            ]
+        ],
+        "map_name": "The Test Subject"
     },
     "1277": {
-        "map_name": "The Charge",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 50,
         "type": "Instance",
-        "floors": [50],
+        "floors": [
+            50
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -52224],
-            [39936, 52224]
+            [
+                -36864,
+                -52224
+            ],
+            [
+                39936,
+                52224
+            ]
         ],
         "continent_rect": [
-            [19226, 39018],
-            [22426, 43370]
-        ]
+            [
+                51994,
+                55402
+            ],
+            [
+                55194,
+                59754
+            ]
+        ],
+        "map_name": "The Charge"
     },
     "1278": {
-        "map_name": "???",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 48],
+        "floors": [
+            1,
+            48
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -36864],
-            [36864, 36864]
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
         ],
         "continent_rect": [
-            [20736, 8192],
-            [23808, 11264]
-        ]
+            [
+                53504,
+                24576
+            ],
+            [
+                56576,
+                27648
+            ]
+        ],
+        "map_name": "???"
     },
     "1279": {
-        "map_name": "ERROR: SIGNAL LOST",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -37,
         "type": "Instance",
-        "floors": [-37],
+        "floors": [
+            -37
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -24576],
-            [24576, 24576]
+            [
+                -24576,
+                -24576
+            ],
+            [
+                24576,
+                24576
+            ]
         ],
         "continent_rect": [
-            [11204, 4414],
-            [13252, 6462]
-        ]
+            [
+                43972,
+                20798
+            ],
+            [
+                46020,
+                22846
+            ]
+        ],
+        "map_name": "ERROR: SIGNAL LOST"
     },
     "1281": {
-        "map_name": "A Kindness Repaid",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -52224],
-            [39936, 52224]
+            [
+                -36864,
+                -52224
+            ],
+            [
+                39936,
+                52224
+            ]
         ],
         "continent_rect": [
-            [19226, 39018],
-            [22426, 43370]
-        ]
+            [
+                51994,
+                55402
+            ],
+            [
+                55194,
+                59754
+            ]
+        ],
+        "map_name": "A Kindness Repaid"
     },
     "1282": {
-        "map_name": "Tracking the Scientist",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -21504],
-            [15360, 24576]
+            [
+                -15360,
+                -21504
+            ],
+            [
+                15360,
+                24576
+            ]
         ],
         "continent_rect": [
-            [26918, 23755],
-            [28198, 25675]
-        ]
+            [
+                59686,
+                40139
+            ],
+            [
+                60966,
+                42059
+            ]
+        ],
+        "map_name": "Tracking the Scientist"
     },
     "1283": {
-        "map_name": "???",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 5,
         "region_name": "Tarnished Coast",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-46080, -27648],
-            [46080, 30720]
+            [
+                -46080,
+                -27648
+            ],
+            [
+                46080,
+                30720
+            ]
         ],
         "continent_rect": [
-            [17792, 21376],
-            [21632, 23808]
-        ]
+            [
+                50560,
+                37760
+            ],
+            [
+                54400,
+                40192
+            ]
+        ],
+        "map_name": "???"
     },
     "1285": {
-        "map_name": "???",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "???"
     },
     "1288": {
-        "map_name": "Domain of Kourna",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -55296],
-            [49152, 58368]
+            [
+                -49152,
+                -55296
+            ],
+            [
+                49152,
+                58368
+            ]
         ],
         "continent_rect": [
-            [30856, 43188],
-            [34952, 47924]
-        ]
+            [
+                63624,
+                59572
+            ],
+            [
+                67720,
+                64308
+            ]
+        ],
+        "map_name": "Domain of Kourna"
     },
     "1289": {
-        "map_name": "Seized",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [24488, 25920],
-            [27048, 28480]
-        ]
+            [
+                57256,
+                42304
+            ],
+            [
+                59816,
+                44864
+            ]
+        ],
+        "map_name": "Seized"
     },
     "1290": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 31,
         "type": "Instance",
-        "floors": [31],
+        "floors": [
+            31
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-21504, -21504],
-            [21504, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                21504,
+                21504
+            ]
         ],
         "continent_rect": [
-            [11804, 4414],
-            [13596, 6206]
-        ]
+            [
+                11804,
+                4414
+            ],
+            [
+                13596,
+                6206
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "1291": {
-        "map_name": "Forearmed Is Forewarned",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 53,
         "type": "Instance",
-        "floors": [53],
+        "floors": [
+            53
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -55296],
-            [49152, 58368]
+            [
+                -49152,
+                -55296
+            ],
+            [
+                49152,
+                58368
+            ]
         ],
         "continent_rect": [
-            [30856, 43188],
-            [34952, 47924]
-        ]
+            [
+                63624,
+                59572
+            ],
+            [
+                67720,
+                64308
+            ]
+        ],
+        "map_name": "Forearmed Is Forewarned"
     },
     "1292": {
-        "map_name": "Be My Guest",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -55296],
-            [49152, 58368]
+            [
+                -49152,
+                -55296
+            ],
+            [
+                49152,
+                58368
+            ]
         ],
         "continent_rect": [
-            [30856, 43188],
-            [34952, 47924]
-        ]
+            [
+                63624,
+                59572
+            ],
+            [
+                67720,
+                64308
+            ]
+        ],
+        "map_name": "Be My Guest"
     },
     "1294": {
-        "map_name": "Sun's Refuge",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -36864],
-            [49152, 39936]
+            [
+                -49152,
+                -36864
+            ],
+            [
+                49152,
+                39936
+            ]
         ],
         "continent_rect": [
-            [30548, 39992],
-            [34644, 43192]
-        ]
+            [
+                63316,
+                56376
+            ],
+            [
+                67412,
+                59576
+            ]
+        ],
+        "map_name": "Sun's Refuge"
     },
     "1295": {
-        "map_name": "Legacy",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -36864],
-            [49152, 39936]
+            [
+                -49152,
+                -36864
+            ],
+            [
+                49152,
+                39936
+            ]
         ],
         "continent_rect": [
-            [30548, 39992],
-            [34644, 43192]
-        ]
+            [
+                63316,
+                56376
+            ],
+            [
+                67412,
+                59576
+            ]
+        ],
+        "map_name": "Legacy"
     },
     "1296": {
-        "map_name": "Storm Tracking",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 51,
         "type": "Instance",
-        "floors": [51],
+        "floors": [
+            51
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-36864, -52224],
-            [39936, 55296]
+            [
+                -36864,
+                -52224
+            ],
+            [
+                39936,
+                55296
+            ]
         ],
         "continent_rect": [
-            [28000, 21000],
-            [31200, 25480]
-        ]
+            [
+                60768,
+                37384
+            ],
+            [
+                63968,
+                41864
+            ]
+        ],
+        "map_name": "Storm Tracking"
     },
     "1297": {
-        "map_name": "A Shattered Nation",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -36864],
-            [49152, 39936]
+            [
+                -49152,
+                -36864
+            ],
+            [
+                49152,
+                39936
+            ]
         ],
         "continent_rect": [
-            [30548, 39992],
-            [34644, 43192]
-        ]
+            [
+                63316,
+                56376
+            ],
+            [
+                67412,
+                59576
+            ]
+        ],
+        "map_name": "A Shattered Nation"
     },
     "1299": {
-        "map_name": "Storm Tracking",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -36864],
-            [49152, 39936]
+            [
+                -49152,
+                -36864
+            ],
+            [
+                49152,
+                39936
+            ]
         ],
         "continent_rect": [
-            [30548, 39992],
-            [34644, 43192]
-        ]
+            [
+                63316,
+                56376
+            ],
+            [
+                67412,
+                59576
+            ]
+        ],
+        "map_name": "Storm Tracking"
     },
     "1300": {
-        "map_name": "From the Ashes—The Deadeye",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -36864],
-            [49152, 39936]
+            [
+                -49152,
+                -36864
+            ],
+            [
+                49152,
+                39936
+            ]
         ],
         "continent_rect": [
-            [30548, 39992],
-            [34644, 43192]
-        ]
+            [
+                63316,
+                56376
+            ],
+            [
+                67412,
+                59576
+            ]
+        ],
+        "map_name": "From the Ashes\u2014The Deadeye"
     },
     "1301": {
-        "map_name": "Jahai Bluffs",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -36864],
-            [49152, 39936]
+            [
+                -49152,
+                -36864
+            ],
+            [
+                49152,
+                39936
+            ]
         ],
         "continent_rect": [
-            [30548, 39992],
-            [34644, 43192]
-        ]
+            [
+                63316,
+                56376
+            ],
+            [
+                67412,
+                59576
+            ]
+        ],
+        "map_name": "Jahai Bluffs"
     },
     "1302": {
-        "map_name": "Storm Tracking",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -36864],
-            [49152, 39936]
+            [
+                -49152,
+                -36864
+            ],
+            [
+                49152,
+                39936
+            ]
         ],
         "continent_rect": [
-            [30548, 39992],
-            [34644, 43192]
-        ]
+            [
+                63316,
+                56376
+            ],
+            [
+                67412,
+                59576
+            ]
+        ],
+        "map_name": "Storm Tracking"
     },
     "1303": {
-        "map_name": "Mythwright Gambit",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -38,
         "type": "Instance",
-        "floors": [-38],
+        "floors": [
+            -38
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 24576]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                24576
+            ]
         ],
         "continent_rect": [
-            [13440, 14336],
-            [15360, 16256]
-        ]
+            [
+                46208,
+                30720
+            ],
+            [
+                48128,
+                32640
+            ]
+        ],
+        "map_name": "Mythwright Gambit"
     },
     "1304": {
-        "map_name": "Mad King's Raceway",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -34,
         "type": "Public",
-        "floors": [-34],
+        "floors": [
+            -34
+        ],
         "region_id": 25,
         "region_name": "Mad King's Realm",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [2944, 13440],
-            [3712, 14208]
-        ]
+            [
+                2944,
+                13440
+            ],
+            [
+                3712,
+                14208
+            ]
+        ],
+        "map_name": "Mad King's Raceway"
     },
     "1305": {
-        "map_name": "Djinn's Dominion",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 44,
         "type": "Pvp",
-        "floors": [1, 44],
+        "floors": [
+            1,
+            44
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-24576, -12288],
-            [24576, 12288]
+            [
+                -24576,
+                -12288
+            ],
+            [
+                24576,
+                12288
+            ]
         ],
         "continent_rect": [
-            [11812, 5488],
-            [13860, 6512]
-        ]
+            [
+                11812,
+                5488
+            ],
+            [
+                13860,
+                6512
+            ]
+        ],
+        "map_name": "Djinn's Dominion"
     },
     "1306": {
-        "map_name": "Secret Lair of the Snowmen (Squad)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -39,
         "type": "Instance",
-        "floors": [-39],
+        "floors": [
+            -39
+        ],
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [19500, 8000],
-            [20780, 9280]
-        ]
+            [
+                52268,
+                24384
+            ],
+            [
+                53548,
+                25664
+            ]
+        ],
+        "map_name": "Secret Lair of the Snowmen (Squad)"
     },
     "1308": {
-        "map_name": "Scion & Champion",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -56,
         "type": "Instance",
-        "floors": [-55, -56],
+        "floors": [
+            -55,
+            -56
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -24576],
-            [15360, 27648]
+            [
+                -15360,
+                -24576
+            ],
+            [
+                15360,
+                27648
+            ]
         ],
         "continent_rect": [
-            [19984, 15574],
-            [21264, 17750]
-        ]
+            [
+                52752,
+                31958
+            ],
+            [
+                54032,
+                34134
+            ]
+        ],
+        "map_name": "Scion & Champion"
     },
     "1309": {
-        "map_name": "Fractals of the Mists",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 11,
         "type": "Instance",
-        "floors": [11],
+        "floors": [
+            11
+        ],
         "region_id": 26,
         "region_name": "Fractals of the Mists",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 24576]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                24576
+            ]
         ],
         "continent_rect": [
-            [11804, 4414],
-            [13724, 6334]
-        ]
+            [
+                11804,
+                4414
+            ],
+            [
+                13724,
+                6334
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
     },
     "1310": {
-        "map_name": "Thunderhead Peaks",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -43008],
-            [39936, 46080]
+            [
+                -39936,
+                -43008
+            ],
+            [
+                39936,
+                46080
+            ]
         ],
         "continent_rect": [
-            [23052, 18552],
-            [26380, 22264]
-        ]
+            [
+                55820,
+                34936
+            ],
+            [
+                59148,
+                38648
+            ]
+        ],
+        "map_name": "Thunderhead Peaks"
     },
     "1313": {
-        "map_name": "The Crystal Dragon",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -53,
         "type": "Instance",
-        "floors": [-53],
+        "floors": [
+            -53
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                18432
+            ]
         ],
         "continent_rect": [
-            [22650, 18816],
-            [24954, 20352]
-        ]
+            [
+                55418,
+                35200
+            ],
+            [
+                57722,
+                36736
+            ]
+        ],
+        "map_name": "The Crystal Dragon"
     },
     "1314": {
-        "map_name": "The Crystal Blooms",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -53,
         "type": "Instance",
-        "floors": [-53],
+        "floors": [
+            -53
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                18432
+            ]
         ],
         "continent_rect": [
-            [22650, 18816],
-            [24954, 20352]
-        ]
+            [
+                55418,
+                35200
+            ],
+            [
+                57722,
+                36736
+            ]
+        ],
+        "map_name": "The Crystal Blooms"
     },
     "1315": {
-        "map_name": "Armistice Bastion",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 3,
         "type": "Unknown",
-        "floors": [3],
+        "floors": [
+            3
+        ],
         "region_id": 7,
         "region_name": "World vs. World",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-21504, -21504],
-            [21504, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                21504,
+                21504
+            ]
         ],
         "continent_rect": [
-            [13798, 8646],
-            [15590, 10438]
-        ]
+            [
+                13798,
+                8646
+            ],
+            [
+                15590,
+                10438
+            ]
+        ],
+        "map_name": "Armistice Bastion"
     },
     "1316": {
-        "map_name": "Mists Rift",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -35,
         "type": "Public",
-        "floors": [-35],
+        "floors": [
+            -35
+        ],
         "region_id": 25,
         "region_name": "Mad King's Realm",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-6144, -6144],
-            [9216, 9216]
+            [
+                -6144,
+                -6144
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [2944, 13440],
-            [3584, 14080]
-        ]
+            [
+                2944,
+                13440
+            ],
+            [
+                3584,
+                14080
+            ]
+        ],
+        "map_name": "Mists Rift"
     },
     "1317": {
-        "map_name": "Dragonfall",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [43008, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [11200, 32000],
-            [14656, 34816]
-        ]
+            [
+                43968,
+                48384
+            ],
+            [
+                47424,
+                51200
+            ]
+        ],
+        "map_name": "Dragonfall"
     },
     "1318": {
-        "map_name": "Dragonfall",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 49],
+        "floors": [
+            1,
+            49
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-39936, -33792],
-            [43008, 33792]
+            [
+                -39936,
+                -33792
+            ],
+            [
+                43008,
+                33792
+            ]
         ],
         "continent_rect": [
-            [11200, 32000],
-            [14656, 34816]
-        ]
+            [
+                43968,
+                48384
+            ],
+            [
+                47424,
+                51200
+            ]
+        ],
+        "map_name": "Dragonfall"
     },
     "1319": {
-        "map_name": "Descent",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -57,
         "type": "Instance",
-        "floors": [-57],
+        "floors": [
+            -57
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 24576]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                24576
+            ]
         ],
         "continent_rect": [
-            [12300, 34700],
-            [14220, 36620]
-        ]
+            [
+                45068,
+                51084
+            ],
+            [
+                46988,
+                53004
+            ]
+        ],
+        "map_name": "Descent"
     },
     "1320": {
-        "map_name": "The End",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -53,
         "type": "Instance",
-        "floors": [-53],
+        "floors": [
+            -53
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 18432]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                18432
+            ]
         ],
         "continent_rect": [
-            [22650, 18816],
-            [24954, 20352]
-        ]
+            [
+                55418,
+                35200
+            ],
+            [
+                57722,
+                36736
+            ]
+        ],
+        "map_name": "The End"
     },
     "1321": {
-        "map_name": "Dragonflight",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -52,
         "type": "Instance",
-        "floors": [-52],
+        "floors": [
+            -52
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-24576, -24576],
-            [24576, 24576]
+            [
+                -24576,
+                -24576
+            ],
+            [
+                24576,
+                24576
+            ]
         ],
         "continent_rect": [
-            [27000, 21000],
-            [29048, 23048]
-        ]
+            [
+                27000,
+                21000
+            ],
+            [
+                29048,
+                23048
+            ]
+        ],
+        "map_name": "Dragonflight"
     },
     "1322": {
-        "map_name": "Epilogue",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 54,
         "type": "Instance",
-        "floors": [54],
+        "floors": [
+            54
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-9216, -9216],
-            [9216, 9216]
+            [
+                -9216,
+                -9216
+            ],
+            [
+                9216,
+                9216
+            ]
         ],
         "continent_rect": [
-            [12870, 30751],
-            [13638, 31519]
-        ]
+            [
+                45638,
+                47135
+            ],
+            [
+                46406,
+                47903
+            ]
+        ],
+        "map_name": "Epilogue"
     },
     "1323": {
-        "map_name": "The Key of Ahdashim",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 49, 2, 0],
+        "floors": [
+            1,
+            3,
+            49,
+            2,
+            0
+        ],
         "region_id": 12,
         "region_name": "Crystal Desert",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 24576]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                24576
+            ]
         ],
         "continent_rect": [
-            [33530, 34050],
-            [35450, 35970]
-        ]
+            [
+                66298,
+                50434
+            ],
+            [
+                68218,
+                52354
+            ]
+        ],
+        "map_name": "The Key of Ahdashim"
     },
     "1326": {
-        "map_name": "Dragon Bash Arena",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Dragon Bash Arena"
     },
     "1327": {
-        "map_name": "Dragon Arena Survival",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-27648, -18432],
-            [27648, 21504]
+            [
+                -27648,
+                -18432
+            ],
+            [
+                27648,
+                21504
+            ]
         ],
         "continent_rect": [
-            [19456, 13312],
-            [21760, 14976]
-        ]
+            [
+                52224,
+                29696
+            ],
+            [
+                54528,
+                31360
+            ]
+        ],
+        "map_name": "Dragon Arena Survival"
     },
     "1328": {
-        "map_name": "Auric Span",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 41,
         "type": "Pvp",
-        "floors": [1, 41],
+        "floors": [
+            1,
+            41
+        ],
         "region_id": 6,
         "region_name": "Player vs. Player",
         "continent_id": 2,
         "continent_name": "Mists",
         "map_rect": [
-            [-18432, -18432],
-            [18432, 18432]
+            [
+                -18432,
+                -18432
+            ],
+            [
+                18432,
+                18432
+            ]
         ],
         "continent_rect": [
-            [9104, 4834],
-            [10640, 6370]
-        ]
+            [
+                9104,
+                4834
+            ],
+            [
+                10640,
+                6370
+            ]
+        ],
+        "map_name": "Auric Span"
     },
     "1329": {
-        "map_name": "Coming Home",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -30720],
-            [39936, 30720]
+            [
+                -36864,
+                -30720
+            ],
+            [
+                39936,
+                30720
+            ]
         ],
         "continent_rect": [
-            [26624, 1120],
-            [29824, 3680]
-        ]
+            [
+                59392,
+                17504
+            ],
+            [
+                62592,
+                20064
+            ]
+        ],
+        "map_name": "Coming Home"
     },
     "1330": {
-        "map_name": "Grothmar Valley",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -30720],
-            [39936, 30720]
+            [
+                -36864,
+                -30720
+            ],
+            [
+                39936,
+                30720
+            ]
         ],
         "continent_rect": [
-            [26624, 1120],
-            [29824, 3680]
-        ]
+            [
+                59392,
+                17504
+            ],
+            [
+                62592,
+                20064
+            ]
+        ],
+        "map_name": "Grothmar Valley"
     },
     "1331": {
-        "map_name": "Strike Mission: Shiverpeaks Pass (Public)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -30720],
-            [39936, 30720]
+            [
+                -36864,
+                -30720
+            ],
+            [
+                39936,
+                30720
+            ]
         ],
         "continent_rect": [
-            [26624, 1120],
-            [29824, 3680]
-        ]
+            [
+                59392,
+                17504
+            ],
+            [
+                62592,
+                20064
+            ]
+        ],
+        "map_name": "Strike Mission: Shiverpeaks Pass (Public)"
     },
     "1332": {
-        "map_name": "Strike Mission: Shiverpeaks Pass (Squad)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -30720],
-            [39936, 30720]
+            [
+                -36864,
+                -30720
+            ],
+            [
+                39936,
+                30720
+            ]
         ],
         "continent_rect": [
-            [26624, 1120],
-            [29824, 3680]
-        ]
+            [
+                59392,
+                17504
+            ],
+            [
+                62592,
+                20064
+            ]
+        ],
+        "map_name": "Strike Mission: Shiverpeaks Pass (Squad)"
     },
     "1334": {
-        "map_name": "Deeper and Deeper",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -30720],
-            [39936, 30720]
+            [
+                -36864,
+                -30720
+            ],
+            [
+                39936,
+                30720
+            ]
         ],
         "continent_rect": [
-            [26624, 1120],
-            [29824, 3680]
-        ]
+            [
+                59392,
+                17504
+            ],
+            [
+                62592,
+                20064
+            ]
+        ],
+        "map_name": "Deeper and Deeper"
     },
     "1336": {
-        "map_name": "A Race to Arms",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -30720],
-            [39936, 30720]
+            [
+                -36864,
+                -30720
+            ],
+            [
+                39936,
+                30720
+            ]
         ],
         "continent_rect": [
-            [26624, 1120],
-            [29824, 3680]
-        ]
+            [
+                59392,
+                17504
+            ],
+            [
+                62592,
+                20064
+            ]
+        ],
+        "map_name": "A Race to Arms"
     },
     "1338": {
-        "map_name": "Bad Blood",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-36864, -30720],
-            [39936, 30720]
+            [
+                -36864,
+                -30720
+            ],
+            [
+                39936,
+                30720
+            ]
         ],
         "continent_rect": [
-            [26624, 1120],
-            [29824, 3680]
-        ]
+            [
+                59392,
+                17504
+            ],
+            [
+                62592,
+                20064
+            ]
+        ],
+        "map_name": "Bad Blood"
     },
     "1339": {
-        "map_name": "Weekly Strike Mission: Boneskinner (Squad)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 61,
         "type": "Instance",
-        "floors": [61],
+        "floors": [
+            61
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [23944, 1110],
-            [24961, 2127]
-        ]
+            [
+                56712,
+                17494
+            ],
+            [
+                57729,
+                18511
+            ]
+        ],
+        "map_name": "Weekly Strike Mission: Boneskinner (Squad)"
     },
     "1340": {
-        "map_name": "Weekly Strike Mission: Voice of the Fallen and Claw of the Fallen (Public)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 62,
         "type": "Public",
-        "floors": [62],
+        "floors": [
+            62
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [23944, 1110],
-            [24961, 2127]
-        ]
+            [
+                56712,
+                17494
+            ],
+            [
+                57729,
+                18511
+            ]
+        ],
+        "map_name": "Weekly Strike Mission: Voice of the Fallen and Claw of the Fallen (Public)"
     },
     "1341": {
-        "map_name": "Weekly Strike Mission: Fraenir of Jormag (Squad)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 60,
         "type": "Instance",
-        "floors": [60],
+        "floors": [
+            60
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [23944, 1110],
-            [24961, 2127]
-        ]
+            [
+                56712,
+                17494
+            ],
+            [
+                57729,
+                18511
+            ]
+        ],
+        "map_name": "Weekly Strike Mission: Fraenir of Jormag (Squad)"
     },
     "1342": {
-        "map_name": "The Invitation",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-52224, -24576],
-            [55296, 27648]
+            [
+                -52224,
+                -24576
+            ],
+            [
+                55296,
+                27648
+            ]
         ],
         "continent_rect": [
-            [22143, 588],
-            [26623, 2764]
-        ]
+            [
+                54911,
+                16972
+            ],
+            [
+                59391,
+                19148
+            ]
+        ],
+        "map_name": "The Invitation"
     },
     "1343": {
-        "map_name": "Bjora Marches",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-52224, -24576],
-            [55296, 27648]
+            [
+                -52224,
+                -24576
+            ],
+            [
+                55296,
+                27648
+            ]
         ],
         "continent_rect": [
-            [22143, 588],
-            [26623, 2764]
-        ]
+            [
+                54911,
+                16972
+            ],
+            [
+                59391,
+                19148
+            ]
+        ],
+        "map_name": "Bjora Marches"
     },
     "1344": {
-        "map_name": "Weekly Strike Mission: Fraenir of Jormag (Public)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 60,
         "type": "Public",
-        "floors": [60],
+        "floors": [
+            60
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [23944, 1110],
-            [24961, 2127]
-        ]
+            [
+                56712,
+                17494
+            ],
+            [
+                57729,
+                18511
+            ]
+        ],
+        "map_name": "Weekly Strike Mission: Fraenir of Jormag (Public)"
     },
     "1345": {
-        "map_name": "What's Left Behind",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-52224, -24576],
-            [55296, 27648]
+            [
+                -52224,
+                -24576
+            ],
+            [
+                55296,
+                27648
+            ]
         ],
         "continent_rect": [
-            [22143, 588],
-            [26623, 2764]
-        ]
+            [
+                54911,
+                16972
+            ],
+            [
+                59391,
+                19148
+            ]
+        ],
+        "map_name": "What's Left Behind"
     },
     "1346": {
-        "map_name": "Weekly Strike Mission: Voice of the Fallen and Claw of the Fallen (Squad)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 62,
         "type": "Instance",
-        "floors": [62],
+        "floors": [
+            62
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [23944, 1110],
-            [24961, 2127]
-        ]
+            [
+                56712,
+                17494
+            ],
+            [
+                57729,
+                18511
+            ]
+        ],
+        "map_name": "Weekly Strike Mission: Voice of the Fallen and Claw of the Fallen (Squad)"
     },
     "1349": {
-        "map_name": "Silence",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-52224, -24576],
-            [55296, 27648]
+            [
+                -52224,
+                -24576
+            ],
+            [
+                55296,
+                27648
+            ]
         ],
         "continent_rect": [
-            [22143, 588],
-            [26623, 2764]
-        ]
+            [
+                54911,
+                16972
+            ],
+            [
+                59391,
+                19148
+            ]
+        ],
+        "map_name": "Silence"
     },
     "1351": {
-        "map_name": "Weekly Strike Mission: Boneskinner (Public)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 61,
         "type": "Public",
-        "floors": [61],
+        "floors": [
+            61
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-12288, -12288],
-            [12288, 12288]
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
         ],
         "continent_rect": [
-            [23944, 1110],
-            [24961, 2127]
-        ]
+            [
+                56712,
+                17494
+            ],
+            [
+                57729,
+                18511
+            ]
+        ],
+        "map_name": "Weekly Strike Mission: Boneskinner (Public)"
     },
     "1352": {
-        "map_name": "Secret Lair of the Snowmen (Public)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -39,
         "type": "Public",
-        "floors": [-39],
+        "floors": [
+            -39
+        ],
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [19500, 8000],
-            [20780, 9280]
-        ]
+            [
+                52268,
+                24384
+            ],
+            [
+                53548,
+                25664
+            ]
+        ],
+        "map_name": "Secret Lair of the Snowmen (Public)"
     },
     "1353": {
-        "map_name": "Celestial Challenge",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 2,
         "type": "Public",
-        "floors": [2],
+        "floors": [
+            2
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -21504],
-            [24576, 21504]
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
         ],
         "continent_rect": [
-            [10240, 9856],
-            [12160, 11648]
-        ]
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "Celestial Challenge"
     },
     "1355": {
-        "map_name": "Voice in the Deep",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -40,
         "type": "Instance",
-        "floors": [-40],
+        "floors": [
+            -40
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-9216, -6144],
-            [9216, 6144]
+            [
+                -9216,
+                -6144
+            ],
+            [
+                9216,
+                6144
+            ]
         ],
         "continent_rect": [
-            [22760, 2596],
-            [23528, 3108]
-        ]
+            [
+                55528,
+                18980
+            ],
+            [
+                56296,
+                19492
+            ]
+        ],
+        "map_name": "Voice in the Deep"
     },
     "1356": {
-        "map_name": "Chasing Ghosts",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-52224, -24576],
-            [55296, 27648]
+            [
+                -52224,
+                -24576
+            ],
+            [
+                55296,
+                27648
+            ]
         ],
         "continent_rect": [
-            [22143, 588],
-            [26623, 2764]
-        ]
+            [
+                54911,
+                16972
+            ],
+            [
+                59391,
+                19148
+            ]
+        ],
+        "map_name": "Chasing Ghosts"
     },
     "1357": {
-        "map_name": "Strike Mission: Whisper of Jormag (Public)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -41,
         "type": "Public",
-        "floors": [-41],
+        "floors": [
+            -41
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-6144, -6144],
-            [6144, 6144]
+            [
+                -6144,
+                -6144
+            ],
+            [
+                6144,
+                6144
+            ]
         ],
         "continent_rect": [
-            [22760, 2596],
-            [23272, 3108]
-        ]
+            [
+                55528,
+                18980
+            ],
+            [
+                56040,
+                19492
+            ]
+        ],
+        "map_name": "Strike Mission: Whisper of Jormag (Public)"
     },
     "1358": {
-        "map_name": "Eye of the North",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [24576, 4864],
-            [25856, 6144]
-        ]
+            [
+                57344,
+                21248
+            ],
+            [
+                58624,
+                22528
+            ]
+        ],
+        "map_name": "Eye of the North"
     },
     "1359": {
-        "map_name": "Strike Mission: Whisper of Jormag (Squad)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -41,
         "type": "Instance",
-        "floors": [-41],
+        "floors": [
+            -41
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-6144, -6144],
-            [6144, 6144]
+            [
+                -6144,
+                -6144
+            ],
+            [
+                6144,
+                6144
+            ]
         ],
         "continent_rect": [
-            [22760, 2596],
-            [23272, 3108]
-        ]
+            [
+                55528,
+                18980
+            ],
+            [
+                56040,
+                19492
+            ]
+        ],
+        "map_name": "Strike Mission: Whisper of Jormag (Squad)"
     },
     "1361": {
-        "map_name": "The Nightmare Incarnate",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 45,
         "type": "Instance",
-        "floors": [45],
+        "floors": [
+            45
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-49152, -24576],
-            [49152, 24576]
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
         ],
         "continent_rect": [
-            [8576, 13952],
-            [12672, 16000]
-        ]
+            [
+                41344,
+                30336
+            ],
+            [
+                45440,
+                32384
+            ]
+        ],
+        "map_name": "The Nightmare Incarnate"
     },
     "1362": {
-        "map_name": "Forging Steel (Public)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 58,
         "type": "Public",
-        "floors": [58],
+        "floors": [
+            58
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [11432, 3640],
-            [12968, 5688]
-        ]
+            [
+                11432,
+                3640
+            ],
+            [
+                12968,
+                5688
+            ]
+        ],
+        "map_name": "Forging Steel (Public)"
     },
     "1363": {
-        "map_name": "North Nolan Hatchery",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 2,
         "region_name": "Ascalon",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-43008, -27648],
-            [43008, 27648]
+            [
+                -43008,
+                -27648
+            ],
+            [
+                43008,
+                27648
+            ]
         ],
         "continent_rect": [
-            [23552, 11264],
-            [27136, 13568]
-        ]
+            [
+                56320,
+                27648
+            ],
+            [
+                59904,
+                29952
+            ]
+        ],
+        "map_name": "North Nolan Hatchery"
     },
     "1364": {
-        "map_name": "Cragstead",
         "min_level": 0,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1],
+        "floors": [
+            1
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -30720],
-            [30720, 30720]
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
         ],
         "continent_rect": [
-            [22528, 9984],
-            [25088, 12544]
-        ]
+            [
+                55296,
+                26368
+            ],
+            [
+                57856,
+                28928
+            ]
+        ],
+        "map_name": "Cragstead"
     },
     "1366": {
-        "map_name": "Darkrime Delves",
         "min_level": 80,
         "max_level": 80,
         "default_floor": -42,
         "type": "Instance",
-        "floors": [-42],
+        "floors": [
+            -42
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-21504, -9216],
-            [24576, 12288]
+            [
+                -21504,
+                -9216
+            ],
+            [
+                24576,
+                12288
+            ]
         ],
         "continent_rect": [
-            [18500, 800],
-            [20420, 1696]
-        ]
+            [
+                51268,
+                17184
+            ],
+            [
+                53188,
+                18080
+            ]
+        ],
+        "map_name": "Darkrime Delves"
     },
     "1368": {
-        "map_name": "Forging Steel (Squad)",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 58,
         "type": "Instance",
-        "floors": [58],
+        "floors": [
+            58
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-18432, -24576],
-            [18432, 24576]
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                24576
+            ]
         ],
         "continent_rect": [
-            [11432, 3640],
-            [12968, 5688]
-        ]
+            [
+                11432,
+                3640
+            ],
+            [
+                12968,
+                5688
+            ]
+        ],
+        "map_name": "Forging Steel (Squad)"
     },
     "1369": {
-        "map_name": "Canach's Lair",
         "min_level": 80,
         "max_level": 80,
         "default_floor": 1,
         "type": "Instance",
-        "floors": [1, 0],
+        "floors": [
+            1,
+            0
+        ],
         "region_id": 4,
         "region_name": "Kryta",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-30720, -21504],
-            [33792, 21504]
+            [
+                -30720,
+                -21504
+            ],
+            [
+                33792,
+                21504
+            ]
         ],
         "continent_rect": [
-            [11520, 18944],
-            [14208, 20736]
-        ]
+            [
+                44288,
+                35328
+            ],
+            [
+                46976,
+                37120
+            ]
+        ],
+        "map_name": "Canach's Lair"
     },
     "1370": {
-        "map_name": "Eye of the North",
         "min_level": 0,
         "max_level": 0,
         "default_floor": 1,
         "type": "Public",
-        "floors": [1, 3, 2, 0],
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
         "region_id": 1,
         "region_name": "Shiverpeak Mountains",
         "continent_id": 1,
         "continent_name": "Tyria",
         "map_rect": [
-            [-15360, -15360],
-            [15360, 15360]
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
         ],
         "continent_rect": [
-            [24576, 4864],
-            [25856, 6144]
-        ]
+            [
+                57344,
+                21248
+            ],
+            [
+                58624,
+                22528
+            ]
+        ],
+        "map_name": "Eye of the North"
+    },
+    "1371": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Public",
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -52224
+            ],
+            [
+                27648,
+                55296
+            ]
+        ],
+        "continent_rect": [
+            [
+                50128,
+                17809
+            ],
+            [
+                52304,
+                22289
+            ]
+        ],
+        "map_name": "Drizzlewood Coast"
+    },
+    "1372": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            1,
+            2,
+            0
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -52224
+            ],
+            [
+                27648,
+                55296
+            ]
+        ],
+        "continent_rect": [
+            [
+                50128,
+                17809
+            ],
+            [
+                52304,
+                22289
+            ]
+        ],
+        "map_name": "Turnabout"
+    },
+    "1373": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            1,
+            2,
+            0
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -52224
+            ],
+            [
+                27648,
+                55296
+            ]
+        ],
+        "continent_rect": [
+            [
+                50128,
+                17809
+            ],
+            [
+                52304,
+                22289
+            ]
+        ],
+        "map_name": "Pointed Parley"
+    },
+    "1374": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": -43,
+        "type": "Instance",
+        "floors": [
+            -43
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -15360,
+                -12288
+            ],
+            [
+                15360,
+                12288
+            ]
+        ],
+        "continent_rect": [
+            [
+                50128,
+                17809
+            ],
+            [
+                51408,
+                18833
+            ]
+        ],
+        "map_name": "Strike Mission: Cold War (Squad)"
+    },
+    "1375": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            1,
+            2,
+            0
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -52224
+            ],
+            [
+                27648,
+                55296
+            ]
+        ],
+        "continent_rect": [
+            [
+                50128,
+                17809
+            ],
+            [
+                52304,
+                22289
+            ]
+        ],
+        "map_name": "Snapping Steel"
+    },
+    "1376": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": -43,
+        "type": "Public",
+        "floors": [
+            -43
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -15360,
+                -12288
+            ],
+            [
+                15360,
+                12288
+            ]
+        ],
+        "continent_rect": [
+            [
+                50128,
+                17809
+            ],
+            [
+                51408,
+                18833
+            ]
+        ],
+        "map_name": "Strike Mission: Cold War (Public)"
+    },
+    "1378": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -52224
+            ],
+            [
+                27648,
+                55296
+            ]
+        ],
+        "continent_rect": [
+            [
+                50128,
+                17809
+            ],
+            [
+                52304,
+                22289
+            ]
+        ],
+        "map_name": "Behind Enemy Lines"
+    },
+    "1379": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 0,
+        "type": "Instance",
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -52224
+            ],
+            [
+                27648,
+                55296
+            ]
+        ],
+        "continent_rect": [
+            [
+                50128,
+                17809
+            ],
+            [
+                52304,
+                22289
+            ]
+        ],
+        "map_name": "One Charr, One Dragon, One Champion"
+    },
+    "1380": {
+        "min_level": 0,
+        "max_level": 0,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            1
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
+        ],
+        "continent_rect": [
+            [
+                57344,
+                21248
+            ],
+            [
+                58624,
+                22528
+            ]
+        ],
+        "map_name": "Epilogue"
+    },
+    "1382": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -52224
+            ],
+            [
+                27648,
+                55296
+            ]
+        ],
+        "continent_rect": [
+            [
+                50128,
+                17809
+            ],
+            [
+                52304,
+                22289
+            ]
+        ],
+        "map_name": "Arena of the Wolverine"
+    },
+    "1383": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -52224
+            ],
+            [
+                27648,
+                55296
+            ]
+        ],
+        "continent_rect": [
+            [
+                50128,
+                17809
+            ],
+            [
+                52304,
+                22289
+            ]
+        ],
+        "map_name": "A Simple Negotiation"
+    },
+    "1384": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 51,
+        "type": "Instance",
+        "floors": [
+            51
+        ],
+        "region_id": 26,
+        "region_name": "Fractals of the Mists",
+        "continent_id": 2,
+        "continent_name": "Mists",
+        "map_rect": [
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
+        ],
+        "continent_rect": [
+            [
+                11204,
+                4414
+            ],
+            [
+                12228,
+                5438
+            ]
+        ],
+        "map_name": "Fractals of the Mists"
+    },
+    "1385": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 56,
+        "type": "Instance",
+        "floors": [
+            56
+        ],
+        "region_id": 5,
+        "region_name": "Tarnished Coast",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
+        ],
+        "continent_rect": [
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Caledon Forest (Private)"
+    },
+    "1386": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 63,
+        "type": "Instance",
+        "floors": [
+            63
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -39936,
+                -43008
+            ],
+            [
+                39936,
+                46080
+            ]
+        ],
+        "continent_rect": [
+            [
+                55820,
+                34936
+            ],
+            [
+                59148,
+                38648
+            ]
+        ],
+        "map_name": "Thunderhead Peaks (Private)"
+    },
+    "1387": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 64,
+        "type": "Public",
+        "floors": [
+            64
+        ],
+        "region_id": 4,
+        "region_name": "Kryta",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -27648,
+                -36864
+            ],
+            [
+                30720,
+                39936
+            ]
+        ],
+        "continent_rect": [
+            [
+                48000,
+                32256
+            ],
+            [
+                50432,
+                35456
+            ]
+        ],
+        "map_name": "Bloodtide Coast (Public)"
+    },
+    "1388": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 58,
+        "type": "Instance",
+        "floors": [
+            58
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
+        ],
+        "continent_rect": [
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Snowden Drifts (Private)"
+    },
+    "1389": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 58,
+        "type": "Public",
+        "floors": [
+            58
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -49152,
+                -24576
+            ],
+            [
+                49152,
+                24576
+            ]
+        ],
+        "continent_rect": [
+            [
+                50432,
+                27648
+            ],
+            [
+                54528,
+                29696
+            ]
+        ],
+        "map_name": "Snowden Drifts (Public)"
+    },
+    "1390": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 67,
+        "type": "Public",
+        "floors": [
+            67
+        ],
+        "region_id": 2,
+        "region_name": "Ascalon",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
+        ],
+        "continent_rect": [
+            [
+                56576,
+                24832
+            ],
+            [
+                59904,
+                27648
+            ]
+        ],
+        "map_name": "Fireheart Rise (Public)"
+    },
+    "1391": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 57,
+        "type": "Instance",
+        "floors": [
+            57
+        ],
+        "region_id": 5,
+        "region_name": "Tarnished Coast",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
+        ],
+        "continent_rect": [
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Brisban Wildlands (Private)"
+    },
+    "1392": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            1
+        ],
+        "region_id": 5,
+        "region_name": "Tarnished Coast",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Primordus Rising"
+    },
+    "1393": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 65,
+        "type": "Public",
+        "floors": [
+            65
+        ],
+        "region_id": 4,
+        "region_name": "Kryta",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -15360,
+                -30720
+            ],
+            [
+                15360,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                44928,
+                25472
+            ],
+            [
+                46208,
+                28032
+            ]
+        ],
+        "map_name": "Lake Doric (Public)"
+    },
+    "1394": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 64,
+        "type": "Instance",
+        "floors": [
+            64
+        ],
+        "region_id": 4,
+        "region_name": "Kryta",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -27648,
+                -36864
+            ],
+            [
+                30720,
+                39936
+            ]
+        ],
+        "continent_rect": [
+            [
+                48000,
+                32256
+            ],
+            [
+                50432,
+                35456
+            ]
+        ],
+        "map_name": "Bloodtide Coast (Private)"
+    },
+    "1395": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 63,
+        "type": "Public",
+        "floors": [
+            63
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -39936,
+                -43008
+            ],
+            [
+                39936,
+                46080
+            ]
+        ],
+        "continent_rect": [
+            [
+                55820,
+                34936
+            ],
+            [
+                59148,
+                38648
+            ]
+        ],
+        "map_name": "Thunderhead Peaks (Public)"
+    },
+    "1396": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 66,
+        "type": "Public",
+        "floors": [
+            66
+        ],
+        "region_id": 4,
+        "region_name": "Kryta",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
+        ],
+        "continent_rect": [
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Gendarran Fields (Public)"
+    },
+    "1397": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 55,
+        "type": "Public",
+        "floors": [
+            55
+        ],
+        "region_id": 5,
+        "region_name": "Tarnished Coast",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
+        ],
+        "continent_rect": [
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Metrica Province (Public)"
+    },
+    "1398": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 68,
+        "type": "Public",
+        "floors": [
+            68
+        ],
+        "region_id": 2,
+        "region_name": "Ascalon",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
+        ],
+        "continent_rect": [
+            [
+                61440,
+                32640
+            ],
+            [
+                64512,
+                35712
+            ]
+        ],
+        "map_name": "Fields of Ruin (Public)"
+    },
+    "1399": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 57,
+        "type": "Public",
+        "floors": [
+            57
+        ],
+        "region_id": 5,
+        "region_name": "Tarnished Coast",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -39936,
+                -30720
+            ],
+            [
+                43008,
+                33792
+            ]
+        ],
+        "continent_rect": [
+            [
+                38656,
+                30848
+            ],
+            [
+                42112,
+                33536
+            ]
+        ],
+        "map_name": "Brisban Wildlands (Public)"
+    },
+    "1400": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 68,
+        "type": "Instance",
+        "floors": [
+            68
+        ],
+        "region_id": 2,
+        "region_name": "Ascalon",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -36864,
+                -36864
+            ],
+            [
+                36864,
+                36864
+            ]
+        ],
+        "continent_rect": [
+            [
+                61440,
+                32640
+            ],
+            [
+                64512,
+                35712
+            ]
+        ],
+        "map_name": "Fields of Ruin (Private)"
+    },
+    "1401": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 55,
+        "type": "Instance",
+        "floors": [
+            55
+        ],
+        "region_id": 5,
+        "region_name": "Tarnished Coast",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -39936
+            ],
+            [
+                27648,
+                39936
+            ]
+        ],
+        "continent_rect": [
+            [
+                39936,
+                33536
+            ],
+            [
+                42112,
+                36864
+            ]
+        ],
+        "map_name": "Metrica Province (Private)"
+    },
+    "1402": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 65,
+        "type": "Instance",
+        "floors": [
+            65
+        ],
+        "region_id": 4,
+        "region_name": "Kryta",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -15360,
+                -30720
+            ],
+            [
+                15360,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                44928,
+                25472
+            ],
+            [
+                46208,
+                28032
+            ]
+        ],
+        "map_name": "Lake Doric (Private)"
+    },
+    "1403": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 56,
+        "type": "Public",
+        "floors": [
+            57,
+            56
+        ],
+        "region_id": 5,
+        "region_name": "Tarnished Coast",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -46080
+            ],
+            [
+                24576,
+                49152
+            ]
+        ],
+        "continent_rect": [
+            [
+                42112,
+                32512
+            ],
+            [
+                44032,
+                36480
+            ]
+        ],
+        "map_name": "Caledon Forest (Public)"
+    },
+    "1404": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 67,
+        "type": "Instance",
+        "floors": [
+            67
+        ],
+        "region_id": 2,
+        "region_name": "Ascalon",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -39936,
+                -33792
+            ],
+            [
+                39936,
+                33792
+            ]
+        ],
+        "continent_rect": [
+            [
+                56576,
+                24832
+            ],
+            [
+                59904,
+                27648
+            ]
+        ],
+        "map_name": "Fireheart Rise (Private)"
+    },
+    "1405": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 66,
+        "type": "Instance",
+        "floors": [
+            66
+        ],
+        "region_id": 4,
+        "region_name": "Kryta",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -49152,
+                -24576
+            ],
+            [
+                52224,
+                24576
+            ]
+        ],
+        "continent_rect": [
+            [
+                46208,
+                28672
+            ],
+            [
+                50432,
+                30720
+            ]
+        ],
+        "map_name": "Gendarran Fields (Private)"
+    },
+    "1407": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 2,
+        "type": "Instance",
+        "floors": [
+            1,
+            3,
+            2,
+            0
+        ],
+        "region_id": 5,
+        "region_name": "Tarnished Coast",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -30720,
+                -30720
+            ],
+            [
+                30720,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                37376,
+                36094
+            ],
+            [
+                39936,
+                38654
+            ]
+        ],
+        "map_name": "Council Level"
+    },
+    "1408": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": -28,
+        "type": "Instance",
+        "floors": [
+            -28,
+            -26,
+            -27
+        ],
+        "region_id": 20,
+        "region_name": "Ring of Fire",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -46080
+            ],
+            [
+                46080,
+                46080
+            ]
+        ],
+        "continent_rect": [
+            [
+                34718,
+                39284
+            ],
+            [
+                38558,
+                43124
+            ]
+        ],
+        "map_name": "Wildfire"
+    },
+    "1409": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 59,
+        "type": "Instance",
+        "floors": [
+            59
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -18432,
+                -18432
+            ],
+            [
+                18432,
+                18432
+            ]
+        ],
+        "continent_rect": [
+            [
+                51968,
+                26112
+            ],
+            [
+                53504,
+                27648
+            ]
+        ],
+        "map_name": "Dragonstorm (Private Squad)"
+    },
+    "1410": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 59,
+        "type": "Instance",
+        "floors": [
+            59
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -18432,
+                -18432
+            ],
+            [
+                18432,
+                18432
+            ]
+        ],
+        "continent_rect": [
+            [
+                51968,
+                26112
+            ],
+            [
+                53504,
+                27648
+            ]
+        ],
+        "map_name": "Champion's End"
+    },
+    "1411": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 59,
+        "type": "Public",
+        "floors": [
+            59
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -18432,
+                -18432
+            ],
+            [
+                18432,
+                18432
+            ]
+        ],
+        "continent_rect": [
+            [
+                51968,
+                26112
+            ],
+            [
+                53504,
+                27648
+            ]
+        ],
+        "map_name": "Dragonstorm (Public)"
+    },
+    "1412": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 59,
+        "type": "Instance",
+        "floors": [
+            59
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -18432,
+                -18432
+            ],
+            [
+                18432,
+                18432
+            ]
+        ],
+        "continent_rect": [
+            [
+                51968,
+                26112
+            ],
+            [
+                53504,
+                27648
+            ]
+        ],
+        "map_name": "Dragonstorm"
+    },
+    "1413": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 60,
+        "type": "Public",
+        "floors": [
+            60,
+            58
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
+        ],
+        "continent_rect": [
+            [
+                17664,
+                13312
+            ],
+            [
+                19456,
+                18176
+            ]
+        ],
+        "map_name": "The Twisted Marionette (Public)"
+    },
+    "1414": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 60,
+        "type": "Instance",
+        "floors": [
+            60,
+            58
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -58368
+            ],
+            [
+                21504,
+                58368
+            ]
+        ],
+        "continent_rect": [
+            [
+                17664,
+                13312
+            ],
+            [
+                19456,
+                18176
+            ]
+        ],
+        "map_name": "The Twisted Marionette (Private Squad)"
+    },
+    "1415": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                25000,
+                98100
+            ],
+            [
+                28840,
+                100660
+            ]
+        ],
+        "map_name": "The Future in Jade: Power Plant"
+    },
+    "1416": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": -44,
+        "type": "Instance",
+        "floors": [
+            -44
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -12288,
+                -12288
+            ],
+            [
+                12288,
+                12288
+            ]
+        ],
+        "continent_rect": [
+            [
+                23976,
+                98110
+            ],
+            [
+                25000,
+                99134
+            ]
+        ],
+        "map_name": "Deepest Secrets: Yong Reactor"
+    },
+    "1419": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                21319,
+                103145
+            ],
+            [
+                23239,
+                105705
+            ]
+        ],
+        "map_name": "Isle of Reflection"
+    },
+    "1420": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                25000,
+                98100
+            ],
+            [
+                28840,
+                100660
+            ]
+        ],
+        "map_name": "Fallout: Nika's Blade"
+    },
+    "1421": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                33792
+            ]
+        ],
+        "continent_rect": [
+            [
+                21159,
+                100457
+            ],
+            [
+                24999,
+                103145
+            ]
+        ],
+        "map_name": "???"
+    },
+    "1422": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Public",
+        "floors": [
+            69,
+            1,
+            3,
+            2,
+            0
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -43008
+            ],
+            [
+                27648,
+                46080
+            ]
+        ],
+        "continent_rect": [
+            [
+                33126,
+                101838
+            ],
+            [
+                35302,
+                105550
+            ]
+        ],
+        "map_name": "Dragon's End"
+    },
+    "1426": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                21319,
+                103145
+            ],
+            [
+                23239,
+                105705
+            ]
+        ],
+        "map_name": "Isle of Reflection"
+    },
+    "1427": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                33792
+            ]
+        ],
+        "continent_rect": [
+            [
+                21159,
+                100457
+            ],
+            [
+                24999,
+                103145
+            ]
+        ],
+        "map_name": "Lady Joon's Estate"
+    },
+    "1428": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Public",
+        "floors": [
+            69,
+            1,
+            3,
+            2,
+            0
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                29185,
+                100890
+            ],
+            [
+                33025,
+                103450
+            ]
+        ],
+        "map_name": "Arborstone"
+    },
+    "1429": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                29185,
+                100890
+            ],
+            [
+                33025,
+                103450
+            ]
+        ],
+        "map_name": "The Cycle, Reborn: Arborstone"
+    },
+    "1430": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 69,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                21319,
+                103145
+            ],
+            [
+                23239,
+                105705
+            ]
+        ],
+        "map_name": "Claiming the Isle of Reflection"
+    },
+    "1432": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 72,
+        "type": "Instance",
+        "floors": [
+            72
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -3072,
+                -3072
+            ],
+            [
+                6144,
+                6144
+            ]
+        ],
+        "continent_rect": [
+            [
+                23600,
+                102380
+            ],
+            [
+                23984,
+                102764
+            ]
+        ],
+        "map_name": "Strike Mission: Aetherblade Hideout"
+    },
+    "1433": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            1
+        ],
+        "region_id": 1,
+        "region_name": "Shiverpeak Mountains",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -18432,
+                -24576
+            ],
+            [
+                18432,
+                27648
+            ]
+        ],
+        "continent_rect": [
+            [
+                50432,
+                31484
+            ],
+            [
+                51968,
+                33660
+            ]
+        ],
+        "map_name": "Old Friends"
+    },
+    "1434": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                29185,
+                100890
+            ],
+            [
+                33025,
+                103450
+            ]
+        ],
+        "map_name": "Empty"
+    },
+    "1435": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                21319,
+                103145
+            ],
+            [
+                23239,
+                105705
+            ]
+        ],
+        "map_name": "Isle of Reflection"
+    },
+    "1436": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                29185,
+                100890
+            ],
+            [
+                33025,
+                103450
+            ]
+        ],
+        "map_name": "Extraction Point: Command Quarters"
+    },
+    "1437": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 71,
+        "type": "Instance",
+        "floors": [
+            71
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -43008
+            ],
+            [
+                27648,
+                46080
+            ]
+        ],
+        "continent_rect": [
+            [
+                33126,
+                101838
+            ],
+            [
+                35302,
+                105550
+            ]
+        ],
+        "map_name": "Strike Mission: Harvest Temple"
+    },
+    "1438": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Public",
+        "floors": [
+            69,
+            1,
+            3,
+            2,
+            0
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                25000,
+                98100
+            ],
+            [
+                28840,
+                100660
+            ]
+        ],
+        "map_name": "New Kaineng City"
+    },
+    "1439": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -43008
+            ],
+            [
+                27648,
+                46080
+            ]
+        ],
+        "continent_rect": [
+            [
+                33126,
+                101838
+            ],
+            [
+                35302,
+                105550
+            ]
+        ],
+        "map_name": "The Only One"
+    },
+    "1440": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -24576,
+                -43008
+            ],
+            [
+                27648,
+                46080
+            ]
+        ],
+        "continent_rect": [
+            [
+                33126,
+                101838
+            ],
+            [
+                35302,
+                105550
+            ]
+        ],
+        "map_name": "Laying to Rest"
+    },
+    "1442": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Public",
+        "floors": [
+            69,
+            1,
+            3,
+            2,
+            0
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                33792
+            ]
+        ],
+        "continent_rect": [
+            [
+                21159,
+                100457
+            ],
+            [
+                24999,
+                103145
+            ]
+        ],
+        "map_name": "Seitung Province"
+    },
+    "1444": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                21319,
+                103145
+            ],
+            [
+                23239,
+                105705
+            ]
+        ],
+        "map_name": "Isle of Reflection"
+    },
+    "1445": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                25000,
+                98100
+            ],
+            [
+                28840,
+                100660
+            ]
+        ],
+        "map_name": "The Future in Jade: Nahpui Lab"
+    },
+    "1446": {
+        "min_level": 0,
+        "max_level": 80,
+        "default_floor": -53,
+        "type": "Instance",
+        "floors": [
+            -53
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -15360,
+                -15360
+            ],
+            [
+                15360,
+                15360
+            ]
+        ],
+        "continent_rect": [
+            [
+                100,
+                100
+            ],
+            [
+                2148,
+                2148
+            ]
+        ],
+        "map_name": "Aetherblade Armada"
+    },
+    "1448": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -21504
+            ],
+            [
+                24576,
+                21504
+            ]
+        ],
+        "continent_rect": [
+            [
+                43008,
+                26240
+            ],
+            [
+                44928,
+                28032
+            ]
+        ],
+        "map_name": "The Cycle, Reborn: The Dead End Bar"
+    },
+    "1449": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                33792
+            ]
+        ],
+        "continent_rect": [
+            [
+                21159,
+                100457
+            ],
+            [
+                24999,
+                103145
+            ]
+        ],
+        "map_name": "Aurene's Sanctuary"
+    },
+    "1450": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 70,
+        "type": "Instance",
+        "floors": [
+            70
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                29185,
+                100890
+            ],
+            [
+                33025,
+                103450
+            ]
+        ],
+        "map_name": "Strike Mission: Xunlai Jade Junkyard"
+    },
+    "1451": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 73,
+        "type": "Instance",
+        "floors": [
+            73
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                25000,
+                98100
+            ],
+            [
+                28840,
+                100660
+            ]
+        ],
+        "map_name": "Strike Mission: Kaineng Overlook"
+    },
+    "1452": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Public",
+        "floors": [
+            69,
+            1,
+            3,
+            2,
+            0
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                29185,
+                100890
+            ],
+            [
+                33025,
+                103450
+            ]
+        ],
+        "map_name": "The Echovald Wilds"
+    },
+    "1453": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                25000,
+                98100
+            ],
+            [
+                28840,
+                100660
+            ]
+        ],
+        "map_name": "Ministry of Security: Main Office"
+    },
+    "1454": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                25000,
+                98100
+            ],
+            [
+                28840,
+                100660
+            ]
+        ],
+        "map_name": "The Scenic Route: Kaineng Docks"
+    },
+    "1456": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 69,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                21319,
+                103145
+            ],
+            [
+                23239,
+                105705
+            ]
+        ],
+        "map_name": "Claiming the Isle of Reflection"
+    },
+    "1457": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                33792
+            ]
+        ],
+        "continent_rect": [
+            [
+                21159,
+                100457
+            ],
+            [
+                24999,
+                103145
+            ]
+        ],
+        "map_name": "Detention Facility"
+    },
+    "1458": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                33792
+            ]
+        ],
+        "continent_rect": [
+            [
+                21159,
+                100457
+            ],
+            [
+                24999,
+                103145
+            ]
+        ],
+        "map_name": "Aurene's Sanctuary"
+    },
+    "1459": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 69,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                21319,
+                103145
+            ],
+            [
+                23239,
+                105705
+            ]
+        ],
+        "map_name": "Claiming the Isle of Reflection"
+    },
+    "1460": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                33792
+            ]
+        ],
+        "continent_rect": [
+            [
+                21159,
+                100457
+            ],
+            [
+                24999,
+                103145
+            ]
+        ],
+        "map_name": "Empress Ihn's Court"
+    },
+    "1461": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                33792
+            ]
+        ],
+        "continent_rect": [
+            [
+                21159,
+                100457
+            ],
+            [
+                24999,
+                103145
+            ]
+        ],
+        "map_name": "Zen Daijun Hideaway"
+    },
+    "1462": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                21319,
+                103145
+            ],
+            [
+                23239,
+                105705
+            ]
+        ],
+        "map_name": "Isle of Reflection"
+    },
+    "1463": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 69,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -21504,
+                -30720
+            ],
+            [
+                24576,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                21319,
+                103145
+            ],
+            [
+                23239,
+                105705
+            ]
+        ],
+        "map_name": "Claiming the Isle of Reflection"
+    },
+    "1464": {
+        "min_level": 80,
+        "max_level": 80,
+        "default_floor": 1,
+        "type": "Instance",
+        "floors": [
+            69,
+            1
+        ],
+        "region_id": 37,
+        "region_name": "Cantha",
+        "continent_id": 1,
+        "continent_name": "Tyria",
+        "map_rect": [
+            [
+                -46080,
+                -30720
+            ],
+            [
+                46080,
+                30720
+            ]
+        ],
+        "continent_rect": [
+            [
+                29185,
+                100890
+            ],
+            [
+                33025,
+                103450
+            ]
+        ],
+        "map_name": "Fallout: Arborstone"
     }
 }
+
 
 const mapMap: { [index: string]: string } = {}
 
