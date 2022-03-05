@@ -54,7 +54,7 @@ function Markerpack(props: IProps) {
     }
 
     return (
-        <div className={"markerpack " + (props.pack.active ? "active " : "inactive ") + (props.pack.markers[props.settings.runtimeData?.map || ""] ? "activemap": "")}>
+        <div className={"markerpack " + (props.pack.active ? "active " : "inactive ") + (props.pack.markers[props.settings.runtimeData?.map || ""] && props.pack.active ? "activemap": "")}>
             <Section
                 expanded={false}
                 title={
