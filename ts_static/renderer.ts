@@ -151,8 +151,6 @@ function updateGw2Data(data: IGw2MumbleLinkData) {
       UpdateSceneData(null);
       positionManager.SetPosition(data);
     }
-    logger(`Map data: ${JSON.stringify(data.context, null, 2)}`)
-    logger(`Linear mapping: ${THREE.MathUtils.mapLinear(data.context.MapPlayerX, 15232, 17664, -27648, 30720)}`)
     isMap = true;
     return;
   }
