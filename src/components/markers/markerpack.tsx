@@ -15,7 +15,6 @@ import { Marker } from './marker';
 import "./markerpack.css";
 import { IMarkerSettings } from '../../shared/interfaces/settings/IMarkerSettings';
 import { SortArray, ByActive, ByActiveMap } from '../helpers/sorting';
-import { Settings } from '../../shared/models/settings/Settings';
 import { ISettings } from '../../shared/interfaces/settings';
 import { IPC } from '../../shared/ipc';
 
@@ -46,7 +45,7 @@ function Markerpack(props: IProps) {
     function indexOf(markerMap: string, marker: IMarkerSettings) {
         var elementIndex = -1;
         props.pack.markers[markerMap].forEach((element, index) => {
-            if (element.id == marker.id) {
+            if (element.id === marker.id) {
                 elementIndex = index;
             }
         });

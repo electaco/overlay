@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Window from './window/window';
 import { IMarkerSearchResult } from '../shared/interfaces/datatransfer/IMarkerSearchResult';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFolderPlus, faFileImport } from '@fortawesome/free-solid-svg-icons'
+import { faFileImport } from '@fortawesome/free-solid-svg-icons'
 import { IPC } from '../shared/ipc';
+import IconCheckbox from './window/CheckBox';
+import { ISettings } from '../shared/interfaces/settings';
 const { ipcRenderer } = window.require('electron')
 
 const ROOT = "https://elec.k.thelazy.net/";
-const QURL = ROOT + "markers/search?q=";
+const QURL = ROOT + "markers/search?";
 const FETCH_URL = ROOT + "markers/get/"
+
+interface IProps {
+
+}
+
+interface IState {
+    results: IMarkerSearchResult[],
+    error: any,
+    isLoaded: boolean,
+    isSearching: boolean,
+    searchText: string,
+    searchMap: boolean,
+    settings: ISettings | null
+}
 
 interface markerProps {
     marker: IMarkerSearchResult;
@@ -41,59 +57,89 @@ function SearchMarkerResult(props: markerProps) {
     </tr>);
 }
 
-function App() {
-    const [results, setResults] = useState<IMarkerSearchResult[]>([]);
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [isSearching, setIsSearching] = useState(false);
-    const [searchString, setSearchString] = useState("");
+class App extends React.Component<IProps, IState> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            settings: null,
+            results: [],
+            error: null,
+            isLoaded: false,
+            isSearching: false,
+            searchText: "",
+            searchMap: false
+        };
+        this.settingsListener = this.settingsListener.bind(this);
+        this.search = this.search.bind(this);
+        ipcRenderer.on(IPC.Settings.Set, this.settingsListener);
+        ipcRenderer.send(IPC.Settings.Get, true);
+      }
+    
+      componentWillUnmount() {
+        ipcRenderer.removeAllListeners(IPC.Settings.Set);
+      }
+    
+      settingsListener(event: any, data: any) {
+        this.setState({settings: data});
+      }
 
-    function search(query: string) {
-        setIsSearching(true);
-        fetch(QURL + query, {cache: "no-cache"})
+    search() {
+        let mapid = "";
+        if (this.state.searchMap && this.state.settings) {
+            mapid = this.state.settings.runtimeData?.map || "";
+        }
+        let qs = `q=${this.state.searchText}&map=${mapid}`;
+        this.setState({isSearching: true});
+        fetch(QURL + qs, {cache: "no-cache"})
         .then(res => res.json())
         .then(
-          (result) => {
-            setIsLoaded(true);
-            setResults(result.result);
+            (result) => {
+                this.setState({
+                    isLoaded: true,
+                    results: result.result
+                });
           },
-          (error) => {
-            setIsLoaded(true);
-            setError(error);
+            (error) => {
+                this.setState({
+                    isLoaded: true,
+                    error: error
+                });
           }
         )
     }
-    function handleKeyPress(event: any) {
+    handleKeyPress(event: any) {
         if(event.key === 'Enter'){
-            search(searchString);
+            this.search();
         }
     }
-    function handleSelect(evt) {
-        setSearchString(evt.target.value);
+    handleSelect(evt) {
+        this.setState({searchText: evt.target.value});
     }
-
-    return (
-        <Window title="Find Markerpacks" path="get_markers">
-            <div className="d-flex">
-                <input className="form-control" onChange={handleSelect} value={searchString} onKeyPress={handleKeyPress}/>
-                <button className="btn btn-secondary" onClick={()=>search(searchString)}>Search</button>
-            </div>
-            {isSearching && !isLoaded && <div>Searching..</div>}
-            {error && <div>Error: {error}</div>}
-            {isLoaded && <div>
-                {results && <div>
-                    <table className="table text-white">
-                    {results.map((result) => 
-                        <SearchMarkerResult marker={result} key={result.id} />
-                    )}
-                    </table>
+    render() {
+        return (
+            <Window title="Find Markerpacks" path="get_markers">
+                <div className="d-flex">
+                    <input className="form-control" onChange={this.handleSelect} value={this.state.searchText} onKeyPress={this.handleKeyPress} />
+                    <button className="btn btn-secondary" onClick={() => this.search()}>Search</button>
+                </div>
+                <IconCheckbox toggleCheck={(e)=> {this.setState({searchMap: e})}} checked={this.state.searchMap}>Only results with markes on current map</IconCheckbox>
+                {this.state.isSearching && !this.state.isLoaded && <div>Searching..</div>}
+                {this.state.error && <div>Error: {this.state.error}</div>}
+                {this.state.isLoaded && <div>
+                    {this.state.results && <div>
+                        <table className="table text-white">
+                            {this.state.results.map((result) =>
+                                <SearchMarkerResult marker={result} key={result.id} />
+                            )}
+                        </table>
+                    </div>}
+                    {!this.state.results && <div>
+                        No results
+                    </div>}
                 </div>}
-                {!results && <div>
-                    No results
-                </div>}
-            </div>}
-        </Window>
-    );
+            </Window>
+        );
+    }
 }
 
 export default App;

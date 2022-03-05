@@ -1,6 +1,8 @@
+import { ISettings } from "../../shared/interfaces/settings";
+
 var objectPath = require("object-path");
 
-function getSetting(settings: any, name: string, path: string, defaultval?: any) {
+function getSetting(settings: ISettings, name: string, path: string, defaultval?: any) {
     var v= {
       name,
       path,

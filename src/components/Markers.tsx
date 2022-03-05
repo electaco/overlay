@@ -58,7 +58,7 @@ class App extends React.Component<IProps, IState>{
   indexOf(markerpack: IMarkerGroupSettings) {
     var elementIndex = -1;
     this.state.settings?.marks.forEach((element, index) => {
-      if (element.id == markerpack.id) {
+      if (element.id === markerpack.id) {
         elementIndex = index;
       }
     });

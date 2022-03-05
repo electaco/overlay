@@ -1,24 +1,18 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons'
+import React from 'react';
 import { IPC } from '../../shared/ipc';
+import Checkbox from '../../components/window/CheckBox';
+
 const { ipcRenderer } = window.require('electron')
 
+
 function IconCheckbox(props) {
-    let checkedIcon = props.iconChecked ? props.iconChecked : faCheckSquare;
-    let unCheckedIcon = props.iconUnchecked ? props.iconUnchecked : faSquare;
-    let icon = props.setting.value ? checkedIcon : unCheckedIcon;
-
-    function toggleCheck() {
-        ipcRenderer.send(IPC.Settings.Update, {path: props.setting.path, value: !props.setting.value})
+    function toggleCheck(value) {
+        ipcRenderer.send(IPC.Settings.Update, {path: props.setting.path, value: value})
     }
-
     return (
-        <span className="button" onClick={toggleCheck} title={props.popup}>
-            <FontAwesomeIcon icon={icon} className="mr-2" style={{width: "1em"}}/>
-            {props.setting.name}
+        <Checkbox checked={props.setting.value} toggleCheck={toggleCheck} popup={props.popup} name={props.setting.name}>
             {props.children}
-        </span>
+        </Checkbox>
     );
 }
 
