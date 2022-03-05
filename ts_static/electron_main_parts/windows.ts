@@ -53,14 +53,15 @@ export function createRenderWindow(): typeof BrowserWindow {
     rendererWindow.webContents.on('did-finish-load', () => {
         const Mounts = ["Raptor", "Springer", "Skimmer",
             "Jackal", "Griffon", "Roller_Beetle", "Warclaw", "Skyscale"];
-        const Scale = 0.5;
+        const Scale = 1;
         const StartNum = 112;
-        const space = 0.45;
+        const space = 3;
         for (var i = 0; i < Mounts.length; i++) {
             let uiElement: IUiElement = {
                 id: "test",
                 icon: `mounts/${ Mounts[i] }.png`,
-                position: { x: 3.2 + (i*space), y: -4.85 },
+                //position: { x: 32 + (i*space), y: -48.5 },
+                position: { x: -2 + (i*space), y: 0 },
                 scale: { x: Scale, y: Scale },
                 onclick_event: "mount",
                 onclick_data: `${StartNum + i}`

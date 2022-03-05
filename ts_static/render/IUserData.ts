@@ -8,4 +8,5 @@ export interface IUserData {
     onMouseOverExit?: () => void;
     onMouseOverEnter?: () => void;
     onClick?: () => void;
+    UpdateUiPosition?: () => void;
 }
