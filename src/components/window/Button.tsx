@@ -10,7 +10,7 @@ interface IProps {
 
 function Button(props: IProps) {
     return (
-        <div className="button windowButton px-2 mx-2" onClick={props.onClick} title={props.title}>
+        <div className="button windowButton px-2 mx-2 btn btn-secondary" onClick={props.onClick} title={props.title}>
                 { props.text }{props.children}
         </div>
     );

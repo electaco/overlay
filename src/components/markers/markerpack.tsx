@@ -85,7 +85,7 @@ function Markerpack(props: IProps) {
                     </span>
                 </div>
 
-                Description: <EditableText path={props.path + "description"} value={props.pack.description} defaultValue="No description" />
+                <EditableText path={props.path + "description"} value={props.pack.description} defaultValue="No description" />
                 <div className="markerpack" >
                     {SortArray(Object.keys(props.pack.markers), ByActiveMap(props.settings.runtimeData?.map ?? ""))?.map((markerMap) =>
                         <div className={"map " + (props.settings.runtimeData?.map === markerMap ? "active": "")}>
