@@ -10,7 +10,7 @@ function IconCheckbox(props) {
         ipcRenderer.send(IPC.Settings.Update, {path: props.setting.path, value: value})
     }
     return (
-        <Checkbox checked={props.setting.value} toggleCheck={toggleCheck} popup={props.popup} name={props.setting.name}>
+        <Checkbox checked={props.setting.value} toggleCheck={toggleCheck} popup={props.popup} name={props.setting.name} iconChecked={props.iconChecked} iconUnchecked={props.iconUnchecked}>
             {props.children}
         </Checkbox>
     );
