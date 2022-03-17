@@ -1,13 +1,14 @@
 import { IRuntimeSettings, ISettings } from "../../interfaces/settings";
 import { IRenderSettings } from "../../interfaces/settings/IRenderSettings";
 import { IRenderData } from "../../interfaces/render/renderdata";
-import { MarkerGroupSettings } from "./MarkerGroupSettings";
+import { IUpdateAvailable, MarkerGroupSettings } from "./MarkerGroupSettings";
 import { RenderSettings } from "./RenderSettings";
 import { deserialize, Type } from 'class-transformer';
 import { IPositionMarker, MarkerType } from "../../interfaces/render/marker";
 import { IVideoData } from "../../interfaces/datatransfer/IVideoData";
 import { IOverlaySettings } from "../../interfaces/settings/IOverlaySettings";
 import { OverlaySettings } from "./OverlaySettings";
+import fetch from 'cross-fetch'
 
 const fs = require('fs');
 
@@ -38,11 +39,6 @@ export class Settings implements ISettings {
         }));
     }
 
-    addMarkerGroupFromJson(json: string): void {
-        var instance = deserialize(MarkerGroupSettings, json);
-        this.addMarkerGroup(instance);
-    }
-
     static loadConfig(filename: string): Settings {
         if (fs.existsSync(filename)) {
             let data = fs.readFileSync(filename);
@@ -58,8 +54,25 @@ export class Settings implements ISettings {
         this.runtimeData.map = mapId;
     }
 
-    addMarkerGroup(markerGroup: MarkerGroupSettings): void {
+    getMarkerGroupIndexById(id: string): number | null {
+        let markid = this.marks.findIndex(m => m.id === id);
+        if (markid === -1) {
+            return null;
+        }
+        return markid;
+    }
+
+    addMarkerGroup(markerGroup: MarkerGroupSettings, forceReplace: boolean = false): boolean {
+        var existing = this.getMarkerGroupIndexById(markerGroup.id);
+        if ( existing !== null) {
+            if (forceReplace) {
+                this.removeMarkerGroup(existing);
+            } else {
+                return false;
+            }
+        }
         this.marks.push(markerGroup);
+        return true;
     }
 
     removeMarkerGroup(index: number): void {
@@ -68,6 +81,37 @@ export class Settings implements ISettings {
 
     getMarkerGroup(index: number): MarkerGroupSettings {
         return this.marks[index];
+    }
+
+    getMarkerGroupById(id: string): MarkerGroupSettings | null {
+        let markid = this.marks.findIndex(m => m.id === id);
+        if (markid === -1) {
+            return null;
+        }
+        return this.marks[markid];
+    }
+
+    async CheckForMarkerUpdates() {
+        console.log("Checking for marker updates");
+        const asyncRes = await Promise.allSettled(this.marks.map(async (markerGroup) => { return await markerGroup.CheckForUpdates(); }));
+        (asyncRes.filter(res => res.status === 'fulfilled') as PromiseFulfilledResult<IUpdateAvailable>[]).map(res => res.value).forEach(async res => {
+            if (res.updateAvailable && res.url) {
+                try {
+                    var response = await fetch(res.url);
+                } catch (e) {
+                    console.log("Error fetching marker update! "+ e);
+                    return;
+                }
+                if (!response?.ok) {
+                    console.log("Failed to fetch update for " + res.markerid + " at " + res.url);
+                    const message = `An error has occured: ${response?.status}`;
+                    throw new Error(message);
+                }
+                var json = MarkerGroupSettings.fromJson(await response.text());
+                this.addMarkerGroup(json, true);  
+                console.log("Updated marker " + res.markerid);
+            }
+        });
     }
 
     // Translate marker data from settings to render ready data

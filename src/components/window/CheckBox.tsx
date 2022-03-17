@@ -19,7 +19,7 @@ function IconCheckbox(props: IProps) {
     let icon = props.checked ? checkedIcon : unCheckedIcon;
 
     return (
-        <span className="button" onClick={() => props.toggleCheck(!props.checked)} title={props.popup}>
+        <span className="button text-nowrap" onClick={() => props.toggleCheck(!props.checked)} title={props.popup}>
             <FontAwesomeIcon icon={icon} className="mr-2" style={{width: "1em"}}/>
             {props.name}
             {props.children}

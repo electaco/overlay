@@ -11,6 +11,7 @@ import { LoadMarkerPacksFromCommandLine, InitSettings } from './electron_main_pa
 import { createConfigButtonWindow, createRenderWindow, getConfigButtonWindow, getRenderWindow } from './electron_main_parts/windows';
 import { SetupBackgroundService } from './electron_main_parts/background_service';
 import { IPC } from '../src/shared/IPC';
+import { Settings } from '../src/shared/models/settings/Settings';
 
 // If we're in wrong folder, we need to change folder to the app's folder
 if (!fs.existsSync("gw2data/WebSocketServerNetFramework.exe")) {
@@ -26,7 +27,7 @@ if (!gotTheLock) {
     // Someone tried to run a second instance
     LoadMarkerPacksFromCommandLine(commandLine, workingDirectory);
   });
-  InitSettings();
+  var settings = InitSettings();
   LoadMarkerPacksFromCommandLine(process.argv, process.cwd());
 }
 
@@ -46,6 +47,9 @@ function onGameStarted() {
   createConfigButtonWindow();
   InitializeMouseMove();
   InitAutoUpdate();
+  if (settings.overlaySettings.checkForMarkerUpdates) {
+    settings.CheckForMarkerUpdates();
+  }
 }
 
 function onReady() {

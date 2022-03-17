@@ -71,6 +71,7 @@ class App extends React.Component<IProps, IState> {
         };
         this.settingsListener = this.settingsListener.bind(this);
         this.search = this.search.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
         ipcRenderer.on(IPC.Settings.Set, this.settingsListener);
         ipcRenderer.send(IPC.Settings.Get, true);
       }

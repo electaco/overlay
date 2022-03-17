@@ -49,7 +49,8 @@ class App extends React.Component<IProps, IState> {
           </Section>
           <Section title="Overlay">
             <Checkbox setting={getSetting(this.state.settings, 'Check for new versions', "overlaySettings.checkForUpdates", true)} />
-            <Checkbox setting={getSetting(this.state.settings, 'Automatically update to new versions', "overlaySettings.autoUpdate", true)}/>
+            <Checkbox setting={getSetting(this.state.settings, 'Automatically update to new versions', "overlaySettings.autoUpdate", true)} />
+            <Checkbox setting={getSetting(this.state.settings, 'Automatically update markers to new versions on start', "overlaySettings.checkForMarkerUpdates", true)}/>
           </Section>
           <Section title="Development" expanded={false}>
             <Section title="Dev tools">

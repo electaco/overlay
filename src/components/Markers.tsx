@@ -29,7 +29,7 @@ class App extends React.Component<IProps, IState>{
   }
 
   componentWillUnmount() {
-    ipcRenderer.removeAllListeners([IPC.Settings.Set]);
+    ipcRenderer.removeAllListeners(IPC.Settings.Set);
   }
 
   settingsListener(event: any, data: ISettings) {

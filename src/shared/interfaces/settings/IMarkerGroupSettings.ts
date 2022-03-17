@@ -9,6 +9,8 @@ export interface IMarkerGroupSettings {
   color: string;
   description: string;
   id: string;
+  version?: string;
+  updateurl?: string;
   markers: IMarkerMapSettings;
   defaultNamePlate: INamePlateSetting;
 

@@ -11,6 +11,7 @@ import { getLastPosition, getMapId } from "./position_data";
 import { getRenderWindow, getWindows as getOpenWindows } from "./windows";
 import { IPC } from '../../src/shared/IPC';
 
+
 var objectPath = require("object-path");
 const { app, ipcMain, dialog } = require('electron')
 const fs = require('fs');
@@ -25,7 +26,6 @@ export function InitSettings(): Settings {
     console.log("Settings file: " + configFile);
 
     SETTINGS = Settings.loadConfig(configFile);
-
     return SETTINGS;
 }
 
@@ -42,7 +42,8 @@ export function LoadMarkerPacksFromCommandLine(argv: string[], workingDirectory:
             if (fs.existsSync(argv[i]) && fs.statSync(argv[i]).isFile()) {
                 log("Main", "Loading marker file: " + argv[i]);
                 let data = fs.readFileSync(argv[i]);
-                GetSettings().addMarkerGroupFromJson(data);
+                let markergroup = MarkerGroupSettings.fromJson(data.toString());
+                AddNewMarkerGroupWithDialog(markergroup);
             }
             // Check if starts with emtp:
             else if (argv[i].startsWith("emtp:")) {
@@ -50,10 +51,10 @@ export function LoadMarkerPacksFromCommandLine(argv: string[], workingDirectory:
                 //Load data from url
                 let url = argv[i].substring(5);
                 let data = fs.readFileSync(url);
-                GetSettings().addMarkerGroupFromJson(data);
+                let markergroup = MarkerGroupSettings.fromJson(data.toString());
+                AddNewMarkerGroupWithDialog(markergroup);
             }
         }
-        configUpdated();
     }
 }
 
@@ -105,6 +106,27 @@ ipcMain.on(IPC.Settings.Get, (event, arg) => {
     event.sender.send(IPC.Settings.Set, SETTINGS);
 })
 
+async function AddNewMarkerGroupWithDialog(group: MarkerGroupSettings) {
+    if (!SETTINGS.addMarkerGroup(group)) {
+        log("Main", "Marker group already exists");
+        let result = await dialog.showMessageBox({
+            type: 'question',
+            buttons: ['Cancel', 'Replace', 'Keep both'],
+            message: `Marker group "${group.name}" already exists. What do you want to do?`,
+        });
+        if (result.response == 0) {
+            return;
+        }
+        else if (result.response == 1) { // Replace
+            SETTINGS.addMarkerGroup(group, true);
+        }
+        else if (result.response == 2) { // Keep both
+            SETTINGS.getMarkerGroupById(group.id).createId();
+            SETTINGS.addMarkerGroup(group);
+        }
+    }
+    configUpdated();
+}
 
 ipcMain.on(IPC.Marker.SaveGroup, (event, arg) => {
     log("savemarkergroup", arg);
@@ -124,8 +146,7 @@ ipcMain.on(IPC.Marker.SaveGroup, (event, arg) => {
 })
 
 ipcMain.on(IPC.Marker.LoadJson, (event, arg) => {
-    SETTINGS.addMarkerGroup(arg);
-    configUpdated();
+    AddNewMarkerGroupWithDialog(arg);
 });
 
 ipcMain.on(IPC.Marker.LoadGroup, (event, arg) => {
@@ -138,8 +159,8 @@ ipcMain.on(IPC.Marker.LoadGroup, (event, arg) => {
     }).then((result) => {
         if (result.canceled) { return; }
         let data = fs.readFileSync(result.filePaths[0]);
-        SETTINGS.addMarkerGroupFromJson(data);
-        configUpdated();
+        let markergroup = MarkerGroupSettings.fromJson(data.toString());
+        AddNewMarkerGroupWithDialog(markergroup);
     }).catch(err => {
         log("MAIN", "Loadfile error:" + err);
     })

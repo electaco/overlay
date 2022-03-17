@@ -25,7 +25,7 @@ export class MovieManager {
     this.video = document.getElementById('player_html5_api') as HTMLVideoElement;
     this.video.crossOrigin = "anonymous";
     this.vTexture = new THREE.VideoTexture(this.video);
-    this.vMaterial = new THREE.MeshBasicMaterial({ map: this.vTexture, side: THREE.DoubleSide });
+    this.vMaterial = new THREE.MeshBasicMaterial({ map: this.vTexture, side: THREE.FrontSide });
 
     this.video.onended = () => {
       this.Stop();
