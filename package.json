@@ -1,6 +1,6 @@
 {
   "name": "electaco",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Guild Wars 2 Overlay",
   "main": "build/electron/ts_static/electron_main.js",
   "homepage": "./",
