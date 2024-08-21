@@ -61,7 +61,7 @@ export function createConfigButtonWindow() {
     const cwin = new BrowserWindow({
         width: 200,
         height: 500,
-        x: (screen.getPrimaryDisplay().workAreaSize.width /2) -50,
+        x: (screen.getPrimaryDisplay().workAreaSize.width /2) -70,
         y: 0,
         webPreferences: {
             nodeIntegration: true,
