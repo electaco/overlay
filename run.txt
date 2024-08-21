@@ -1,7 +1,16 @@
-Run on node v14.15
+Tested on node v18.14.2
 
-Live building of files (electron and react components):
+Build and run steps:
+  1. yarn electron-build
+  2. yarn react-build
+  3. yarn start
+
+To build and run electron:
+  yarn run run
+
+Live building of files (step 1 and 2 - electron and react components):
   yarn watch
+
 Start Electron:
   yarn start
 Build installer:

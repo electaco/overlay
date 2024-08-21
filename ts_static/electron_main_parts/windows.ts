@@ -1,7 +1,7 @@
 import { IPC } from "../../src/shared/IPC";
 import { configUpdated, GetSettings } from "./settings";
 
-const { BrowserWindow, ipcMain } = require('electron')
+const { BrowserWindow, ipcMain, screen } = require('electron')
 
 let rendererWindow = null;
 let configButton = null;
@@ -61,7 +61,7 @@ export function createConfigButtonWindow() {
     const cwin = new BrowserWindow({
         width: 200,
         height: 500,
-        x: 350,
+        x: (screen.getPrimaryDisplay().workAreaSize.width /2) -50,
         y: 0,
         webPreferences: {
             nodeIntegration: true,
