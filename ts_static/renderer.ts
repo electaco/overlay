@@ -42,7 +42,7 @@ class RenderManager {
 
     this.initWebSocket();
     this.initEventListeners();
-    this.renderScene();
+    requestAnimationFrame(this.renderScene.bind(this));
   }
 
   private initWebSocket() {
