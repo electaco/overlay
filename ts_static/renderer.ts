@@ -139,7 +139,7 @@ class RenderManager {
       if (child.userData.onAfterRender) {
         child.userData.onAfterRender(this.positionManager.GetPosition(), this.scene);
       }
-      if (child.userData.showDistance) {
+      if (child.userData.showDistance && child.parent) {
         child.visible = child.parent.position.distanceTo(this.camera.position) < child.userData.showDistance;
       }
     });
@@ -198,7 +198,7 @@ class RenderManager {
   }
 
   private removeUnusedObjects() {
-    let toRemove = [];
+    let toRemove: THREE.Object3D[] = [];
     this.scene.children.forEach((child) => {
       if (child.userData.onRemove) {
         child.userData.onRemove(this.scene);
