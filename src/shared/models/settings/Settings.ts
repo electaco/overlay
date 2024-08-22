@@ -157,7 +157,9 @@ export class Settings implements ISettings {
                         renderMarker.text = {
                             backgroundColor: marker.nameplate?.plateColor ?? markerGroup.defaultNamePlate?.plateColor ?? "#000000",
                             text: marker.name,
-                            borderColor: marker.nameplate?.borderColor ?? markerGroup.defaultNamePlate?.borderColor ?? "#ffffff",
+                            description: marker.description,
+                            group: markerGroup.name,
+                            borderColor: marker.nameplate?.borderColor ?? markerGroup.defaultNamePlate?.borderColor ?? "#000000",
                             textColor: marker.nameplate?.textColor ?? markerGroup.defaultNamePlate?.textColor ?? "#F00",
                             offset: {
                                 X: 0,

@@ -136,6 +136,9 @@ class RenderManager {
 
   private handlePostRenderActions() {
     this.scene.children.forEach((child) => {
+      if (child.userData.lookAtUser) {
+        child.lookAt(this.camera.position);
+      }
       if (child.userData.onAfterRender) {
         child.userData.onAfterRender(this.positionManager.GetPosition(), this.scene);
       }
