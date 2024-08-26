@@ -3,8 +3,8 @@ import { configUpdated, GetSettings } from "./settings";
 
 const { BrowserWindow, ipcMain, screen } = require('electron')
 
-let rendererWindow = null;
-let configButton = null;
+let rendererWindow: typeof BrowserWindow|null = null;
+let configButton: typeof BrowserWindow|null = null;
 let openWindows: { [path: string]: typeof BrowserWindow } = {};
 
 ipcMain.on(IPC.Debug.DebugWindowRender, (event, arg) => {
@@ -44,6 +44,26 @@ export function createRenderWindow(): typeof BrowserWindow {
     win.setAlwaysOnTop(true, "screen-saver");
     win.setIgnoreMouseEvents(true, { forward: true });
 
+    win.on("always-on-top-changed", (event, isAlwaysOnTop) => {
+        console.log("Always on top changed", isAlwaysOnTop);
+    });
+    win.on("blur", () => {
+        console.log("blur");
+     });
+    win.on("focus", () => {
+        console.log("focus");
+    });
+    win.on("show", () => {
+        console.log("show");
+    });
+    win.on("hide", () => {
+        console.log("hide");
+    }); 
+    win.on("leave-full-screen", () => {
+        console.log("leave-full-screen");
+    });
+    
+    
     win.loadFile('build/renderer.html')
 
     rendererWindow = win;

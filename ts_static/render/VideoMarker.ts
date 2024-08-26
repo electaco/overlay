@@ -2,8 +2,10 @@ import { IVideoData } from "../../src/shared/interfaces/datatransfer/IVideoData"
 import * as THREE from 'three';
 import { ICameraPositionResult } from "./CameraPositionManager";
 import { Vector3 } from "three";
+// @ts-ignore
 import isEqual = require("lodash.isequal");
-import { runInThisContext } from "vm";
+
+
 
 export class MovieManager {
   video: HTMLVideoElement;
@@ -100,6 +102,7 @@ export class MovieManager {
   }
 
   UnloadMarker() {
+    if (this.movieScreen == null) return;
     this.movieScreen.userData.onAfterRender = null;
     this.activeVideoMark = null;
     this.Stop();
@@ -125,6 +128,7 @@ export class MovieManager {
 
   PlayVideo(data: IVideoData) {
     //this.SetVisibleStatus(true);
+    if (this.movieScreen == null) return;
     if (isEqual (data, this.activeVideoMark)) return;
     
     this.isActive = true;
@@ -143,7 +147,7 @@ export class MovieManager {
     this.movieScreen.scale.set(data.scale, data.scale, data.scale);
     this.SetVisibleStatus(true);
 
-    this.movieScreen.userData.onAfterRender = (camerapos: ICameraPositionResult, scene: THREE.Scene) => {
+    this.movieScreen.userData.onAfterRender = (camerapos: ICameraPositionResult, scene: THREE.Scene, camera) => {
       if (!this.movieScreen)
         return;
 

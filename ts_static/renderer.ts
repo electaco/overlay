@@ -136,11 +136,8 @@ class RenderManager {
 
   private handlePostRenderActions() {
     this.scene.children.forEach((child) => {
-      if (child.userData.lookAtUser) {
-        child.lookAt(this.camera.position);
-      }
       if (child.userData.onAfterRender) {
-        child.userData.onAfterRender(this.positionManager.GetPosition(), this.scene);
+        child.userData.onAfterRender(this.positionManager.GetPosition(), this.scene, this.camera);
       }
       if (child.userData.showDistance && child.parent) {
         child.visible = child.parent.position.distanceTo(this.camera.position) < child.userData.showDistance;

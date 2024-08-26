@@ -30,7 +30,7 @@ export function CreateMarker(marker: IPositionMarker) {
       onMouseOverExit: () => {
         showMarkerName = false;
       },
-      onAfterRender: (camerapos: ICameraPositionResult, scene: THREE.Scene) => {
+      onAfterRender: (camerapos: ICameraPositionResult, scene: THREE.Scene, camera) => {
         var distance = markerGroup.position.distanceTo(camerapos.playerposition);
         if (marker.text?.showDistance) {
           textSprite.visible = distance < marker.text.showDistance || showMarkerName;
@@ -43,6 +43,9 @@ export function CreateMarker(marker: IPositionMarker) {
           var textOffset = THREE.MathUtils.mapLinear(distance, 5, 1500, 0, 15);
           textSprite.position.set(marker.text.offset.X, marker.text.offset.Y + textOffset, marker.text.offset.Z);
           textSprite.scale.set(textScale, textScale, textScale);
+          if (textSprite.visible) {
+            textSprite.lookAt(camera.position);
+          }
         }
         if (marker.icon) {
           icon.scale.set(scale, scale, scale);

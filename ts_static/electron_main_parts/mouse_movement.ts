@@ -34,4 +34,4 @@ function getMouseCursorPosition() {
   }
 }
 
-let mouseCursorCheckInterval = null;
+let mouseCursorCheckInterval: NodeJS.Timer|null = null;

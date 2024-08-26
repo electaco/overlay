@@ -1,6 +1,6 @@
 {
   "name": "electaco",
-  "version": "0.2.6",
+  "version": "0.3.0-beta.1",
   "description": "Guild Wars 2 Overlay",
   "main": "build/electron/ts_static/electron_main.js",
   "homepage": "./",
@@ -66,6 +66,7 @@
   "author": "Terrasque",
   "license": "ISC",
   "devDependencies": {
+    "@types/lodash.isequal": "^4.5.8",
     "@types/three": "^0.167.2",
     "electron": "32.0.1",
     "electron-builder": "^22.13.1",
