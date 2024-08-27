@@ -5,7 +5,14 @@ const { app, ipcMain } = require('electron')
 const fs = require('fs');
 
 const configFolder = app.getPath("userData");
-const LOGS = [];
+
+interface iLOG {
+    source: any,
+    message: string,
+    timestamp: number
+}
+
+const LOGS: iLOG[] = [];
 
 function getTimestamp() {
     const pad = (n, s = 2) => (`${new Array(s).fill(0)}${n}`).slice(-s);

@@ -7,13 +7,13 @@ const { ipcMain } = require('electron')
 
 let LASTPOS: IGw2MumbleLinkData | null = null;
 
-export function getMapId(position: IGw2MumbleLinkData): string {
-    if (!position || !position?.coordinates?.MapId) { return null; }
+export function getMapId(position: IGw2MumbleLinkData | null): string | null{
+    if (!position || position == null || !position?.coordinates?.MapId) { return null; }
     return TranslateMapId(position.coordinates.MapId);
 }
 
 ipcMain.on(IPC.Gw2Data, (event, arg: IGw2MumbleLinkData) => {
-    if (getMapId(LASTPOS) != getMapId(arg)) {
+    if (LASTPOS == null || getMapId(LASTPOS) != getMapId(arg)) {
 
         LASTPOS = arg;
         configUpdated();
@@ -21,7 +21,7 @@ ipcMain.on(IPC.Gw2Data, (event, arg: IGw2MumbleLinkData) => {
     LASTPOS = arg;
 });
 
-export function getLastPosition(): IGw2MumbleLinkData {
+export function getLastPosition(): IGw2MumbleLinkData | null{
     return LASTPOS;
 }
 

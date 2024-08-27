@@ -21,7 +21,7 @@ const TD = new TextDecoder("utf-8");
 
 export function SetupBackgroundService() {
     bat = spawn(bat_prefix + BACKGROUND_SERVICE_PATH);
-
+    
     bat.stdout.on("data", (data) => {
         if (webSocket == null) {
             setupWebSocket();

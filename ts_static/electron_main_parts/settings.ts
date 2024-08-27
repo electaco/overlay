@@ -17,11 +17,15 @@ const { app, ipcMain, dialog } = require('electron')
 const fs = require('fs');
 const path = require('path');
 
-let SETTINGS:Settings|null = null;
+let SETTINGS:Settings;
+
+export function GetStoragePathFor(filename: string) {
+    const configFolder = app.getPath("userData");
+    return path.join(configFolder, filename);
+}
 
 export function InitSettings(): Settings {
-    const configFolder = app.getPath("userData");
-    const configFile = path.join(configFolder, "settings2.json");
+    const configFile = GetStoragePathFor("settings2.json");
 
     console.log("Settings file: " + configFile);
 
@@ -59,7 +63,9 @@ export function LoadMarkerPacksFromCommandLine(argv: string[], workingDirectory:
 }
 
 function addMarker(markerSetNum: number) {
-    let mapid: string = getMapId(getLastPosition());
+    let lastpos = getLastPosition();
+    if (lastpos == null) return;
+    let mapid: string | null = getMapId(lastpos);
     if (mapid == null) { return; }
 
     if (!SETTINGS.marks[markerSetNum]) {
@@ -72,7 +78,7 @@ function addMarker(markerSetNum: number) {
         markerPos = markerGroup.markers[mapid].length + 1;
     }
 
-    let point = Position.FromGw2Position(getLastPosition().coordinates.playerPosition);
+    let point = Position.FromGw2Position(lastpos.coordinates.playerPosition);
     let markerName = "Marker #" + markerPos;
     let marker = new MarkerSettings(point, markerName);
     log("main", "Adding marker: " + JSON.stringify(marker));
@@ -121,9 +127,13 @@ async function AddNewMarkerGroupWithDialog(group: MarkerGroupSettings) {
             SETTINGS.addMarkerGroup(group, true);
         }
         else if (result.response == 2) { // Keep both
-            SETTINGS.getMarkerGroupById(group.id).createId();
-            SETTINGS.addMarkerGroup(group);
+            let markergroup = SETTINGS.getMarkerGroupById(group.id);
+            if (markergroup != null) {
+                markergroup.createId();
+                SETTINGS.addMarkerGroup(group);
+            }
         }
+        // TODO: Add Merge
     }
     configUpdated();
 }
@@ -196,7 +206,11 @@ ipcMain.on(IPC.Settings.Update, (event, arg) => {
 });
 
 function sendRenderData(settings: Settings) {
-    let rd = settings.createRenderData(getMapId(getLastPosition()));
+    let lastpos = getLastPosition();
+    if (lastpos == null) return;
+    let mapid = getMapId(lastpos);
+    if (mapid == null) return;
+    let rd = settings.createRenderData(mapid);
     getRenderWindow()?.webContents.send(IPC.Render, rd);
 }
 
@@ -216,7 +230,7 @@ ipcMain.on(IPC.GetRender, (event, arg) => {
 
 ipcMain.on(IPC.Gw2Data, (event, arg: IGw2MumbleLinkData) => {
     let mapid = getMapId(arg);
-    if (mapid != SETTINGS.runtimeData.map) {
+    if (mapid != null && mapid != SETTINGS.runtimeData.map) {
         SETTINGS.setMap(mapid);
         configUpdated();
     }
