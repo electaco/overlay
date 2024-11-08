@@ -18,19 +18,26 @@ export function InitializeMouseMove() {
 }
 
 function getMouseCursorPosition() {
-  var point = screen.getCursorScreenPoint();
+  try {
+    var point = screen.getCursorScreenPoint();
 
-  if (point.x != mousePoint.x || point.y != mousePoint.y) {
-    let display = screen.getPrimaryDisplay();
-    var boundRect = display.bounds;
-    if (point.x > boundRect.x && point.x < boundRect.width) {
-      var np = {
-        x: transformRange(point.x, boundRect.width),
-        y: transformRange(point.y, boundRect.height) * -1,
-      };
-      getRenderWindow()?.webContents.send(IPC.MouseMove, np);
+    if (point.x != mousePoint.x || point.y != mousePoint.y) {
+      let display = screen.getPrimaryDisplay();
+      var boundRect = display.bounds;
+      if (point.x > boundRect.x && point.x < boundRect.width) {
+        var np = {
+          x: transformRange(point.x, boundRect.width),
+          y: transformRange(point.y, boundRect.height) * -1,
+        };
+        getRenderWindow()?.webContents.send(IPC.MouseMove, np);
+      }
+      mousePoint = point;
     }
-    mousePoint = point;
+  } catch (error) {
+    if (error.message !== "Object has been destroyed") {
+      console.error("An unexpected error occurred:", error);
+    }
+    // Otherwise, silently ignore the "Object has been destroyed" error
   }
 }
 

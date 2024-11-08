@@ -85,6 +85,7 @@ export class MovieManager {
 
   ClearMarkers() {
     this.videoMarks = [];
+    this.video.pause();
   }
 
   SetVideoMarkers(markers: IVideoData[]) {
