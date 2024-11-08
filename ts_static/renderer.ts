@@ -9,7 +9,7 @@ import { CameraPositionManager } from './render/CameraPositionManager';
 import { CreateMarker } from './render/PositionMarker';
 
 declare var ipcRenderer: any;
-declare var vPlayer: any;
+//declare var vPlayer: any;
 
 class RenderManager {
   private scene: THREE.Scene;
@@ -35,7 +35,7 @@ class RenderManager {
     this.renderer.setSize(window.innerWidth, window.innerHeight, false);
     document.body.appendChild(this.renderer.domElement);
 
-    this.movieManager = new MovieManager(this.scene, vPlayer);
+    this.movieManager = new MovieManager(this.scene);
     this.positionManager = new CameraPositionManager(this.renderScene.bind(this));
     this.raycaster = new THREE.Raycaster();
     this.raycaster.layers.set(2);

@@ -4,12 +4,12 @@ import { ICameraPositionResult } from "./CameraPositionManager";
 import { Vector3 } from "three";
 // @ts-ignore
 import isEqual = require("lodash.isequal");
-
+const Hls = require("hls.js");
 
 export class MovieManager {
   video: HTMLVideoElement;
   movieScreen: THREE.Mesh | null = null;
-  vPlayer: any;
+  //vPlayer: any;
   scene: THREE.Scene;
   isPlaying: boolean = false;
   isActive: boolean = false;
@@ -20,10 +20,10 @@ export class MovieManager {
   videoMarks: {marker: IVideoData, pos: Vector3}[] = [];
   vMaterial: THREE.MeshBasicMaterial;
 
-  constructor(scene: THREE.Scene, player: any) {
-    this.vPlayer = player;
+  constructor(scene: THREE.Scene) {
+    //this.vPlayer = player;
     this.scene = scene;
-    this.video = document.getElementById('player_html5_api') as HTMLVideoElement;
+    this.video = document.getElementById('player') as HTMLVideoElement;
     this.video.crossOrigin = "anonymous";
     this.vTexture = new THREE.VideoTexture(this.video);
     this.vMaterial = new THREE.MeshBasicMaterial({ map: this.vTexture, side: THREE.FrontSide });
@@ -50,8 +50,8 @@ export class MovieManager {
   }
 
   Stop() {
-    this.isPlaying = false;
-    this.vPlayer.pause();
+   this.isPlaying = false;
+   // this.vPlayer.pause();
   }
 
   SetVisibleStatus (status: boolean) {
@@ -62,12 +62,12 @@ export class MovieManager {
   }
 
   Cleanup() {
-    this.vPlayer.dispose();
+    //this.vPlayer.dispose();
   }
 
   Play() {
     if (this.isActive) {
-      this.vPlayer.play();
+      //this.vPlayer.play();
       this.isPlaying = true;
     }
   }
@@ -136,8 +136,12 @@ export class MovieManager {
     if (!isEqual(data.source, this.activeVideoMark?.source)) {
       this.Stop();
       let src = { url: data.source.url, type: data.source.type };
-      console.log('Play video', src );
-      this.vPlayer.src(src);
+      console.log('Play video', src);
+      var hls = new Hls();
+      hls.loadSource(src.url);
+      hls.attachMedia(this.video);
+      this.video.play();
+      //this.vPlayer.src(src);
     }
 
     this.activeVideoMark = data;

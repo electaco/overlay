@@ -4,8 +4,6 @@
 <head>
   <meta charset="utf-8">
   <title>Renderer view</title>
-  <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
-  <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -39,22 +37,6 @@
   <script>var exports = {};</script>
 
   <video id="player"></video>
-
-  <script>
-    const vPlayer = videojs('player', {
-      html5: {
-        hlsjsConfig: {
-          enableWorker: true,
-          liveBackBufferLength: 15,
-          backBufferLength: 20,
-          maxBufferSize: 4096,
-          maxBufferLength: 20,
-          liveSyncDurationCount: 3,
-          initialLiveManifestSize: 4,
-        },
-      }
-    });
-  </script>
   
   <script>
     require('./electron/ts_static/renderer');
