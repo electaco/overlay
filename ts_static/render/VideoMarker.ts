@@ -6,7 +6,6 @@ import { Vector3 } from "three";
 import isEqual = require("lodash.isequal");
 
 
-
 export class MovieManager {
   video: HTMLVideoElement;
   movieScreen: THREE.Mesh | null = null;
@@ -74,6 +73,7 @@ export class MovieManager {
   }
 
   AddVideo(data: IVideoData) {
+    console.log("Add video", data);
     this.videoMarks.push({
       marker: data,
       pos: new Vector3(data.position.X, data.position.Y, data.position.Z)
@@ -128,19 +128,21 @@ export class MovieManager {
 
   PlayVideo(data: IVideoData) {
     //this.SetVisibleStatus(true);
-    if (this.movieScreen == null) return;
-    if (isEqual (data, this.activeVideoMark)) return;
-    
+    if (isEqual(data, this.activeVideoMark)) return;
+    console.log("Data is not active video mark");
+    this.GetVideoMarker(data.source.ratio);
     this.isActive = true;
 
     if (!isEqual(data.source, this.activeVideoMark?.source)) {
       this.Stop();
-      this.vPlayer.src({ type: data.source.type, src: data.source.url });
+      let src = { url: data.source.url, type: data.source.type };
+      console.log('Play video', src );
+      this.vPlayer.src(src);
     }
 
     this.activeVideoMark = data;
 
-    this.GetVideoMarker(data.source.ratio);
+    if (this.movieScreen == null) return;
 
     this.movieScreen.position.set(data.position.X, data.position.Y, data.position.Z);
     this.movieScreen.rotation.set(data.rotation.X, data.rotation.Y, data.rotation.Z);

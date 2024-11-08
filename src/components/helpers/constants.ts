@@ -31324,6 +31324,7 @@ export const maps: IMaps = {
 
 const mapMap: { [index: string]: string } = {}
 
+// some maps got multiple entries, this normalize the id to the first map with that name in the list
 export function TranslateMapId(mapId: string) {
     if (mapMap[mapId]) {
         return mapMap[mapId]
