@@ -13,6 +13,7 @@ export class MovieManager {
   scene: THREE.Scene;
   hls: typeof Hls;
   isPlaying: boolean = false;
+  videoSourcePlaying: boolean = false;
   isActive: boolean = false;
   vTexture: THREE.VideoTexture | null = null;
   vTextureUpdated: Date = new Date();
@@ -30,6 +31,25 @@ export class MovieManager {
     this.vTexture = new THREE.VideoTexture(this.video);
     this.vTexture.colorSpace = THREE.SRGBColorSpace;
     this.vMaterial = new THREE.MeshBasicMaterial({ map: this.vTexture, side: THREE.FrontSide });
+
+    let me = this;
+    this.hls.on(Hls.Events.ERROR, function (event, data) {
+      var errorType = data.type;
+      var errorFatal = data.fatal;
+      
+      if (errorFatal) {
+        console.log("HLS Error:", data);
+        switch (errorType) {
+          case Hls.ErrorTypes.NETWORK_ERROR:
+            setTimeout((me) => {
+              me.activeVideoMark = null;
+              }, 5000, me);
+            break;
+          default:
+            break;
+        }
+      }
+     });
 
     this.video.onended = () => {
       this.Stop();
@@ -84,11 +104,13 @@ export class MovieManager {
   }
 
   ClearMarkers() {
+    console.log("Clear markers called");
     this.videoMarks = [];
-    this.video.pause();
+    if (this.videoSourcePlaying) { this.video.pause(); }
   }
 
   SetVideoMarkers(markers: IVideoData[]) {
+    console.log("SetVideoMarkers called");
     this.ClearMarkers();
     for (let i = 0; i < markers.length; i++) {
       this.AddVideo(markers[i]);
@@ -144,7 +166,21 @@ export class MovieManager {
       console.log('Play video', src);
       this.hls.loadSource(src.url);
       this.hls.attachMedia(this.video);
-      this.video.play();
+
+      this.videoSourcePlaying = false;
+      var playPromise = this.video.play();
+      if (playPromise !== undefined) {
+        playPromise.then(_ => {
+          // Automatic playback started!
+          // Show playing UI.
+          this.videoSourcePlaying = true;
+        })
+          .catch(error => {
+            console.log("Error in playPromise:", error);
+          // Auto-play was prevented
+          // Show paused UI.
+        });
+      }
       //this.vPlayer.src(src);
     }
 

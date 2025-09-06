@@ -67,6 +67,7 @@
   "author": "Terrasque",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.0",
     "@types/lodash.isequal": "^4.5.8",
     "@types/three": "^0.167.2",
     "electron": "32.0.1",

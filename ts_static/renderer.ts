@@ -103,6 +103,7 @@ class RenderManager {
     try {
       this.removeUnusedObjects();
       this.addNewMarkers(renderData);
+      console.log("Update setting video markers");
       this.movieManager.SetVideoMarkers(this.extractVideoMarkers(renderData));
     } catch (e) {
       this.logError("Error in UpdateScene: " + e);
