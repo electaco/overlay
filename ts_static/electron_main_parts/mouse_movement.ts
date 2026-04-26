@@ -7,7 +7,7 @@ import { getRenderWindow } from "./windows";
 
 var mousePoint = { x: 0, y: 0 };
 
-var transformRange = (value, r2) => {
+var transformRange = (value: number, r2: number) => {
   var scale = 2 / r2;
   return (value * scale) - 1;
 }
@@ -33,7 +33,7 @@ function getMouseCursorPosition() {
       }
       mousePoint = point;
     }
-  } catch (error) {
+  } catch (error: any) {
     if (error.message !== "Object has been destroyed") {
       console.error("An unexpected error occurred:", error);
     }

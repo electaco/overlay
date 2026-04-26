@@ -24,7 +24,7 @@ class RenderManager {
   private lastTime = 0;
   private lastMainUpdate = 0;
   private isMap = false;
-  private webSocket: WebSocket;
+  private webSocket: WebSocket | null = null;
   private gotPosition = false;
 
   constructor() {
@@ -75,21 +75,17 @@ class RenderManager {
   }
 
   private initEventListeners() {
-    ipcRenderer.on(IPC.Render, (event, data: IRenderData) => {
+    ipcRenderer.on(IPC.Render, (event: any, data: IRenderData) => {
       this.renderData = data;
       this.updateSceneData(this.renderData);
       this.renderScene();
     });
 
-    ipcRenderer.on(IPC.Video, (event, data: IVideoData) => {
-      this.movieManager.PlayVideo(data);
-    });
-
-    ipcRenderer.on(IPC.Gw2Data, (event, data: IGw2MumbleLinkData) => {
+    ipcRenderer.on(IPC.Gw2Data, (event: any, data: IGw2MumbleLinkData) => {
       this.updateGw2Data(data);
     });
 
-    ipcRenderer.on(IPC.MouseMove, (event, mouse) => {
+    ipcRenderer.on(IPC.MouseMove, (event: any, mouse: {x: number; y: number;}) => {
       this.handleMouseMove(mouse);
     });
   }

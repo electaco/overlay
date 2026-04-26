@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { IPosition } from '../../shared/interfaces/common';
 import { IPC } from '../../shared/ipc';
 import './PositionEditor.css'
-const { ipcRenderer } = window.require('electron')
+import { send } from '../../shared/electron_ipc';
 
 
 function PositionEditor(props: {
@@ -14,25 +14,32 @@ function PositionEditor(props: {
   const [x, setX] = useState(props.position.X);
   const [y, setY] = useState(props.position.Y);
   const [z, setZ] = useState(props.position.Z);
+  const valuesRef = useRef({ x, y, z });
+
+  const onchange = (position: IPosition) => {
+    send(IPC.Settings.Update, { path: props.path, value: position });
+  };
 
   const onChangeX = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setX(parseFloat(e.target.value));
-    onchange({ X: parseFloat(e.target.value), Y: y, Z: z });
+    const newX = parseFloat(e.target.value);
+    setX(newX);
+    valuesRef.current.x = newX;
+    onchange({ X: newX, Y: valuesRef.current.y, Z: valuesRef.current.z });
   };
 
   const onChangeY = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setY(parseFloat(e.target.value));
-    onchange({ X: x, Y: parseFloat(e.target.value), Z: z });
+    const newY = parseFloat(e.target.value);
+    setY(newY);
+    valuesRef.current.y = newY;
+    onchange({ X: valuesRef.current.x, Y: newY, Z: valuesRef.current.z });
   };
 
   const onChangeZ = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setZ(parseFloat(e.target.value));
-    onchange({X: x, Y: y, Z: parseFloat(e.target.value)});
+    const newZ = parseFloat(e.target.value);
+    setZ(newZ);
+    valuesRef.current.z = newZ;
+    onchange({ X: valuesRef.current.x, Y: valuesRef.current.y, Z: newZ });
   };
-
-  const onchange = (position: IPosition) => {
-    ipcRenderer.send(IPC.Settings.Update, { path: props.path, value: position });
-    };
 
   return (
     <span className="position-editor">

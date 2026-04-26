@@ -8,10 +8,10 @@ import { faFolderPlus, faFileImport, faSearchLocation } from '@fortawesome/free-
 import { SortArray, ByActive, CompoundSort, MarkerPackHasMap } from './helpers/sorting';
 import { IMarkerGroupSettings } from '../shared/interfaces/settings/IMarkerGroupSettings';
 import { IPC } from '../shared/ipc';
-const { ipcRenderer } = window.require('electron')
+import { send, on, removeAllListeners } from '../shared/electron_ipc';
 
 function log(data: string) {
-  ipcRenderer.send(IPC.Log, "Markers", data);
+  send(IPC.Log, "Markers", data);
 }
 
 interface IProps { }
@@ -24,28 +24,32 @@ class App extends React.Component<IProps, IState>{
       settings: null
     };
     this.settingsListener = this.settingsListener.bind(this);
-    ipcRenderer.on(IPC.Settings.Set, this.settingsListener);
-    ipcRenderer.send(IPC.Settings.Get, true);
+    const cleanup = on(IPC.Settings.Set, this.settingsListener);
+    send(IPC.Settings.Get, true);
+    this._cleanup = cleanup;
   }
+
+  private _cleanup?: () => void;
 
   componentWillUnmount() {
-    ipcRenderer.removeAllListeners(IPC.Settings.Set);
+    this._cleanup?.();
+    removeAllListeners(IPC.Settings.Set);
   }
 
-  settingsListener(event: any, data: ISettings) {
-    this.setState({ settings: data });
+  settingsListener(_event: unknown, data: unknown) {
+    this.setState({ settings: data as ISettings });
   }
 
   newMarkerGroup() {
-    ipcRenderer.send(IPC.Marker.NewGroup, true);
+    send(IPC.Marker.NewGroup, true);
   }
 
   loadMarkerGroup() {
-    ipcRenderer.send(IPC.Marker.LoadGroup, true);
+    send(IPC.Marker.LoadGroup, true);
   }
 
   openSearchPage() {
-    ipcRenderer.send(IPC.Window.Open, {path: "get_markers", show:true});
+    send(IPC.Window.Open, {path: "get_markers", show:true});
   }
 
   getSettings(): ISettings {

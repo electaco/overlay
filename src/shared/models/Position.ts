@@ -6,7 +6,7 @@ export class Position implements IPosition {
     Z: number;
 
     // Note: The Z and X are switched here.
-    static FromGw2Position(position) {
+    static FromGw2Position(position: { X: number; Y: number; Z: number }) {
         return new Position(position.Z, position.Y, position.X);
     }
 

@@ -33,7 +33,8 @@ export class MovieManager {
     this.vMaterial = new THREE.MeshBasicMaterial({ map: this.vTexture, side: THREE.FrontSide });
 
     let me = this;
-    this.hls.on(Hls.Events.ERROR, function (event, data) {
+    // https://github.com/video-dev/hls.js/blob/master/docs/API.md#fifth-step-error-handling
+    this.hls.on(Hls.Events.ERROR, function (event: any, data: any) {
       var errorType = data.type;
       var errorFatal = data.fatal;
       
@@ -193,7 +194,7 @@ export class MovieManager {
     this.movieScreen.scale.set(data.scale, data.scale, data.scale);
     this.SetVisibleStatus(true);
 
-    this.movieScreen.userData.onAfterRender = (camerapos: ICameraPositionResult, scene: THREE.Scene, camera) => {
+    this.movieScreen.userData.onAfterRender = (camerapos: ICameraPositionResult, scene: THREE.Scene, camera: THREE.PerspectiveCamera) => {
       if (!this.movieScreen)
         return;
 

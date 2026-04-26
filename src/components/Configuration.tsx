@@ -7,8 +7,7 @@ import getSetting from './helpers/getSetting';
 import EventButton from './window/EventButton';
 import { IPC } from '../shared/ipc';
 import { Settings } from '../shared/models/settings/Settings';
-
-const { ipcRenderer } = window.require('electron')
+import { send, on, removeAllListeners } from '../shared/electron_ipc';
 
 interface IProps {
 
@@ -19,22 +18,26 @@ interface IState {
 }
 
 class App extends React.Component<IProps, IState> {
-  constructor(props: any) {
+  constructor(props: IProps) {
     super(props);
     this.state = {
       settings: null
     };
     this.settingsListener = this.settingsListener.bind(this);
-    ipcRenderer.on(IPC.Settings.Set, this.settingsListener);
-    ipcRenderer.send(IPC.Settings.Get, true);
+    const cleanup = on(IPC.Settings.Set, this.settingsListener);
+    send(IPC.Settings.Get, true);
+    this._cleanup = cleanup;
   }
+
+  private _cleanup?: () => void;
 
   componentWillUnmount() {
-    ipcRenderer.removeAllListeners(IPC.Settings.Set);
+    this._cleanup?.();
+    removeAllListeners(IPC.Settings.Set);
   }
 
-  settingsListener(event: any, data: any) {
-    this.setState({settings: data});
+  settingsListener(_event: unknown, data: unknown) {
+    this.setState({settings: data as Settings});
   }
 
   render() {

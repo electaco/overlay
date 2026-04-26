@@ -30,7 +30,7 @@ export function CreateMarker(marker: IPositionMarker) {
       onMouseOverExit: () => {
         showMarkerName = false;
       },
-      onAfterRender: (camerapos: ICameraPositionResult, scene: THREE.Scene, camera) => {
+      onAfterRender: (camerapos: ICameraPositionResult, scene: THREE.Scene, camera: THREE.PerspectiveCamera) => {
         var distance = markerGroup.position.distanceTo(camerapos.playerposition);
         if (marker.text?.showDistance) {
           textSprite.visible = distance < marker.text.showDistance || showMarkerName;

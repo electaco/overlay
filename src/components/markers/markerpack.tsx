@@ -17,8 +17,7 @@ import { IMarkerSettings } from '../../shared/interfaces/settings/IMarkerSetting
 import { SortArray, ByActive, ByActiveMap } from '../helpers/sorting';
 import { ISettings } from '../../shared/interfaces/settings';
 import { IPC } from '../../shared/ipc';
-
-const { ipcRenderer } = window.require('electron')
+import { send } from '../../shared/electron_ipc';
 
 interface IProps {
     pack: IMarkerGroupSettings,
@@ -29,15 +28,15 @@ interface IProps {
 
 function Markerpack(props: IProps) {
     function addMarker() {
-        ipcRenderer.send(IPC.Marker.Add, props.index);
+        send(IPC.Marker.Add, props.index);
     }
 
     function removeMarkerGroup() {
-        ipcRenderer.send(IPC.Marker.RemoveGroup, props.index);
+        send(IPC.Marker.RemoveGroup, props.index);
     }
 
     function exportMarkerGroup() {
-        ipcRenderer.send(IPC.Marker.SaveGroup, props.index);
+        send(IPC.Marker.SaveGroup, props.index);
     }
 
 

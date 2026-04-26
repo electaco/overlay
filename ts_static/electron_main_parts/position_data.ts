@@ -26,5 +26,6 @@ export function getLastPosition(): IGw2MumbleLinkData | null{
 }
 
 ipcMain.on(IPC.ConnectionStatus, (event, arg) => {
-    getConfigButtonWindow().webContents.send(IPC.ConnectionStatus, arg);
+    const win = getConfigButtonWindow();
+    if (win) win.webContents.send(IPC.ConnectionStatus, arg);
 });

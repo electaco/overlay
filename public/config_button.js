@@ -8,44 +8,44 @@ const minWidth = menuHeader.offsetWidth;
 const maxHeight = mouseTarget.offsetHeight;
 const maxWidth = mouseTarget.offsetWidth;
 
-ipcRenderer.send("resize", {w: minWidth, h: minHeight});
+window.config.send("resize", {w: minWidth, h: minHeight});
 
 //win.setSize(minWidth, minHeight);
 
 mouseTarget.addEventListener('mouseenter', e => {
-    ipcRenderer.send("resize", {w: maxWidth, h: maxHeight});
+    window.config.send("resize", {w: maxWidth, h: maxHeight});
   });
 
 mouseTarget.addEventListener('mouseleave', e => {
-    ipcRenderer.send("resize", {w: minWidth, h: minHeight});
+    window.config.send("resize", {w: minWidth, h: minHeight});
 });
 
 function exit_program() {
-    ipcRenderer.send("exit", "");
+    window.config.send("exit", "");
 }
 
 function download_update() {
-    ipcRenderer.send("download_update", "");
+    window.config.send("download_update", "");
     document.getElementById("updatestatus_download").className = "hidden";
 }
 
 function restart_app() {
-    ipcRenderer.send("restart_app", "");
+    window.config.send("restart_app", "");
 }
 
 function openWindow(name) {
-    ipcRenderer.send("show-page", {path: name, show:true});
+    window.config.send("show-page", {path: name, show:true});
 }
 
-ipcRenderer.on("connstatus", (evt, arg)=> {
+window.config.on("connstatus", (arg)=> {
     let item = document.getElementById("connstatus");
     item.className = arg;
 });
 
-ipcRenderer.on("update_downloaded", (evt, arg)=> {
+window.config.on("update_downloaded", (evt, arg)=> {
     document.getElementById("updatestatus").className = "";
 });
 
-ipcRenderer.on("update_available", (evt, arg)=> {
+window.config.on("update_available", (evt, arg)=> {
     document.getElementById("updatestatus_download").className = "";
 });

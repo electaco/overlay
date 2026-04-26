@@ -12,8 +12,7 @@ import PositionEditor from '../settings/PositionEditor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import IMarkerTypeChange from '../../shared/interfaces/datatransfer/IMarkerTypeChange';
 import { IPC } from '../../shared/ipc';
-
-const { ipcRenderer } = window.require('electron')
+import { send } from '../../shared/electron_ipc';
 
 interface IProps {
     settings: ISettings;
@@ -26,22 +25,22 @@ interface IProps {
 
 function MarkerPosition(props: IProps) {
     function removeMarker() {
-        let markerInfo: IMarkerRemovalInfo = {
+        const markerInfo: IMarkerRemovalInfo = {
             index: props.index,
             map: props.mapId,
             markerpack: props.markergroupindex
         }
-        ipcRenderer.send(IPC.Marker.Remove, markerInfo);
+        send(IPC.Marker.Remove, markerInfo);
     }
 
     function toVideoMarker() {
-        let markerInfo: IMarkerTypeChange =  {
+        const markerInfo: IMarkerTypeChange =  {
             type: 1,
             id: props.index,
             map: props.mapId,
             markergroup: props.markergroupindex
         }
-        ipcRenderer.send(IPC.Marker.ChangeType, markerInfo);
+        send(IPC.Marker.ChangeType, markerInfo);
     }
     return (
         <div className="marker d-flex">

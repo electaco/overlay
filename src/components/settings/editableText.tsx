@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import './EditableText.css'
 import { IPC } from '../../shared/ipc';
-
-const { ipcRenderer } = window.require('electron')
+import { send } from '../../shared/electron_ipc';
 
 interface IProps {
     value: string,
@@ -56,7 +55,7 @@ class EditableText extends React.Component<IProps, IState> {
     }
 
     saveState() {
-        ipcRenderer.send(IPC.Settings.Update, { path: this.props.path, value: this.state.value });
+        send(IPC.Settings.Update, { path: this.props.path, value: this.state.value });
         this.setState({editing: false});
     }
     render() {

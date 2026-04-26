@@ -15,13 +15,13 @@ interface iLOG {
 const LOGS: iLOG[] = [];
 
 function getTimestamp() {
-    const pad = (n, s = 2) => (`${new Array(s).fill(0)}${n}`).slice(-s);
+    const pad = (n: number, s: number = 2) => (`${new Array(s).fill(0)}${n}`).slice(-s);
     const d = new Date();
 
     return `${pad(d.getFullYear(), 4)}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
-export function log(source, message) {
+export function log(source: string, message: string) {
     LOGS.push({
         source: source,
         message: message,

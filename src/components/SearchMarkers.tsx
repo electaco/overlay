@@ -6,7 +6,7 @@ import { faFileImport } from '@fortawesome/free-solid-svg-icons'
 import { IPC } from '../shared/ipc';
 import IconCheckbox from './window/CheckBox';
 import { ISettings } from '../shared/interfaces/settings';
-const { ipcRenderer } = window.require('electron')
+import { send, on, removeAllListeners } from '../shared/electron_ipc';
 
 const ROOT = "https://elec.k.thelazy.net/";
 const QURL = ROOT + "markers/search?";
@@ -18,7 +18,7 @@ interface IProps {
 
 interface IState {
     results: IMarkerSearchResult[],
-    error: any,
+    error: unknown,
     isLoaded: boolean,
     isSearching: boolean,
     searchText: string,
@@ -36,7 +36,7 @@ function SearchMarkerResult(props: markerProps) {
         .then(res => res.json())
         .then(
           (result) => {
-            ipcRenderer.send(IPC.Marker.LoadJson, result);
+            send(IPC.Marker.LoadJson, result);
           },
           (error) => {
           }
@@ -58,7 +58,7 @@ function SearchMarkerResult(props: markerProps) {
 }
 
 class App extends React.Component<IProps, IState> {
-    constructor(props: any) {
+    constructor(props: IProps) {
         super(props);
         this.state = {
             settings: null,
@@ -72,16 +72,20 @@ class App extends React.Component<IProps, IState> {
         this.settingsListener = this.settingsListener.bind(this);
         this.search = this.search.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
-        ipcRenderer.on(IPC.Settings.Set, this.settingsListener);
-        ipcRenderer.send(IPC.Settings.Get, true);
+        const cleanup = on(IPC.Settings.Set, this.settingsListener);
+        send(IPC.Settings.Get, true);
+        this._cleanup = cleanup;
       }
+
+      private _cleanup?: () => void;
     
       componentWillUnmount() {
-        ipcRenderer.removeAllListeners(IPC.Settings.Set);
+        this._cleanup?.();
+        removeAllListeners(IPC.Settings.Set);
       }
     
-      settingsListener(event: any, data: any) {
-        this.setState({settings: data});
+      settingsListener(_event: unknown, data: unknown) {
+        this.setState({settings: data as ISettings});
       }
 
     search() {
@@ -108,13 +112,14 @@ class App extends React.Component<IProps, IState> {
           }
         )
     }
-    handleKeyPress(event: any) {
+    handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
         if(event.key === 'Enter'){
             this.search();
         }
     }
-    handleSelect(evt) {
-        this.setState({searchText: evt.target.value});
+    handleSelect(evt: React.SyntheticEvent) {
+        const target = evt.currentTarget as HTMLInputElement;
+        this.setState({searchText: target.value});
     }
     render() {
         return (

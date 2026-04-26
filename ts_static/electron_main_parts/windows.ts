@@ -1,15 +1,15 @@
 import { IPC } from "../../src/shared/IPC";
 import { configUpdated, GetSettings } from "./settings";
+import { app, BrowserWindow, ipcMain, screen } from 'electron';
+import * as pathModule from 'path';
 
-const { BrowserWindow, ipcMain, screen } = require('electron')
-
-let rendererWindow: typeof BrowserWindow|null = null;
-let configButton: typeof BrowserWindow|null = null;
-let openWindows: { [path: string]: typeof BrowserWindow } = {};
+let rendererWindow: BrowserWindow | null = null;
+let configButton: BrowserWindow | null = null;
+let openWindows: { [key: string]: BrowserWindow | undefined } = {};
 
 ipcMain.on(IPC.Debug.DebugWindowRender, (event, arg) => {
     //renderer.setIgnoreMouseEvents(false);
-    rendererWindow.webContents.openDevTools({ mode: 'detach' });
+    rendererWindow?.webContents.openDevTools({ mode: 'detach' });
 });
 
 ipcMain.on(IPC.Debug.DebugWindow, (event, arg: string) => {
@@ -19,21 +19,25 @@ ipcMain.on(IPC.Debug.DebugWindow, (event, arg: string) => {
 
 
 ipcMain.on(IPC.Debug.ReloadRender, (event, arg) => {
-    rendererWindow.setIgnoreMouseEvents(true);
-    rendererWindow.reload();
+    if (rendererWindow) {
+        rendererWindow.setIgnoreMouseEvents(true);
+        rendererWindow.webContents.reload();
+    }
 });
 
-export function createRenderWindow(): typeof BrowserWindow {
+export function createRenderWindow(): BrowserWindow {
     if (rendererWindow != null) {
         rendererWindow.close();
     }
     // Create the browser window.
-    const win: typeof BrowserWindow = new BrowserWindow({
+    const preloadPath = pathModule.join(app.getAppPath(), 'public', 'electron', 'preload.js');
+    const win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false
+            nodeIntegration: false,
+            contextIsolation: true,
+            preload: preloadPath,
         },
         frame: false,
         transparent: true,
@@ -77,6 +81,7 @@ ipcMain.on(IPC.Window.ResizeConfig, (event, arg) => {
 
 
 export function createConfigButtonWindow() {
+    const preloadPath = pathModule.join(app.getAppPath(), 'public', 'electron', 'preload.js');
     // Create the browser window.
     const cwin = new BrowserWindow({
         width: 200,
@@ -84,14 +89,15 @@ export function createConfigButtonWindow() {
         x: (screen.getPrimaryDisplay().workAreaSize.width /2) -70,
         y: 0,
         webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false
+            nodeIntegration: false,
+            contextIsolation: true,
+            preload: preloadPath,
         },
         frame: false,
         transparent: true,
         maximizable: false,
         fullscreenable: false,
-        parent: rendererWindow,
+        parent: rendererWindow || undefined,
     })
 
     cwin.setAlwaysOnTop(true, "screen-saver");
@@ -100,7 +106,8 @@ export function createConfigButtonWindow() {
     return cwin;
 }
 
-function createWindow(parent, path: string) {
+function createWindow(parent: BrowserWindow, windowPath: string) {
+    const preloadPath = pathModule.join(app.getAppPath(), 'public', 'electron', 'preload.js');
     // Create the browser window.
     const cwin = new BrowserWindow({
         width: 600,
@@ -108,8 +115,9 @@ function createWindow(parent, path: string) {
         minWidth: 100,
         minHeight: 80,
         webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false
+            nodeIntegration: false,
+            contextIsolation: true,
+            preload: preloadPath,
         },
         frame: false,
         transparent: true,
@@ -117,7 +125,7 @@ function createWindow(parent, path: string) {
     })
 
     cwin.setAlwaysOnTop(true, "screen-saver");
-    cwin.loadFile('build/index.html', { hash: "/" + path });
+    cwin.loadFile('build/index.html', { hash: "/" + windowPath });
 
     cwin.webContents.send(IPC.Settings.Set, GetSettings());
     
@@ -131,8 +139,8 @@ export function getConfigButtonWindow() {
     return configButton;
 }
 
-export function getWindow(path: string) {
-    return openWindows[path];
+export function getWindow(windowPath: string) {
+    return openWindows[windowPath] || undefined;
 }
 
 export function getWindows() {
@@ -142,12 +150,13 @@ export function getWindows() {
 ipcMain.on(IPC.Window.Open, (event, arg: { show: boolean, path: string }) => {
     if (arg.show) {
         if (!openWindows[arg.path]) {
-            openWindows[arg.path] = createWindow(rendererWindow, arg.path);
+            openWindows[arg.path] = createWindow(rendererWindow!, arg.path);
         }
     } else {
-        if (openWindows[arg.path]) {
-            openWindows[arg.path].close();
-            openWindows[arg.path] = null;
+        const win = openWindows[arg.path];
+        if (win) {
+            win.close();
+            openWindows[arg.path] = undefined;
         }
     }
 });

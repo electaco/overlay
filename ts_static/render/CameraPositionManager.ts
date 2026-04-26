@@ -3,9 +3,9 @@ import { IPosition } from '../../src/shared/interfaces/common';
 import { IGw2MumbleLinkData } from '../../src/shared/interfaces/datatransfer/IGw2MumbleLinkData';
 
 export interface ICameraPositionManager {
-    SetPosition(coordinates): void;
+    SetPosition(coordinates: IGw2MumbleLinkData): void;
     GetPosition(): ICameraPositionResult;
-    UpdateCameraPosition(camera): void;
+    UpdateCameraPosition(camera: THREE.PerspectiveCamera): void;
   }
 
 export interface ICameraPositionResult {
@@ -20,9 +20,9 @@ function v3ize(data: IPosition) {
 }
 
 export class CameraPositionManager implements ICameraPositionManager {
-    renderCallback: any;
+    renderCallback: () => void;
 
-    constructor(renderCallback) {
+    constructor(renderCallback: () => void) {
         this.renderCallback = renderCallback;
     }
 
@@ -56,9 +56,9 @@ export class CameraPositionManager implements ICameraPositionManager {
         playerposition: this.last_received_player_position
       }
     }
-    last_received_position: THREE.Vector3;
-    last_received_target: THREE.Vector3;
-    last_received_player_position: THREE.Vector3;
-    fov: number;
+    last_received_position: THREE.Vector3 = new THREE.Vector3();
+    last_received_target: THREE.Vector3 = new THREE.Vector3();
+    last_received_player_position: THREE.Vector3 = new THREE.Vector3();
+    fov: number = 0;
     isReady: boolean = false;
   }

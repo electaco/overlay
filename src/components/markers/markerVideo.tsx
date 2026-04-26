@@ -12,8 +12,7 @@ import PositionEditor from '../settings/PositionEditor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NumberEditor } from '../settings/NumberEditor';
 import { IPC } from '../../shared/ipc';
-
-const { ipcRenderer } = window.require('electron')
+import { send } from '../../shared/electron_ipc';
 
 interface IProps {
     settings: ISettings;
@@ -26,12 +25,12 @@ interface IProps {
 
 function MarkerVideo(props: IProps) {
     function removeMarker() {
-        let markerInfo: IMarkerRemovalInfo = {
+        const markerInfo: IMarkerRemovalInfo = {
             index: props.index,
             map: props.mapId,
             markerpack: props.markergroupindex
         }
-        ipcRenderer.send(IPC.Marker.Remove, markerInfo);
+        send(IPC.Marker.Remove, markerInfo);
     }
 
     return (

@@ -1,7 +1,7 @@
 import { IMarkerIcon } from "../../src/shared/interfaces/render/marker";
 import * as THREE from 'three';
 
-const materialMap: Array<THREE.SpriteMaterial> = [];
+const materialMap: Record<string, THREE.SpriteMaterial> = {};
 
 function getMarkerIconMaterial(icon: IMarkerIcon) {
   var key = icon.color +"-" +  icon.icon;

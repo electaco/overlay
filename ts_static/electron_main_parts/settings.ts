@@ -168,7 +168,7 @@ ipcMain.on(IPC.Marker.LoadGroup, (event, arg) => {
         ]
     }).then((result) => {
         if (result.canceled) { return; }
-        let data = fs.readFileSync(result.filePaths[0]);
+        let data = fs.readFileSync(result.filePaths![0]);
         let markergroup = MarkerGroupSettings.fromJson(data.toString());
         AddNewMarkerGroupWithDialog(markergroup);
     }).catch(err => {

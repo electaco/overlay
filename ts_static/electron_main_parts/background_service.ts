@@ -12,17 +12,17 @@ const WebSocket = require("ws");
 export const BACKGROUND_SERVICE_PATH = 'gw2data\\WebSocketServerNetFramework.exe';
 const WS_CLIENT = "ws://localhost:19939/control";
 
-let webSocket = null;
+let webSocket: any = null;
 
 //Start external program to get position from GW2
-let bat = null;
+let bat: any = null;
 let bat_prefix = "";
 const TD = new TextDecoder("utf-8");
 
 export function SetupBackgroundService() {
     bat = spawn(bat_prefix + BACKGROUND_SERVICE_PATH);
     
-    bat.stdout.on("data", (data) => {
+    bat.stdout.on("data", (data: any) => {
         if (webSocket == null) {
             setupWebSocket();
         }
@@ -34,14 +34,14 @@ export function SetupBackgroundService() {
     });
 }
 
-ipcMain.on(IPC.UseFallbackPositionUpdate, (event) => {
+ipcMain.on(IPC.UseFallbackPositionUpdate, (event: any) => {
     log("Main", "Fallback position activating");
     if (bat)
         bat.kill();
 
     bat = spawn(bat_prefix + "gw2data\\fallback\\TacoCli.exe");
 
-    bat.stdout.on("data", (data) => {
+    bat.stdout.on("data", (data: any) => {
         try {
             var json = TD.decode(data);
             var decoded = JSON.parse(json);
@@ -55,7 +55,7 @@ ipcMain.on(IPC.UseFallbackPositionUpdate, (event) => {
 });
 
 
-ipcMain.on(IPC.SendKeys, (event, arg) => {
+ipcMain.on(IPC.SendKeys, (event: any, arg: any) => {
     let msg: IWebSocketCommand = {
         Data: arg,
         Type: "keys",
@@ -68,19 +68,19 @@ ipcMain.on(IPC.SendKeys, (event, arg) => {
 function setupWebSocket() {
     webSocket = new WebSocket(WS_CLIENT);
 
-    webSocket.onopen = function (event) {
+    webSocket.onopen = function (event: any) {
         log("Main", "Connected to web socket");
     }
 
-    webSocket.onclose = function (event) {
+    webSocket.onclose = function (event: any) {
         log("Main", "Disconnected from web socket");
     }
 
-    webSocket.onerror = function (event) {
+    webSocket.onerror = function (event: any) {
         log("Main", "Error on web socket");
     }
 
-    webSocket.onmessage = function (event) {
+    webSocket.onmessage = function (event: any) {
         let msg: IWebSocketCommand = JSON.parse(event.data);
         log("Main", "Got ws message: " + event.data);
         if (msg.Type == "gamerunning") {

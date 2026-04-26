@@ -3,19 +3,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 import './window.css';
 import { IPC } from '../../shared/ipc';
-const { ipcRenderer } = window.require('electron')
+import { send } from '../../shared/electron_ipc';
 
 
 interface IProps {
     path: string,
     title: string,
-    titleextra?: any,
+    titleextra?: React.ReactNode,
     children: React.ReactNode
 }
 
 function Window(props: IProps) {
     function closeWindow() {
-        ipcRenderer.send(IPC.Window.Open, {path:props.path, show: false});
+        send(IPC.Window.Open, {path:props.path, show: false});
     }
     return  <div id="app" className="vh-100 pb-4">
             <div id="title">

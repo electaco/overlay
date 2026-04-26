@@ -1,17 +1,17 @@
 import React from 'react';
 import Button from './Button';
-const { ipcRenderer } = window.require('electron')
+import { send } from '../../shared/electron_ipc';
 
 interface IProps {
     text?: React.ReactNode;
     event: string;
-    value: any;
+    value: unknown;
     children?: React.ReactNode;
 }
 
 function EventButton(props: IProps) { // TODO: Update references with IPC
     function click() {
-        ipcRenderer.send(props.event, props.value);
+        send(props.event, props.value);
     }
     return (
         <Button text={props.text} onClick={click}>

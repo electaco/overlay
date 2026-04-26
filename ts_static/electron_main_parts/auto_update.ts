@@ -24,13 +24,15 @@ ipcMain.on(IPC.DownloadUpdate, () => {
 
 autoUpdater.on(IPC.AutoUpdate.UpdateAvailable, () => {
     if (!GetSettings().overlaySettings.autoUpdate) {
-        getConfigButtonWindow().webContents.send(IPC.UpdateAvailable);
+        const win = getConfigButtonWindow();
+        if (win) win.webContents.send(IPC.UpdateAvailable);
     }
     log("updater", "Update available");
 });
 
 autoUpdater.on(IPC.AutoUpdate.UpdateDownloaded, () => {
-    getConfigButtonWindow().webContents.send(IPC.UpdateDownloaded);
+    const win = getConfigButtonWindow();
+    if (win) win.webContents.send(IPC.UpdateDownloaded);
     log("updater", "Update downloaded");
 });
 
@@ -38,10 +40,10 @@ autoUpdater.on(IPC.AutoUpdate.CheckingForUpdate, () => {
     log("updater", "Checking for update");
 })
 
-autoUpdater.on(IPC.AutoUpdate.UpdateNotAvailable, (info) => {
+autoUpdater.on(IPC.AutoUpdate.UpdateNotAvailable, (info: any) => {
     log("updater", "Update not available");
 })
 
-autoUpdater.on(IPC.AutoUpdate.Error, (err) => {
+autoUpdater.on(IPC.AutoUpdate.Error, (err: any) => {
     log("updater", "Error in auto-updater: " + err);
 })

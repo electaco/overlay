@@ -1,11 +1,11 @@
 import React from 'react';
 import { IPC } from '../../shared/ipc';
 import './colorpicker.css';
-const { ipcRenderer } = window.require('electron')
+import { send } from '../../shared/electron_ipc';
 
 interface IProps {
   popup: string,
-  setting: any
+  setting: { path: string; value: string }
 }
 
 class Colorbox extends React.Component<IProps> {
@@ -14,9 +14,9 @@ class Colorbox extends React.Component<IProps> {
         this.handleInputChange = this.handleInputChange.bind(this);
       }
     
-      handleInputChange(event: any) {
+      handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
         const target = event.target;
-        ipcRenderer.send(IPC.Settings.Update, {path: this.props.setting.path, value: target.value})
+        send(IPC.Settings.Update, {path: this.props.setting.path, value: target.value})
       }
       render() {
         return <div title={this.props.popup}>
