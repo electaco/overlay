@@ -35,9 +35,8 @@ export function createRenderWindow(): BrowserWindow {
         width: 800,
         height: 600,
         webPreferences: {
-            nodeIntegration: false,
+            nodeIntegration: true,
             contextIsolation: true,
-            preload: preloadPath,
         },
         frame: false,
         transparent: true,
