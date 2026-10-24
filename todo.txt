@@ -1,0 +1,9 @@
+Markers:
+ * Split marker pack data and personal preferences (like visible or hidden setting), but can have default setting in marker pack
+ Marker pack level:
+  * Option for more icons
+  * Option to hide marker for x time / until shown again if within a certain distance for a certain time
+  * Option to unhide next marker in list when hiding current marker (type where having to do things in order)
+* Have arrow pointing to nearest marker, with name and distance
+ 
+
