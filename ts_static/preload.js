@@ -29,6 +29,10 @@ contextBridge.exposeInMainWorld('electaco', {
                 'gw2data', 'getrender', 'debugrenderer', 'reloadRender',
                 // Map table (requesting it from a settings window)
                 'getmaps',
+                // Mount radial window asking where it was placed, toggling click-through
+                // based on what is under the cursor, and dragging from its grip.
+                'get-mounts-position', 'set-mounts-clickable',
+                'mounts-drag-start', 'mounts-drag-end',
                 // Settings / marker windows
                 'addMarker', 'removeMarker', 'updateMarker', 'newMarkerGroup',
                 'loadmarkergroup', 'removeMarkerGroup', 'savemarkergroup',
@@ -44,6 +48,8 @@ contextBridge.exposeInMainWorld('electaco', {
             const validChannels = [
                 // Settings / marker windows
                 'setsettings', 'updateconfig', 'connstatus', 'maps-updated',
+                // Mount radial window
+                'mounts-position',
                 // Overlay renderer
                 'render', 'gw2data', 'mousemove',
                 // Auto updater

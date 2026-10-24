@@ -1,4 +1,5 @@
 import { IPC } from "../../src/shared/ipc";
+import { IMountPlacement, MOUNT_EDGE_INSET, MOUNT_WINDOW_SIZE } from "../../src/shared/mounts";
 import { configUpdated, GetSettings } from "./settings";
 import { app, BrowserWindow, ipcMain, screen } from 'electron';
 import * as pathModule from 'path';
@@ -6,6 +7,19 @@ import * as pathModule from 'path';
 let rendererWindow: BrowserWindow | null = null;
 let configButton: BrowserWindow | null = null;
 let openWindows: { [key: string]: BrowserWindow | undefined } = {};
+
+// Mount menu window. A fixed MOUNT_WINDOW_SIZE square that is never resized, and always lies
+// fully inside one display: a window spanning two displays with different scale factors gets
+// rescaled by Windows (it grew 1.5x between a 150% and a 100% monitor). It is centred on the
+// hub where that fits; near an edge it is clamped onto the display and the hub sits off-centre
+// in it. mountsLayout() is the one place that decides this. Opening and closing the fan is
+// purely a rendering change in the page.
+//
+// Hub position in absolute screen coordinates. This is the source of truth; the window is
+// derived from it. Kept across close/reopen for the rest of the app run.
+let mountsHub: { x: number; y: number } | null = null;
+// Timer that moves the window with the cursor during a grip drag.
+let mountsDrag: NodeJS.Timeout | null = null;
 
 ipcMain.on(IPC.Debug.DebugWindowRender, (event, arg) => {
     //renderer.setIgnoreMouseEvents(false);
@@ -109,12 +123,18 @@ export function createConfigButtonWindow() {
 
 function createWindow(parent: BrowserWindow, windowPath: string) {
     const preloadPath = pathModule.join(app.getAppPath(), 'build', 'electron', 'preload.js');
-    // Create the browser window.
-    const cwin = new BrowserWindow({
-        width: 600,
-        height: 400,
-        minWidth: 100,
-        minHeight: 80,
+
+    // The mount menu is a radial that fans out from its own centre; anything else is a
+    // normal settings window.
+    const isMounts = windowPath === 'mounts';
+    const width = isMounts ? MOUNT_WINDOW_SIZE : 600;
+    const height = isMounts ? MOUNT_WINDOW_SIZE : 400;
+
+    const opts: any = {
+        width,
+        height,
+        minWidth: isMounts ? width : 100,
+        minHeight: isMounts ? height : 80,
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
@@ -123,14 +143,89 @@ function createWindow(parent: BrowserWindow, windowPath: string) {
         frame: false,
         transparent: true,
         parent: parent,
-    })
+    };
+
+    if (isMounts) {
+        // Around the remembered hub, or the primary display's centre the first time.
+        const primary = screen.getPrimaryDisplay().bounds;
+        const layout = mountsLayout(mountsHub ?? { x: primary.x + primary.width / 2, y: primary.y + primary.height / 2 });
+        mountsHub = layout.hub;
+        opts.resizable = false;
+        opts.fullscreenable = false;
+        opts.maximizable = false;
+        opts.skipTaskbar = true;
+        // Never take focus from the game (WS_EX_NOACTIVATE). Otherwise a click activates this
+        // window, the position service then has to pull GW2 back to the foreground before it
+        // sends the chord (which Windows' foreground lock can refuse, losing the keys), and the
+        // focus change blurs this page.
+        opts.focusable = false;
+        opts.useContentSize = true;
+        opts.x = layout.x;
+        opts.y = layout.y;
+    }
+
+    const cwin = new BrowserWindow(opts);
 
     cwin.setAlwaysOnTop(true, "screen-saver");
     cwin.loadFile('build/index.html', { hash: "/" + windowPath });
 
     cwin.webContents.send(IPC.Settings.Set, GetSettings());
-    
+
+    if (isMounts) {
+        // Starts fully click-through; the page turns capture on over its controls.
+        cwin.setIgnoreMouseEvents(true, { forward: true });
+        cwin.on('closed', stopMountDrag);
+    }
+
     return cwin;
+}
+
+/**
+ * Where the mount window goes for a hub at `wanted` (absolute screen coordinates).
+ *
+ * The hub is kept on the display nearest to it (MOUNT_EDGE_INSET inside), and the window
+ * is centred on the hub, then clamped to lie fully on that display. Uses the display's full
+ * bounds, not workArea: GW2 runs fullscreen, so the taskbar reservation is not a real limit.
+ */
+function mountsLayout(wanted: { x: number; y: number }) {
+    const area = screen.getDisplayNearestPoint({ x: Math.round(wanted.x), y: Math.round(wanted.y) }).bounds;
+    const clamp = (v: number, lo: number, hi: number) => Math.min(Math.max(v, lo), hi);
+    const inset = MOUNT_EDGE_INSET;
+    const size = MOUNT_WINDOW_SIZE;
+    const hub = {
+        x: Math.round(clamp(wanted.x, area.x + inset, area.x + area.width - inset)),
+        y: Math.round(clamp(wanted.y, area.y + inset, area.y + area.height - inset)),
+    };
+    const x = clamp(hub.x - size / 2, area.x, area.x + area.width - size);
+    const y = clamp(hub.y - size / 2, area.y, area.y + area.height - size);
+    return { hub, area, x, y };
+}
+
+/** Move the mount window for a hub at `wanted` and tell the page where everything is. */
+function placeMounts(win: BrowserWindow, wanted: { x: number; y: number }) {
+    const layout = mountsLayout(wanted);
+    mountsHub = layout.hub;
+
+    const b = win.getBounds();
+    if (b.x !== layout.x || b.y !== layout.y || Math.abs(b.width - MOUNT_WINDOW_SIZE) > 1) {
+        // setBounds rather than setPosition: on scaled displays setPosition can change the
+        // window size by a pixel, and the size must stay fixed.
+        win.setBounds({ x: layout.x, y: layout.y, width: MOUNT_WINDOW_SIZE, height: MOUNT_WINDOW_SIZE });
+    }
+
+    const placement: IMountPlacement = {
+        hub: { x: layout.hub.x - layout.area.x, y: layout.hub.y - layout.area.y },
+        display: { width: layout.area.width, height: layout.area.height },
+        hubInWindow: { x: layout.hub.x - layout.x, y: layout.hub.y - layout.y },
+    };
+    win.webContents.send(IPC.Mounts.Position, placement);
+}
+
+function stopMountDrag() {
+    if (mountsDrag) {
+        clearInterval(mountsDrag);
+        mountsDrag = null;
+    }
 }
 
 export function getRenderWindow() {
@@ -160,4 +255,53 @@ ipcMain.on(IPC.Window.Open, (event, arg: { show: boolean, path: string }) => {
             openWindows[arg.path] = undefined;
         }
     }
+});
+
+// The mount menu covers a chunk of the game. Everything that is not a button must be
+// click-through, otherwise the window swallows clicks meant for Guild Wars 2. The renderer
+// tracks which regions are interactive and asks us to toggle this.
+ipcMain.on(IPC.Mounts.SetClickable, (event, clickable: boolean) => {
+    const win = openWindows['mounts'];
+    if (!win || win.isDestroyed()) { return; }
+    // forward:true keeps mouse-move events flowing so the renderer can still tell when the
+    // cursor enters an interactive region and re-enable clicking.
+    win.setIgnoreMouseEvents(!clickable, { forward: true });
+});
+
+// The mount window needs to know where it is on screen so its fan points inwards instead of
+// off the edge (a window near the left edge should be a half circle, a corner a quarter).
+ipcMain.on(IPC.Mounts.GetPosition, (event) => {
+    const win = openWindows['mounts'];
+    if (!win || win.isDestroyed()) { return; }
+    const b = win.getBounds();
+    placeMounts(win, mountsHub ?? { x: b.x + b.width / 2, y: b.y + b.height / 2 });
+});
+
+// Grip drag. The page reports press and release; in between we move the window with the
+// cursor from here. That is as smooth as a native drag (no IPC per mouse move, which was
+// visibly laggy) without -webkit-app-region, whose OS-owned area hides mouse events from the
+// page and kept breaking the click-through handling.
+ipcMain.on(IPC.Mounts.DragStart, () => {
+    const win = openWindows['mounts'];
+    if (!win || win.isDestroyed()) { return; }
+    stopMountDrag();
+
+    // The hub follows the cursor, keeping the offset at which the grip was grabbed.
+    const cursor = screen.getCursorScreenPoint();
+    const start = mountsHub ?? cursor;
+    const offsetX = cursor.x - start.x;
+    const offsetY = cursor.y - start.y;
+    let last = { x: NaN, y: NaN };
+
+    mountsDrag = setInterval(() => {
+        if (win.isDestroyed()) { stopMountDrag(); return; }
+        const c = screen.getCursorScreenPoint();
+        if (c.x === last.x && c.y === last.y) { return; }
+        last = c;
+        placeMounts(win, { x: c.x - offsetX, y: c.y - offsetY });
+    }, 16);
+});
+
+ipcMain.on(IPC.Mounts.DragEnd, () => {
+    stopMountDrag();
 });

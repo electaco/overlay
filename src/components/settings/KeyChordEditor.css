@@ -1,0 +1,20 @@
+.keyChordEditor {
+    min-width: 90px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(196, 150, 90, 0.6);
+    background: rgba(30, 18, 6, 0.8);
+    color: #f0e0c0;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.keyChordEditor:hover {
+    border-color: rgba(255, 210, 122, 0.9);
+}
+
+.keyChordEditor.capturing {
+    border-color: #ffd27a;
+    box-shadow: 0 0 8px rgba(255, 196, 90, 0.6);
+    color: #fff3d0;
+}

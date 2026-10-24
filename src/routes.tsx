@@ -7,7 +7,7 @@ import {
 
 import Configuration from './components/Configuration';
 import Markers from './components/Markers';
-import Mounts from './components/Mounts';
+import Mounts from './components/mounts/Mounts';
 import SearchMarkers from './components/SearchMarkers';
 import App from './App';
 

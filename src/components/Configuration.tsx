@@ -5,6 +5,7 @@ import Checkbox from './settings/IconCheckbox';
 
 import getSetting from './helpers/getSetting';
 import EventButton from './window/EventButton';
+import { KeyChordEditor } from './settings/KeyChordEditor';
 import { IPC } from '../shared/ipc';
 import { Settings } from '../shared/models/settings/Settings';
 import { send, on, removeAllListeners } from '../shared/electron_ipc';
@@ -54,6 +55,28 @@ class App extends React.Component<IProps, IState> {
             <Checkbox setting={getSetting(this.state.settings, 'Check for new versions', "overlaySettings.checkForUpdates", true)} />
             <Checkbox setting={getSetting(this.state.settings, 'Automatically update to new versions', "overlaySettings.autoUpdate", true)} />
             <Checkbox setting={getSetting(this.state.settings, 'Automatically update markers to new versions on start', "overlaySettings.checkForMarkerUpdates", true)}/>
+          </Section>
+          <Section title="Mount keys" expanded={false}>
+            <p className="small mb-2">
+              These are the keys the overlay presses to summon each mount. They must match
+              the mount key bindings in Guild Wars 2 (Options &rarr; Control Options).
+              Click a key, then press the combination you bound in game.
+            </p>
+            <table className="table table-sm text-white mb-0">
+              <tbody>
+                {(this.state.settings.overlaySettings?.mounts?.mounts ?? []).map((mount, index) => (
+                  <tr key={mount.id}>
+                    <td className="align-middle">{mount.name}</td>
+                    <td className="align-middle text-right">
+                      <KeyChordEditor
+                        path={"overlaySettings.mounts.mounts." + index + ".keys"}
+                        value={mount.keys}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </Section>
           <Section title="Development" expanded={false}>
             <Section title="Dev tools">

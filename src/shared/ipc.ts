@@ -34,6 +34,18 @@ export const IPC = {
         // Window -> main: ask for the current table (on mount).
         Get: "getmaps",
     },
+    Mounts: {
+        // Main -> mount window: IMountPlacement (src/shared/mounts.ts), so the fan points inwards.
+        Position: "mounts-position",
+        // Mount window -> main: request that placement.
+        GetPosition: "get-mounts-position",
+        // Mount window -> main: enable/disable mouse capture for the region under the cursor.
+        SetClickable: "set-mounts-clickable",
+        // Mount window -> main: the grip was pressed / released. Main moves the window with
+        // the cursor in between.
+        DragStart: "mounts-drag-start",
+        DragEnd: "mounts-drag-end",
+    },
     GetRender: "getrender",
     Restart: "restart",
     Exit: "exit",

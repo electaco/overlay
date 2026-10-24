@@ -1,0 +1,228 @@
+/* Mount radial menu.
+   Icons are absolutely positioned by radialLayout.ts, which already accounts for which
+   screen edges are nearby; this file only does presentation. */
+
+html, body, #root {
+    background: transparent;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.mountRadial {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    -webkit-user-select: none;
+    user-select: none;
+    /* No -webkit-app-region anywhere in this window: an OS drag region hides mouse events
+       from the page, which breaks the click-through hit test. The grip drag is done by the
+       main process instead (see Mounts.tsx). */
+}
+
+/* The "main icon" the fan extends from, always at the window centre. Toggles the fan. */
+.mountHub {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 40%, rgba(60, 40, 18, 0.95), rgba(20, 12, 4, 0.95));
+    border: 2px solid rgba(196, 150, 90, 0.85);
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.6), inset 0 0 18px rgba(120, 80, 30, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 4;
+}
+
+/* Drag grip, shown only while the fan is open. Sits just off the hub's upper-right edge
+   (positioned from JS, centred on its point with negative margins). */
+.mountGrip {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(30, 18, 8, 0.94);
+    border: 1px solid rgba(196, 150, 90, 0.75);
+    color: #e2d2b2;
+    cursor: grab;
+    z-index: 10;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: none;
+}
+
+.mountGripArrows {
+    pointer-events: none;
+    line-height: 1;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Close button, mirroring the drag grip on the opposite diagonal. Removes the button from
+   the screen entirely rather than just collapsing the fan. */
+.mountClose {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(30, 18, 8, 0.94);
+    border: 1px solid rgba(196, 150, 90, 0.75);
+    color: #e2d2b2;
+    cursor: pointer;
+    z-index: 10;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    line-height: 1;
+}
+
+.mountClose:hover {
+    border-color: #ff8a7a;
+    color: #ffd0c8;
+}
+
+.mountGrip.dragging {
+    cursor: grabbing;
+    border-color: #ffd27a;
+    color: #ffe8b8;
+}
+
+.mountGrip:hover {
+    border-color: #ffd27a;
+    color: #ffe8b8;
+}
+
+.mountHub:hover {
+    border-color: #ffd27a;
+    box-shadow: 0 0 18px rgba(255, 196, 90, 0.6), inset 0 0 18px rgba(150, 100, 40, 0.55);
+}
+
+/* Open state: the hub becomes a label plate rather than an icon. */
+.mountHub.mountHubOpen {
+    background: radial-gradient(circle at 50% 40%, rgba(85, 57, 26, 0.97), rgba(26, 15, 6, 0.97));
+}
+
+.mountHubIcon {
+    width: 46%;
+    height: 46%;
+    object-fit: contain;
+    pointer-events: none;
+    opacity: 0.95;
+    -webkit-user-drag: none;
+}
+
+.mountHubLabel {
+    color: #f0e0c0;
+    font-size: 12px;
+    font-weight: 600;
+    text-shadow: 0 1px 3px #000;
+    text-align: center;
+    line-height: 1.1;
+    padding: 0 4px;
+    pointer-events: none;
+}
+
+/* A mount button, positioned by the layout. */
+.mountIcon {
+    position: absolute;
+    transform: translate(-50%, -50%) scale(var(--mount-scale, 1));
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 40%, rgba(70, 46, 22, 0.92), rgba(24, 14, 5, 0.92));
+    border: 2px solid rgba(196, 150, 90, 0.7);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.55);
+    color: #f0e0c0;
+    cursor: pointer;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 90ms ease, box-shadow 90ms ease, transform 90ms ease;
+    z-index: 3;
+}
+
+.mountIcon.hovered,
+.mountIcon:focus {
+    border-color: #ffd27a;
+    box-shadow: 0 0 16px rgba(255, 196, 90, 0.65);
+    --mount-scale: 1.12;
+    outline: none;
+}
+
+.mountIcon:active {
+    --mount-scale: 0.96;
+}
+
+/* Fan out from the hub when the menu opens. */
+@keyframes mountFanOut {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.35);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.mountRadial.open .mountIcon {
+    animation: mountFanOut 140ms ease-out backwards;
+}
+
+/* Mount artwork. Slightly over-sized so it fills the circle edge to edge without the
+   button border clipping it, and so the vignette has something to fade into. */
+.mountIconImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.18);
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+/* Vignette: fades the artwork's edges into the button so the square icon corners and any
+   hard edges disappear, leaving a soft round glow. Sits above the image, below nothing. */
+.mountIcon::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at 50% 45%,
+        rgba(30, 18, 8, 0) 42%,
+        rgba(30, 18, 8, 0.45) 72%,
+        rgba(18, 10, 4, 0.85) 100%
+    );
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.65);
+}
+
+.mountIconGlyph {
+    font-size: 26px;
+    font-weight: 600;
+    text-shadow: 0 1px 3px #000;
+    pointer-events: none;
+}
+
+/* A mount with no key bound: still visible, but clearly not usable yet. */
+.mountIcon.unbound {
+    opacity: 0.45;
+    filter: grayscale(0.6);
+}
+
+.mountEmpty {
+    position: absolute;
+    left: 50%;
+    /* Below the hub, which sits at the window centre. */
+    top: calc(50% + 52px);
+    transform: translateX(-50%);
+    white-space: nowrap;
+    color: #d8c8a8;
+    font-size: 13px;
+    text-align: center;
+    text-shadow: 0 1px 3px #000;
+    pointer-events: none;
+}

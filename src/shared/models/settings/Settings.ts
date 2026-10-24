@@ -8,6 +8,7 @@ import { IPositionMarker, MarkerType } from "../../interfaces/render/marker";
 import { IVideoData } from "../../interfaces/datatransfer/IVideoData";
 import { IOverlaySettings } from "../../interfaces/settings/IOverlaySettings";
 import { OverlaySettings } from "./OverlaySettings";
+import { NormalizeMountsSettings } from "./MountsSettings";
 import fetch from 'cross-fetch'
 
 const fs = require('fs');
@@ -75,6 +76,13 @@ export class Settings implements ISettings {
                 const data = fs.readFileSync(file);
                 const instance = deserialize(Settings, data);
                 instance.configFile = filename;
+                try {
+                    instance.Migrate();
+                } catch (e) {
+                    // A migration problem must not make a perfectly readable file look
+                    // corrupt (the catch below would then skip it and lose the markers).
+                    console.log("Settings migration failed, continuing: " + e);
+                }
                 if (file !== filename) {
                     console.log("Settings file unreadable, restored from " + file);
                 }
@@ -89,6 +97,17 @@ export class Settings implements ISettings {
 
     setMap(mapId: string) {
         this.runtimeData.map = mapId;
+    }
+
+    /**
+     * Bring a deserialized config up to date with the current defaults. Settings files are
+     * plain JSON, so anything added since they were written is simply absent.
+     */
+    Migrate() {
+        if (!this.overlaySettings) {
+            this.overlaySettings = new OverlaySettings();
+        }
+        this.overlaySettings.mounts = NormalizeMountsSettings(this.overlaySettings.mounts);
     }
 
     getMarkerGroupIndexById(id: string): number | null {
