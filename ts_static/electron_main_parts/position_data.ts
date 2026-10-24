@@ -1,4 +1,5 @@
 import { TranslateMapId } from "../../src/components/helpers/constants";
+import { mapService } from "./service_map";
 import { IGw2MumbleLinkData } from "../../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
 import { IPC } from "../../src/shared/ipc";
 import { configUpdated } from "./settings";

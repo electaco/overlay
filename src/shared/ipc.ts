@@ -28,6 +28,12 @@ export const IPC = {
         ResizeConfig: "resize",
         Open: "show-page",
     },
+    Maps: {
+        // Main -> windows: the GW2 map table was refreshed from the API.
+        Updated: "maps-updated",
+        // Window -> main: ask for the current table (on mount).
+        Get: "getmaps",
+    },
     GetRender: "getrender",
     Restart: "restart",
     Exit: "exit",

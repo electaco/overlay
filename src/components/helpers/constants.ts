@@ -31324,18 +31324,69 @@ export const maps: IMaps = {
 
 const mapMap: { [index: string]: string } = {}
 
+// The table actually used for lookups. Defaults to the bundled copy; the main process swaps
+// in a freshly downloaded one (see ts_static/electron_main_parts/service_map.ts) once it has
+// validated it against the live API, so callers need no knowledge of where it came from.
+let activeMaps: IMaps = maps;
+
+// name -> first id with that name. Built once per table instead of scanning ~900 entries on
+// every cache miss, which matters because a table swap can invalidate every cached id.
+let nameToId: { [name: string]: string } = {};
+
+function rebuildNameIndex(table: IMaps) {
+    nameToId = {};
+    for (let key in table) {
+        const name = table[key]?.map_name;
+        if (name !== undefined && nameToId[name] === undefined) {
+            nameToId[name] = key;
+        }
+    }
+}
+
+rebuildNameIndex(activeMaps);
+
+export function SetActiveMaps(next: IMaps) {
+    if (!next || Object.keys(next).length === 0) { return; }
+    activeMaps = next;
+    rebuildNameIndex(next);
+    for (const key of Object.keys(mapMap)) { delete mapMap[key]; }
+}
+
+export function GetActiveMaps(): IMaps {
+    return activeMaps;
+}
+
+// Renderer-side counterpart of SetActiveMaps: the main process owns the full table, and only
+// ships id -> name to the UI windows (the geometry is not needed to display markers). Names
+// for ids we do not have are added so unknown/new maps still get a label.
+// Name overrides from the main process, kept separate so the bundled table is never mutated.
+let mapNames: { [id: string]: string } = {};
+
+export function SetActiveMapNames(names: { [id: string]: string }) {
+    if (!names || Object.keys(names).length === 0) { return; }
+    mapNames = names;
+    for (const key of Object.keys(mapMap)) { delete mapMap[key]; }
+}
+
+/** Display name for a map id, preferring data from the main process. */
+export function GetMapName(mapId: string): string | undefined {
+    return mapNames[mapId] ?? activeMaps[mapId]?.map_name;
+}
+
 // some maps got multiple entries, this normalize the id to the first map with that name in the list
 export function TranslateMapId(mapId: string) {
     if (mapMap[mapId]) {
         return mapMap[mapId]
     }
-    let name = maps[mapId] ? maps[mapId].map_name : "Unknown";
-    for (let key in maps) {
-        if (maps[key].map_name === name) {
-            mapMap[mapId] = key;
-            return key;
+    const local = activeMaps[mapId];
+    if (local) {
+        const canonical = nameToId[local.map_name];
+        if (canonical !== undefined) {
+            mapMap[mapId] = canonical;
+            return canonical;
         }
     }
+    // Unknown map: keep the id as-is so markers keyed on it still resolve.
     return mapId;
 }
 

@@ -9,6 +9,7 @@ import { SortArray, ByActive, CompoundSort, MarkerPackHasMap } from './helpers/s
 import { IMarkerGroupSettings } from '../shared/interfaces/settings/IMarkerGroupSettings';
 import { IPC } from '../shared/ipc';
 import { send, on, removeAllListeners } from '../shared/electron_ipc';
+import { SetActiveMapNames } from './helpers/constants';
 
 function log(data: string) {
   send(IPC.Log, "Markers", data);
@@ -24,16 +25,30 @@ class App extends React.Component<IProps, IState>{
       settings: null
     };
     this.settingsListener = this.settingsListener.bind(this);
+    this.mapsListener = this.mapsListener.bind(this);
     const cleanup = on(IPC.Settings.Set, this.settingsListener);
+    const cleanupMaps = on(IPC.Maps.Updated, this.mapsListener);
     send(IPC.Settings.Get, true);
+    send(IPC.Maps.Get, true);
     this._cleanup = cleanup;
+    this._cleanupMaps = cleanupMaps;
   }
 
   private _cleanup?: () => void;
+  private _cleanupMaps?: () => void;
 
   componentWillUnmount() {
     this._cleanup?.();
+    this._cleanupMaps?.();
     removeAllListeners(IPC.Settings.Set);
+    removeAllListeners(IPC.Maps.Updated);
+  }
+
+  // Map names come from the main process, which keeps the table current against the API.
+  mapsListener(data: unknown) {
+    SetActiveMapNames(data as { [id: string]: string });
+    // Force a re-render so the updated names show up.
+    this.forceUpdate();
   }
 
   settingsListener(data: unknown) {

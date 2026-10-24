@@ -33,7 +33,7 @@
     "watch": "npm-watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "electron-build": "tsc -p tsconfig-electron.json",
+    "electron-build": "tsc -p tsconfig-electron.json && node scripts/copy-preload.js",
     "//react-build": "craco build wipes build/, which also deletes the compiled Electron main; re-run electron-build so build/ is always launchable.",
     "build-all": "npm run react-build",
     "run": "npm run build-all && npm run start",

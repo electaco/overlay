@@ -9,7 +9,7 @@ import getSetting from '../helpers/getSetting';
 import Section from '../window/section';
 import Colorpicker from '../settings/colorpicker';
 import EditableText from '../settings/editableText';
-import { maps } from '../helpers/constants';
+import { GetMapName } from '../helpers/constants';
 import { IMarkerGroupSettings } from "../../shared/interfaces/settings/IMarkerGroupSettings";
 import { Marker } from './marker';
 import "./markerpack.css";
@@ -87,7 +87,7 @@ function Markerpack(props: IProps) {
                 <div className="markerpack" >
                     {SortArray(Object.keys(props.pack.markers), ByActiveMap(props.settings.runtimeData?.map ?? ""))?.map((markerMap) =>
                         <div className={"map " + (props.settings.runtimeData?.map === markerMap ? "active": "")}>
-                            <Section title={maps[markerMap]?.map_name ?? "<Map " + markerMap + ">"}
+                            <Section title={GetMapName(markerMap) ?? "<Map " + markerMap + ">"}
                                 expanded={markerMap === props.settings.runtimeData?.map}
                             >
                                 {SortArray(props.pack.markers[markerMap], ByActive).map((marker) =>
