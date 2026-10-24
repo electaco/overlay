@@ -34,10 +34,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "electron-build": "tsc -p tsconfig-electron.json",
-    "build-all": "npm run electron-build && npm run react-build",
+    "//react-build": "craco build wipes build/, which also deletes the compiled Electron main; re-run electron-build so build/ is always launchable.",
+    "build-all": "npm run react-build",
     "run": "npm run build-all && npm run start",
     "react-start": "craco start",
-    "react-build": "craco build",
+    "react-build": "craco build && npm run electron-build",
     "deploy": "electron-builder --publish always",
     "build": "electron-builder --publish never"
   },
