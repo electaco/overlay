@@ -1,3 +1,7 @@
+// Entirely commented-out scaffolding for a future GW2 map service. The explicit export
+// keeps this a module (not a global script) under --isolatedModules.
+export {};
+
 // //import { fs } from 'fs/promises';
 // import { GetStoragePathFor } from './settings';
 // import axios from 'axios';

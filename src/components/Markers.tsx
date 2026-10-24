@@ -36,7 +36,7 @@ class App extends React.Component<IProps, IState>{
     removeAllListeners(IPC.Settings.Set);
   }
 
-  settingsListener(_event: unknown, data: unknown) {
+  settingsListener(data: unknown) {
     this.setState({ settings: data as ISettings });
   }
 

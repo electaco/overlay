@@ -2,16 +2,15 @@ import { IVideoData } from "../../src/shared/interfaces/datatransfer/IVideoData"
 import * as THREE from 'three';
 import { ICameraPositionResult } from "./CameraPositionManager";
 import { Vector3 } from "three";
-// @ts-ignore
-import isEqual = require("lodash.isequal");
-const Hls = require("hls.js");
+import isEqual from "lodash.isequal";
+import Hls from "hls.js";
 
 export class MovieManager {
   video: HTMLVideoElement;
   movieScreen: THREE.Mesh | null = null;
   //vPlayer: any;
   scene: THREE.Scene;
-  hls: typeof Hls;
+  hls: Hls;
   isPlaying: boolean = false;
   videoSourcePlaying: boolean = false;
   isActive: boolean = false;

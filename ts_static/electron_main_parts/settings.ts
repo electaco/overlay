@@ -9,7 +9,7 @@ import { Settings } from "../../src/shared/models/settings/Settings";
 import { log } from "./logging";
 import { getLastPosition, getMapId } from "./position_data";
 import { getRenderWindow, getWindows as getOpenWindows } from "./windows";
-import { IPC } from '../../src/shared/IPC';
+import { IPC } from '../../src/shared/ipc';
 
 
 var objectPath = require("object-path");
@@ -215,6 +215,15 @@ function sendRenderData(settings: Settings) {
 }
 
 export function configUpdated() {
+    // Guard rather than throw: configUpdated is called from IPC handlers and window
+    // creation, and an undefined SETTINGS used to surface as an unhandled rejection
+    // ("Cannot read properties of undefined (reading 'saveConfig')") that left the app
+    // running with no usable state.
+    if (!SETTINGS) {
+        log("Main", "configUpdated called before settings were initialised; ignoring");
+        return;
+    }
+
     SETTINGS.saveConfig();
 
     sendRenderData(SETTINGS);

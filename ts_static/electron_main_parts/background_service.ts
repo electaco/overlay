@@ -1,7 +1,7 @@
 // For class-transformer
 import 'reflect-metadata';
 import { IWebSocketCommand } from '../../src/shared/interfaces/datatransfer/IWebSocketCommand';
-import { IPC } from '../../src/shared/IPC';
+import { IPC } from '../../src/shared/ipc';
 import { log } from './logging';
 import { getRenderWindow } from './windows';
 

@@ -30,21 +30,58 @@ export class Settings implements ISettings {
         this.configFile = configFile?.trim();
     }
 
-    saveConfig() {
+    private get backupFile() {
+        return this.configFile + ".bak";
+    }
 
-        fs.writeFileSync(this.configFile, JSON.stringify({
+    saveConfig() {
+        const json = JSON.stringify({
             render: this.render,
             marks: this.marks,
             overlaySettings: this.overlaySettings
-        }));
+        });
+
+        // Write to a temp file and rename over the target: a kill mid-write then leaves the
+        // previous file intact instead of a truncated one, and readers never see a partial
+        // file. (rename is atomic on the same filesystem, and both paths are in userData.)
+        const tmpFile = this.configFile + ".tmp";
+        fs.writeFileSync(tmpFile, json);
+        try {
+            fs.renameSync(tmpFile, this.configFile);
+        } catch (e) {
+            // Some filesystems refuse to rename over an existing file; fall back to a
+            // direct write so saving still works.
+            fs.writeFileSync(this.configFile, json);
+            try { fs.unlinkSync(tmpFile); } catch { /* ignore */ }
+        }
+
+        // Keep the previous contents as a one-step undo. Only retained when it actually
+        // holds marker groups, so an empty-state save can never overwrite the last good
+        // backup with emptiness.
+        if (this.marks && this.marks.length > 0) {
+            try {
+                fs.copyFileSync(this.configFile, this.backupFile);
+            } catch { /* best-effort */ }
+        }
     }
 
     static loadConfig(filename: string): Settings {
-        if (fs.existsSync(filename)) {
-            let data = fs.readFileSync(filename);
-            var instance = deserialize(Settings, data);
-            instance.configFile = filename;
-            return instance;
+        // Prefer the main file; fall back to the last good backup if it is missing or
+        // unreadable, so a bad write cannot silently wipe the marker groups.
+        const candidates = [filename, filename + ".bak"];
+        for (const file of candidates) {
+            if (!fs.existsSync(file)) { continue; }
+            try {
+                const data = fs.readFileSync(file);
+                const instance = deserialize(Settings, data);
+                instance.configFile = filename;
+                if (file !== filename) {
+                    console.log("Settings file unreadable, restored from " + file);
+                }
+                return instance;
+            } catch (e) {
+                console.log("Could not load settings from " + file + ": " + e);
+            }
         }
 
         return new Settings(filename);

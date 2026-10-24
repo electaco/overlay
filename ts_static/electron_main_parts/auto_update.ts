@@ -1,4 +1,4 @@
-import { IPC } from "../../src/shared/IPC";
+import { IPC } from "../../src/shared/ipc";
 import { log } from "./logging";
 import { GetSettings } from "./settings";
 import { getConfigButtonWindow } from "./windows";

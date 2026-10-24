@@ -1,4 +1,4 @@
-import { IPC } from "../../src/shared/IPC";
+import { IPC } from "../../src/shared/ipc";
 import { configUpdated, GetSettings } from "./settings";
 import { app, BrowserWindow, ipcMain, screen } from 'electron';
 import * as pathModule from 'path';
@@ -30,13 +30,15 @@ export function createRenderWindow(): BrowserWindow {
         rendererWindow.close();
     }
     // Create the browser window.
-    const preloadPath = pathModule.join(app.getAppPath(), 'public', 'electron', 'preload.js');
+    const preloadPath = pathModule.join(app.getAppPath(), 'build', 'electron', 'preload.js');
     const win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
-            nodeIntegration: true,
+            nodeIntegration: false,
             contextIsolation: true,
+            sandbox: true,
+            preload: preloadPath,
         },
         frame: false,
         transparent: true,
@@ -80,7 +82,7 @@ ipcMain.on(IPC.Window.ResizeConfig, (event, arg) => {
 
 
 export function createConfigButtonWindow() {
-    const preloadPath = pathModule.join(app.getAppPath(), 'public', 'electron', 'preload.js');
+    const preloadPath = pathModule.join(app.getAppPath(), 'build', 'electron', 'preload.js');
     // Create the browser window.
     const cwin = new BrowserWindow({
         width: 200,
@@ -106,7 +108,7 @@ export function createConfigButtonWindow() {
 }
 
 function createWindow(parent: BrowserWindow, windowPath: string) {
-    const preloadPath = pathModule.join(app.getAppPath(), 'public', 'electron', 'preload.js');
+    const preloadPath = pathModule.join(app.getAppPath(), 'build', 'electron', 'preload.js');
     // Create the browser window.
     const cwin = new BrowserWindow({
         width: 600,

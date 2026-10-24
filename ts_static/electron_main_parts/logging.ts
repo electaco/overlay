@@ -1,10 +1,8 @@
-import { IPC } from "../../src/shared/IPC";
+import { IPC } from "../../src/shared/ipc";
 
 const path = require('path');
 const { app, ipcMain } = require('electron')
 const fs = require('fs');
-
-const configFolder = app.getPath("userData");
 
 interface iLOG {
     source: any,
@@ -13,6 +11,27 @@ interface iLOG {
 }
 
 const LOGS: iLOG[] = [];
+
+// Resolved lazily, not at module load: app.getPath("userData") needs the app to be
+// initialised, and this module is imported before whenReady(). Resolving it eagerly is what
+// turned a startup-ordering problem into a silent `Cannot read properties of undefined`.
+let logFolder: string | null = null;
+
+function getLogFolder(): string | null {
+    if (logFolder) return logFolder;
+    try {
+        logFolder = app.getPath("userData");
+    } catch {
+        // Falling back keeps logging alive instead of killing the main process; console
+        // output below still works.
+        try {
+            logFolder = app.getPath("temp");
+        } catch {
+            logFolder = null;
+        }
+    }
+    return logFolder;
+}
 
 function getTimestamp() {
     const pad = (n: number, s: number = 2) => (`${new Array(s).fill(0)}${n}`).slice(-s);
@@ -27,10 +46,26 @@ export function log(source: string, message: string) {
         message: message,
         timestamp: Date.now()
     });
-    var msg = getTimestamp() + " [" + source + "] " + message
-    let logfile = path.join(configFolder, "log.txt");
-    fs.appendFileSync(logfile, msg + "\r\n");
-    console.log(msg);
+
+    var msg = getTimestamp() + " [" + source + "] " + message;
+
+    // Never let logging throw: this is called from child-process and socket callbacks
+    // (including during shutdown), where an EPERM/EBUSY on the log file would otherwise
+    // surface as an uncaught exception and crash the main process.
+    try {
+        const folder = getLogFolder();
+        if (folder) {
+            fs.appendFileSync(path.join(folder, "log.txt"), msg + "\r\n");
+        }
+    } catch {
+        // Ignore: file logging is best-effort.
+    }
+
+    try {
+        console.log(msg);
+    } catch {
+        // Ignore: stdout may already be closed during teardown.
+    }
 }
 
 
@@ -40,5 +75,4 @@ ipcMain.on(IPC.Log, (event, sender, arg) => {
 
 ipcMain.on(IPC.Error, (event, arg) => {
     log("Unknown", arg);
-  });
-  
+});

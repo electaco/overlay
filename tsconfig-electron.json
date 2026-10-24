@@ -4,7 +4,12 @@
         "sourceMap": true,
         "target": "es6",
         "module": "commonjs",
-        "outDir": "public/electron",
+        // Must match package.json "main" (build/electron/ts_static/electron_main.js).
+        // This used to be public/electron, which only worked because react-scripts copies
+        // public/* into build/ and a stale compiled tree was left behind in build/electron.
+        "outDir": "build/electron",
+        "lib": ["dom", "esnext"],
+        "skipLibCheck": true,
         "esModuleInterop": true,
         "types": ["node"]
     },

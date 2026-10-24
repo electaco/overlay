@@ -1,6 +1,6 @@
 // For class-transformer
 import 'reflect-metadata';
-import { IPC } from '../../src/shared/IPC';
+import { IPC } from '../../src/shared/ipc';
 
 const { screen } = require('electron')
 import { getRenderWindow } from "./windows";

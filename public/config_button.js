@@ -1,5 +1,28 @@
 //let win = require('electron').remote.getCurrentWindow();
 
+window.config = {
+    send: (channel, arg) => {
+        const validChannels = [
+            'resize', 'exit', 'download_update', 'restart_app', 'show-page',
+        ];
+        if (validChannels.includes(channel)) {
+            window.electaco.config.send(channel, arg);
+        }
+    },
+    on: (channel, callback) => {
+        const validChannels = [
+            'connstatus', 'update_downloaded', 'update_available',
+        ];
+        if (validChannels.includes(channel)) {
+            // preload already strips the IPC event, so hand the callback through as-is.
+            return window.electaco.config.on(channel, callback);
+        }
+    },
+    removeAllListeners: (channel) => {
+        window.electaco.config.removeAllListeners(channel);
+    },
+};
+
 const menuHeader = document.getElementById('header')
 const mouseTarget = document.getElementById('app');
 
@@ -42,10 +65,10 @@ window.config.on("connstatus", (arg)=> {
     item.className = arg;
 });
 
-window.config.on("update_downloaded", (evt, arg)=> {
+window.config.on("update_downloaded", (arg)=> {
     document.getElementById("updatestatus").className = "";
 });
 
-window.config.on("update_available", (evt, arg)=> {
+window.config.on("update_available", (arg)=> {
     document.getElementById("updatestatus_download").className = "";
 });

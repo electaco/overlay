@@ -1,12 +1,12 @@
-const { ipcRenderer } = require('electron')
-
-const log = function(text) {
-    ipcRenderer.send("log", "ErrorHandler", text);
-  }
+// Loaded by the win-* windows (build/index.html) and by config_button.html.
+// Uses the preload bridge; the windows no longer have nodeIntegration, so the old
+// `require('electron')` here would throw before window.onerror was ever installed.
+const ipc = (window.electaco && window.electaco.ipc) || window.ipcRenderer;
 
 window.onerror = function (message, source, lineno, colno, error) {
-    let data = JSON.stringify({
+    if (!ipc) { return; }
+    const data = JSON.stringify({
         message, source, lineno, colno, error
     });
-    ipcRenderer.send("error", data);
-  };
+    ipc.send("error", data);
+};

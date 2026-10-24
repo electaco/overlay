@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { IPC } from '../src/shared/IPC';
+import { IPC } from '../src/shared/ipc';
 import { IRenderData } from '../src/shared/interfaces/render/renderdata';
 import { IVideoData } from '../src/shared/interfaces/datatransfer/IVideoData';
 import { IPositionMarker, MarkerType } from '../src/shared/interfaces/render/marker';
@@ -7,9 +7,7 @@ import { IGw2MumbleLinkData, UiState } from "../src/shared/interfaces/datatransf
 import { MovieManager } from './render/VideoMarker';
 import { CameraPositionManager } from './render/CameraPositionManager';
 import { CreateMarker } from './render/PositionMarker';
-
-declare var ipcRenderer: any;
-//declare var vPlayer: any;
+import { send, on } from '../src/shared/electron_ipc';
 
 class RenderManager {
   private scene: THREE.Scene;
@@ -50,11 +48,11 @@ class RenderManager {
     this.webSocket = new WebSocket(WS_CLIENT);
     this.webSocket.onopen = () => {
       this.logInfo("Connected to web socket");
-      ipcRenderer.send(IPC.ConnectionStatus, "yellow");
+      send(IPC.ConnectionStatus, "yellow");
     }
     this.webSocket.onclose = () => {
       this.logInfo("Disconnected from web socket");
-      ipcRenderer.send(IPC.UseFallbackPositionUpdate, "msg");
+      send(IPC.UseFallbackPositionUpdate, "msg");
     }
     this.webSocket.onerror = (event) => {
       console.log("Error on web socket", event);
@@ -67,7 +65,7 @@ class RenderManager {
         if (!this.gotPosition) {
           this.gotPosition = true;
           this.logInfo("Got first position from websocket");
-          ipcRenderer.send(IPC.ConnectionStatus, "green");
+          send(IPC.ConnectionStatus, "green");
         }
         this.updateGw2Data(msg);
       }
@@ -75,18 +73,18 @@ class RenderManager {
   }
 
   private initEventListeners() {
-    ipcRenderer.on(IPC.Render, (event: any, data: IRenderData) => {
-      this.renderData = data;
+    on(IPC.Render, (data) => {
+      this.renderData = data as IRenderData;
       this.updateSceneData(this.renderData);
       this.renderScene();
     });
 
-    ipcRenderer.on(IPC.Gw2Data, (event: any, data: IGw2MumbleLinkData) => {
-      this.updateGw2Data(data);
+    on(IPC.Gw2Data, (data) => {
+      this.updateGw2Data(data as IGw2MumbleLinkData);
     });
 
-    ipcRenderer.on(IPC.MouseMove, (event: any, mouse: {x: number; y: number;}) => {
-      this.handleMouseMove(mouse);
+    on(IPC.MouseMove, (mouse) => {
+      this.handleMouseMove(mouse as {x: number; y: number;});
     });
   }
 
@@ -178,7 +176,8 @@ class RenderManager {
 
     try {
       if (performance.now() - this.lastMainUpdate > 500) {
-        ipcRenderer.send(IPC.Gw2Data, data);
+        // Throttled relay to main, which only needs it to notice map changes.
+        send(IPC.Gw2Data, data);
         this.lastMainUpdate = performance.now();
       }
     } catch (e) {
@@ -187,11 +186,11 @@ class RenderManager {
   }
 
   private logInfo(text: string) {
-    ipcRenderer.send(IPC.Log, "Render", text);
+    send(IPC.Log, "Render", text);
   }
 
   private logError(text: string) {
-    ipcRenderer.send(IPC.Log, "Render", text);
+    send(IPC.Log, "Render", text);
   }
 
   private removeUnusedObjects() {

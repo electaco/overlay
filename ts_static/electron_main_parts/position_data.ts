@@ -1,6 +1,6 @@
 import { TranslateMapId } from "../../src/components/helpers/constants";
 import { IGw2MumbleLinkData } from "../../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
-import { IPC } from "../../src/shared/IPC";
+import { IPC } from "../../src/shared/ipc";
 import { configUpdated } from "./settings";
 import { getConfigButtonWindow } from "./windows";
 const { ipcMain } = require('electron')

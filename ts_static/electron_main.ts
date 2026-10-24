@@ -10,7 +10,7 @@ import { InitAutoUpdate } from './electron_main_parts/auto_update';
 import { LoadMarkerPacksFromCommandLine, InitSettings } from './electron_main_parts/settings';
 import { createConfigButtonWindow, createRenderWindow, getConfigButtonWindow, getRenderWindow } from './electron_main_parts/windows';
 import { SetupBackgroundService } from './electron_main_parts/background_service';
-import { IPC } from '../src/shared/IPC';
+import { IPC } from '../src/shared/ipc';
 import { Settings } from '../src/shared/models/settings/Settings';
 
 // If we're in wrong folder, we need to change folder to the app's folder
@@ -21,6 +21,10 @@ if (!fs.existsSync("gw2data/WebSocketServerNetFramework.exe")) {
 const gotTheLock = app.requestSingleInstanceLock()
 
 if (!gotTheLock) {
+  // Another instance owns the app. Quitting is queued rather than immediate, so everything
+  // below must stay gated on gotTheLock: previously SetupBackgroundService() and
+  // whenReady()==>onGameStarted() ran anyway, leaving a window that kept the app alive with
+  // SETTINGS still undefined (and configUpdated() then threw on saveConfig()).
   app.quit()
 } else {
   app.on('second-instance', (event, commandLine, workingDirectory) => {
@@ -29,9 +33,9 @@ if (!gotTheLock) {
   });
   var settings = InitSettings();
   LoadMarkerPacksFromCommandLine(process.argv, process.cwd());
-}
 
-SetupBackgroundService();
+  SetupBackgroundService();
+}
 
 ipcMain.on(IPC.Restart, (event, arg) => {
   app.relaunch();
@@ -59,4 +63,6 @@ function onReady() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(onReady)
+if (gotTheLock) {
+  app.whenReady().then(onReady);
+}

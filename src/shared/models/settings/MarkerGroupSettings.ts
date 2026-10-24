@@ -62,9 +62,33 @@ export class MarkerGroupSettings implements IMarkerGroupSettings {
         this.createId();
     }
     
+    // A marker-pack update is downloaded and installed without review, so it must not
+    // travel over plaintext http where it could be swapped in transit. Allow localhost
+    // for development, and anything else only over https.
+    static IsUpdateUrlAllowed(url: string): boolean {
+        let parsed: URL;
+        try {
+            parsed = new URL(url);
+        } catch {
+            return false;
+        }
+        if (parsed.protocol === 'https:') {
+            return true;
+        }
+        if (parsed.protocol === 'http:') {
+            const host = parsed.hostname.toLowerCase();
+            return host === 'localhost' || host === '127.0.0.1' || host === '::1';
+        }
+        return false;
+    }
+
     async CheckForUpdates(): Promise<IUpdateAvailable> {
         if (this.updateurl) {
             console.log("Checking for updates for " + this.id + " at " + this.updateurl);
+            if (!MarkerGroupSettings.IsUpdateUrlAllowed(this.updateurl)) {
+                console.log("Refusing to check for updates for " + this.id + ": updateurl is not https");
+                return { updateAvailable: false, markerid: this.id };
+            }
             try {
                 var response = await fetch(this.updateurl);
             } catch (error) {
@@ -78,6 +102,10 @@ export class MarkerGroupSettings implements IMarkerGroupSettings {
                 throw new Error(message);
             }
             var json = (await response.json()) as any;
+            if (json.url && !MarkerGroupSettings.IsUpdateUrlAllowed(String(json.url))) {
+                console.log("Refusing update for " + this.id + ": pack url is not https (" + json.url + ")");
+                return { updateAvailable: false, markerid: this.id };
+            }
             if (json.url && json.version && json.version !== this.version) {
                 console.log("Update found for " + this.id + " at " + json.url);
                 return {

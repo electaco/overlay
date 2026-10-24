@@ -36,8 +36,8 @@
     "electron-build": "tsc -p tsconfig-electron.json",
     "build-all": "npm run electron-build && npm run react-build",
     "run": "npm run build-all && npm run start",
-    "react-start": "react-scripts start",
-    "react-build": "react-scripts build",
+    "react-start": "craco start",
+    "react-build": "craco build",
     "deploy": "electron-builder --publish always",
     "build": "electron-builder --publish never"
   },
@@ -68,6 +68,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.0",
+    "@craco/craco": "^7.1.0",
     "@types/lodash.isequal": "^4.5.8",
     "@types/three": "^0.167.2",
     "electron": "32.0.1",
