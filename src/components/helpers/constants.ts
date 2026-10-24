@@ -31373,6 +31373,11 @@ export function GetMapName(mapId: string): string | undefined {
     return mapNames[mapId] ?? activeMaps[mapId]?.map_name;
 }
 
+/** True if the table knows this map id at all (bundled/cached table, or names sent by main). */
+export function KnowsMap(mapId: string): boolean {
+    return activeMaps[mapId] !== undefined || mapNames[mapId] !== undefined;
+}
+
 // some maps got multiple entries, this normalize the id to the first map with that name in the list
 export function TranslateMapId(mapId: string) {
     if (mapMap[mapId]) {

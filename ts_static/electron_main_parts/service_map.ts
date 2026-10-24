@@ -24,13 +24,20 @@ const fs = require('fs');
 const BUILD_URL = 'https://api.guildwars2.com/v2/build';
 const MAPS_URL = 'https://api.guildwars2.com/v2/maps?ids=all';
 
-// Don't check more often than this, even across restarts.
-const CHECK_INTERVAL_MS = 24 * 60 * 60 * 1000;
+// Routine check cadence. Cheap: this is the 18-byte /v2/build endpoint, and the map table is
+// only re-downloaded when the build id actually changed.
+const CHECK_INTERVAL_MS = 60 * 60 * 1000;
 // How many times to retry a build mismatch before backing off (guards against a build id
 // that changes without the map table actually updating).
 const MAX_REFRESHES = 2;
 // After giving up, wait this long before trying again.
-const RETRY_BACKOFF_MS = 24 * 60 * 60 * 1000;
+const RETRY_BACKOFF_MS = 60 * 60 * 1000;
+// Floor between two API checks, whatever triggered them. An unknown map is strong evidence
+// the table is stale, but a map that ArenaNet has genuinely removed from the API would
+// otherwise ask forever, so never check more often than this.
+const MIN_CHECK_GAP_MS = 5 * 60 * 1000;
+// Collapse a burst of unknown-map reports (the position stream runs at ~2/s) into one check.
+const UNKNOWN_MAP_DEBOUNCE_MS = 3 * 1000;
 
 const MAPS_FILE = 'gw2_maps.json';
 const META_FILE = 'gw2_maps.meta.json';
@@ -53,6 +60,13 @@ export function SetMapsUpdatedCallback(cb: () => void) {
 export class MapService {
     private maps: IMaps | null = null;
     private meta: IMapsMeta = { build: null, lastChecked: 0, refreshes: 0, source: 'bundled' };
+    // Unknown-map handling: one request per distinct id, one in-flight check at a time.
+    private unknownSeen: { [id: string]: boolean } = {};
+    private debounceTimer: ReturnType<typeof setTimeout> | null = null;
+    private refreshing = false;
+    // When this process last hit the API at all (session-scoped, not persisted), used to
+    // rate limit unknown-map driven checks.
+    private lastCheckAt = 0;
 
     get mapsPath() { return GetStoragePathFor(MAPS_FILE); }
     get metaPath() { return GetStoragePathFor(META_FILE); }
@@ -84,6 +98,38 @@ export class MapService {
                 }
             })
             .catch((e) => log('Maps', 'Background refresh failed: ' + e));
+    }
+
+    /**
+     * Called when the game reports a map id the table does not know. That is proof the table
+     * is stale (new expansion/map), so check the API now instead of waiting for the routine
+     * interval. Debounced, deduplicated per id, and rate limited so a map that genuinely is
+     * not in the API cannot turn into a request loop.
+     */
+    OnUnknownMap(mapId: string) {
+        if (mapId in this.unknownSeen) { return; }   // already asked once for this id
+        this.unknownSeen[mapId] = true;
+        log('Maps', `Unknown map id ${mapId}; checking for an updated map table`);
+
+        if (this.debounceTimer !== null) { return; } // a check is already queued
+        this.debounceTimer = setTimeout(() => {
+            this.debounceTimer = null;
+            // Respect the minimum gap even for unknown maps.
+            const sinceLast = Date.now() - this.lastCheckAt;
+            if (sinceLast < MIN_CHECK_GAP_MS) {
+                log('Maps', `Unknown map seen, but last check was ${Math.round(sinceLast / 1000)}s ago; waiting`);
+                return;
+            }
+            this.RefreshNow('unknown map').catch((e) => log('Maps', 'Unknown-map refresh failed: ' + e));
+        }, UNKNOWN_MAP_DEBOUNCE_MS);
+    }
+
+    /** Force a check now (bypassing the interval), sharing the unknown-map rate limit. */
+    async RefreshNow(reason: string): Promise<void> {
+        if (this.refreshing) { return; }
+        this.lastCheckAt = Date.now();
+        await this.RefreshIfStale(true);
+        log('Maps', `Refresh finished (${reason})`);
     }
 
     private LoadCache() {
@@ -131,11 +177,23 @@ export class MapService {
         return false;
     }
 
-    private async RefreshIfStale() {
-        if (!this.IsDue()) {
+    private async RefreshIfStale(force: boolean = false) {
+        if (!force && !this.IsDue()) {
             log('Maps', 'Map table checked recently; skipping API check');
             return;
         }
+        if (this.refreshing) { return; }
+
+        this.refreshing = true;
+        try {
+            await this.RefreshUnsafe();
+        } finally {
+            this.refreshing = false;
+        }
+    }
+
+    private async RefreshUnsafe() {
+        this.lastCheckAt = Date.now();
 
         const build = await this.FetchBuildId();
         if (build === null) { return; }                     // offline; keep what we have
