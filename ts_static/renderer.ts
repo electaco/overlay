@@ -76,6 +76,16 @@ class RenderManager {
 
     this.webSocket.onmessage = (event) => {
       var msg = JSON.parse(event.data);
+      if (msg?.Type === "loadingscreen") {
+        // MumbleLink has no loading screen flag; the position service detects one from a
+        // stalled uiTick. The position stays at the old spot until the next map has loaded,
+        // so nothing is drawn meanwhile and the video is paused. Older services never send this.
+        const loading = String(msg.Data).toLowerCase() === "true";
+        this.logInfo(loading ? "Loading screen" : "Loading screen ended");
+        this.scene.visible = !loading;
+        this.movieManager.SetSuspended(loading);
+        return;
+      }
       if (msg?.identity?.FovDegrees) {
         if (!this.gotPosition) {
           this.gotPosition = true;

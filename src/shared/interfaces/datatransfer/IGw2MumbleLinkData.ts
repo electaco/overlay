@@ -92,6 +92,9 @@ export interface IGw2Coordinates {
     MapId: string
 }
 export interface IGw2MumbleLinkData {
+    // MumbleLink uiTick (advances every game frame). Informational: the position service watches
+    // it and sends loading screen events instead.
+    uiTick?: number
     coordinates: IGw2Coordinates
     identity: IGw2Identity
     context: IGw2Context

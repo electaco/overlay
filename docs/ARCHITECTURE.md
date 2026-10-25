@@ -203,6 +203,17 @@ empty, and render data that arrives meanwhile is stored and only shown when the 
 The overlay also requests render data on its first position, so a reloaded overlay page gets its
 markers without waiting for a map change.
 
+### Loading screens
+
+MumbleLink has no loading-screen flag (unlike `IsMapOpen`); GW2 just stops updating it, so the
+last position (often right next to a video marker) stays until the next map has loaded. The
+position service watches MumbleLink's `uiTick`, which advances every game frame otherwise, and
+when it stands still for 750 ms sends `{"Type":"loadingscreen","Data":"True"}` on the position
+socket, then `"False"` once it moves again. Position messages are still only sent when the data
+changes. `renderer.ts` hides the whole scene (all markers) and passes the event to
+`MovieManager.SetSuspended()`: the video is paused, but the stream stays loaded, and normal marker selection takes over again when
+the loading screen ends. Older services never send the event, so nothing is suspended with them.
+
 ### Video markers
 
 There is one `<video>` element (`#player` in `renderer.html`), one stream and one screen mesh,

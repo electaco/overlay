@@ -198,6 +198,7 @@ export class MovieManager {
   private streams = new Map<string, IStreamHistory>();
   private history: IStreamHistory = { url: "", step: 0, stableMs: 0, stalls: 0 };
   private isLive = false;
+  private suspended = false;
   // Bars baked into the video are made transparent in the screen's shader (see BlackBars.ts).
   private bars = new BlackBarDetector();
   private barUniforms = { uBarV: { value: 0 }, uBarH: { value: 0 } };
@@ -313,7 +314,27 @@ export class MovieManager {
     }
   }
 
+  // The game stopped updating (a loading screen): hide the screen and pause the video, but keep
+  // the stream, since the position is stale until the game is back. Update() takes over again
+  // afterwards and deactivates the marker if the player ended up elsewhere.
+  SetSuspended(suspended: boolean) {
+    if (suspended === this.suspended) return;
+    this.suspended = suspended;
+    if (suspended) {
+      this.rig.visible = false;
+      this.video.pause();
+    } else if (this.active) {
+      this.rig.visible = true;
+      // Time spent suspended is not a stall or a stuck decoder.
+      const now = performance.now();
+      this.lastProgress = now;
+      this.lastNewData = now;
+      this.lastTick = 0;
+    }
+  }
+
   Update(position: ICameraPositionResult) {
+    if (this.suspended) return;
     const target = this.pickMarker(position.playerposition);
     if (target !== this.active) {
       if (target) {
