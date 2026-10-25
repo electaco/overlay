@@ -15,6 +15,9 @@ extraFiles:
 - gw2data
 win:
   target: nsis
+  # Named explicitly: build/ is also the React output, and its icons/ folder (mount menu
+  # images) would otherwise be taken for the app's icon set.
+  icon: build/icon.png
 fileAssociations:
   - ext: etmp
     name: Electaco Marker Pack
