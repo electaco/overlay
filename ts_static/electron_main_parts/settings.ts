@@ -1,5 +1,6 @@
 import { IGw2MumbleLinkData } from "../../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
 import { IMarkerRemovalInfo } from "../../src/shared/interfaces/datatransfer/IMarkerRemovalInfo";
+import { IMarkerMoveInfo } from "../../src/shared/interfaces/datatransfer/IMarkerMoveInfo";
 import IMarkerTypeChange from "../../src/shared/interfaces/datatransfer/IMarkerTypeChange";
 import { MarkerType } from "../../src/shared/interfaces/render/marker";
 import { Position } from "../../src/shared/models/Position";
@@ -96,6 +97,11 @@ ipcMain.on(IPC.Marker.Remove, (event, arg: IMarkerRemovalInfo) => {
     configUpdated();
 });
 
+
+ipcMain.on(IPC.Marker.Move, (event, arg: IMarkerMoveInfo) => {
+    SETTINGS.moveMarker(arg.markerpack, arg.map, arg.from, arg.to);
+    configUpdated();
+});
 
 ipcMain.on(IPC.Marker.NewGroup, (event, arg) => {
     log("Main", "new marker group added");

@@ -164,6 +164,14 @@ export class Settings implements ISettings {
         }
     }
 
+    // Reorders a map's markers; the order is what a sequential pack goes through.
+    moveMarker(packIndex: number, map: string, from: number, to: number): void {
+        const markers = this.marks[packIndex]?.markers[map];
+        if (!markers || from === to || from < 0 || from >= markers.length || to < 0 || to >= markers.length) return;
+        const [marker] = markers.splice(from, 1);
+        markers.splice(to, 0, marker);
+    }
+
     getMarkerGroup(index: number): MarkerGroupSettings {
         return this.marks[index];
     }

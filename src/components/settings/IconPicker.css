@@ -35,6 +35,11 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
+.iconpicker-menu.alignleft {
+    left: 0;
+    right: auto;
+}
+
 .iconpicker-option {
     width: 36px;
     height: 36px;

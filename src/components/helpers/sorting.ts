@@ -2,14 +2,6 @@ export function ByActive(a, b) {
     return a.active === b.active ? 0 : a.active ? -1 : 1;
 }
 
-// Shown before hidden, by an effective-visibility function (e.g. including the player's prefs).
-export function ByActiveUsing<T>(isActive: (item: T) => boolean) {
-    return (a: T, b: T) => {
-        const x = isActive(a), y = isActive(b);
-        return x === y ? 0 : x ? -1 : 1;
-    };
-}
-
 export function MarkerPackHasMap(mapid: string) {
     return function (a, b) {
         if (a.markers[mapid]) {

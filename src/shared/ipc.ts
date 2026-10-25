@@ -6,6 +6,7 @@ export const IPC = {
     Marker: {
         Add: "addMarker",
         Remove: "removeMarker",
+        Move: "moveMarker",
         Update: "updateMarker",
         NewGroup: "newMarkerGroup",
         LoadGroup: "loadmarkergroup",

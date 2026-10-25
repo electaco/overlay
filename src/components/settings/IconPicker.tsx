@@ -18,6 +18,8 @@ interface IProps {
 // A small button showing the current marker icon; clicking it opens a grid of the built-in icons.
 function IconPicker(props: IProps) {
   const [open, setOpen] = useState(false);
+  // The menu opens towards the middle of the window so it is not cut off at the edge.
+  const [alignLeft, setAlignLeft] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const current = props.value || props.defaultIcon || MARKER_ICONS[0].file;
 
@@ -37,11 +39,15 @@ function IconPicker(props: IProps) {
 
   return (
     <div className="iconpicker" ref={root} title={props.popup}>
-      <button type="button" className="iconpicker-current" onClick={() => setOpen(!open)}>
+      <button type="button" className="iconpicker-current" onClick={() => {
+        const box = root.current?.getBoundingClientRect();
+        setAlignLeft(!!box && box.left + box.width / 2 < window.innerWidth / 2);
+        setOpen(!open);
+      }}>
         <img src={current} alt="" />
       </button>
       {open && (
-        <div className="iconpicker-menu">
+        <div className={"iconpicker-menu" + (alignLeft ? " alignleft" : "")}>
           {props.allowDefault && (
             <button type="button" className={"iconpicker-option default" + (!props.value ? " selected" : "")}
               onClick={() => choose(null)} title="Use the pack's icon">

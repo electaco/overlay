@@ -44,7 +44,7 @@ function MarkerVideo(props: IProps) {
                 </div>
             }
                 expanded={false}
-                plusOnRightSide={true}
+                cogOnRightSide={true}
                 rightside={
                     <Checkbox
                         setting={{ path: MarkerActivePath(props.pack, props.marker), value: IsMarkerActive(props.settings.markerPrefs, props.pack, props.marker) }}

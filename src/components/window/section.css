@@ -11,3 +11,11 @@
 .section {
     width: 100%;
 }
+.section .sectioncog {
+    margin-left: 4px;
+    opacity: 0.7;
+}
+.section .sectioncog.active {
+    opacity: 1;
+    color: #ffd166;
+}

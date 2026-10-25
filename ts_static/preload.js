@@ -35,7 +35,7 @@ contextBridge.exposeInMainWorld('electaco', {
                 // Settings window: put the mount menu back in the middle of the screen.
                 'mounts-reset-position',
                 // Settings / marker windows
-                'addMarker', 'removeMarker', 'updateMarker', 'newMarkerGroup',
+                'addMarker', 'removeMarker', 'moveMarker', 'updateMarker', 'newMarkerGroup',
                 'loadmarkergroup', 'removeMarkerGroup', 'savemarkergroup',
                 'loadmarkergroup_json', 'markertype-change',
                 'getsettings', 'setsettings', 'updateconfig',

@@ -330,8 +330,8 @@ place deciding which of a pack's markers are drawn.
 
 **Sequential packs** (pack option `sequential`): per map only the first marker in pack order that
 is neither hidden nor done is drawn, so hiding it (eye toggle or auto-hide) reveals the next.
-"Start over" clears the pack's marker preferences. Sequential packs are listed in pack order in the
-settings, and auto-hide only counts the marker currently drawn.
+"Start over" clears the pack's marker preferences. Markers are listed in pack order in the settings
+(drag a marker's grip to move it; `IPC.Marker.Move` → `Settings.moveMarker()`), and auto-hide only counts the marker currently drawn.
 
 **Marker arrow** (`render.showArrow`, Configuration): a small shaded 3D arrow
 (`ts_static/render/ArrowHud.ts`) at the character's feet, drawn over the character, pointing

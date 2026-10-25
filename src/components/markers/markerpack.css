@@ -21,3 +21,50 @@
 .packoptions input[type="number"] {
     width: 4.5em;
 }
+
+.markergrip {
+    cursor: grab;
+    padding: 4px 6px 0 0;
+    opacity: 0.45;
+}
+
+.markergrip:hover {
+    opacity: 1;
+}
+
+.markerrow.dropbefore {
+    box-shadow: 0 -2px 0 #ffd166;
+}
+
+.markerrow.dropafter {
+    box-shadow: 0 2px 0 #ffd166;
+}
+
+.addmarker {
+    margin-right: 12px;
+}
+
+.packsettingsbutton {
+    margin: 0 4px;
+    opacity: 0.7;
+}
+
+.packsettingsbutton.active {
+    opacity: 1;
+    color: #ffd166;
+}
+
+.packsettings {
+    margin: 2px 0 6px 1.6em;
+    padding: 6px 10px;
+    border-left: 2px solid rgba(255, 209, 102, 0.5);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.packsettingsrow {
+    margin-bottom: 4px;
+}
+
+.packsettingslabel {
+    margin-right: 6px;
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faMinus, faPlus, faCog } from '@fortawesome/free-solid-svg-icons'
 import './section.css';
 
 interface IProps {
@@ -8,7 +8,10 @@ interface IProps {
     title: React.ReactNode;
     rightside?: React.ReactNode;
     children?: React.ReactNode;
-    plusOnRightSide?: boolean;
+    // A settings cogwheel on the right instead of the plus/minus on the left.
+    cogOnRightSide?: boolean;
+    // Shown under the title whether or not the section is expanded.
+    panel?: React.ReactNode;
 }
 
 function Section(props:IProps) {
@@ -17,15 +20,17 @@ function Section(props:IProps) {
     let icon = visible ? faMinus : faPlus;
     return  <div className="section">
             <div className="sectionTitle d-flex align-items-center">
-                {!props.plusOnRightSide && <FontAwesomeIcon icon={icon} className="button" onClick={() => setVisible(!visible)} />}
+                {!props.cogOnRightSide && <FontAwesomeIcon icon={icon} className="button" onClick={() => setVisible(!visible)} />}
                 <div className="flex-grow-1 title">
                     {props.title}
                 </div>
                 <div className="rightside">
                     {props.rightside}
-                    {props.plusOnRightSide && <FontAwesomeIcon icon={icon} className="button" onClick={() => setVisible(!visible)} />}
+                    {props.cogOnRightSide && <FontAwesomeIcon icon={faCog} className={"button sectioncog" + (visible ? " active" : "")}
+                        title="Settings" onClick={() => setVisible(!visible)} />}
                 </div>
             </div>
+            {props.panel}
             {visible && <div className="sectionContent">
                 {props.children}
             </div>}
