@@ -9,7 +9,7 @@ import { ICameraPositionResult } from './CameraPositionManager';
 // sharp.
 
 const ARROW_RAISE = -0.35;    // metres from the character's position, which is about knee high
-const ARROW_SCALE = 0.6;
+const ARROW_SCALE = 0.8;
 // The game's character position steps out of time with its camera, so the arrow's place is
 // smoothed in view space (where the character barely moves while running or turning the camera).
 const SMOOTH_MS = 250;
@@ -32,21 +32,29 @@ function buildArrow(): THREE.Group {
   const material = new THREE.MeshLambertMaterial({ color: COLOR, emissive: 0x4a3200, depthTest: false, transparent: true });
   const outline = new THREE.MeshBasicMaterial({ color: 0x141414, side: THREE.BackSide, depthTest: false, transparent: true });
   const group = new THREE.Group();
-  // Built along +Z, the axis Object3D.lookAt() points at the target.
-  const parts: [THREE.BufferGeometry, number][] = [
-    [new THREE.CylinderGeometry(0.05, 0.05, 0.36, 20), -0.06],
-    [new THREE.ConeGeometry(0.15, 0.3, 28), 0.27],
-  ];
-  for (const [geometry, z] of parts) {
-    geometry.rotateX(Math.PI / 2);
-    geometry.translate(0, 0, z);
-    const body = new THREE.Mesh(geometry, material);
-    const edge = new THREE.Mesh(geometry, outline);
-    edge.scale.setScalar(1.12);
-    edge.renderOrder = 10;
-    body.renderOrder = 11;
-    group.add(edge, body);
-  }
+  // A flat, bevelled arrow lying face up, so its outline shows the direction from the usual
+  // camera above and behind the character.
+  const shape = new THREE.Shape();
+  shape.moveTo(-0.08, -0.35);
+  shape.lineTo(0.08, -0.35);
+  shape.lineTo(0.08, 0.05);
+  shape.lineTo(0.2, 0.05);
+  shape.lineTo(0, 0.35);
+  shape.lineTo(-0.2, 0.05);
+  shape.lineTo(-0.08, 0.05);
+  shape.closePath();
+  const geometry = new THREE.ExtrudeGeometry(shape, {
+    depth: 0.05, bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.015, bevelSegments: 2,
+  });
+  geometry.translate(0, 0, -0.025);
+  // Tip from +Y to +Z, the axis Object3D.lookAt() points at the target; the face then looks up.
+  geometry.rotateX(Math.PI / 2);
+  const body = new THREE.Mesh(geometry, material);
+  const edge = new THREE.Mesh(geometry, outline);
+  edge.scale.setScalar(1.1);
+  edge.renderOrder = 10;
+  body.renderOrder = 11;
+  group.add(edge, body);
   group.scale.setScalar(ARROW_SCALE);
   group.visible = false;
   group.userData.SkipRemove = true;
