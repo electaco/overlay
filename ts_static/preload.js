@@ -20,7 +20,6 @@ contextBridge.exposeInMainWorld('electaco', {
             // the renderer relays its throttled position to main (settings.ts,
             // position_data.ts) so main knows when the map changes. Without it main never
             // has a last position and sendRenderData() silently sends no markers.
-            // `mousemove` really is main -> renderer only.
             const validChannels = [
                 // Main process
                 'restart', 'exit', 'sendkeys',
@@ -51,7 +50,7 @@ contextBridge.exposeInMainWorld('electaco', {
                 // Mount radial window
                 'mounts-position',
                 // Overlay renderer
-                'render', 'gw2data', 'mousemove',
+                'render', 'gw2data',
                 // Auto updater
                 'update_downloaded', 'update_available', 'update-downloaded',
                 'update-available', 'checking-for-update', 'update-not-available',
@@ -69,6 +68,8 @@ contextBridge.exposeInMainWorld('electaco', {
         invoke(channel, args) {
             const validChannels = [
                 'getsettings', 'getrender',
+                // Overlay renderer: is the cursor still over the overlay window?
+                'cursor-in-overlay',
             ];
             if (validChannels.includes(channel)) {
                 return ipcRenderer.invoke(channel, ...args);

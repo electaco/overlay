@@ -7,7 +7,7 @@ import { IGw2MumbleLinkData, UiState } from "../src/shared/interfaces/datatransf
 import { MovieManager } from './render/VideoMarker';
 import { CameraPositionManager } from './render/CameraPositionManager';
 import { CreateMarker } from './render/PositionMarker';
-import { send, on } from '../src/shared/electron_ipc';
+import { send, on, invoke } from '../src/shared/electron_ipc';
 
 class RenderManager {
   private scene: THREE.Scene;
@@ -22,16 +22,31 @@ class RenderManager {
   private lastTime = 0;
   private lastMainUpdate = 0;
   private isMap = false;
+  private mapId: string | null = null;
+  private mapChangePending = false;
   private webSocket: WebSocket | null = null;
   private gotPosition = false;
+  // Cursor in normalized device coordinates, or null when it is off the overlay. Updated from DOM
+  // events and acted on once per rendered frame.
+  private pointer: THREE.Vector2 | null = null;
+  private pointerMoved = false;
 
   constructor() {
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(59, window.innerWidth / window.innerHeight, 0.1, 2000);
     this.renderer = new THREE.WebGLRenderer({ alpha: true });
     this.renderer.setClearColor(0x000000, 0);
-    this.renderer.setSize(window.innerWidth, window.innerHeight, false);
+    // Render at the display's real resolution. Without the pixel ratio the canvas is drawn in CSS
+    // pixels and stretched by the display scale (1.5x at 150%), blurring all text and markers.
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this.renderer.domElement);
+    window.addEventListener('resize', () => {
+      this.renderer.setPixelRatio(window.devicePixelRatio);
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.updateProjectionMatrix();
+    });
 
     this.movieManager = new MovieManager(this.scene);
     this.positionManager = new CameraPositionManager(this.renderScene.bind(this));
@@ -75,7 +90,9 @@ class RenderManager {
   private initEventListeners() {
     on(IPC.Render, (data) => {
       this.renderData = data as IRenderData;
-      this.updateSceneData(this.renderData);
+      // Render data can arrive while the map is open (any settings change sends it). It is
+      // kept for when the map closes, not shown.
+      this.updateSceneData(this.isMap ? null : this.renderData);
       this.renderScene();
     });
 
@@ -83,9 +100,30 @@ class RenderManager {
       this.updateGw2Data(data as IGw2MumbleLinkData);
     });
 
-    on(IPC.MouseMove, (mouse) => {
-      this.handleMouseMove(mouse as {x: number; y: number;});
+    // The overlay is click-through with { forward: true } (windows.ts), so the page still gets
+    // real mousemove events while the game has focus, in page pixels on whatever display the
+    // overlay covers. No clicks reach it.
+    //
+    // The last position is kept and raycast every frame, so hover follows the camera while the
+    // cursor is still. 'mouseleave' is no use here: a click-through window that never really holds
+    // the mouse gets mouseout/mouseleave right after every forwarded move (still inside the
+    // window), which made hover flash for a frame. Whether the cursor has really left the
+    // overlay (to another display) is asked from main while something is hovered.
+    window.addEventListener('mousemove', (e) => {
+      this.pointer = new THREE.Vector2(
+        (e.clientX / window.innerWidth) * 2 - 1,
+        -(e.clientY / window.innerHeight) * 2 + 1);
+      this.pointerMoved = true;
     });
+    setInterval(() => {
+      if (!this.pointer || !this.movieManager.IsHovered()) return;
+      invoke(IPC.CursorInOverlay).then((inside) => {
+        if (inside === false) {
+          this.pointer = null;
+          this.pointerMoved = true;
+        }
+      });
+    }, 500);
   }
 
   private updateSceneData(renderData: IRenderData | null) {
@@ -97,7 +135,6 @@ class RenderManager {
     try {
       this.removeUnusedObjects();
       this.addNewMarkers(renderData);
-      console.log("Update setting video markers");
       this.movieManager.SetVideoMarkers(this.extractVideoMarkers(renderData));
     } catch (e) {
       this.logError("Error in UpdateScene: " + e);
@@ -120,7 +157,15 @@ class RenderManager {
     }
 
     this.positionManager.UpdateCameraPosition(this.camera);
-    this.movieManager.CheckVideoDistance(this.camera);
+    if (this.positionManager.isReady) {
+      this.movieManager.Update(this.positionManager.GetPosition());
+    }
+    if (this.pointerMoved) {
+      this.pointerMoved = false;
+      this.handleMouseMove(this.pointer);
+    }
+    // Every frame, not only on mouse moves: the screen moves under a still cursor as the camera does.
+    this.movieManager.UpdateHover(this.pointer, this.camera);
     this.renderer.render(this.scene, this.camera);
     this.handlePostRenderActions();
 
@@ -140,10 +185,13 @@ class RenderManager {
     });
   }
 
-  private handleMouseMove(mouse: any) {
-    this.raycaster.setFromCamera(mouse, this.camera);
-    const intersects = this.raycaster.intersectObjects(this.scene.children, true);
-    let intersect = intersects.length > 0 ? intersects[0].object.parent : null;
+  private handleMouseMove(mouse: THREE.Vector2 | null) {
+    let intersect: THREE.Object3D | null = null;
+    if (mouse) {
+      this.raycaster.setFromCamera(mouse, this.camera);
+      const intersects = this.raycaster.intersectObjects(this.scene.children, true);
+      intersect = intersects.length > 0 ? intersects[0].object.parent : null;
+    }
 
     if (intersect !== this.intersected) {
       if (this.intersected && this.intersected.userData.onMouseOverExit) {
@@ -158,6 +206,20 @@ class RenderManager {
   }
 
   private updateGw2Data(data: IGw2MumbleLinkData) {
+    const mapId = data.coordinates?.MapId ? String(data.coordinates.MapId) : null;
+    if (mapId && mapId !== this.mapId) {
+      // The markers we have belong to the previous map. Drop them now rather than when main
+      // notices the change (up to the relay interval later), and ask for the new map's markers:
+      // main only resends on its own if the translated map id changed. The first position asks
+      // too, so a reloaded overlay page gets its markers without waiting for a map change.
+      this.mapChangePending = true;
+      if (this.mapId !== null) {
+        this.renderData = null;
+        this.updateSceneData(null);
+      }
+      this.mapId = mapId;
+    }
+
     if (data.context.UiState & UiState.MapOpen) {
       if (!this.isMap) {
         this.updateSceneData(null);
@@ -175,7 +237,12 @@ class RenderManager {
     this.positionManager.SetPosition(data);
 
     try {
-      if (performance.now() - this.lastMainUpdate > 500) {
+      if (this.mapChangePending) {
+        this.mapChangePending = false;
+        send(IPC.Gw2Data, data);
+        send(IPC.GetRender);
+        this.lastMainUpdate = performance.now();
+      } else if (performance.now() - this.lastMainUpdate > 500) {
         // Throttled relay to main, which only needs it to notice map changes.
         send(IPC.Gw2Data, data);
         this.lastMainUpdate = performance.now();
@@ -210,11 +277,6 @@ class RenderManager {
     renderData?.markers?.forEach((marker) => {
       if (marker.type == MarkerType.PositionMarker)
         this.scene.add(CreateMarker(marker as IPositionMarker));
-      if (marker.type == MarkerType.VideoMarker) {
-        const videoData = marker as IVideoData;
-        videoData.visibleDistance = videoData.visibleDistance || 65;
-        videoData.fadeInDistance = videoData.fadeInDistance || 50;
-      }
     });
   }
 

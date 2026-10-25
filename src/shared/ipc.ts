@@ -52,7 +52,7 @@ export const IPC = {
     Render: "render",
     Video: "video",
     Gw2Data: "gw2data",
-    MouseMove: "mousemove",
+    CursorInOverlay: "cursor-in-overlay",
     ConnectionStatus: "connstatus",
     UseFallbackPositionUpdate: "fallback_positionupate",
     UpdateDownloaded: "update_downloaded",

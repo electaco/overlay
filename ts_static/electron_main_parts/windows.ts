@@ -228,6 +228,15 @@ function stopMountDrag() {
     }
 }
 
+// The overlay page cannot tell on its own when the cursor has left it: a click-through window
+// with forwarded mouse moves gets a mouseleave after every single move (see renderer.ts).
+ipcMain.handle(IPC.CursorInOverlay, () => {
+    if (!rendererWindow || rendererWindow.isDestroyed()) return false;
+    const p = screen.getCursorScreenPoint();
+    const b = rendererWindow.getBounds();
+    return p.x >= b.x && p.x < b.x + b.width && p.y >= b.y && p.y < b.y + b.height;
+});
+
 export function getRenderWindow() {
     return rendererWindow;
 }

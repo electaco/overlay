@@ -96,6 +96,15 @@ function MarkerVideo(props: IProps) {
                                 max={20}
                             />
                         </div>
+                        <div title="How far behind the live edge a live stream plays. More delay rides out uneven segment delivery. 0 = 30 s, or as far back as the stream's playlist goes.">
+                            Live delay (s): <NumberEditor
+                                path={props.path + "extraData.source.liveDelay"}
+                                value={props.marker.extraData?.source.liveDelay || 0}
+                                step={1}
+                                min={0}
+                                max={120}
+                            />
+                        </div>
                     </div>
                 }
                 <div>

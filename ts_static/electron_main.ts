@@ -5,7 +5,6 @@ const { app } = require('electron')
 const { ipcMain } = require('electron')
 const fs = require('fs');
 
-import { InitializeMouseMove } from './electron_main_parts/mouse_movement';
 import { InitAutoUpdate } from './electron_main_parts/auto_update';
 import { LoadMarkerPacksFromCommandLine, InitSettings } from './electron_main_parts/settings';
 import { createConfigButtonWindow, createRenderWindow, getConfigButtonWindow, getRenderWindow, getWindows as getOpenWindows } from './electron_main_parts/windows';
@@ -85,7 +84,6 @@ ipcMain.on(IPC.Exit, (event, arg) => {
 function onGameStarted() {
   createRenderWindow();
   createConfigButtonWindow();
-  InitializeMouseMove();
   InitAutoUpdate();
   if (settings.overlaySettings.checkForMarkerUpdates) {
     settings.CheckForMarkerUpdates();
