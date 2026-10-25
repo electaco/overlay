@@ -50,7 +50,7 @@ class App extends React.Component<IProps, IState> {
           <Section title="Rendering">
             <Checkbox setting={getSetting(this.state.settings, 'Show debug boxes', "render.debugBoxes", false)}/>
             <Checkbox setting={getSetting(this.state.settings, 'Show marker names', "render.showMarkerNames", false)}/>
-            <Checkbox setting={getSetting(this.state.settings, 'Show an arrow to the nearest marker (pick a pack or marker with its target button)', "render.showArrow", false)}/>
+            <Checkbox setting={getSetting(this.state.settings, 'Show an arrow to the targeted pack or marker (pick one with its target button)', "render.showArrow", false)}/>
           </Section>
           <Section title="Overlay">
             <Checkbox setting={getSetting(this.state.settings, 'Check for new versions', "overlaySettings.checkForUpdates", true)} />

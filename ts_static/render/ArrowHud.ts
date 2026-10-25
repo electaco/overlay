@@ -2,14 +2,18 @@ import * as THREE from 'three';
 import { IArrowCandidate } from '../../src/shared/interfaces/render/renderdata';
 import { ICameraPositionResult } from './CameraPositionManager';
 
-// The marker arrow: a shaded 3D arrow floating a few metres ahead of the camera, a little above
-// the middle of the view, pointing straight at the nearest candidate marker (the render data's
-// `arrow`, see Settings.arrowCandidates), up and down included. A small label under it gives the
-// marker's name, distance, pack and whether it is well above or below. The label is plain DOM so
-// its text stays sharp.
+// The marker arrow: a small shaded 3D arrow at the character's feet, pointing straight at the
+// nearest candidate marker (the render data's `arrow`, see Settings.arrowCandidates), up and down
+// included. It is drawn over the character. A small label under it gives the marker's name,
+// distance, pack and whether it is well above or below. The label is plain DOM so its text stays
+// sharp.
 
-const ARROW_DISTANCE = 3;     // metres in front of the camera
-const ARROW_RAISE = 0.55;     // metres above the view's centre line
+const ARROW_RAISE = -0.35;    // metres from the character's position, which is about knee high
+const ARROW_SCALE = 0.6;
+// The game's character position steps out of time with its camera, so the arrow's place is
+// smoothed in view space (where the character barely moves while running or turning the camera).
+const SMOOTH_MS = 250;
+const SNAP_M = 4;             // further than this from the smoothed place (teleports): jump there
 const HEIGHT_HINT_M = 5;
 const COLOR = 0xffc94d;
 
@@ -43,6 +47,7 @@ function buildArrow(): THREE.Group {
     body.renderOrder = 11;
     group.add(edge, body);
   }
+  group.scale.setScalar(ARROW_SCALE);
   group.visible = false;
   group.userData.SkipRemove = true;
   return group;
@@ -55,6 +60,8 @@ export class ArrowHud {
   private detail: HTMLDivElement;
   private candidates: { pos: THREE.Vector3; data: IArrowCandidate }[] = [];
   private lastText = "";
+  private viewOffset: THREE.Vector3 | null = null;
+  private lastFrame = 0;
 
   constructor(scene: THREE.Scene) {
     this.arrow = buildArrow();
@@ -92,6 +99,7 @@ export class ArrowHud {
     if (!visible || this.candidates.length === 0) {
       this.arrow.visible = false;
       this.label.hidden = true;
+      this.viewOffset = null;
       return;
     }
     const player = position.playerposition;
@@ -106,14 +114,12 @@ export class ArrowHud {
     }
 
     camera.updateMatrixWorld();
-    const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
-    const up = new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion);
-    this.arrow.position.copy(camera.position).addScaledVector(forward, ARROW_DISTANCE).addScaledVector(up, ARROW_RAISE);
+    this.arrow.position.copy(this.smoothedFeet(player, camera));
     this.arrow.lookAt(best.pos);
     this.arrow.visible = true;
 
     // Label just under the arrow.
-    const anchor = this.arrow.position.clone().addScaledVector(up, -0.32).project(camera);
+    const anchor = this.arrow.position.clone().add(new THREE.Vector3(0, -0.3, 0)).project(camera);
     this.label.style.left = ((anchor.x + 1) / 2 * window.innerWidth).toFixed(0) + "px";
     this.label.style.top = ((1 - anchor.y) / 2 * window.innerHeight).toFixed(0) + "px";
 
@@ -127,5 +133,21 @@ export class ArrowHud {
       this.detail.textContent = detail;
     }
     this.label.hidden = false;
+  }
+
+  // Where the arrow goes: under the character's feet, smoothed as seen from the camera.
+  private smoothedFeet(player: THREE.Vector3, camera: THREE.Camera): THREE.Vector3 {
+    const now = performance.now();
+    const dt = this.lastFrame ? now - this.lastFrame : 0;
+    this.lastFrame = now;
+    const toView = camera.quaternion.clone().invert();
+    const feet = new THREE.Vector3(player.x, player.y + ARROW_RAISE, player.z);
+    const offset = feet.sub(camera.position).applyQuaternion(toView);
+    if (!this.viewOffset || this.viewOffset.distanceTo(offset) > SNAP_M) {
+      this.viewOffset = offset;
+    } else {
+      this.viewOffset.lerp(offset, 1 - Math.exp(-dt / SMOOTH_MS));
+    }
+    return this.viewOffset.clone().applyQuaternion(camera.quaternion).add(camera.position);
   }
 }

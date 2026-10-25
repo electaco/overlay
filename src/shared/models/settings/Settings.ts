@@ -268,14 +268,14 @@ export class Settings implements ISettings {
         return data;
     }
 
-    // What the HUD arrow may point at on this map: the target marker, the target pack's drawn
-    // markers (the current one, for a sequential pack), or every drawn position marker.
+    // What the HUD arrow may point at on this map: the target marker, or the target pack's drawn
+    // markers (the current one, for a sequential pack). No target, no arrow.
     private arrowCandidates(MapId: string, now: number): IArrowCandidate[] {
         const target = this.render.arrowTarget;
-        const packs = target ? this.marks.filter((pack) => pack.id === target.packId) : this.marks;
         const candidates: IArrowCandidate[] = [];
-        for (const pack of packs) {
-            const markers = target?.markerId
+        if (!target) return candidates;
+        for (const pack of this.marks.filter((p) => p.id === target.packId)) {
+            const markers = target.markerId
                 ? (pack.markers[MapId] ?? []).filter((marker) => marker.id === target.markerId)
                 : VisibleMarkers(this.markerPrefs, pack, MapId, now);
             for (const marker of markers) {
