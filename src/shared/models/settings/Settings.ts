@@ -222,7 +222,7 @@ export class Settings implements ISettings {
 
                     let renderMarker: IPositionMarker = {
                         position: marker.position,
-                        icon: { icon: markerGroup.icon, color: markerGroup.color },
+                        icon: { icon: marker.icon || markerGroup.icon, color: markerGroup.color },
                         text: null,
                         type: MarkerType.PositionMarker,
                         markerMouseoverData: {

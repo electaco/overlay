@@ -5,6 +5,7 @@ import { INamePlateSetting } from "../../interfaces/settings/INamePlateSetting";
 import { NamePlateSetting } from "./NamePlateSetting";
 import { Type, deserialize } from 'class-transformer';
 import fetch from 'cross-fetch'
+import { DEFAULT_MARKER_ICON } from "../../markerIcons";
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -38,7 +39,7 @@ export class MarkerGroupSettings implements IMarkerGroupSettings {
 
     name: string = "New Marker Group";
     active: boolean = true;
-    icon: string = "marker1.webp";
+    icon: string = DEFAULT_MARKER_ICON;
     color: string = "#ffffff";
     id!: string;
     updateurl?: string | undefined;

@@ -10,6 +10,7 @@ import { IsMarkerActive, MarkerActivePath } from '../../shared/models/settings/M
 import Button from '../window/Button';
 import Section from '../window/section';
 import PositionEditor from '../settings/PositionEditor';
+import IconPicker from '../settings/IconPicker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import IMarkerTypeChange from '../../shared/interfaces/datatransfer/IMarkerTypeChange';
 import { IPC } from '../../shared/ipc';
@@ -64,6 +65,11 @@ function MarkerPosition(props: IProps) {
                 <Button onClick={toVideoMarker}>To Video marker</Button>
                 <div>
                     <PositionEditor title="Position" position={props.marker.position} path={props.path + "position"} />
+                </div>
+                <div className="d-flex align-items-center">
+                    Icon:
+                    <IconPicker popup="Icon for this marker (Pack: use the pack's icon)" path={props.path + "icon"}
+                        value={props.marker.icon} allowDefault defaultIcon={props.pack.icon} />
                 </div>
                 <div>
                     <EditableText path={props.path + "description"} value={props.marker.description} defaultValue="No description"/>

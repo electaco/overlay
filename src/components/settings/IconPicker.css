@@ -1,0 +1,58 @@
+.iconpicker {
+    position: relative;
+    display: inline-block;
+    margin: 0 4px;
+}
+
+.iconpicker-current,
+.iconpicker-option {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
+    padding: 2px;
+    cursor: pointer;
+    line-height: 0;
+}
+
+.iconpicker-current img {
+    width: 20px;
+    height: 20px;
+}
+
+.iconpicker-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 4px;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(5, 36px);
+    gap: 4px;
+    padding: 6px;
+    background: #2b2622;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.iconpicker-option {
+    width: 36px;
+    height: 36px;
+}
+
+.iconpicker-option img {
+    width: 30px;
+    height: 30px;
+}
+
+.iconpicker-option:hover,
+.iconpicker-option.selected {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: #fff;
+}
+
+.iconpicker-option.default {
+    font-size: 11px;
+    line-height: 1;
+    color: #fff;
+}

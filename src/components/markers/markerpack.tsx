@@ -8,6 +8,7 @@ import Checkbox from '../settings/IconCheckbox';
 import getSetting from '../helpers/getSetting';
 import Section from '../window/section';
 import Colorpicker from '../settings/colorpicker';
+import IconPicker from '../settings/IconPicker';
 import EditableText from '../settings/editableText';
 import { GetMapName } from '../helpers/constants';
 import { IMarkerGroupSettings } from "../../shared/interfaces/settings/IMarkerGroupSettings";
@@ -72,6 +73,8 @@ function Markerpack(props: IProps) {
                         <div className="button">
                             <FontAwesomeIcon icon={faPlusCircle} onClick={addMarker} title="Add a marker on current position" />
                         </div>
+
+                        <IconPicker popup="Marker icon" path={props.path + "icon"} value={props.pack.icon} />
 
                         <Colorpicker
                             setting={getSetting(props.settings, "Marker color", props.path + "color")}

@@ -8,5 +8,7 @@ export interface IMarkerSettings extends IGenericMarker {
   active: boolean;
   description: string;
   nameplate: INamePlateSetting;
+  // Overrides the pack's icon for this marker; empty uses the pack's (see markerIcons.ts).
+  icon?: string | null;
   extraData?: IVideoDataExtra;
 }
