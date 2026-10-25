@@ -27,6 +27,9 @@ class RenderManager {
   private mapChangePending = false;
   private webSocket: WebSocket | null = null;
   private gotPosition = false;
+  // Either one hides the overlay: loading screen (stale position) or another window over the game.
+  private loading = false;
+  private covered = false;
   // Cursor in normalized device coordinates, or null when it is off the overlay. Updated from DOM
   // events and acted on once per rendered frame.
   private pointer: THREE.Vector2 | null = null;
@@ -86,10 +89,22 @@ class RenderManager {
         // so nothing is drawn meanwhile and the video is paused. Older services never send this.
         const loading = String(msg.Data).toLowerCase() === "true";
         this.logInfo(loading ? "Loading screen" : "Loading screen ended");
-        this.scene.visible = !loading;
-        this.movieManager.SetSuspended(loading);
+        this.loading = loading;
+        this.applyHidden();
         // Main's last position is stale meanwhile too (marker auto-hide must not count it).
         send(IPC.LoadingScreen, loading);
+        return;
+      }
+      if (msg?.Type === "gamecovered") {
+        // The position service sees another program's window over the game (or the game
+        // minimized); drawing markers over e.g. a browser would be wrong. Older services never send this.
+        const covered = String(msg.Data).toLowerCase() === "true";
+        if (covered !== this.covered) {
+          this.logInfo(covered ? "Game covered by another window" : "Game uncovered");
+        }
+        this.covered = covered;
+        this.applyHidden();
+        send(IPC.GameCovered, covered);
         return;
       }
       if (msg?.identity?.FovDegrees) {
@@ -186,6 +201,13 @@ class RenderManager {
     }
     this.renderer.render(this.scene, this.camera);
   };
+
+  private applyHidden() {
+    // The arrow HUD label (DOM) follows scene.visible in the frame loop.
+    this.scene.visible = !(this.loading || this.covered);
+    // Covered only hides the picture: a video keeps playing (and is heard) behind another window.
+    this.movieManager.SetSuspended(this.loading);
+  }
 
   private updateSceneObjects() {
     this.scene.children.forEach((child) => {

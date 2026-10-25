@@ -23,8 +23,9 @@ Main code:
 - The **✕** button (lower-left of the hub, fan open only) closes the window entirely; reopen it
   from the Electaco menu. The hub position is remembered for the rest of the app run.
 - The **✥** grip (upper-right of the hub, fan open only) drags the window.
-- It hides while the in-game map is open and during loading screens, and comes back afterwards.
-  The overlay relays both (`IPC.MapOpen`, `IPC.LoadingScreen`); `windows.ts` hides and re-shows
+- It hides while the in-game map is open, during loading screens and while another program's window
+  covers the game (at least 1% of it, see ARCHITECTURE.md), and comes back afterwards.
+  The overlay relays all three (`IPC.MapOpen`, `IPC.LoadingScreen`, `IPC.GameCovered`); `windows.ts` hides and re-shows
   the window (`showInactive`, no focus change) without touching the saved open state, and a menu
   opened meanwhile starts hidden.
 

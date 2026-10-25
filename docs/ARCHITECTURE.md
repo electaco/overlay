@@ -228,6 +228,20 @@ changes. `renderer.ts` hides the whole scene (all markers) and passes the event 
 `MovieManager.SetSuspended()`: the video is paused, but the stream stays loaded, and normal marker selection takes over again when
 the loading screen ends. Older services never send the event, so nothing is suspended with them.
 
+### Game covered by another window
+
+The position service (`GameWindowCover.cs`) checks every 100 ms whether other programs' windows sit
+above the game window (found by the process id in MumbleLink's context) and overlap its client area.
+The game counts as covered when it is minimized, or when the visible parts of windows above it in
+z-order overlap at least 1% of the client area. Not counted: our own windows (the service's parent
+process, `electron.exe`, `Electaco.exe`), invisible or cloaked windows, minimized windows,
+click-through layered windows and non-activating tool windows (Blish HUD, Discord/Nvidia overlays),
+and shell chrome (taskbar, desktop). A change must hold for 150 ms before
+`{"Type":"gamecovered","Data":"True"|"False"}` is sent; the state is also sent once after each
+connect. `renderer.ts` hides the scene (markers, video pictures, arrow HUD
+label) but, unlike a loading screen, leaves videos playing so they are still heard, and relays it to main as `IPC.GameCovered`, which hides the mount menu.
+Marker auto-hide timing ignores it (the player is still standing there). Older services never send it.
+
 ### Video markers
 
 There is one `<video>` element (`#player` in `renderer.html`), one stream and one screen mesh,

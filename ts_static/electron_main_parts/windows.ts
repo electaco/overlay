@@ -148,7 +148,7 @@ function createWindow(parent: BrowserWindow, windowPath: string) {
     };
 
     if (isMounts) {
-        // Opened while the map or a loading screen is up: show it once that is over.
+        // Opened while the map is up, a loading screen is up or the game is covered: show it once that is over.
         opts.show = !mountsHiddenByGame();
         // Around the remembered hub: this run's, else the saved one, else the primary display's
         // centre. mountsLayout() pulls a saved position onto the nearest display, so a hub left
@@ -297,14 +297,15 @@ export function getWindows() {
     return openWindows;
 }
 
-// The mount menu keeps out of the way while the in-game map is open or a loading screen is up
-// (the overlay relays both). It is hidden and shown again without changing whether the player
+// The mount menu keeps out of the way while the in-game map is open, a loading screen is up or
+// another program's window covers the game (the overlay relays all three). It is hidden and shown again without changing whether the player
 // has it open.
 let gameMapOpen = false;
 let gameLoadingScreen = false;
+let gameCovered = false;
 
 function mountsHiddenByGame() {
-    return gameMapOpen || gameLoadingScreen;
+    return gameMapOpen || gameLoadingScreen || gameCovered;
 }
 
 function applyMountsGameVisibility() {
@@ -325,6 +326,11 @@ ipcMain.on(IPC.MapOpen, (event, open: boolean) => {
 
 ipcMain.on(IPC.LoadingScreen, (event, loading: boolean) => {
     gameLoadingScreen = !!loading;
+    applyMountsGameVisibility();
+});
+
+ipcMain.on(IPC.GameCovered, (event, covered: boolean) => {
+    gameCovered = !!covered;
     applyMountsGameVisibility();
 });
 
