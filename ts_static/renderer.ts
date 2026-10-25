@@ -176,18 +176,21 @@ class RenderManager {
     }
     // Every frame, not only on mouse moves: the screen moves under a still cursor as the camera does.
     this.movieManager.UpdateHover(this.pointer, this.camera);
+    // Before rendering: marker sizes and text facing depend on the camera, and applying them after
+    // the render drew every frame with the previous frame's values, so markers (close ones most,
+    // whose size changes fastest) wobbled as the player moved.
+    this.updateSceneObjects();
     this.renderer.render(this.scene, this.camera);
-    this.handlePostRenderActions();
 
     if (timerarg) {
       requestAnimationFrame(this.renderScene.bind(this));
     }
   }
 
-  private handlePostRenderActions() {
+  private updateSceneObjects() {
     this.scene.children.forEach((child) => {
-      if (child.userData.onAfterRender) {
-        child.userData.onAfterRender(this.positionManager.GetPosition(), this.scene, this.camera);
+      if (child.userData.onFrame) {
+        child.userData.onFrame(this.positionManager.GetPosition(), this.scene, this.camera);
       }
       if (child.userData.showDistance && child.parent) {
         child.visible = child.parent.position.distanceTo(this.camera.position) < child.userData.showDistance;
