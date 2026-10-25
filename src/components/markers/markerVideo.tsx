@@ -1,11 +1,12 @@
 import React from 'react';
 import Checkbox from '../settings/IconCheckbox';
 import EditableText from '../settings/editableText';
-import getSetting from '../helpers/getSetting';
 import { IMarkerRemovalInfo } from '../../shared/interfaces/datatransfer/IMarkerRemovalInfo';
 import { faEye, faEyeSlash, faFilm } from '@fortawesome/free-solid-svg-icons'
 import { ISettings } from '../../shared/interfaces/settings';
 import { IMarkerSettings } from '../../shared/interfaces/settings/IMarkerSettings';
+import { IMarkerGroupSettings } from '../../shared/interfaces/settings/IMarkerGroupSettings';
+import { IsMarkerActive, MarkerActivePath } from '../../shared/models/settings/MarkerPrefs';
 import Button from '../window/Button';
 import Section from '../window/section';
 import PositionEditor from '../settings/PositionEditor';
@@ -16,6 +17,7 @@ import { send } from '../../shared/electron_ipc';
 
 interface IProps {
     settings: ISettings;
+    pack: IMarkerGroupSettings;
     path: string;
     marker: IMarkerSettings;
     mapId: string;
@@ -45,7 +47,7 @@ function MarkerVideo(props: IProps) {
                 plusOnRightSide={true}
                 rightside={
                     <Checkbox
-                        setting={getSetting(props.settings, "", props.path + "active")}
+                        setting={{ path: MarkerActivePath(props.pack, props.marker), value: IsMarkerActive(props.settings.markerPrefs, props.pack, props.marker) }}
                         iconChecked={faEye}
                         iconUnchecked={faEyeSlash}
                     />

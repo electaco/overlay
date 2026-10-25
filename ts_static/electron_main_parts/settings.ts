@@ -92,7 +92,7 @@ ipcMain.on(IPC.Marker.Add, (event, arg) => {
 });
 
 ipcMain.on(IPC.Marker.Remove, (event, arg: IMarkerRemovalInfo) => {
-    SETTINGS.marks[arg.markerpack].RemoveMarker(arg.index, arg.map);
+    SETTINGS.removeMarker(arg.markerpack, arg.index, arg.map);
     configUpdated();
 });
 

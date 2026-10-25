@@ -6,7 +6,8 @@ import { send } from '../../shared/electron_ipc';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 interface IProps {
-    setting: { path: string; value: boolean; name?: string };
+    // An array path for keys that may contain "." (marker preferences keyed by id).
+    setting: { path: string | string[]; value: boolean; name?: string };
     popup?: string;
     iconChecked?: IconProp;
     iconUnchecked?: IconProp;

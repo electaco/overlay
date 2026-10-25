@@ -14,7 +14,8 @@ import { IMarkerGroupSettings } from "../../shared/interfaces/settings/IMarkerGr
 import { Marker } from './marker';
 import "./markerpack.css";
 import { IMarkerSettings } from '../../shared/interfaces/settings/IMarkerSettings';
-import { SortArray, ByActive, ByActiveMap } from '../helpers/sorting';
+import { SortArray, ByActiveUsing, ByActiveMap } from '../helpers/sorting';
+import { IsMarkerActive, IsPackActive, PackActivePath } from '../../shared/models/settings/MarkerPrefs';
 import { ISettings } from '../../shared/interfaces/settings';
 import { IPC } from '../../shared/ipc';
 import { send } from '../../shared/electron_ipc';
@@ -51,8 +52,11 @@ function Markerpack(props: IProps) {
         return elementIndex;
     }
 
+    const packActive = IsPackActive(props.settings.markerPrefs, props.pack);
+    const markerActive = (marker: IMarkerSettings) => IsMarkerActive(props.settings.markerPrefs, props.pack, marker);
+
     return (
-        <div className={"markerpack " + (props.pack.active ? "active " : "inactive ") + (props.pack.markers[props.settings.runtimeData?.map || ""] && props.pack.active ? "activemap": "")}>
+        <div className={"markerpack " + (packActive ? "active " : "inactive ") + (props.pack.markers[props.settings.runtimeData?.map || ""] && packActive ? "activemap": "")}>
             <Section
                 expanded={false}
                 title={
@@ -60,7 +64,7 @@ function Markerpack(props: IProps) {
                 }
                 rightside={
                     <div className="d-flex justify-content-center">
-                        <Checkbox setting={getSetting(props.settings, "", props.path + "active")}
+                        <Checkbox setting={{ path: PackActivePath(props.pack), value: packActive }}
                             iconChecked={faEye}
                             popup="Set marker group visible or not"
                             iconUnchecked={faEyeSlash} />
@@ -90,9 +94,10 @@ function Markerpack(props: IProps) {
                             <Section title={GetMapName(markerMap) ?? "<Map " + markerMap + ">"}
                                 expanded={markerMap === props.settings.runtimeData?.map}
                             >
-                                {SortArray(props.pack.markers[markerMap], ByActive).map((marker) =>
+                                {SortArray(props.pack.markers[markerMap], ByActiveUsing(markerActive)).map((marker) =>
                                     <Marker
                                         settings={props.settings}
+                                        pack={props.pack}
                                         path={props.path + "markers." + markerMap + "." + indexOf(markerMap, marker) + "."}
                                         key={marker.id}
                                         marker={marker}

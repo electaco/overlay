@@ -311,6 +311,16 @@ exempt) before any fetch.
 
 Pack/settings lookups go through `object-path` (`getSetting.tsx`).
 
+**Pack data vs personal preferences.** A pack update (or re-import of the same pack id) replaces
+the whole pack in `marks`, so nothing the player chooses is stored there. Preferences live in
+`markerPrefs` (`src/shared/models/settings/MarkerPrefs.ts`), keyed by pack id and marker id:
+currently shown/hidden for packs and markers. A pack's own `active` values are its defaults;
+`IsPackActive()` / `IsMarkerActive()` give the effective value (preference, else pack default),
+and the render data, list sorting and eye toggles all use them. The toggles write array paths
+(`["markerPrefs", packId, "markers", markerId, "active"]`) so ids are never split on `.`.
+Removing a pack or marker removes its preferences; replacing it keeps them. Files from before
+this have hidden packs/markers moved into `markerPrefs` by `Migrate()`.
+
 > Note: `js-yaml` and `video.js` are still declared in `package.json` but are no longer imported
 > anywhere in the source. Video playback is handled by `hls.js` in
 > `ts_static/render/VideoMarker.ts`. Do not assume a declared dependency is in use — grep first.

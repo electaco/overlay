@@ -9,6 +9,7 @@ import { IVideoData } from "../../interfaces/datatransfer/IVideoData";
 import { IOverlaySettings } from "../../interfaces/settings/IOverlaySettings";
 import { OverlaySettings } from "./OverlaySettings";
 import { NormalizeMountsSettings } from "./MountsSettings";
+import { IMarkerPrefsMap, IsMarkerActive, IsPackActive, MigrateMarkerPrefs } from "./MarkerPrefs";
 import fetch from 'cross-fetch'
 
 const fs = require('fs');
@@ -22,6 +23,9 @@ export class Settings implements ISettings {
 
     @Type(() => OverlaySettings)
     overlaySettings: IOverlaySettings = new OverlaySettings();
+
+    // Left undefined here so Migrate() can tell an older file (which had none) from a new one.
+    markerPrefs!: IMarkerPrefsMap;
 
     configFile: string;
 
@@ -39,6 +43,7 @@ export class Settings implements ISettings {
         const json = JSON.stringify({
             render: this.render,
             marks: this.marks,
+            markerPrefs: this.markerPrefs,
             overlaySettings: this.overlaySettings
         });
 
@@ -108,6 +113,9 @@ export class Settings implements ISettings {
             this.overlaySettings = new OverlaySettings();
         }
         this.overlaySettings.mounts = NormalizeMountsSettings(this.overlaySettings.mounts);
+        if (!this.markerPrefs) {
+            this.markerPrefs = MigrateMarkerPrefs(this.marks ?? []);
+        }
     }
 
     getMarkerGroupIndexById(id: string): number | null {
@@ -120,9 +128,10 @@ export class Settings implements ISettings {
 
     addMarkerGroup(markerGroup: MarkerGroupSettings, forceReplace: boolean = false): boolean {
         var existing = this.getMarkerGroupIndexById(markerGroup.id);
-        if ( existing !== null) {
+        if (existing !== null) {
             if (forceReplace) {
-                this.removeMarkerGroup(existing);
+                // Replaced by an update or a re-import: keep the player's preferences.
+                this.marks.splice(existing, 1);
             } else {
                 return false;
             }
@@ -132,7 +141,20 @@ export class Settings implements ISettings {
     }
 
     removeMarkerGroup(index: number): void {
-        this.marks.splice(index, 1);
+        const removed = this.marks.splice(index, 1)[0];
+        // Removing a pack (not updating it, which replaces it via addMarkerGroup) also forgets
+        // the player's preferences for it.
+        if (removed && this.markerPrefs) {
+            delete this.markerPrefs[removed.id];
+        }
+    }
+
+    removeMarker(packIndex: number, markerIndex: number, map: string): void {
+        const pack = this.marks[packIndex];
+        const marker = pack?.markers[map]?.[markerIndex];
+        if (!pack || !marker) return;
+        pack.RemoveMarker(markerIndex, map);
+        delete this.markerPrefs?.[pack.id]?.markers?.[marker.id];
     }
 
     getMarkerGroup(index: number): MarkerGroupSettings {
@@ -175,12 +197,12 @@ export class Settings implements ISettings {
         let data: IRenderData = { markers: [] };
 
         this.marks.forEach((markerGroup, index) => {
-            if (!markerGroup.active) {
+            if (!IsPackActive(this.markerPrefs, markerGroup)) {
                 return;
             }
 
             markerGroup.markers[MapId]?.forEach((marker, markerIndex) => {
-                if (!marker.active) { return; }
+                if (!IsMarkerActive(this.markerPrefs, markerGroup, marker)) { return; }
                 
                 if (marker.type === MarkerType.VideoMarker && marker.extraData) {
                     if (!marker.extraData?.source.url) {
