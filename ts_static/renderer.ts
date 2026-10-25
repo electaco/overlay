@@ -5,7 +5,8 @@ import { IVideoData } from '../src/shared/interfaces/datatransfer/IVideoData';
 import { IPositionMarker, MarkerType } from '../src/shared/interfaces/render/marker';
 import { IGw2MumbleLinkData, UiState } from "../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
 import { MovieManager } from './render/VideoMarker';
-import { ArrowHud } from './render/ArrowHud';
+import { ArrowHud, CoverRect } from './render/ArrowHud';
+import { IGameCover } from '../src/shared/interfaces/datatransfer/IGameCover';
 import { CameraPositionManager, CameraTuning } from './render/CameraPositionManager';
 import { CreateMarker } from './render/PositionMarker';
 import { send, on, invoke } from '../src/shared/electron_ipc';
@@ -27,9 +28,14 @@ class RenderManager {
   private mapChangePending = false;
   private webSocket: WebSocket | null = null;
   private gotPosition = false;
-  // Either one hides the overlay: loading screen (stale position) or another window over the game.
+  // Either one hides the scene: loading screen (stale position) or the game minimized.
   private loading = false;
-  private covered = false;
+  private minimized = false;
+  // Other windows over the game, as the service sent them (game client pixels) and scaled to the
+  // canvas (CSS pixels). The overlay is assumed to cover exactly the game client.
+  private cover: { w: number; h: number; rects: number[][] } | null = null;
+  private coverRects: CoverRect[] = [];
+  private sentCover = "";
   // Cursor in normalized device coordinates, or null when it is off the overlay. Updated from DOM
   // events and acted on once per rendered frame.
   private pointer: THREE.Vector2 | null = null;
@@ -50,6 +56,7 @@ class RenderManager {
       this.renderer.setSize(window.innerWidth, window.innerHeight);
       this.camera.aspect = window.innerWidth / window.innerHeight;
       this.camera.updateProjectionMatrix();
+      this.scaleCover();
     });
 
     this.movieManager = new MovieManager(this.scene);
@@ -95,16 +102,20 @@ class RenderManager {
         send(IPC.LoadingScreen, loading);
         return;
       }
-      if (msg?.Type === "gamecovered") {
-        // The position service sees another program's window over the game (or the game
-        // minimized); drawing markers over e.g. a browser would be wrong. Older services never send this.
-        const covered = String(msg.Data).toLowerCase() === "true";
-        if (covered !== this.covered) {
-          this.logInfo(covered ? "Game covered by another window" : "Game uncovered");
+      if (msg?.Type === "gamecover") {
+        // The position service sees other programs' windows over the game (or the game minimized).
+        // They are cut out of the picture after each render so the overlay looks to be behind
+        // them. Older services never send this.
+        try {
+          const c = JSON.parse(msg.Data);
+          this.minimized = !!c.minimized;
+          this.cover = { w: c.w, h: c.h, rects: c.rects ?? [] };
+        } catch (e) {
+          this.logError("Bad gamecover message: " + e);
+          return;
         }
-        this.covered = covered;
         this.applyHidden();
-        send(IPC.GameCovered, covered);
+        this.scaleCover();
         return;
       }
       if (msg?.identity?.FovDegrees) {
@@ -197,16 +208,49 @@ class RenderManager {
     // whose size changes fastest) wobbled as the player moved.
     this.updateSceneObjects();
     if (this.positionManager.isReady) {
-      this.arrowHud.Update(this.positionManager.GetPosition(), this.camera, this.scene.visible);
+      this.arrowHud.Update(this.positionManager.GetPosition(), this.camera, this.scene.visible, this.coverRects);
     }
     this.renderer.render(this.scene, this.camera);
+    if (this.coverRects.length > 0) {
+      // Clear the parts under other windows back to transparent. Scissor values are CSS pixels
+      // (three applies the pixel ratio) and measured from the bottom. The scissor test must be
+      // off again before the next frame, or its autoClear would only clear these rectangles.
+      this.renderer.setScissorTest(true);
+      for (const r of this.coverRects) {
+        this.renderer.setScissor(r.x, window.innerHeight - r.y - r.h, r.w, r.h);
+        this.renderer.clear();
+      }
+      this.renderer.setScissorTest(false);
+    }
   };
 
   private applyHidden() {
     // The arrow HUD label (DOM) follows scene.visible in the frame loop.
-    this.scene.visible = !(this.loading || this.covered);
-    // Covered only hides the picture: a video keeps playing (and is heard) behind another window.
+    this.scene.visible = !(this.loading || this.minimized);
+    // Minimized only hides the picture: a video keeps playing (and is heard) behind other windows.
     this.movieManager.SetSuspended(this.loading);
+  }
+
+  // Game client pixels to canvas CSS pixels; also relays the rects to main (screen DIP) when they change.
+  private scaleCover() {
+    const c = this.cover;
+    this.coverRects = [];
+    if (c && c.w > 0 && c.h > 0) {
+      const sx = window.innerWidth / c.w;
+      const sy = window.innerHeight / c.h;
+      this.coverRects = c.rects.map(([x, y, w, h]) => ({ x: x * sx, y: y * sy, w: w * sx, h: h * sy }));
+    }
+    const payload: IGameCover = {
+      minimized: this.minimized,
+      rects: this.coverRects.map((r) => ({
+        x: window.screenX + r.x, y: window.screenY + r.y, width: r.w, height: r.h,
+      })),
+    };
+    const json = JSON.stringify(payload);
+    if (json !== this.sentCover) {
+      this.sentCover = json;
+      send(IPC.GameCover, payload);
+    }
   }
 
   private updateSceneObjects() {

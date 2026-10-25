@@ -1,7 +1,8 @@
 import { IPC } from "../../src/shared/ipc";
 import { IMountPlacement, MOUNT_EDGE_INSET, MOUNT_WINDOW_SIZE } from "../../src/shared/mounts";
 import { configUpdated, GetSettings } from "./settings";
-import { app, BrowserWindow, ipcMain, screen } from 'electron';
+import { IGameCover } from "../../src/shared/interfaces/datatransfer/IGameCover";
+import { app, BrowserWindow, ipcMain, Rectangle, screen } from 'electron';
 import * as pathModule from 'path';
 
 let rendererWindow: BrowserWindow | null = null;
@@ -149,12 +150,12 @@ function createWindow(parent: BrowserWindow, windowPath: string) {
 
     if (isMounts) {
         // Opened while the map is up, a loading screen is up or the game is covered: show it once that is over.
-        opts.show = !mountsHiddenByGame();
         // Around the remembered hub: this run's, else the saved one, else the primary display's
         // centre. mountsLayout() pulls a saved position onto the nearest display, so a hub left
         // on a monitor that is gone or has changed resolution still comes back on screen.
         const layout = mountsLayout(mountsHub ?? savedMountsHub() ?? primaryCentre());
         mountsHub = layout.hub;
+        opts.show = !mountsHiddenByGame({ x: layout.x, y: layout.y, width: MOUNT_WINDOW_SIZE, height: MOUNT_WINDOW_SIZE });
         watchDisplaysForMounts();
         opts.resizable = false;
         opts.fullscreenable = false;
@@ -225,6 +226,8 @@ function placeMounts(win: BrowserWindow, wanted: { x: number; y: number }) {
         hubInWindow: { x: layout.hub.x - layout.x, y: layout.hub.y - layout.y },
     };
     win.webContents.send(IPC.Mounts.Position, placement);
+    // Moved: cut (or hide) it for the new spot. Not hidden mid-drag; see mountsHiddenByGame.
+    applyMountsGameVisibility();
 }
 
 function stopMountDrag() {
@@ -232,6 +235,8 @@ function stopMountDrag() {
         clearInterval(mountsDrag);
         mountsDrag = null;
         saveMountsHub();
+        // Dropped on top of a covering window: hide now.
+        applyMountsGameVisibility();
     }
 }
 
@@ -297,24 +302,80 @@ export function getWindows() {
     return openWindows;
 }
 
-// The mount menu keeps out of the way while the in-game map is open, a loading screen is up or
-// another program's window covers the game (the overlay relays all three). It is hidden and shown again without changing whether the player
-// has it open.
+// The mount menu keeps out of the way while the in-game map is open, a loading screen is up, the
+// game is minimized or another program's window is over the menu (the overlay relays all of
+// these). It is hidden and shown again without changing whether the player has it open.
 let gameMapOpen = false;
 let gameLoadingScreen = false;
-let gameCovered = false;
+let gameCover: IGameCover = { minimized: false, rects: [] };
 
-function mountsHiddenByGame() {
-    return gameMapOpen || gameLoadingScreen || gameCovered;
+// The parts of a window at `b` (screen DIP) that no other program's window covers, relative to
+// the window: `b` minus every cover rect, as rectangles. Our own windows never appear in the cover
+// rects (the service skips this app's processes), so the menu can't cut itself.
+function uncoveredParts(b: Rectangle): Rectangle[] {
+    let parts: Rectangle[] = [{ x: 0, y: 0, width: b.width, height: b.height }];
+    for (const c of gameCover.rects) {
+        // Whole pixels, rounded outwards so no sliver of the menu shows over the other window.
+        const x0 = Math.floor(c.x - b.x), y0 = Math.floor(c.y - b.y);
+        const x1 = Math.ceil(c.x + c.width - b.x), y1 = Math.ceil(c.y + c.height - b.y);
+        const next: Rectangle[] = [];
+        for (const p of parts) {
+            if (x0 >= p.x + p.width || x1 <= p.x || y0 >= p.y + p.height || y1 <= p.y) {
+                next.push(p);
+                continue;
+            }
+            // Up to four pieces around the cut: full-width above and below, then left and right.
+            const top = Math.max(p.y, y0), bottom = Math.min(p.y + p.height, y1);
+            if (top > p.y) { next.push({ x: p.x, y: p.y, width: p.width, height: top - p.y }); }
+            if (bottom < p.y + p.height) { next.push({ x: p.x, y: bottom, width: p.width, height: p.y + p.height - bottom }); }
+            if (x0 > p.x) { next.push({ x: p.x, y: top, width: x0 - p.x, height: bottom - top }); }
+            if (x1 < p.x + p.width) { next.push({ x: x1, y: top, width: p.x + p.width - x1, height: bottom - top }); }
+        }
+        parts = next;
+    }
+    return parts;
+}
+
+// `b`: where the menu is (or will be). Other programs' windows don't hide it: they are cut out of
+// it (see applyMountsGameVisibility), unless nothing is left.
+function mountsHiddenByGame(b: Rectangle) {
+    // Not hidden in the middle of the player's own drag: it is re-checked when the drag ends.
+    return gameMapOpen || gameLoadingScreen || gameCover.minimized || (!mountsDrag && uncoveredParts(b).length === 0);
+}
+
+let mountsCut = false;
+
+// A new menu window is uncut: cut it for where it opened.
+function mountsOpened() {
+    mountsCut = false;
+    applyMountsGameVisibility();
 }
 
 function applyMountsGameVisibility() {
     const win = openWindows['mounts'];
     if (!win || win.isDestroyed()) { return; }
-    if (mountsHiddenByGame()) {
+    const bounds = win.getBounds();
+    if (mountsHiddenByGame(bounds)) {
         stopMountDrag();
         if (win.isVisible()) { win.hide(); }
-    } else if (!win.isVisible()) {
+        return;
+    }
+    // Like the overlay, the menu looks as if other windows are in front of it: only its uncovered
+    // parts are drawn (and clickable), also while it is dragged.
+    const parts = uncoveredParts(bounds);
+    // Wholly covered mid-drag: keep the last shape (an empty one would mean "uncut").
+    if (parts.length > 0) {
+        const whole = parts.length === 1 && parts[0].width === bounds.width && parts[0].height === bounds.height;
+        if (!whole) {
+            win.setShape(parts);
+            mountsCut = true;
+        } else if (mountsCut) {
+            // An empty shape makes the window rectangular again.
+            win.setShape([]);
+            mountsCut = false;
+        }
+    }
+    if (!win.isVisible()) {
         win.showInactive();
     }
 }
@@ -329,8 +390,8 @@ ipcMain.on(IPC.LoadingScreen, (event, loading: boolean) => {
     applyMountsGameVisibility();
 });
 
-ipcMain.on(IPC.GameCovered, (event, covered: boolean) => {
-    gameCovered = !!covered;
+ipcMain.on(IPC.GameCover, (event, cover: IGameCover) => {
+    gameCover = { minimized: !!cover?.minimized, rects: cover?.rects ?? [] };
     applyMountsGameVisibility();
 });
 
@@ -338,6 +399,7 @@ ipcMain.on(IPC.GameCovered, (event, covered: boolean) => {
 export function restoreMountsWindow() {
     if (GetSettings()?.overlaySettings?.mounts?.open && !openWindows['mounts'] && rendererWindow) {
         openWindows['mounts'] = createWindow(rendererWindow, 'mounts');
+        mountsOpened();
     }
 }
 
@@ -357,6 +419,7 @@ ipcMain.on(IPC.Window.Open, (event, arg: { show: boolean, path: string }) => {
     if (arg.show) {
         if (!openWindows[arg.path]) {
             openWindows[arg.path] = createWindow(rendererWindow!, arg.path);
+            if (arg.path === 'mounts') { mountsOpened(); }
         }
     } else {
         const win = openWindows[arg.path];

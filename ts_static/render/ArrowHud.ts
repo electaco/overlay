@@ -17,6 +17,8 @@ const SNAP_M = 4;             // further than this from the smoothed place (tele
 const HEIGHT_HINT_M = 5;
 const COLOR = 0xffc94d;
 
+export interface CoverRect { x: number; y: number; w: number; h: number }
+
 const STYLE = `
 #arrowlabel {
   position: fixed; transform: translate(-50%, 0); padding: 4px 10px; text-align: center;
@@ -102,8 +104,9 @@ export class ArrowHud {
     }));
   }
 
-  // Every frame before rendering, with the camera that frame uses.
-  Update(position: ICameraPositionResult, camera: THREE.Camera, visible: boolean) {
+  // Every frame before rendering, with the camera that frame uses. `covers` are the parts of the
+  // screen other windows are over, in CSS pixels; the label is DOM and can't be cut out like the canvas.
+  Update(position: ICameraPositionResult, camera: THREE.Camera, visible: boolean, covers: CoverRect[]) {
     if (!visible || this.candidates.length === 0) {
       this.arrow.visible = false;
       this.label.hidden = true;
@@ -141,6 +144,11 @@ export class ArrowHud {
       this.detail.textContent = detail;
     }
     this.label.hidden = false;
+    if (covers.length > 0) {
+      const b = this.label.getBoundingClientRect();
+      this.label.hidden = covers.some((c) =>
+        c.x < b.right && c.x + c.w > b.left && c.y < b.bottom && c.y + c.h > b.top);
+    }
   }
 
   // Where the arrow goes: under the character's feet, smoothed as seen from the camera.

@@ -230,17 +230,28 @@ the loading screen ends. Older services never send the event, so nothing is susp
 
 ### Game covered by another window
 
-The position service (`GameWindowCover.cs`) checks every 100 ms whether other programs' windows sit
-above the game window (found by the process id in MumbleLink's context) and overlap its client area.
-The game counts as covered when it is minimized, or when the visible parts of windows above it in
-z-order overlap at least 1% of the client area. Not counted: our own windows (the service's parent
-process, `electron.exe`, `Electaco.exe`), invisible or cloaked windows, minimized windows,
-click-through layered windows and non-activating tool windows (Blish HUD, Discord/Nvidia overlays),
-and shell chrome (taskbar, desktop). A change must hold for 150 ms before
-`{"Type":"gamecovered","Data":"True"|"False"}` is sent; the state is also sent once after each
-connect. `renderer.ts` hides the scene (markers, video pictures, arrow HUD
-label) but, unlike a loading screen, leaves videos playing so they are still heard, and relays it to main as `IPC.GameCovered`, which hides the mount menu.
-Marker auto-hide timing ignores it (the player is still standing there). Older services never send it.
+Other programs' windows over the game look as if they are in front of the overlay: the overlay draws
+normally and the parts under those windows are then cleared to transparent. The position service
+(`GameWindowCover.cs`) checks every 50 ms which windows sit above the game window (found by the
+process id in MumbleLink's context) and intersects each one's frame (DWM extended frame bounds)
+with the game's client area. Not counted: our own windows (the service's parent process,
+`electron.exe`, `Electaco.exe`), invisible or cloaked windows, minimized windows, click-through
+layered windows and non-activating tool windows (Blish HUD, Discord/Nvidia overlays), and shell
+chrome (taskbar, desktop). Overlaps under 2x2 px are dropped; beyond 32 rectangles the smallest are
+merged into their bounding box. The service is per-monitor DPI aware so all of this is in physical pixels.
+
+Whenever the result changes (and once after each connect) it sends, with no debounce so a dragged
+window is followed closely,
+`{"Type":"gamecover","Data":"{\"w\":1920,\"h\":1080,\"minimized\":false,\"rects\":[[x,y,w,h],...]}"}`
+(`Data` is a JSON string; rects are relative to the client's top-left). `renderer.ts` assumes the
+overlay canvas covers exactly the game client, scales the rects to CSS pixels (rescaled on resize)
+and, after each `renderer.render()`, clears them with the scissor test (the scissor test is turned off
+again so the next frame's autoClear covers the whole canvas). The arrow HUD label (DOM) is hidden
+while its box touches a rect. A minimized game hides the scene like a loading screen but, unlike one,
+leaves videos playing so they are still heard. The rects are relayed to main as `IPC.GameCover`
+(`IGameCover`, screen DIP) when they change; the mount menu hides when minimized, and is otherwise cut
+to its parts outside the rects (`setShape`, see mount-menu.md). Marker auto-hide timing ignores all this (the player is still standing there).
+Older services never send it.
 
 ### Video markers
 
