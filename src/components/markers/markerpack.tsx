@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle, faEye, faEyeSlash, faFileExport, faCog, faGripVertical } from '@fortawesome/free-solid-svg-icons'
@@ -33,8 +33,39 @@ interface IProps {
 
 function Markerpack(props: IProps) {
     const [showSettings, setShowSettings] = useState(false);
-    // Marker being dragged by its grip, and the row it is over.
+    // Marker being dragged by its grip, and the row it is over. Plain pointer events rather than
+    // HTML drag and drop, which didn't start or drop reliably in the Electron window.
     const [drag, setDrag] = useState<{ map: string; from: number; over: number } | null>(null);
+    const dragRef = useRef(drag);
+    dragRef.current = drag;
+    useEffect(() => {
+        if (!drag) return;
+        const move = (e: PointerEvent) => {
+            const d = dragRef.current;
+            const row = document.elementFromPoint(e.clientX, e.clientY)?.closest('.markerrow') as HTMLElement | null;
+            if (!d || !row || row.dataset.map !== d.map || row.dataset.pack !== String(props.index)) return;
+            const over = Number(row.dataset.index);
+            if (over !== d.over) setDrag({ ...d, over });
+        };
+        const up = () => {
+            const d = dragRef.current;
+            if (d && d.from !== d.over) {
+                const info: IMarkerMoveInfo = { markerpack: props.index, map: d.map, from: d.from, to: d.over };
+                send(IPC.Marker.Move, info);
+            }
+            setDrag(null);
+        };
+        const cancel = (e: KeyboardEvent) => { if (e.key === 'Escape') setDrag(null); };
+        window.addEventListener('pointermove', move);
+        window.addEventListener('pointerup', up);
+        window.addEventListener('keydown', cancel);
+        return () => {
+            window.removeEventListener('pointermove', move);
+            window.removeEventListener('pointerup', up);
+            window.removeEventListener('keydown', cancel);
+        };
+        // Listeners only while a drag is on; they read the latest state through dragRef.
+    }, [drag !== null, props.index]);
     function addMarker() {
         send(IPC.Marker.Add, props.index);
     }
@@ -57,14 +88,6 @@ function Markerpack(props: IProps) {
             }
         });
         return elementIndex;
-    }
-
-    function dropOn(map: string, to: number) {
-        if (drag && drag.map === map && drag.from !== to) {
-            const move: IMarkerMoveInfo = { markerpack: props.index, map, from: drag.from, to };
-            send(IPC.Marker.Move, move);
-        }
-        setDrag(null);
     }
 
     const packActive = IsPackActive(props.settings.markerPrefs, props.pack);
@@ -129,22 +152,17 @@ function Markerpack(props: IProps) {
                                     marker's grip to move it. */}
                                 {props.pack.markers[markerMap].map((marker, index) =>
                                     <div key={marker.id}
-                                        className={"markerrow d-flex" + (drag && drag.map === markerMap && drag.over === index && drag.from !== index
-                                            ? (drag.from < index ? " dropafter" : " dropbefore") : "")}
-                                        onDragOver={(e) => {
-                                            if (!drag || drag.map !== markerMap) return;
-                                            e.preventDefault();
-                                            if (drag.over !== index) setDrag({ ...drag, over: index });
-                                        }}
-                                        onDrop={(e) => { e.preventDefault(); dropOn(markerMap, index); }}>
-                                        <span className="markergrip" draggable title="Drag to reorder"
-                                            onDragStart={(e) => {
-                                                e.dataTransfer.effectAllowed = "move";
-                                                const row = (e.currentTarget as HTMLElement).parentElement;
-                                                if (row) e.dataTransfer.setDragImage(row, 10, 10);
+                                        data-pack={props.index} data-map={markerMap} data-index={index}
+                                        className={"markerrow d-flex" + (drag && drag.map === markerMap && drag.from === index ? " dragging" : "")
+                                            + (drag && drag.map === markerMap && drag.over === index && drag.from !== index
+                                            ? (drag.from < index ? " dropafter" : " dropbefore") : "")}>
+                                        <span className="markergrip" title="Drag to reorder"
+                                            onPointerDown={(e) => {
+                                                if (e.button !== 0) return;
+                                                // No text selection while dragging.
+                                                e.preventDefault();
                                                 setDrag({ map: markerMap, from: index, over: index });
-                                            }}
-                                            onDragEnd={() => setDrag(null)}>
+                                            }}>
                                             <FontAwesomeIcon icon={faGripVertical} />
                                         </span>
                                         <div className="flex-grow-1">

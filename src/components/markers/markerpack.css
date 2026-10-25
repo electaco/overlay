@@ -32,6 +32,10 @@
     opacity: 1;
 }
 
+.markerrow.dragging {
+    opacity: 0.5;
+}
+
 .markerrow.dropbefore {
     box-shadow: 0 -2px 0 #ffd166;
 }
