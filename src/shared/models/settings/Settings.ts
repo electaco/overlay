@@ -11,6 +11,8 @@ import { OverlaySettings } from "./OverlaySettings";
 import { NormalizeMountsSettings } from "./MountsSettings";
 import { IMarkerPrefsMap, MigrateMarkerPrefs, VisibleMarkerIds, VisibleMarkers } from "./MarkerPrefs";
 import { IArrowCandidate } from "../../interfaces/render/renderdata";
+import { GetActiveMaps } from "../../../components/helpers/constants";
+import { MarkerToContinent } from "../../mapProjection";
 import fetch from 'cross-fetch'
 
 const fs = require('fs');
@@ -212,6 +214,7 @@ export class Settings implements ISettings {
         let data: IRenderData = { markers: [] };
 
         const now = Date.now();
+        const mapRects = GetActiveMaps()[MapId];
         this.marks.forEach((markerGroup, index) => {
             const visible = new Set(VisibleMarkerIds(this.markerPrefs, markerGroup, MapId, now));
             if (visible.size === 0) {
@@ -233,6 +236,8 @@ export class Settings implements ISettings {
                         scale: marker.extraData.scale,
                         visibleDistance: marker.visibleDistance,
                         fadeInDistance: marker.fadeInDistance,
+                        continent: MarkerToContinent(marker.position, mapRects) ?? undefined,
+                        mapLabel: marker.name,
                     }
                     data.markers.push(videoMarker);
                 } else if (marker.type === MarkerType.PositionMarker) {
@@ -242,6 +247,8 @@ export class Settings implements ISettings {
                         icon: { icon: marker.icon || markerGroup.icon, color: markerGroup.color },
                         text: null,
                         type: MarkerType.PositionMarker,
+                        continent: MarkerToContinent(marker.position, mapRects) ?? undefined,
+                        mapLabel: marker.name,
                         markerMouseoverData: {
                             markerGroup: index,
                             markerIndex: markerIndex

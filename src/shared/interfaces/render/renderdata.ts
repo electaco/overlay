@@ -12,4 +12,6 @@ export interface IRenderData {
     markers: Array<IGenericMarker>,
     // Present when the arrow is switched on.
     arrow?: { candidates: Array<IArrowCandidate> },
+    // GW2's "Use DPI scaling" option, for placing markers on the in-game map.
+    gameDpiScaling?: boolean,
 }

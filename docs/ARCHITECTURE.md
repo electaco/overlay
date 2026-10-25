@@ -341,6 +341,32 @@ reconciles that player with what *should* be active; nothing else starts, stops 
   drains and playback pauses for the difference. The buffering policy makes those pauses clean
   and visible. It cannot remove them.
 
+### Map layer
+
+While the in-game map is open the 3D scene is thrown away (the camera is meaningless), and
+`MapLayer` (`ts_static/render/MapLayer.ts`) draws the markers on a 2D canvas instead.
+
+- **Data flow.** `Settings.createRenderData` adds `continent: {x, y}` and `mapLabel` to every
+  position and video marker it emits (`MarkerToContinent` in `src/shared/mapProjection.ts`, using
+  `map_rect` / `continent_rect` of the current map from the active map table). The renderer keeps
+  `renderData` while the map is open and reads it directly; it also keeps the latest MumbleLink
+  `context` (UiState MapOpen, `MapCenterX/Y`, `MapScale`, which change as the player pans and zooms).
+  `renderScene` calls `mapLayer.Update` each frame; with the map closed it clears once and stops.
+- **World to continent.** Stored positions have MumbleLink X and Z swapped, so `mapX_m = Z`,
+  `mapY_m = X`. In inches (`* 39.3701`), `contX = cx0 + (inX - x0) / (x1 - x0) * (cx1 - cx0)` and
+  `contY = cy0 + (y1 - inY) / (y1 - y0) * (cy1 - cy0)` (y flipped). Checked against MumbleLink's
+  `MapPlayerX/Y` on map 1622. The rects are those of the canonical (translated) map id.
+- **Continent to screen.** `screen = viewport centre + (cont - MapCenter) / MapScale * k / devicePixelRatio`
+  in CSS pixels; the overlay is assumed to cover the game client exactly. `k` is
+  `devicePixelRatio` when GW2's "Use DPI scaling" option is on (the game then scales its map by
+  Windows' display scale; checked in game at 150%), else 1. Main reads the option from
+  `%APPDATA%\Guild Wars 2\GFXSettings.Gw2-64.exe.xml` (`gw2_settings.ts`) and sends it as
+  `gameDpiScaling` in the render data.
+- **Tunables.** `window.mapTuning.k` (overrides the automatic `k`; null by default) and `window.mapTuning.playerDot` (red dot at `MapPlayerX/Y`
+  through the same transform, to compare with the game's own player arrow).
+- Names are drawn only at `MapScale <= 2`. Cover rects are cleared on this canvas like on the
+  WebGL one; nothing is drawn while loading or minimized.
+
 ## 9. Marker packs
 
 Marker packs are `.etmp` files, associated with the app and openable via the `etmp://` scheme

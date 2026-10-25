@@ -1,4 +1,5 @@
 import { IGw2MumbleLinkData } from "../../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
+import { GameUsesDpiScaling } from "./gw2_settings";
 import { IMarkerRemovalInfo } from "../../src/shared/interfaces/datatransfer/IMarkerRemovalInfo";
 import { IMarkerMoveInfo } from "../../src/shared/interfaces/datatransfer/IMarkerMoveInfo";
 import IMarkerTypeChange from "../../src/shared/interfaces/datatransfer/IMarkerTypeChange";
@@ -217,6 +218,7 @@ function sendRenderData(settings: Settings) {
     let mapid = getMapId(lastpos);
     if (mapid == null) return;
     let rd = settings.createRenderData(mapid);
+    rd.gameDpiScaling = GameUsesDpiScaling();
     getRenderWindow()?.webContents.send(IPC.Render, rd);
 }
 

@@ -3,12 +3,13 @@ import { IPC } from '../src/shared/ipc';
 import { IRenderData } from '../src/shared/interfaces/render/renderdata';
 import { IVideoData } from '../src/shared/interfaces/datatransfer/IVideoData';
 import { IPositionMarker, MarkerType } from '../src/shared/interfaces/render/marker';
-import { IGw2MumbleLinkData, UiState } from "../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
+import { IGw2Context, IGw2MumbleLinkData, UiState } from "../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
 import { MovieManager } from './render/VideoMarker';
 import { ArrowHud, CoverRect } from './render/ArrowHud';
 import { IGameCover } from '../src/shared/interfaces/datatransfer/IGameCover';
 import { CameraPositionManager, CameraTuning } from './render/CameraPositionManager';
 import { CreateMarker } from './render/PositionMarker';
+import { MapLayer } from './render/MapLayer';
 import { send, on, invoke } from '../src/shared/electron_ipc';
 
 class RenderManager {
@@ -18,6 +19,9 @@ class RenderManager {
   private movieManager: MovieManager;
   private arrowHud: ArrowHud;
   private positionManager: CameraPositionManager;
+  private mapLayer: MapLayer;
+  // Latest context while the map is open: its centre and zoom change as the player pans.
+  private mapContext: IGw2Context | null = null;
   private raycaster: THREE.Raycaster;
   private intersected: THREE.Object3D | null = null;
   private renderData: IRenderData | null = null;
@@ -62,6 +66,7 @@ class RenderManager {
     this.movieManager = new MovieManager(this.scene);
     this.arrowHud = new ArrowHud(this.scene);
     this.positionManager = new CameraPositionManager();
+    this.mapLayer = new MapLayer();
     // For tuning the camera timing live through the remote debugging port.
     (window as any).cameraTuning = CameraTuning;
     this.raycaster = new THREE.Raycaster();
@@ -222,6 +227,8 @@ class RenderManager {
       }
       this.renderer.setScissorTest(false);
     }
+    // Hidden while loading (stale position) or minimized, like the scene.
+    this.mapLayer.Update(this.isMap && this.scene.visible ? this.mapContext : null, this.renderData, this.coverRects);
   };
 
   private applyHidden() {
@@ -300,6 +307,7 @@ class RenderManager {
     }
 
     if (data.context.UiState & UiState.MapOpen) {
+      this.mapContext = data.context;
       if (!this.isMap) {
         this.updateSceneData(null);
         this.positionManager.SetPosition(data);
@@ -310,6 +318,7 @@ class RenderManager {
     }
 
     if (this.isMap) {
+      this.mapContext = null;
       this.updateSceneData(this.renderData);
       this.isMap = false;
       send(IPC.MapOpen, false);

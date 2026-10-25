@@ -27,5 +27,8 @@ export interface IGenericMarker {
     type: MarkerType;
     fadeInDistance?: number;
     visibleDistance?: number;
+    // Continent coordinates and display name, for drawing on the in-game map.
+    continent?: { x: number, y: number };
+    mapLabel?: string;
 }
 
