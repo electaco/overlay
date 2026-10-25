@@ -173,13 +173,16 @@ and stretched by the display scale (1.5× at 150%), blurring all text and marker
 
 The scene is rendered only from `requestAnimationFrame`, once per display frame; position messages
 never trigger a render (that used to present frames off vsync and made markers jitter).
-`CameraPositionManager.SetPosition()` stores each MumbleLink sample with a timestamp in a short ring
-buffer, and `Advance(now)` (first thing in each rendered frame) computes that frame's camera by
-interpolating between the two samples around `now - delay`. `delay` is a moving average of the
-interval between samples (ignoring gaps over 100 ms), clamped to 0..40 ms and scaled by
-`DELAY_SCALE`; it holds the newest sample rather than extrapolating, and a camera jump over 20 m
-(teleport, map change) drops older samples so nothing is blended across it. `INTERPOLATE` and
-`DELAY_SCALE` at the top of the file tune or disable it. `GetPosition()` returns the same
+`CameraPositionManager.SetPosition()` stores each MumbleLink sample in a short ring buffer, timed by
+the service's `sampleTime` stamp (when it saw the game frame) mapped to local time by the smallest
+arrival-minus-stamp seen, else by arrival. `Advance(now)` (first thing in each rendered frame)
+computes that frame's camera at render time `now + lead × interval` (interval: moving average of
+the time between samples, ignoring gaps over 100 ms): blended between the two samples around it,
+or, past the newest, continued from the last two samples for at most `maxPredictMs` (none once
+samples have stopped). A camera jump over 20 m (teleport, map change) drops older samples so
+nothing is blended across it. `CameraTuning` at the top of the file holds `lead` (default 0.75),
+`maxPredictMs`, `velocitySpan` (samples back that prediction measures motion over) and `enabled`; the overlay page exposes it as `window.cameraTuning` for tuning live through the
+remote debugging port. `GetPosition()` returns the same
 per-frame state to markers, the video manager, the arrow HUD and hover.
 
 `typings/index.d.ts` deliberately does not pull in the old vendored three.js globals — it carries a

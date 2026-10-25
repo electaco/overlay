@@ -6,7 +6,7 @@ import { IPositionMarker, MarkerType } from '../src/shared/interfaces/render/mar
 import { IGw2MumbleLinkData, UiState } from "../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
 import { MovieManager } from './render/VideoMarker';
 import { ArrowHud } from './render/ArrowHud';
-import { CameraPositionManager } from './render/CameraPositionManager';
+import { CameraPositionManager, CameraTuning } from './render/CameraPositionManager';
 import { CreateMarker } from './render/PositionMarker';
 import { send, on, invoke } from '../src/shared/electron_ipc';
 
@@ -52,6 +52,8 @@ class RenderManager {
     this.movieManager = new MovieManager(this.scene);
     this.arrowHud = new ArrowHud(this.scene);
     this.positionManager = new CameraPositionManager();
+    // For tuning the camera timing live through the remote debugging port.
+    (window as any).cameraTuning = CameraTuning;
     this.raycaster = new THREE.Raycaster();
     this.raycaster.layers.set(2);
 

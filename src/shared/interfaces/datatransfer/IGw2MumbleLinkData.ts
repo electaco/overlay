@@ -95,6 +95,8 @@ export interface IGw2MumbleLinkData {
     // MumbleLink uiTick (advances every game frame). Informational: the position service watches
     // it and sends loading screen events instead.
     uiTick?: number
+    // When the service saw this game frame, in ms on the service's clock. Older services leave it out.
+    sampleTime?: number
     coordinates: IGw2Coordinates
     identity: IGw2Identity
     context: IGw2Context
