@@ -209,14 +209,20 @@ The one clickable thing on the overlay is the marker action bar, below.
 GW2 turns the camera with either mouse button, so the overlay never catches clicks except on its own
 small bar (`ts_static/render/MarkerActions.ts`, DOM, styled like the arrow label). It appears once
 the cursor has rested ~400 ms on a drawn position marker's icon (`renderer.ts` `handleMouseMove`
-raycast) or on a video screen (`MovieManager.IsHovered()`), next to the icon (`MarkerBarAnchor()`
-projects it) or under the video info card (`InfoAnchor()`). It follows the marker each frame, stays
-while the cursor is on the marker or the bar, and fades ~500 ms after it leaves both. One bar at a
-time. It is hidden while the scene is (loading screen, minimized, the map open), when it would sit
-under a cover rect (the same intersection test as the arrow label), and when its marker is gone
-from the render data.
+raycast; on the open map, `MapLayer.HitTest()` against the icons drawn that frame), next to the icon
+(`MarkerBarAnchor()` projects it; `MapLayer.Spot()` on the map). It follows the marker each frame,
+stays while the cursor is on the marker or the bar, and fades ~500 ms after it leaves both. One bar
+at a time. It is hidden while the scene is (loading screen, minimized), when it would sit under a
+cover rect (the same intersection test as the arrow label), and when its marker is gone from the
+render data.
 
-- **Buttons** (tooltips are `title`): hide marker (`markerPrefs.<pack>.markers.<id>.active = false`),
+A video screen (`MovieManager.IsHovered()`) instead gets only a volume slider, hung centred under
+the screen and drawn in the screen's plane (`MovieManager.BarQuad()`, mapped onto the DOM bar with
+a CSS `matrix3d`), so it tilts with the video. It has no delay or fade of its own: its opacity is
+the info card's (`InfoOpacity()`), and the cursor on the slider counts as hovering the video, so the
+card stays up (a short grace keeps the card's show delay from restarting while crossing the gap).
+
+- **Buttons** (tooltips are `title`), track first and, after a gap, the ones that hide: hide marker (`markerPrefs.<pack>.markers.<id>.active = false`),
   point the arrow at it (`render.arrowTarget` + `render.showArrow`, the same as
   `ArrowTargetButton`; highlighted, and clears the target, when it already is the target), hide
   pack (`markerPrefs.<pack>.active = false`), and, in packs with auto-hide, mark done
