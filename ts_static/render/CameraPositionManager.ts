@@ -11,7 +11,10 @@ import { IGw2MumbleLinkData } from '../../src/shared/interfaces/datatransfer/IGw
 export const CameraTuning = {
     // Render time = now + lead * the estimated sample interval. Negative blends in the past
     // (smoothest, laggiest), 0 continues the motion up to now, positive predicts further ahead.
-    lead: 0.75,
+    // GW2 writes MumbleLink at about 64 Hz whatever it draws at (seen with a 60 fps limit and
+    // vsync), so samples drift against the overlay's frames. 0.25 felt best in game: more
+    // predicts the mouse's uneven steps into jitter, less lags on fast swings.
+    lead: 0.25,
     // Prediction never goes further than this past the newest sample.
     maxPredictMs: 40,
     // How many sample intervals back prediction measures the motion over. 1 reacts fastest but

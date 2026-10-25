@@ -180,7 +180,7 @@ computes that frame's camera at render time `now + lead × interval` (interval: 
 the time between samples, ignoring gaps over 100 ms): blended between the two samples around it,
 or, past the newest, continued from the last two samples for at most `maxPredictMs` (none once
 samples have stopped). A camera jump over 20 m (teleport, map change) drops older samples so
-nothing is blended across it. `CameraTuning` at the top of the file holds `lead` (default 0.75),
+nothing is blended across it. `CameraTuning` at the top of the file holds `lead` (default 0.25),
 `maxPredictMs`, `velocitySpan` (samples back that prediction measures motion over) and `enabled`; the overlay page exposes it as `window.cameraTuning` for tuning live through the
 remote debugging port. `GetPosition()` returns the same
 per-frame state to markers, the video manager, the arrow HUD and hover.
