@@ -202,10 +202,47 @@ something is hovered, the renderer asks main (`IPC.CursorInOverlay`: `screen.get
 against the overlay's bounds) twice a second whether the cursor has really left. This replaced a 300 ms `screen.getCursorScreenPoint()` poll in main
 (`mouse_movement.ts`, `IPC.MouseMove`), which was slow and only mapped the primary display.
 
-Clickable controls on the overlay (for example a volume control on the video screen) would need
-the mount menu's pattern from [mount-menu.md](mount-menu.md): hit-test on `mousemove`, and switch
-`setIgnoreMouseEvents(false)` only while the cursor is over the control. The window would also
-have to be non-focusable so a click does not take focus from GW2.
+The one clickable thing on the overlay is the marker action bar, below.
+
+### Marker interaction (hover action bar)
+
+GW2 turns the camera with either mouse button, so the overlay never catches clicks except on its own
+small bar (`ts_static/render/MarkerActions.ts`, DOM, styled like the arrow label). It appears once
+the cursor has rested ~400 ms on a drawn position marker's icon (`renderer.ts` `handleMouseMove`
+raycast) or on a video screen (`MovieManager.IsHovered()`), next to the icon (`MarkerBarAnchor()`
+projects it) or under the video info card (`InfoAnchor()`). It follows the marker each frame, stays
+while the cursor is on the marker or the bar, and fades ~500 ms after it leaves both. One bar at a
+time. It is hidden while the scene is (loading screen, minimized, the map open), when it would sit
+under a cover rect (the same intersection test as the arrow label), and when its marker is gone
+from the render data.
+
+- **Buttons** (tooltips are `title`): hide marker (`markerPrefs.<pack>.markers.<id>.active = false`),
+  point the arrow at it (`render.arrowTarget` + `render.showArrow`, the same as
+  `ArrowTargetButton`; highlighted, and clears the target, when it already is the target), hide
+  pack (`markerPrefs.<pack>.active = false`), and, in packs with auto-hide, mark done
+  (`markerPrefs...doneAt = Date.now()`, what `marker_progress.ts` stores). All go through
+  `send(IPC.Settings.Update, { path, value })` with array paths from `MarkerPrefs.ts`; main applies
+  them and resends the render data.
+- **Identity.** Render markers carry `packId`, `markerId`, `markerName`, `packName` and
+  `packAutoHide` (`Settings.createRenderData()`), and `IRenderData.arrowTarget` says what the arrow
+  follows. The older index-based `markerMouseoverData` is unused by the bar. The scene objects are
+  rebuilt with every render data refresh, so the bar keeps only the `packId|markerId` key and looks
+  the marker up again each frame.
+- **Clicks.** `IPC.OverlaySetClickable` (main: `setIgnoreMouseEvents(!clickable, { forward: true })`
+  on the overlay window, like `IPC.Mounts.SetClickable`). The bar asks for `true` only while the
+  cursor is inside its rectangle (+3 px), tested against the forwarded `mousemove` position, not
+  with `mouseenter`/`mouseleave` (see Cursor input). `true` is repeated every second so a lost
+  message cannot leave the window swallowing the game's clicks; main also returns to click-through
+  on page (re)load, a renderer crash, the map opening, a loading screen and minimizing. While
+  clickable, `mouseleave` on the document is real and clears the cursor. The overlay window is
+  created `focusable: false` (`WS_EX_NOACTIVATE`), so clicking the bar does not take focus from GW2.
+- **Video volume.** `markerPrefs.<pack>.markers.<id>.volume` (0..1, default 1) and `.muted` are a
+  player's own preference (`MarkerVolumePath`, `MarkerMutedPath`, `MarkerVolume()`,
+  `IsMarkerMuted()`); the render data carries the effective values on the video marker. Playback
+  volume = volume x (muted ? 0 : 1) x the distance fade. The slider applies at once
+  (`MovieManager.SetLocalAudio()`, preferred over render data for 2 s) and saves at most every
+  250 ms and on release. The settings UI (marker details) shows the same two values. Track works for
+  a video marker only as an explicit marker target (pack-wide arrows still pick position markers).
 
 ### Map changes and the open map
 

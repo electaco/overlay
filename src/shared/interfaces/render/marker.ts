@@ -23,6 +23,13 @@ export interface IPositionMarker extends IGenericMarker {
 }
 
 export interface IGenericMarker {
+    // Which marker this is, for the overlay's action bar (settings changes use ids, not indices).
+    packId?: string;
+    markerId?: string;
+    markerName?: string;
+    packName?: string;
+    // Whether "Mark done" applies: the pack has auto-hide on.
+    packAutoHide?: boolean;
     position: IPosition;
     type: MarkerType;
     fadeInDistance?: number;

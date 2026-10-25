@@ -8,7 +8,8 @@ import { MovieManager } from './render/VideoMarker';
 import { ArrowHud, CoverRect } from './render/ArrowHud';
 import { IGameCover } from '../src/shared/interfaces/datatransfer/IGameCover';
 import { CameraPositionManager, CameraTuning } from './render/CameraPositionManager';
-import { CreateMarker } from './render/PositionMarker';
+import { CreateMarker, MarkerBarAnchor } from './render/PositionMarker';
+import { IBarFrame, IBarTarget, MarkerActionBar } from './render/MarkerActions';
 import { MapLayer } from './render/MapLayer';
 import { send, on, invoke } from '../src/shared/electron_ipc';
 
@@ -43,7 +44,12 @@ class RenderManager {
   // Cursor in normalized device coordinates, or null when it is off the overlay. Updated from DOM
   // events and acted on once per rendered frame.
   private pointer: THREE.Vector2 | null = null;
+  private pointerPx: { x: number; y: number } | null = null;
   private pointerMoved = false;
+  // Hover action bar for markers, and the position markers' bar targets by key (the scene's
+  // objects are rebuilt with every render data refresh).
+  private actionBar: MarkerActionBar;
+  private barGroups = new Map<string, THREE.Object3D>();
 
   constructor() {
     this.scene = new THREE.Scene();
@@ -67,6 +73,10 @@ class RenderManager {
     this.arrowHud = new ArrowHud(this.scene);
     this.positionManager = new CameraPositionManager();
     this.mapLayer = new MapLayer();
+    this.actionBar = new MarkerActionBar({
+      get: (key) => this.movieManager.AudioOf(key),
+      set: (key, volume, muted) => this.movieManager.SetLocalAudio(key, volume, muted),
+    });
     // For tuning the camera timing live through the remote debugging port.
     (window as any).cameraTuning = CameraTuning;
     this.raycaster = new THREE.Raycaster();
@@ -148,7 +158,8 @@ class RenderManager {
 
     // The overlay is click-through with { forward: true } (windows.ts), so the page still gets
     // real mousemove events while the game has focus, in page pixels on whatever display the
-    // overlay covers. No clicks reach it.
+    // overlay covers. No clicks reach it, except while the cursor is over the marker action bar
+    // (MarkerActionBar asks main to take clicks then).
     //
     // The last position is kept and raycast every frame, so hover follows the camera while the
     // cursor is still. 'mouseleave' is no use here: a click-through window that never really holds
@@ -159,13 +170,23 @@ class RenderManager {
       this.pointer = new THREE.Vector2(
         (e.clientX / window.innerWidth) * 2 - 1,
         -(e.clientY / window.innerHeight) * 2 + 1);
+      this.pointerPx = { x: e.clientX, y: e.clientY };
+      this.pointerMoved = true;
+    });
+    // While the window takes clicks the mouse is really in it, so leaving is a real leave. (Not
+    // while click-through: see above.)
+    document.documentElement.addEventListener('mouseleave', () => {
+      if (!this.actionBar.IsClickable()) return;
+      this.pointer = null;
+      this.pointerPx = null;
       this.pointerMoved = true;
     });
     setInterval(() => {
-      if (!this.pointer || !this.movieManager.IsHovered()) return;
+      if (!this.pointer || !(this.movieManager.IsHovered() || this.intersected || this.actionBar.IsShown())) return;
       invoke(IPC.CursorInOverlay).then((inside) => {
         if (inside === false) {
           this.pointer = null;
+          this.pointerPx = null;
           this.pointerMoved = true;
         }
       });
@@ -180,6 +201,7 @@ class RenderManager {
     this.isUpdating = true;
     try {
       this.removeUnusedObjects();
+      this.barGroups.clear();
       this.addNewMarkers(renderData);
       this.movieManager.SetVideoMarkers(this.extractVideoMarkers(renderData));
       this.arrowHud.SetCandidates(renderData?.arrow?.candidates);
@@ -207,11 +229,12 @@ class RenderManager {
       this.handleMouseMove(this.pointer);
     }
     // Every frame, not only on mouse moves: the screen moves under a still cursor as the camera does.
-    this.movieManager.UpdateHover(this.pointer, this.camera);
+    this.movieManager.UpdateHover(this.pointer, this.camera, this.actionBar.IsOnVideoBar());
     // Before rendering: marker sizes and text facing depend on the camera, and applying them after
     // the render drew every frame with the previous frame's values, so markers (close ones most,
     // whose size changes fastest) wobbled as the player moved.
     this.updateSceneObjects();
+    this.updateActionBar();
     if (this.positionManager.isReady) {
       this.arrowHud.Update(this.positionManager.GetPosition(), this.camera, this.scene.visible, this.coverRects);
     }
@@ -230,6 +253,58 @@ class RenderManager {
     // Hidden while loading (stale position) or minimized, like the scene.
     this.mapLayer.Update(this.isMap && this.scene.visible ? this.mapContext : null, this.renderData, this.coverRects);
   };
+
+  // What the cursor rests on that has a bar (a position marker's icon, else the video screen).
+  private hoveredBarFrame(): IBarFrame | null {
+    if (this.isMap) {
+      return this.pointerPx ? this.mapLayer.HitTest(this.pointerPx.x, this.pointerPx.y) : null;
+    }
+    const w = window.innerWidth, h = window.innerHeight;
+    const group = this.intersected;
+    const target = group?.userData.barTarget as IBarTarget | null | undefined;
+    // (a removed marker can still be the stale hover until the cursor moves)
+    if (group?.parent && target) {
+      const a = MarkerBarAnchor(group, this.camera, w, h);
+      if (a) return { target, ...a };
+    }
+    if (this.movieManager.IsHovered()) {
+      return this.videoBarFrame();
+    }
+    return null;
+  }
+
+  private videoBarFrame(): IBarFrame | null {
+    const active = this.movieManager.ActiveMarker();
+    const m = active?.marker;
+    if (!active || !m?.packId || !m.markerId) return null;
+    const p = this.movieManager.BottomAnchor(this.camera);
+    if (!p || p.z > 1) return null;
+    const target: IBarTarget = {
+      key: active.key, kind: 'video', packId: m.packId, markerId: m.markerId,
+      packName: m.packName ?? '', markerName: m.markerName ?? '', packAutoHide: false,
+    };
+    return {
+      target, x: (p.x + 1) / 2 * window.innerWidth, y: (1 - p.y) / 2 * window.innerHeight + 2, below: true,
+      opacity: this.movieManager.InfoOpacity(),
+      quad: (w, h) => this.movieManager.BarQuad(this.camera, w, h, window.innerWidth, window.innerHeight),
+    };
+  }
+
+  private updateActionBar() {
+    const resolve = (key: string): IBarFrame | null => {
+      if (this.isMap) return this.mapLayer.Spot(key);
+      const group = this.barGroups.get(key);
+      const target = group?.userData.barTarget as IBarTarget | undefined;
+      if (group && target && group.parent) {
+        const a = MarkerBarAnchor(group, this.camera, window.innerWidth, window.innerHeight);
+        return a ? { target, ...a } : null;
+      }
+      const video = this.videoBarFrame();
+      return video && video.target.key === key ? video : null;
+    };
+    this.actionBar.Update(performance.now(), this.hoveredBarFrame(), resolve,
+      this.scene.visible, this.coverRects, this.pointerPx, this.renderData?.arrowTarget);
+  }
 
   private applyHidden() {
     // The arrow HUD label (DOM) follows scene.visible in the frame loop.
@@ -366,7 +441,11 @@ class RenderManager {
   private addNewMarkers(renderData: IRenderData | null) {
     renderData?.markers?.forEach((marker) => {
       if (marker.type == MarkerType.PositionMarker)
-        this.scene.add(CreateMarker(marker as IPositionMarker));
+      {
+        const group = CreateMarker(marker as IPositionMarker);
+        this.scene.add(group);
+        if (group.userData.barTarget) this.barGroups.set(group.userData.barTarget.key, group);
+      }
     });
   }
 

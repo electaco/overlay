@@ -16,4 +16,10 @@ export interface IVideoDataExtra {
     scale: number;
 }
 
-export interface IVideoData extends IVideoDataExtra, IGenericMarker {}
+// The player's own audio preference for this marker (markerPrefs), 0..1 and mute.
+export interface IVideoAudio {
+    volume?: number;
+    muted?: boolean;
+}
+
+export interface IVideoData extends IVideoDataExtra, IGenericMarker, IVideoAudio {}

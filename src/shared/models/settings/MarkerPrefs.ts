@@ -13,7 +13,15 @@ export interface IMarkerPrefs {
   // When auto-hide marked the marker done (ms since epoch). It stays hidden until the pack's
   // reappear rule says otherwise; null/absent means not done.
   doneAt?: number | null;
+  // Video markers: this player's own volume (0..1, absent means full) and mute. The distance
+  // fade is applied on top.
+  volume?: number;
+  muted?: boolean;
 }
+
+// Only the ids matter for the paths below (the overlay's action bar has no full pack or marker).
+type PackRef = Pick<IMarkerGroupSettings, "id">;
+type MarkerRef = Pick<IMarkerSettings, "id">;
 
 // Auto-hide (a pack option): a marker the player stays near for a while is marked done and hidden
 // until it reappears: never by itself (manual), after a custom time, or at GW2's daily or weekly
@@ -69,7 +77,7 @@ export function ReappearsAt(options: IAutoHideOptions, doneAt: number): number {
   }
 }
 
-export function MarkerDoneAtPath(pack: IMarkerGroupSettings, marker: IMarkerSettings): string[] {
+export function MarkerDoneAtPath(pack: PackRef, marker: MarkerRef): string[] {
   return ["markerPrefs", pack.id, "markers", marker.id, "doneAt"];
 }
 
@@ -103,12 +111,30 @@ export interface IMarkerPrefsMap {
 }
 
 // Settings paths as arrays, so ids are never split on "." by object-path.
-export function PackActivePath(pack: IMarkerGroupSettings): string[] {
+export function PackActivePath(pack: PackRef): string[] {
   return ["markerPrefs", pack.id, "active"];
 }
 
-export function MarkerActivePath(pack: IMarkerGroupSettings, marker: IMarkerSettings): string[] {
+export function MarkerActivePath(pack: PackRef, marker: MarkerRef): string[] {
   return ["markerPrefs", pack.id, "markers", marker.id, "active"];
+}
+
+export function MarkerVolumePath(pack: PackRef, marker: MarkerRef): string[] {
+  return ["markerPrefs", pack.id, "markers", marker.id, "volume"];
+}
+
+export function MarkerMutedPath(pack: PackRef, marker: MarkerRef): string[] {
+  return ["markerPrefs", pack.id, "markers", marker.id, "muted"];
+}
+
+// The playback volume setting of a marker, 0..1.
+export function MarkerVolume(prefs: IMarkerPrefsMap | undefined, pack: PackRef, marker: MarkerRef): number {
+  const v = prefs?.[pack.id]?.markers?.[marker.id]?.volume;
+  return typeof v === "number" && isFinite(v) ? Math.min(1, Math.max(0, v)) : 1;
+}
+
+export function IsMarkerMuted(prefs: IMarkerPrefsMap | undefined, pack: PackRef, marker: MarkerRef): boolean {
+  return !!prefs?.[pack.id]?.markers?.[marker.id]?.muted;
 }
 
 export function IsPackActive(prefs: IMarkerPrefsMap | undefined, pack: IMarkerGroupSettings): boolean {

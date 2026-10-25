@@ -2,11 +2,11 @@ import React from 'react';
 import Checkbox from '../settings/IconCheckbox';
 import EditableText from '../settings/editableText';
 import { IMarkerRemovalInfo } from '../../shared/interfaces/datatransfer/IMarkerRemovalInfo';
-import { faEye, faEyeSlash, faFilm } from '@fortawesome/free-solid-svg-icons'
+import { faEye, faEyeSlash, faFilm, faVolumeMute, faVolumeUp } from '@fortawesome/free-solid-svg-icons'
 import { ISettings } from '../../shared/interfaces/settings';
 import { IMarkerSettings } from '../../shared/interfaces/settings/IMarkerSettings';
 import { IMarkerGroupSettings } from '../../shared/interfaces/settings/IMarkerGroupSettings';
-import { IsMarkerActive, MarkerActivePath } from '../../shared/models/settings/MarkerPrefs';
+import { IsMarkerActive, IsMarkerMuted, MarkerActivePath, MarkerMutedPath, MarkerVolume, MarkerVolumePath } from '../../shared/models/settings/MarkerPrefs';
 import Button from '../window/Button';
 import Section from '../window/section';
 import PositionEditor from '../settings/PositionEditor';
@@ -98,7 +98,22 @@ function MarkerVideo(props: IProps) {
                                 max={20}
                             />
                         </div>
-                        <div title="How far behind the live edge a live stream plays. More delay rides out uneven segment delivery. 0 = 30 s, or as far back as the stream's playlist goes.">
+                        <div title="Your own volume for this video marker; the overlay's hover bar on the screen changes it too.">
+                    Volume (%): <NumberEditor
+                        path={MarkerVolumePath(props.pack, props.marker)}
+                        value={Math.round(MarkerVolume(props.settings.markerPrefs, props.pack, props.marker) * 100)}
+                        step={5}
+                        min={0}
+                        max={100}
+                        factor={100}
+                    />
+                    <Checkbox
+                        setting={{ path: MarkerMutedPath(props.pack, props.marker), value: IsMarkerMuted(props.settings.markerPrefs, props.pack, props.marker) }}
+                        iconChecked={faVolumeMute}
+                        iconUnchecked={faVolumeUp}
+                    />
+                </div>
+                <div title="How far behind the live edge a live stream plays. More delay rides out uneven segment delivery. 0 = 30 s, or as far back as the stream's playlist goes.">
                             Live delay (s): <NumberEditor
                                 path={props.path + "extraData.source.liveDelay"}
                                 value={props.marker.extraData?.source.liveDelay || 0}

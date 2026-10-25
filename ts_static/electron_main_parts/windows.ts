@@ -37,7 +37,7 @@ ipcMain.on(IPC.Debug.DebugWindow, (event, arg: string) => {
 
 ipcMain.on(IPC.Debug.ReloadRender, (event, arg) => {
     if (rendererWindow) {
-        rendererWindow.setIgnoreMouseEvents(true);
+        overlayClickThrough();
         rendererWindow.webContents.reload();
     }
 });
@@ -61,10 +61,16 @@ export function createRenderWindow(): BrowserWindow {
         transparent: true,
         fullscreen: true,
         resizable: false,
+        // A click on a marker action bar must not take focus from the game (WS_EX_NOACTIVATE,
+        // like the mount menu). Nothing in the overlay page needs the keyboard.
+        focusable: false,
     })
 
     win.setAlwaysOnTop(true, "screen-saver");
     win.setIgnoreMouseEvents(true, { forward: true });
+    // Whatever the page had switched on (click capture over an action bar) must not outlive it.
+    win.webContents.on('did-start-loading', overlayClickThrough);
+    win.webContents.on('render-process-gone', overlayClickThrough);
 
     win.on("always-on-top-changed", (event, isAlwaysOnTop) => {
         console.log("Always on top changed", isAlwaysOnTop);
@@ -92,6 +98,19 @@ export function createRenderWindow(): BrowserWindow {
     configUpdated();
     return win;
 }
+
+// The overlay takes clicks only while the cursor is over one of its marker action bars (the page
+// asks, see renderer.ts); everywhere else it is click-through so GW2 gets every click.
+function overlayClickThrough() {
+    if (!rendererWindow || rendererWindow.isDestroyed()) return;
+    rendererWindow.setIgnoreMouseEvents(true, { forward: true });
+}
+
+ipcMain.on(IPC.OverlaySetClickable, (event, clickable: boolean) => {
+    if (!rendererWindow || rendererWindow.isDestroyed()) return;
+    // forward:true keeps mouse moves flowing so the page can tell when the cursor leaves the bar.
+    rendererWindow.setIgnoreMouseEvents(!clickable, { forward: true });
+});
 
 ipcMain.on(IPC.Window.ResizeConfig, (event, arg) => {
     configButton?.setSize(arg.w, arg.h);
@@ -382,16 +401,19 @@ function applyMountsGameVisibility() {
 
 ipcMain.on(IPC.MapOpen, (event, open: boolean) => {
     gameMapOpen = !!open;
+    if (open) overlayClickThrough();
     applyMountsGameVisibility();
 });
 
 ipcMain.on(IPC.LoadingScreen, (event, loading: boolean) => {
     gameLoadingScreen = !!loading;
+    if (loading) overlayClickThrough();
     applyMountsGameVisibility();
 });
 
 ipcMain.on(IPC.GameCover, (event, cover: IGameCover) => {
     gameCover = { minimized: !!cover?.minimized, rects: cover?.rects ?? [] };
+    if (gameCover.minimized) overlayClickThrough();
     applyMountsGameVisibility();
 });
 

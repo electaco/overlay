@@ -1,5 +1,6 @@
 import { IGenericMarker } from './marker';
 import { IPosition } from '../common';
+import { IArrowTarget } from '../settings/IRenderSettings';
 
 // A marker the HUD arrow may point at; the overlay picks the nearest each frame.
 export interface IArrowCandidate {
@@ -12,6 +13,8 @@ export interface IRenderData {
     markers: Array<IGenericMarker>,
     // Present when the arrow is switched on.
     arrow?: { candidates: Array<IArrowCandidate> },
+    // What the arrow is set to follow (also when it is off), for the marker action bar's button.
+    arrowTarget?: IArrowTarget | null,
     // GW2's "Use DPI scaling" option, for placing markers on the in-game map.
     gameDpiScaling?: boolean,
 }

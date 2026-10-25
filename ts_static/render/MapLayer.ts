@@ -2,6 +2,15 @@ import { IRenderData } from '../../src/shared/interfaces/render/renderdata';
 import { IGenericMarker, IPositionMarker, MarkerType } from '../../src/shared/interfaces/render/marker';
 import { IGw2Context } from '../../src/shared/interfaces/datatransfer/IGw2MumbleLinkData';
 import { CoverRect } from './ArrowHud';
+import { BarTargetOf, IBarFrame, IBarTarget } from './MarkerActions';
+
+// Where a marker was drawn this frame, for hovering it (its action bar works on the map too).
+interface IMapSpot {
+  target: IBarTarget;
+  x: number;
+  y: number;
+  video: boolean;
+}
 
 // For calibrating live through the remote debugging port (window.mapTuning).
 export const MapTuning = {
@@ -23,6 +32,7 @@ export class MapLayer {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
   private drawn = false;
+  private spots: IMapSpot[] = [];
   // Icon images and their tinted copies, loaded once.
   private images: Record<string, HTMLImageElement> = {};
   private tinted: Record<string, HTMLCanvasElement> = {};
@@ -47,6 +57,7 @@ export class MapLayer {
   Update(context: IGw2Context | null, renderData: IRenderData | null, covers: CoverRect[]) {
     const ctx = this.ctx;
     if (!context) {
+      this.spots = [];
       if (this.drawn) {
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -68,11 +79,14 @@ export class MapLayer {
       y: h / 2 + (cy - context.MapCenterY) / scale * k / dpr,
     });
 
+    this.spots = [];
     for (const marker of renderData?.markers ?? []) {
       if (!marker.continent) continue;
       const p = toScreen(marker.continent.x, marker.continent.y);
       if (p.x < -ICON_SIZE || p.y < -ICON_SIZE || p.x > w + ICON_SIZE || p.y > h + ICON_SIZE) continue;
       this.drawMarker(marker, p.x, p.y, scale);
+      const target = BarTargetOf(marker);
+      if (target) this.spots.push({ target, x: p.x, y: p.y, video: marker.type === MarkerType.VideoMarker });
     }
 
     if (MapTuning.playerDot) {
@@ -85,6 +99,32 @@ export class MapLayer {
 
     // Parts under other windows go back to transparent, as on the 3D canvas.
     for (const r of covers) ctx.clearRect(r.x, r.y, r.w, r.h);
+  }
+
+  // The marker drawn under the cursor (CSS px), with where its bar goes: right of the icon.
+  HitTest(px: number, py: number): IBarFrame | null {
+    const half = ICON_SIZE / 2;
+    // Topmost (drawn last) first.
+    for (let i = this.spots.length - 1; i >= 0; i--) {
+      const s = this.spots[i];
+      // A pin's tip is its position (icon above it); a video badge is centred on it.
+      const top = s.video ? s.y - half : s.y - ICON_SIZE;
+      if (px >= s.x - half && px <= s.x + half && py >= top && py <= top + ICON_SIZE) {
+        return this.frameOf(s);
+      }
+    }
+    return null;
+  }
+
+  // Where a marker's bar goes now, null once it is no longer drawn.
+  Spot(key: string): IBarFrame | null {
+    const s = this.spots.find((x) => x.target.key === key);
+    return s ? this.frameOf(s) : null;
+  }
+
+  private frameOf(s: IMapSpot): IBarFrame {
+    const half = ICON_SIZE / 2;
+    return { target: s.target, x: s.x + half + 4, y: s.video ? s.y : s.y - half };
   }
 
   private drawMarker(marker: IGenericMarker, x: number, y: number, mapScale: number) {

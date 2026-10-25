@@ -9,7 +9,7 @@ import { IVideoData } from "../../interfaces/datatransfer/IVideoData";
 import { IOverlaySettings } from "../../interfaces/settings/IOverlaySettings";
 import { OverlaySettings } from "./OverlaySettings";
 import { NormalizeMountsSettings } from "./MountsSettings";
-import { IMarkerPrefsMap, MigrateMarkerPrefs, VisibleMarkerIds, VisibleMarkers } from "./MarkerPrefs";
+import { IMarkerPrefsMap, IsMarkerMuted, MarkerVolume, MigrateMarkerPrefs, VisibleMarkerIds, VisibleMarkers } from "./MarkerPrefs";
 import { IArrowCandidate } from "../../interfaces/render/renderdata";
 import { GetActiveMaps } from "../../../components/helpers/constants";
 import { MarkerToContinent } from "../../mapProjection";
@@ -224,6 +224,13 @@ export class Settings implements ISettings {
             markerGroup.markers[MapId]?.forEach((marker, markerIndex) => {
                 if (!visible.has(marker.id)) { return; }
                 
+                const ids = {
+                    packId: markerGroup.id,
+                    markerId: marker.id,
+                    markerName: marker.name,
+                    packName: markerGroup.name,
+                    packAutoHide: !!markerGroup.autoHide?.enabled,
+                };
                 if (marker.type === MarkerType.VideoMarker && marker.extraData) {
                     if (!marker.extraData?.source.url) {
                         return;
@@ -238,6 +245,9 @@ export class Settings implements ISettings {
                         fadeInDistance: marker.fadeInDistance,
                         continent: MarkerToContinent(marker.position, mapRects) ?? undefined,
                         mapLabel: marker.name,
+                        ...ids,
+                        volume: MarkerVolume(this.markerPrefs, markerGroup, marker),
+                        muted: IsMarkerMuted(this.markerPrefs, markerGroup, marker),
                     }
                     data.markers.push(videoMarker);
                 } else if (marker.type === MarkerType.PositionMarker) {
@@ -249,6 +259,7 @@ export class Settings implements ISettings {
                         type: MarkerType.PositionMarker,
                         continent: MarkerToContinent(marker.position, mapRects) ?? undefined,
                         mapLabel: marker.name,
+                        ...ids,
                         markerMouseoverData: {
                             markerGroup: index,
                             markerIndex: markerIndex
@@ -277,6 +288,7 @@ export class Settings implements ISettings {
 
         });
 
+        data.arrowTarget = this.render.arrowTarget ?? null;
         if (this.render.showArrow) {
             data.arrow = { candidates: this.arrowCandidates(MapId, now) };
         }
@@ -294,7 +306,8 @@ export class Settings implements ISettings {
                 ? (pack.markers[MapId] ?? []).filter((marker) => marker.id === target.markerId)
                 : VisibleMarkers(this.markerPrefs, pack, MapId, now);
             for (const marker of markers) {
-                if ((marker.type ?? MarkerType.PositionMarker) !== MarkerType.PositionMarker) continue;
+                // A video marker can only be pointed at by itself (the action bar's Track button).
+                if (!target.markerId && (marker.type ?? MarkerType.PositionMarker) !== MarkerType.PositionMarker) continue;
                 candidates.push({ position: marker.position, name: marker.name, group: pack.name });
             }
         }

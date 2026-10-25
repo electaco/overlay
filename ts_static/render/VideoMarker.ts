@@ -108,12 +108,15 @@ const INFO_REDRAW_MS = 250;
 const INFO_SHOW_DELAY_MS = 350;
 const INFO_FADE_IN_MS = 200;
 const INFO_FADE_OUT_MS = 250;
+const HOVER_GRACE_MS = 200;
 // Status icon in the screen's lower-left corner while loading, buffering or offline.
 const STATUS_CANVAS = 256;
 const STATUS_SCREEN_SHARE = 0.16;
 const STATUS_REDRAW_MS = 50;
 // How often the playing video is checked for letterbox / pillarbox bars.
 const BARS_SAMPLE_MS = 1000;
+// How long the action bar's own volume change outranks render data (it is saved within 250 ms).
+const LOCAL_AUDIO_MS = 2000;
 
 const UI_FONT = '"Segoe UI", "Segoe UI Variable", system-ui, sans-serif';
 const COLOR_OK = '#7ee0a0';
@@ -184,11 +187,16 @@ export class MovieManager {
   private distanceOpacity = 1;
   private hovering = false;
   private hoverSince = 0;
+  private hoverLeft = 0;
   private infoFade = 0;
   private hoverUpdated = 0;
 
   private markers: IVideoMark[] = [];
   private active: IVideoMark | null = null;
+  // Volume / mute set on the action bar, used until render data carries the saved values (the
+  // round trip through main), so the slider acts at once; given up after LOCAL_AUDIO_MS so a
+  // change made elsewhere (settings window) is not shadowed. By marker key.
+  private audioLocal = new Map<string, { volume: number; muted: boolean; until: number }>();
 
   private hls: Hls | null = null;
   private loadedKey: string | null = null;
@@ -298,6 +306,13 @@ export class MovieManager {
       marker,
       pos: new THREE.Vector3(marker.position.X, marker.position.Y, marker.position.Z),
     }));
+    for (const m of this.markers) {
+      const local = this.audioLocal.get(m.key);
+      if (local && (performance.now() > local.until
+          || (local.volume === (m.marker.volume ?? 1) && local.muted === !!m.marker.muted))) {
+        this.audioLocal.delete(m.key);
+      }
+    }
 
     if (this.active) {
       // Settings changes resend every marker. Keep playing if the active one is still there.
@@ -440,14 +455,73 @@ export class MovieManager {
     return this.hovering;
   }
 
-  // Called every frame with the cursor (or null when it is off the overlay).
-  UpdateHover(pointer: THREE.Vector2 | null, camera: THREE.Camera) {
+  // The marker whose screen is showing, if any.
+  ActiveMarker(): { key: string; marker: IVideoData } | null {
+    return this.active ? { key: this.active.key, marker: this.active.marker } : null;
+  }
+
+  // The marker's audio as played: the bar's own change if it is still waiting to be saved.
+  AudioOf(key: string): { volume: number; muted: boolean } {
+    const local = this.audioLocal.get(key);
+    if (local && performance.now() <= local.until) return local;
+    const marker = this.markers.find((m) => m.key === key)?.marker;
+    return { volume: marker?.volume ?? 1, muted: !!marker?.muted };
+  }
+
+  SetLocalAudio(key: string, volume: number, muted: boolean) {
+    this.audioLocal.set(key, { volume: THREE.MathUtils.clamp(volume, 0, 1), muted, until: performance.now() + LOCAL_AUDIO_MS });
+  }
+
+  // Where the middle of the screen's bottom edge is, in normalized device coordinates (the volume
+  // bar hangs from it), or null when the screen is not showing.
+  BottomAnchor(camera: THREE.Camera): THREE.Vector3 | null {
+    if (!this.active || !this.rig.visible) return null;
+    camera.updateMatrixWorld();
+    this.rig.updateMatrixWorld();
+    const edge = new THREE.Vector3(0, -0.5, 0).applyMatrix4(this.backdrop.matrixWorld);
+    return edge.project(camera);
+  }
+
+  // Where a bar of w x h CSS px hung under the screen lands on the screen, drawn in the screen's
+  // plane so it follows the video at an angle: its corners (top-left, top-right, bottom-right,
+  // bottom-left) in CSS px, or null when not showing or partly behind the camera. Its size is
+  // picked so that, seen straight on, it is w x h.
+  BarQuad(camera: THREE.Camera, w: number, h: number, viewW: number, viewH: number): [number, number][] | null {
+    if (!this.active || !this.rig.visible) return null;
+    camera.updateMatrixWorld();
+    this.rig.updateMatrixWorld();
+    const toPx = (x: number, y: number) => {
+      const p = new THREE.Vector3(x, y, 0).applyMatrix4(this.backdrop.matrixWorld).project(camera);
+      return p.z > 1 ? null : new THREE.Vector2((p.x + 1) / 2 * viewW, (1 - p.y) / 2 * viewH);
+    };
+    // The screen's own size on screen, along its edges (local units: the screen is 1 x 1).
+    const bl = toPx(-0.5, -0.5), br = toPx(0.5, -0.5), tl = toPx(-0.5, 0.5);
+    if (!bl || !br || !tl) return null;
+    const sw = bl.distanceTo(br), sh = bl.distanceTo(tl);
+    if (sw < 1 || sh < 1) return null;
+    const lw = w / sw, lh = h / sh, gap = 2 / sh;
+    const top = -0.5 - gap, bottom = top - lh;
+    const corners = [toPx(-lw / 2, top), toPx(lw / 2, top), toPx(lw / 2, bottom), toPx(-lw / 2, bottom)];
+    if (corners.some((c) => !c)) return null;
+    return corners.map((c) => [c!.x, c!.y] as [number, number]);
+  }
+
+  // How far the info card has faded in (eased, 0..1); the volume bar follows it.
+  InfoOpacity() {
+    return this.infoFade * this.infoFade * (3 - 2 * this.infoFade);
+  }
+
+  // Called every frame with the cursor (or null when it is off the overlay). `onBar`: the cursor is
+  // on the video's volume bar, which counts as still hovering (the card stays up).
+  UpdateHover(pointer: THREE.Vector2 | null, camera: THREE.Camera, onBar = false) {
     const now = performance.now();
     const elapsed = this.hoverUpdated ? Math.min(now - this.hoverUpdated, 100) : 0;
     this.hoverUpdated = now;
 
-    const hovering = !!pointer && !!this.ScreenPointAt(pointer, camera);
-    if (hovering && !this.hovering) this.hoverSince = now;
+    const hovering = onBar || (!!pointer && !!this.ScreenPointAt(pointer, camera));
+    // A moment off it (crossing to the volume bar below) doesn't restart the card's show delay.
+    if (hovering && !this.hovering && now - this.hoverLeft > HOVER_GRACE_MS) this.hoverSince = now;
+    if (!hovering && this.hovering) this.hoverLeft = now;
     this.hovering = hovering;
 
     const show = hovering && now - this.hoverSince >= INFO_SHOW_DELAY_MS;
@@ -455,9 +529,8 @@ export class MovieManager {
       ? Math.min(1, this.infoFade + elapsed / INFO_FADE_IN_MS)
       : Math.max(0, this.infoFade - elapsed / INFO_FADE_OUT_MS);
     this.info.visible = this.infoFade > 0;
-    // Ease so the start and end of the fade are soft.
-    const eased = this.infoFade * this.infoFade * (3 - 2 * this.infoFade);
-    this.infoMaterial.opacity = this.distanceOpacity * eased;
+    // Eased so the start and end of the fade are soft.
+    this.infoMaterial.opacity = this.distanceOpacity * this.InfoOpacity();
 
     // Keep the contents fresh while shown, and draw them right before it starts fading in.
     if ((this.info.visible || (hovering && now - this.hoverSince >= INFO_SHOW_DELAY_MS - 50))
@@ -700,7 +773,8 @@ export class MovieManager {
       material.opacity = opacity;
     }
     this.distanceOpacity = opacity;
-    this.video.volume = opacity;
+    const audio = this.AudioOf(mark.key);
+    this.video.volume = opacity * (audio.muted ? 0 : audio.volume);
 
     if (this.retryAt) {
       if (now >= this.retryAt) {

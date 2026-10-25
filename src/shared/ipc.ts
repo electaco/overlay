@@ -56,6 +56,9 @@ export const IPC = {
     Video: "video",
     Gw2Data: "gw2data",
     CursorInOverlay: "cursor-in-overlay",
+    // Overlay renderer -> main: take clicks (true) or be click-through again (false). Only true
+    // while the cursor is over a marker action bar.
+    OverlaySetClickable: "set-overlay-clickable",
     // Overlay renderer -> main: the position service's loading screen state (true/false).
     LoadingScreen: "loadingscreen",
     // Overlay renderer -> main: the parts of the game other programs' windows cover (IGameCover).

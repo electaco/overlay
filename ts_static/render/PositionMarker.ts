@@ -3,6 +3,19 @@ import { IPositionMarker } from "../../src/shared/interfaces/render/marker";
 import { ICameraPositionResult } from './CameraPositionManager';
 import { createMarkerIcon } from "./MarkerIcon";
 import { TroikaTextSprite } from './textsprite';
+import { BarTargetOf } from './MarkerActions';
+
+// Where the action bar hangs for a marker: just right of its icon, vertically centred on it.
+// The icon is a sprite without size attenuation, drawn `scale / tan(fov / 2)` of half the view's
+// height tall and as wide, standing on the marker's position.
+export function MarkerBarAnchor(group: THREE.Object3D, camera: THREE.PerspectiveCamera, width: number, height: number) {
+  const p = group.position.clone().project(camera);
+  if (p.z > 1 || p.z < -1) return null;
+  const size = (group.userData.icon as THREE.Object3D | undefined)?.scale.y ?? 0.02;
+  const iconPx = size / Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) * height / 2;
+  const x = (p.x + 1) / 2 * width, y = (1 - p.y) / 2 * height;
+  return { x: x + iconPx / 2 + 6, y: y - iconPx / 2 };
+}
 
 export function CreateMarker(marker: IPositionMarker) {
     const markerGroup = new THREE.Group();
@@ -21,8 +34,11 @@ export function CreateMarker(marker: IPositionMarker) {
   }
   
   let showMarkerName = false;
+    const barTarget = BarTargetOf(marker);
     markerGroup.userData = {
       mouseover: marker.markerMouseoverData,
+      barTarget,
+      icon: marker.icon ? icon! : null,
       lookAtUser: true,
       onMouseOverEnter: () => {
         showMarkerName = true;
