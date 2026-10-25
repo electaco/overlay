@@ -48,6 +48,7 @@ export class MarkerGroupSettings implements IMarkerGroupSettings {
     markers: IMarkerMapSettings = {};
     description: string = "";
     autoHide?: IAutoHideOptions;
+    sequential?: boolean;
 
     @Type(() => NamePlateSetting)
     defaultNamePlate: INamePlateSetting = new NamePlateSetting();

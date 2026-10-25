@@ -16,7 +16,7 @@ import { Marker } from './marker';
 import "./markerpack.css";
 import { IMarkerSettings } from '../../shared/interfaces/settings/IMarkerSettings';
 import { SortArray, ByActiveUsing, ByActiveMap } from '../helpers/sorting';
-import { IsMarkerShownNow, IsPackActive, PackActivePath } from '../../shared/models/settings/MarkerPrefs';
+import { IsMarkerShownNow, IsPackActive, PackActivePath, VisibleMarkerIds } from '../../shared/models/settings/MarkerPrefs';
 import PackOptions from './PackOptions';
 import { ISettings } from '../../shared/interfaces/settings';
 import { IPC } from '../../shared/ipc';
@@ -57,6 +57,7 @@ function Markerpack(props: IProps) {
     const packActive = IsPackActive(props.settings.markerPrefs, props.pack);
     const now = Date.now();
     const markerActive = (marker: IMarkerSettings) => IsMarkerShownNow(props.settings.markerPrefs, props.pack, marker, now);
+    const drawnOn = (map: string) => new Set(VisibleMarkerIds(props.settings.markerPrefs, props.pack, map, now));
 
     return (
         <div className={"markerpack " + (packActive ? "active " : "inactive ") + (props.pack.markers[props.settings.runtimeData?.map || ""] && packActive ? "activemap": "")}>
@@ -100,10 +101,15 @@ function Markerpack(props: IProps) {
                             <Section title={GetMapName(markerMap) ?? "<Map " + markerMap + ">"}
                                 expanded={markerMap === props.settings.runtimeData?.map}
                             >
-                                {SortArray(props.pack.markers[markerMap], ByActiveUsing(markerActive)).map((marker) =>
+                                {(props.pack.sequential
+                                    // A sequential pack is listed in its order, which is the order markers are done in.
+                                    ? props.pack.markers[markerMap]
+                                    : SortArray(props.pack.markers[markerMap], ByActiveUsing(markerActive))
+                                ).map((marker) =>
                                     <Marker
                                         settings={props.settings}
                                         pack={props.pack}
+                                        drawn={drawnOn(markerMap).has(marker.id)}
                                         path={props.path + "markers." + markerMap + "." + indexOf(markerMap, marker) + "."}
                                         key={marker.id}
                                         marker={marker}

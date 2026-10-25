@@ -16,6 +16,8 @@ export interface IMarkerGroupSettings {
   defaultNamePlate: INamePlateSetting;
   // Pack behaviour, set by the pack author (part of the pack data, replaced by updates).
   autoHide?: IAutoHideOptions;
+  // Markers are done in order: per map only the first one not hidden or done is drawn.
+  sequential?: boolean;
 
   AddMarker(marker: IMarkerSettings, map: string): void;
 }

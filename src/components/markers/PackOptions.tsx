@@ -2,7 +2,8 @@ import React from 'react';
 import { IPC } from '../../shared/ipc';
 import { send } from '../../shared/electron_ipc';
 import { IMarkerGroupSettings } from '../../shared/interfaces/settings/IMarkerGroupSettings';
-import { AutoHideOptions, ReappearMode } from '../../shared/models/settings/MarkerPrefs';
+import { AutoHideOptions, PackMarkerPrefsPath, ReappearMode } from '../../shared/models/settings/MarkerPrefs';
+import Button from '../window/Button';
 import { NumberEditor } from '../settings/NumberEditor';
 
 interface IProps {
@@ -23,8 +24,23 @@ function PackOptions(props: IProps) {
     const auto = AutoHideOptions(props.pack);
     const set = (key: string, value: unknown) => send(IPC.Settings.Update, { path: props.path + "autoHide." + key, value });
 
+    function startOver() {
+        send(IPC.Settings.Update, { path: PackMarkerPrefsPath(props.pack), value: {} });
+    }
+
     return (
         <div className="packoptions">
+            <div className="d-flex align-items-center">
+                <label className="mb-0">
+                    <input type="checkbox" checked={!!props.pack.sequential}
+                        onChange={(e) => send(IPC.Settings.Update, { path: props.path + "sequential", value: e.target.checked })} />{" "}
+                    In order: show one marker at a time per map
+                </label>
+                {/* Outside the label: a click inside a label also toggles its checkbox. */}
+                {props.pack.sequential && (
+                    <Button onClick={startOver} title="Show all markers again, starting from the first">Start over</Button>
+                )}
+            </div>
             <label className="d-block">
                 <input type="checkbox" checked={auto.enabled} onChange={(e) => set("enabled", e.target.checked)} />{" "}
                 Auto-hide markers I've been to

@@ -328,6 +328,11 @@ the player stands still; the overlay forwards the position service's loading scr
 reappear times passing and resends render data. `VisibleMarkers()` in `MarkerPrefs.ts` is the one
 place deciding which of a pack's markers are drawn.
 
+**Sequential packs** (pack option `sequential`): per map only the first marker in pack order that
+is neither hidden nor done is drawn, so hiding it (eye toggle or auto-hide) reveals the next.
+"Start over" clears the pack's marker preferences. Sequential packs are listed in pack order in the
+settings, and auto-hide only counts the marker currently drawn.
+
 **Pack data vs personal preferences.** A pack update (or re-import of the same pack id) replaces
 the whole pack in `marks`, so nothing the player chooses is stored there. Preferences live in
 `markerPrefs` (`src/shared/models/settings/MarkerPrefs.ts`), keyed by pack id and marker id:

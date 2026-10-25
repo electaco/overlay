@@ -120,10 +120,18 @@ export function IsMarkerActive(prefs: IMarkerPrefsMap | undefined, pack: IMarker
 }
 
 // The markers of a pack drawn on a map now, in pack order. The one place deciding this, used by
-// the render data and the main-process progress checks.
+// the render data, the main-process progress checks, the arrow and the settings UI. A sequential
+// pack draws only the first marker (in pack order) that is neither hidden nor done, so hiding it
+// (by hand or by auto-hide) reveals the next.
 export function VisibleMarkers(prefs: IMarkerPrefsMap | undefined, pack: IMarkerGroupSettings, mapId: string, now: number): IMarkerSettings[] {
   if (!IsPackActive(prefs, pack)) return [];
-  return (pack.markers[mapId] ?? []).filter((marker) => IsMarkerShownNow(prefs, pack, marker, now));
+  const shown = (pack.markers[mapId] ?? []).filter((marker) => IsMarkerShownNow(prefs, pack, marker, now));
+  return pack.sequential ? shown.slice(0, 1) : shown;
+}
+
+// Starting a sequential pack over: forget which of its markers were hidden or done.
+export function PackMarkerPrefsPath(pack: IMarkerGroupSettings): string[] {
+  return ["markerPrefs", pack.id, "markers"];
 }
 
 export function VisibleMarkerIds(prefs: IMarkerPrefsMap | undefined, pack: IMarkerGroupSettings, mapId: string, now: number): string[] {

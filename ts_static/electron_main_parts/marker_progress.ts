@@ -1,6 +1,6 @@
 import { IPC } from "../../src/shared/ipc";
 import { Position } from "../../src/shared/models/Position";
-import { AutoHideOptions, IsMarkerShownNow, IsPackActive, MarkerDoneAtPath, UsesAutoHide, VisibleMarkerIds } from "../../src/shared/models/settings/MarkerPrefs";
+import { AutoHideOptions, MarkerDoneAtPath, UsesAutoHide, VisibleMarkerIds, VisibleMarkers } from "../../src/shared/models/settings/MarkerPrefs";
 import { log } from "./logging";
 import { getLastPosition, getMapId } from "./position_data";
 import { configUpdated, GetSettings } from "./settings";
@@ -39,10 +39,11 @@ function tick() {
         const player = Position.FromGw2Position(lastpos.coordinates.playerPosition);
         const seen = new Set<string>();
         for (const pack of settings.marks) {
-            if (!pack.autoHide?.enabled || !IsPackActive(settings.markerPrefs, pack)) continue;
+            if (!pack.autoHide?.enabled) continue;
             const options = AutoHideOptions(pack);
-            for (const marker of pack.markers[mapId] ?? []) {
-                if (!UsesAutoHide(pack, marker) || !IsMarkerShownNow(settings.markerPrefs, pack, marker, now)) continue;
+            // Only markers actually drawn count (in a sequential pack, the current one).
+            for (const marker of VisibleMarkers(settings.markerPrefs, pack, mapId, now)) {
+                if (!UsesAutoHide(pack, marker)) continue;
                 const p = marker.position;
                 const distance = Math.hypot(p.X - player.X, p.Y - player.Y, p.Z - player.Z);
                 if (distance > options.distance) continue;
