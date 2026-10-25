@@ -13,6 +13,10 @@ export const BACKGROUND_SERVICE_PATH = 'gw2data\\WebSocketServerNetFramework.exe
 const WS_CLIENT = "ws://localhost:19939/control";
 
 let webSocket: any = null;
+// The control socket is wanted while the position service runs (not in fallback mode).
+let controlWanted = false;
+let reconnectTimer: NodeJS.Timeout | null = null;
+const RECONNECT_DELAY_MS = 2000;
 
 //Start external program to get position from GW2
 let bat: any = null;
@@ -21,7 +25,8 @@ const TD = new TextDecoder("utf-8");
 
 export function SetupBackgroundService() {
     bat = spawn(bat_prefix + BACKGROUND_SERVICE_PATH);
-    
+    controlWanted = true;
+
     bat.stdout.on("data", (data: any) => {
         if (webSocket == null) {
             setupWebSocket();
@@ -31,11 +36,13 @@ export function SetupBackgroundService() {
     });
     bat.on("close", () => {
         log("PositionServer", "Program closed");
+        controlWanted = false;
     });
 }
 
 ipcMain.on(IPC.UseFallbackPositionUpdate, (event: any) => {
     log("Main", "Fallback position activating");
+    controlWanted = false;
     if (bat)
         bat.kill();
 
@@ -60,33 +67,68 @@ ipcMain.on(IPC.SendKeys, (event: any, arg: any) => {
         Data: arg,
         Type: "keys",
     }
-    if (webSocket) {
+    if (webSocket && webSocket.readyState === WebSocket.OPEN) {
         webSocket.send(JSON.stringify(msg));
+    } else {
+        log("Main", "Keys not sent, control socket not connected: " + arg);
     }
 })
 
+// Connects to the service's control socket, and keeps reconnecting while the service runs.
+// The first attempt is made on the service's first line of output, which comes before it
+// starts listening, so it can be refused. Without a retry the socket then stayed dead for the
+// whole run and every mount click was silently dropped.
 function setupWebSocket() {
-    webSocket = new WebSocket(WS_CLIENT);
+    if (reconnectTimer) {
+        clearTimeout(reconnectTimer);
+        reconnectTimer = null;
+    }
+    const ws = new WebSocket(WS_CLIENT);
+    webSocket = ws;
+    let opened = false;
 
-    webSocket.onopen = function (event: any) {
+    ws.onopen = function (event: any) {
+        opened = true;
         log("Main", "Connected to web socket");
     }
 
-    webSocket.onclose = function (event: any) {
-        log("Main", "Disconnected from web socket");
+    ws.onclose = function (event: any) {
+        // Refused attempts while the service starts up are expected; only log real drops.
+        if (opened) {
+            log("Main", "Disconnected from web socket");
+        }
+        if (webSocket === ws) {
+            webSocket = null;
+            scheduleReconnect();
+        }
     }
 
-    webSocket.onerror = function (event: any) {
-        log("Main", "Error on web socket");
+    ws.onerror = function (event: any) {
+        // 'close' follows and handles reconnecting.
+        if (opened) {
+            log("Main", "Error on web socket");
+        }
     }
 
-    webSocket.onmessage = function (event: any) {
+    ws.onmessage = function (event: any) {
         let msg: IWebSocketCommand = JSON.parse(event.data);
         log("Main", "Got ws message: " + event.data);
         if (msg.Type == "gamerunning") {
             setGameState(msg.Data == "True");
         }
     }
+}
+
+function scheduleReconnect() {
+    if (!controlWanted || reconnectTimer) {
+        return;
+    }
+    reconnectTimer = setTimeout(() => {
+        reconnectTimer = null;
+        if (controlWanted && webSocket == null) {
+            setupWebSocket();
+        }
+    }, RECONNECT_DELAY_MS);
 }
 
 function setGameState(state: boolean) {
