@@ -18,6 +18,7 @@ import { IMarkerSettings } from '../../shared/interfaces/settings/IMarkerSetting
 import { SortArray, ByActiveUsing, ByActiveMap } from '../helpers/sorting';
 import { IsMarkerShownNow, IsPackActive, PackActivePath, VisibleMarkerIds } from '../../shared/models/settings/MarkerPrefs';
 import PackOptions from './PackOptions';
+import ArrowTargetButton from './ArrowTargetButton';
 import { ISettings } from '../../shared/interfaces/settings';
 import { IPC } from '../../shared/ipc';
 import { send } from '../../shared/electron_ipc';
@@ -76,6 +77,8 @@ function Markerpack(props: IProps) {
                         <div className="button">
                             <FontAwesomeIcon icon={faPlusCircle} onClick={addMarker} title="Add a marker on current position" />
                         </div>
+
+                        <ArrowTargetButton settings={props.settings} packId={props.pack.id} />
 
                         <IconPicker popup="Marker icon" path={props.path + "icon"} value={props.pack.icon} />
 

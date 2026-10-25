@@ -8,6 +8,16 @@
     color: rgb(255, 250, 183);
 }
 
+.arrowtarget {
+    margin: 0 6px;
+    opacity: 0.55;
+}
+
+.arrowtarget.active {
+    opacity: 1;
+    color: #ffd166;
+}
+
 .packoptions input[type="number"] {
     width: 4.5em;
 }

@@ -11,6 +11,7 @@ import Button from '../window/Button';
 import Section from '../window/section';
 import PositionEditor from '../settings/PositionEditor';
 import IconPicker from '../settings/IconPicker';
+import ArrowTargetButton from './ArrowTargetButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import IMarkerTypeChange from '../../shared/interfaces/datatransfer/IMarkerTypeChange';
 import { IPC } from '../../shared/ipc';
@@ -76,6 +77,9 @@ function MarkerPosition(props: IProps) {
                 <Button onClick={toVideoMarker}>To Video marker</Button>
                 <div>
                     <PositionEditor title="Position" position={props.marker.position} path={props.path + "position"} />
+                </div>
+                <div className="d-flex align-items-center">
+                    Arrow target: <ArrowTargetButton settings={props.settings} packId={props.pack.id} markerId={props.marker.id} />
                 </div>
                 <div className="d-flex align-items-center">
                     Icon:

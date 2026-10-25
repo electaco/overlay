@@ -9,7 +9,8 @@ import { IVideoData } from "../../interfaces/datatransfer/IVideoData";
 import { IOverlaySettings } from "../../interfaces/settings/IOverlaySettings";
 import { OverlaySettings } from "./OverlaySettings";
 import { NormalizeMountsSettings } from "./MountsSettings";
-import { IMarkerPrefsMap, MigrateMarkerPrefs, VisibleMarkerIds } from "./MarkerPrefs";
+import { IMarkerPrefsMap, MigrateMarkerPrefs, VisibleMarkerIds, VisibleMarkers } from "./MarkerPrefs";
+import { IArrowCandidate } from "../../interfaces/render/renderdata";
 import fetch from 'cross-fetch'
 
 const fs = require('fs');
@@ -147,6 +148,9 @@ export class Settings implements ISettings {
         if (removed && this.markerPrefs) {
             delete this.markerPrefs[removed.id];
         }
+        if (removed && this.render?.arrowTarget?.packId === removed.id) {
+            this.render.arrowTarget = null;
+        }
     }
 
     removeMarker(packIndex: number, markerIndex: number, map: string): void {
@@ -155,6 +159,9 @@ export class Settings implements ISettings {
         if (!pack || !marker) return;
         pack.RemoveMarker(markerIndex, map);
         delete this.markerPrefs?.[pack.id]?.markers?.[marker.id];
+        if (this.render?.arrowTarget?.markerId === marker.id) {
+            this.render.arrowTarget = null;
+        }
     }
 
     getMarkerGroup(index: number): MarkerGroupSettings {
@@ -254,6 +261,28 @@ export class Settings implements ISettings {
             });
 
         });
+
+        if (this.render.showArrow) {
+            data.arrow = { candidates: this.arrowCandidates(MapId, now) };
+        }
         return data;
+    }
+
+    // What the HUD arrow may point at on this map: the target marker, the target pack's drawn
+    // markers (the current one, for a sequential pack), or every drawn position marker.
+    private arrowCandidates(MapId: string, now: number): IArrowCandidate[] {
+        const target = this.render.arrowTarget;
+        const packs = target ? this.marks.filter((pack) => pack.id === target.packId) : this.marks;
+        const candidates: IArrowCandidate[] = [];
+        for (const pack of packs) {
+            const markers = target?.markerId
+                ? (pack.markers[MapId] ?? []).filter((marker) => marker.id === target.markerId)
+                : VisibleMarkers(this.markerPrefs, pack, MapId, now);
+            for (const marker of markers) {
+                if ((marker.type ?? MarkerType.PositionMarker) !== MarkerType.PositionMarker) continue;
+                candidates.push({ position: marker.position, name: marker.name, group: pack.name });
+            }
+        }
+        return candidates;
     }
 }

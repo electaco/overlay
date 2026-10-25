@@ -5,6 +5,7 @@ import { IVideoData } from '../src/shared/interfaces/datatransfer/IVideoData';
 import { IPositionMarker, MarkerType } from '../src/shared/interfaces/render/marker';
 import { IGw2MumbleLinkData, UiState } from "../src/shared/interfaces/datatransfer/IGw2MumbleLinkData";
 import { MovieManager } from './render/VideoMarker';
+import { ArrowHud } from './render/ArrowHud';
 import { CameraPositionManager } from './render/CameraPositionManager';
 import { CreateMarker } from './render/PositionMarker';
 import { send, on, invoke } from '../src/shared/electron_ipc';
@@ -14,6 +15,7 @@ class RenderManager {
   private camera: THREE.PerspectiveCamera;
   private renderer: THREE.WebGLRenderer;
   private movieManager: MovieManager;
+  private arrowHud: ArrowHud;
   private positionManager: CameraPositionManager;
   private raycaster: THREE.Raycaster;
   private intersected: THREE.Object3D | null = null;
@@ -49,6 +51,7 @@ class RenderManager {
     });
 
     this.movieManager = new MovieManager(this.scene);
+    this.arrowHud = new ArrowHud();
     this.positionManager = new CameraPositionManager(this.renderScene.bind(this));
     this.raycaster = new THREE.Raycaster();
     this.raycaster.layers.set(2);
@@ -148,6 +151,7 @@ class RenderManager {
       this.removeUnusedObjects();
       this.addNewMarkers(renderData);
       this.movieManager.SetVideoMarkers(this.extractVideoMarkers(renderData));
+      this.arrowHud.SetCandidates(renderData?.arrow?.candidates);
     } catch (e) {
       this.logError("Error in UpdateScene: " + e);
     }
@@ -183,6 +187,9 @@ class RenderManager {
     // whose size changes fastest) wobbled as the player moved.
     this.updateSceneObjects();
     this.renderer.render(this.scene, this.camera);
+    if (this.positionManager.isReady) {
+      this.arrowHud.Update(this.positionManager.GetPosition(), this.camera, this.scene.visible);
+    }
 
     if (timerarg) {
       requestAnimationFrame(this.renderScene.bind(this));

@@ -333,6 +333,15 @@ is neither hidden nor done is drawn, so hiding it (eye toggle or auto-hide) reve
 "Start over" clears the pack's marker preferences. Sequential packs are listed in pack order in the
 settings, and auto-hide only counts the marker currently drawn.
 
+**Marker arrow** (`render.showArrow`, Configuration): a HUD element at the top centre of the
+overlay (`ts_static/render/ArrowHud.ts`, plain DOM) pointing at the nearest candidate marker, with
+its name, distance, pack and a ▲/▼ hint when it is 5 m or more above or below. The arrow turns
+relative to the camera (up = ahead). Main puts the candidates in the render data
+(`Settings.arrowCandidates()`): every drawn position marker on the map, or with
+`render.arrowTarget` set (the crosshair button on a pack or in a marker's details) that pack's
+drawn markers (the current one of a sequential pack) or that one marker. Hidden while the map is
+open and during loading screens.
+
 **Pack data vs personal preferences.** A pack update (or re-import of the same pack id) replaces
 the whole pack in `marks`, so nothing the player chooses is stored there. Preferences live in
 `markerPrefs` (`src/shared/models/settings/MarkerPrefs.ts`), keyed by pack id and marker id:
