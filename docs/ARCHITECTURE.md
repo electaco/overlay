@@ -171,6 +171,17 @@ and stretched by the display scale (1.5× at 150%), blurring all text and marker
 - `render/BlackBars.ts` — detects letterbox / pillarbox bars in the playing video
 - `render/textsprite.ts` — troika-three-text labels
 
+The scene is rendered only from `requestAnimationFrame`, once per display frame; position messages
+never trigger a render (that used to present frames off vsync and made markers jitter).
+`CameraPositionManager.SetPosition()` stores each MumbleLink sample with a timestamp in a short ring
+buffer, and `Advance(now)` (first thing in each rendered frame) computes that frame's camera by
+interpolating between the two samples around `now - delay`. `delay` is a moving average of the
+interval between samples (ignoring gaps over 100 ms), clamped to 0..40 ms and scaled by
+`DELAY_SCALE`; it holds the newest sample rather than extrapolating, and a camera jump over 20 m
+(teleport, map change) drops older samples so nothing is blended across it. `INTERPOLATE` and
+`DELAY_SCALE` at the top of the file tune or disable it. `GetPosition()` returns the same
+per-frame state to markers, the video manager, the arrow HUD and hover.
+
 `typings/index.d.ts` deliberately does not pull in the old vendored three.js globals — it carries a
 comment saying so. Those declare both a global `THREE` namespace and `declare module "three"`,
 which conflicts with `@types/three`; three is typed from `@types/three` now.

@@ -21,7 +21,6 @@ class RenderManager {
   private intersected: THREE.Object3D | null = null;
   private renderData: IRenderData | null = null;
   private isUpdating = false;
-  private lastTime = 0;
   private lastMainUpdate = 0;
   private isMap = false;
   private mapId: string | null = null;
@@ -52,13 +51,13 @@ class RenderManager {
 
     this.movieManager = new MovieManager(this.scene);
     this.arrowHud = new ArrowHud(this.scene);
-    this.positionManager = new CameraPositionManager(this.renderScene.bind(this));
+    this.positionManager = new CameraPositionManager();
     this.raycaster = new THREE.Raycaster();
     this.raycaster.layers.set(2);
 
     this.initWebSocket();
     this.initEventListeners();
-    requestAnimationFrame(this.renderScene.bind(this));
+    requestAnimationFrame(this.renderScene);
   }
 
   private initWebSocket() {
@@ -108,7 +107,6 @@ class RenderManager {
       // Render data can arrive while the map is open (any settings change sends it). It is
       // kept for when the map closes, not shown.
       this.updateSceneData(this.isMap ? null : this.renderData);
-      this.renderScene();
     });
 
     on(IPC.Gw2Data, (data) => {
@@ -158,20 +156,15 @@ class RenderManager {
     this.isUpdating = false;
   }
 
-  private renderScene(timerarg: number | null = null) {
+  // Only ever called by requestAnimationFrame, so frames are presented once per display refresh.
+  // Rendering from position messages instead presented frames at irregular times and made markers jitter.
+  private renderScene = () => {
+    requestAnimationFrame(this.renderScene);
     if (this.isUpdating) {
-      requestAnimationFrame(this.renderScene.bind(this));
       return;
     }
 
-    if (timerarg) {
-      if (timerarg == null || timerarg - this.lastTime < 21) {
-        requestAnimationFrame(this.renderScene.bind(this));
-        return;
-      }
-      this.lastTime = timerarg;
-    }
-
+    this.positionManager.Advance(performance.now());
     this.positionManager.UpdateCameraPosition(this.camera);
     if (this.positionManager.isReady) {
       this.movieManager.Update(this.positionManager.GetPosition());
@@ -190,11 +183,7 @@ class RenderManager {
       this.arrowHud.Update(this.positionManager.GetPosition(), this.camera, this.scene.visible);
     }
     this.renderer.render(this.scene, this.camera);
-
-    if (timerarg) {
-      requestAnimationFrame(this.renderScene.bind(this));
-    }
-  }
+  };
 
   private updateSceneObjects() {
     this.scene.children.forEach((child) => {
