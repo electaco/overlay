@@ -246,6 +246,7 @@ class RenderManager {
       if (!this.isMap) {
         this.updateSceneData(null);
         this.positionManager.SetPosition(data);
+        send(IPC.MapOpen, true);
       }
       this.isMap = true;
       return;
@@ -254,6 +255,7 @@ class RenderManager {
     if (this.isMap) {
       this.updateSceneData(this.renderData);
       this.isMap = false;
+      send(IPC.MapOpen, false);
     }
 
     this.positionManager.SetPosition(data);

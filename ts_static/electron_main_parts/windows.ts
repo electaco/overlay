@@ -148,6 +148,8 @@ function createWindow(parent: BrowserWindow, windowPath: string) {
     };
 
     if (isMounts) {
+        // Opened while the map or a loading screen is up: show it once that is over.
+        opts.show = !mountsHiddenByGame();
         // Around the remembered hub: this run's, else the saved one, else the primary display's
         // centre. mountsLayout() pulls a saved position onto the nearest display, so a hub left
         // on a monitor that is gone or has changed resolution still comes back on screen.
@@ -294,6 +296,37 @@ export function getWindow(windowPath: string) {
 export function getWindows() {
     return openWindows;
 }
+
+// The mount menu keeps out of the way while the in-game map is open or a loading screen is up
+// (the overlay relays both). It is hidden and shown again without changing whether the player
+// has it open.
+let gameMapOpen = false;
+let gameLoadingScreen = false;
+
+function mountsHiddenByGame() {
+    return gameMapOpen || gameLoadingScreen;
+}
+
+function applyMountsGameVisibility() {
+    const win = openWindows['mounts'];
+    if (!win || win.isDestroyed()) { return; }
+    if (mountsHiddenByGame()) {
+        stopMountDrag();
+        if (win.isVisible()) { win.hide(); }
+    } else if (!win.isVisible()) {
+        win.showInactive();
+    }
+}
+
+ipcMain.on(IPC.MapOpen, (event, open: boolean) => {
+    gameMapOpen = !!open;
+    applyMountsGameVisibility();
+});
+
+ipcMain.on(IPC.LoadingScreen, (event, loading: boolean) => {
+    gameLoadingScreen = !!loading;
+    applyMountsGameVisibility();
+});
 
 // Reopens the mount menu at startup if the player left it showing.
 export function restoreMountsWindow() {

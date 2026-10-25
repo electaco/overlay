@@ -57,6 +57,8 @@ export const IPC = {
     CursorInOverlay: "cursor-in-overlay",
     // Overlay renderer -> main: the position service's loading screen state (true/false).
     LoadingScreen: "loadingscreen",
+    // Overlay renderer -> main: the in-game map opened (true) or closed (false).
+    MapOpen: "mapopen",
     ConnectionStatus: "connstatus",
     UseFallbackPositionUpdate: "fallback_positionupate",
     UpdateDownloaded: "update_downloaded",
