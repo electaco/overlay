@@ -7,6 +7,7 @@ const fs = require('fs');
 
 import { InitAutoUpdate } from './electron_main_parts/auto_update';
 import { LoadMarkerPacksFromCommandLine, InitSettings } from './electron_main_parts/settings';
+import { InitMarkerProgress } from './electron_main_parts/marker_progress';
 import { createConfigButtonWindow, createRenderWindow, getConfigButtonWindow, getRenderWindow, getWindows as getOpenWindows, restoreMountsWindow } from './electron_main_parts/windows';
 import { SetupBackgroundService } from './electron_main_parts/background_service';
 import { mapService, SetMapsUpdatedCallback } from './electron_main_parts/service_map';
@@ -35,6 +36,7 @@ if (!gotTheLock) {
   });
   var settings = InitSettings();
   LoadMarkerPacksFromCommandLine(process.argv, process.cwd());
+  InitMarkerProgress();
 
   SetupBackgroundService();
 

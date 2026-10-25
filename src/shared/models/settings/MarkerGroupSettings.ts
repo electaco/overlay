@@ -6,6 +6,7 @@ import { NamePlateSetting } from "./NamePlateSetting";
 import { Type, deserialize } from 'class-transformer';
 import fetch from 'cross-fetch'
 import { DEFAULT_MARKER_ICON } from "../../markerIcons";
+import { IAutoHideOptions } from "./MarkerPrefs";
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -46,6 +47,7 @@ export class MarkerGroupSettings implements IMarkerGroupSettings {
     version?: string | undefined;
     markers: IMarkerMapSettings = {};
     description: string = "";
+    autoHide?: IAutoHideOptions;
 
     @Type(() => NamePlateSetting)
     defaultNamePlate: INamePlateSetting = new NamePlateSetting();

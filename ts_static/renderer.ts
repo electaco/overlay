@@ -84,6 +84,8 @@ class RenderManager {
         this.logInfo(loading ? "Loading screen" : "Loading screen ended");
         this.scene.visible = !loading;
         this.movieManager.SetSuspended(loading);
+        // Main's last position is stale meanwhile too (marker auto-hide must not count it).
+        send(IPC.LoadingScreen, loading);
         return;
       }
       if (msg?.identity?.FovDegrees) {

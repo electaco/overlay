@@ -16,7 +16,8 @@ import { Marker } from './marker';
 import "./markerpack.css";
 import { IMarkerSettings } from '../../shared/interfaces/settings/IMarkerSettings';
 import { SortArray, ByActiveUsing, ByActiveMap } from '../helpers/sorting';
-import { IsMarkerActive, IsPackActive, PackActivePath } from '../../shared/models/settings/MarkerPrefs';
+import { IsMarkerShownNow, IsPackActive, PackActivePath } from '../../shared/models/settings/MarkerPrefs';
+import PackOptions from './PackOptions';
 import { ISettings } from '../../shared/interfaces/settings';
 import { IPC } from '../../shared/ipc';
 import { send } from '../../shared/electron_ipc';
@@ -54,7 +55,8 @@ function Markerpack(props: IProps) {
     }
 
     const packActive = IsPackActive(props.settings.markerPrefs, props.pack);
-    const markerActive = (marker: IMarkerSettings) => IsMarkerActive(props.settings.markerPrefs, props.pack, marker);
+    const now = Date.now();
+    const markerActive = (marker: IMarkerSettings) => IsMarkerShownNow(props.settings.markerPrefs, props.pack, marker, now);
 
     return (
         <div className={"markerpack " + (packActive ? "active " : "inactive ") + (props.pack.markers[props.settings.runtimeData?.map || ""] && packActive ? "activemap": "")}>
@@ -91,6 +93,7 @@ function Markerpack(props: IProps) {
                 </div>
 
                 <EditableText path={props.path + "description"} value={props.pack.description} defaultValue="No description" />
+                <PackOptions pack={props.pack} path={props.path} />
                 <div className="markerpack" >
                     {SortArray(Object.keys(props.pack.markers), ByActiveMap(props.settings.runtimeData?.map ?? ""))?.map((markerMap) =>
                         <div className={"map " + (props.settings.runtimeData?.map === markerMap ? "active": "")}>

@@ -6,7 +6,7 @@ import { faEye, faEyeSlash, faMapMarkerAlt } from '@fortawesome/free-solid-svg-i
 import { ISettings } from '../../shared/interfaces/settings';
 import { IMarkerSettings } from '../../shared/interfaces/settings/IMarkerSettings';
 import { IMarkerGroupSettings } from '../../shared/interfaces/settings/IMarkerGroupSettings';
-import { IsMarkerActive, MarkerActivePath } from '../../shared/models/settings/MarkerPrefs';
+import { DoneUntil, IsMarkerActive, MarkerActivePath, MarkerDoneAtPath } from '../../shared/models/settings/MarkerPrefs';
 import Button from '../window/Button';
 import Section from '../window/section';
 import PositionEditor from '../settings/PositionEditor';
@@ -45,6 +45,11 @@ function MarkerPosition(props: IProps) {
         }
         send(IPC.Marker.ChangeType, markerInfo);
     }
+    const doneUntil = DoneUntil(props.settings.markerPrefs, props.pack, props.marker, Date.now());
+    function showAgain() {
+        send(IPC.Settings.Update, { path: MarkerDoneAtPath(props.pack, props.marker), value: null });
+    }
+
     return (
         <div className="marker d-flex">
             <Section title={
@@ -61,6 +66,12 @@ function MarkerPosition(props: IProps) {
                         iconUnchecked={faEyeSlash}
                     />
                 }>
+                {doneUntil !== null && (
+                    <div className="markerdone">
+                        Done, hidden {isFinite(doneUntil) ? "until " + new Date(doneUntil).toLocaleString() : "until shown again"}{" "}
+                        <Button onClick={showAgain}>Show again</Button>
+                    </div>
+                )}
                 <Button onClick={removeMarker}>Remove marker</Button>
                 <Button onClick={toVideoMarker}>To Video marker</Button>
                 <div>

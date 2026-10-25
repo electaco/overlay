@@ -318,6 +318,16 @@ multiplies them by the pack colour. A pack's `icon` is chosen with the picker ne
 a marker's own `icon` (pack data, set in the marker's details) overrides it, empty meaning the
 pack's.
 
+**Auto-hide** (pack option `autoHide`, part of the pack data): a position marker the player
+stays within `distance` metres of for `seconds` is marked done (`markerPrefs ... doneAt`) and left
+out of the render data until it reappears: `manual` (only via "Show again"), `after`
+`afterMinutes`, `daily` (00:00 UTC) or `weekly` (Monday 07:30 UTC). The main process checks this
+every 500 ms (`marker_progress.ts`) against the last relayed position, which stays valid while
+the player stands still; the overlay forwards the position service's loading screen events
+(`IPC.LoadingScreen`) so a stale position during loading never counts. The same loop notices
+reappear times passing and resends render data. `VisibleMarkers()` in `MarkerPrefs.ts` is the one
+place deciding which of a pack's markers are drawn.
+
 **Pack data vs personal preferences.** A pack update (or re-import of the same pack id) replaces
 the whole pack in `marks`, so nothing the player chooses is stored there. Preferences live in
 `markerPrefs` (`src/shared/models/settings/MarkerPrefs.ts`), keyed by pack id and marker id:

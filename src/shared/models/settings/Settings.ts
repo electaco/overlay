@@ -9,7 +9,7 @@ import { IVideoData } from "../../interfaces/datatransfer/IVideoData";
 import { IOverlaySettings } from "../../interfaces/settings/IOverlaySettings";
 import { OverlaySettings } from "./OverlaySettings";
 import { NormalizeMountsSettings } from "./MountsSettings";
-import { IMarkerPrefsMap, IsMarkerActive, IsPackActive, MigrateMarkerPrefs } from "./MarkerPrefs";
+import { IMarkerPrefsMap, MigrateMarkerPrefs, VisibleMarkerIds } from "./MarkerPrefs";
 import fetch from 'cross-fetch'
 
 const fs = require('fs');
@@ -196,13 +196,15 @@ export class Settings implements ISettings {
     createRenderData(MapId: string): IRenderData {
         let data: IRenderData = { markers: [] };
 
+        const now = Date.now();
         this.marks.forEach((markerGroup, index) => {
-            if (!IsPackActive(this.markerPrefs, markerGroup)) {
+            const visible = new Set(VisibleMarkerIds(this.markerPrefs, markerGroup, MapId, now));
+            if (visible.size === 0) {
                 return;
             }
 
             markerGroup.markers[MapId]?.forEach((marker, markerIndex) => {
-                if (!IsMarkerActive(this.markerPrefs, markerGroup, marker)) { return; }
+                if (!visible.has(marker.id)) { return; }
                 
                 if (marker.type === MarkerType.VideoMarker && marker.extraData) {
                     if (!marker.extraData?.source.url) {

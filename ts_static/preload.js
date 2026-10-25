@@ -25,7 +25,7 @@ contextBridge.exposeInMainWorld('electaco', {
                 'restart', 'exit', 'sendkeys',
                 'fallback_positionupate', 'connstatus', 'log', 'error',
                 // Overlay renderer (renderer.ts)
-                'gw2data', 'getrender', 'debugrenderer', 'reloadRender',
+                'gw2data', 'getrender', 'debugrenderer', 'reloadRender', 'loadingscreen',
                 // Map table (requesting it from a settings window)
                 'getmaps',
                 // Mount radial window asking where it was placed, toggling click-through

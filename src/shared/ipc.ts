@@ -55,6 +55,8 @@ export const IPC = {
     Video: "video",
     Gw2Data: "gw2data",
     CursorInOverlay: "cursor-in-overlay",
+    // Overlay renderer -> main: the position service's loading screen state (true/false).
+    LoadingScreen: "loadingscreen",
     ConnectionStatus: "connstatus",
     UseFallbackPositionUpdate: "fallback_positionupate",
     UpdateDownloaded: "update_downloaded",
