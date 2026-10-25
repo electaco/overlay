@@ -45,6 +45,8 @@ export const IPC = {
         // the cursor in between.
         DragStart: "mounts-drag-start",
         DragEnd: "mounts-drag-end",
+        // Settings window -> main: move the menu back to the primary display's centre.
+        ResetPosition: "mounts-reset-position",
     },
     GetRender: "getrender",
     Restart: "restart",

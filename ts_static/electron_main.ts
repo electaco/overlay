@@ -7,7 +7,7 @@ const fs = require('fs');
 
 import { InitAutoUpdate } from './electron_main_parts/auto_update';
 import { LoadMarkerPacksFromCommandLine, InitSettings } from './electron_main_parts/settings';
-import { createConfigButtonWindow, createRenderWindow, getConfigButtonWindow, getRenderWindow, getWindows as getOpenWindows } from './electron_main_parts/windows';
+import { createConfigButtonWindow, createRenderWindow, getConfigButtonWindow, getRenderWindow, getWindows as getOpenWindows, restoreMountsWindow } from './electron_main_parts/windows';
 import { SetupBackgroundService } from './electron_main_parts/background_service';
 import { mapService, SetMapsUpdatedCallback } from './electron_main_parts/service_map';
 import { configUpdated } from './electron_main_parts/settings';
@@ -84,6 +84,7 @@ ipcMain.on(IPC.Exit, (event, arg) => {
 function onGameStarted() {
   createRenderWindow();
   createConfigButtonWindow();
+  restoreMountsWindow();
   InitAutoUpdate();
   if (settings.overlaySettings.checkForMarkerUpdates) {
     settings.CheckForMarkerUpdates();

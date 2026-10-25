@@ -16,10 +16,12 @@ let openWindows: { [key: string]: BrowserWindow | undefined } = {};
 // purely a rendering change in the page.
 //
 // Hub position in absolute screen coordinates. This is the source of truth; the window is
-// derived from it. Kept across close/reopen for the rest of the app run.
+// derived from it. Kept across close/reopen, and saved in the settings when a drag ends
+// (overlaySettings.mounts.position) so it survives restarts.
 let mountsHub: { x: number; y: number } | null = null;
 // Timer that moves the window with the cursor during a grip drag.
 let mountsDrag: NodeJS.Timeout | null = null;
+let mountsWatchingDisplays = false;
 
 ipcMain.on(IPC.Debug.DebugWindowRender, (event, arg) => {
     //renderer.setIgnoreMouseEvents(false);
@@ -146,10 +148,12 @@ function createWindow(parent: BrowserWindow, windowPath: string) {
     };
 
     if (isMounts) {
-        // Around the remembered hub, or the primary display's centre the first time.
-        const primary = screen.getPrimaryDisplay().bounds;
-        const layout = mountsLayout(mountsHub ?? { x: primary.x + primary.width / 2, y: primary.y + primary.height / 2 });
+        // Around the remembered hub: this run's, else the saved one, else the primary display's
+        // centre. mountsLayout() pulls a saved position onto the nearest display, so a hub left
+        // on a monitor that is gone or has changed resolution still comes back on screen.
+        const layout = mountsLayout(mountsHub ?? savedMountsHub() ?? primaryCentre());
         mountsHub = layout.hub;
+        watchDisplaysForMounts();
         opts.resizable = false;
         opts.fullscreenable = false;
         opts.maximizable = false;
@@ -225,7 +229,46 @@ function stopMountDrag() {
     if (mountsDrag) {
         clearInterval(mountsDrag);
         mountsDrag = null;
+        saveMountsHub();
     }
+}
+
+function primaryCentre() {
+    const primary = screen.getPrimaryDisplay().bounds;
+    return { x: primary.x + primary.width / 2, y: primary.y + primary.height / 2 };
+}
+
+function savedMountsHub(): { x: number; y: number } | null {
+    return GetSettings()?.overlaySettings?.mounts?.position ?? null;
+}
+
+// Written straight to disk rather than through configUpdated(), which would also resend every
+// marker to the overlay and the whole settings object to every window for a position change.
+function saveMountsHub() {
+    const settings = GetSettings();
+    if (!settings?.overlaySettings?.mounts) { return; }
+    if (mountsHub) {
+        settings.overlaySettings.mounts.position = { x: mountsHub.x, y: mountsHub.y };
+    } else {
+        delete settings.overlaySettings.mounts.position;
+    }
+    settings.saveConfig();
+}
+
+// A display being removed or changing resolution can leave the window off screen or spanning
+// two displays; re-place it around the same hub, which mountsLayout() pulls back on screen.
+// Registered on first use: the screen module cannot be used before the app is ready.
+function watchDisplaysForMounts() {
+    if (mountsWatchingDisplays) { return; }
+    mountsWatchingDisplays = true;
+    const replace = () => {
+        const win = openWindows['mounts'];
+        if (win && !win.isDestroyed() && mountsHub) {
+            placeMounts(win, mountsHub);
+        }
+    };
+    screen.on('display-removed', replace);
+    screen.on('display-metrics-changed', replace);
 }
 
 // The overlay page cannot tell on its own when the cursor has left it: a click-through window
@@ -252,7 +295,26 @@ export function getWindows() {
     return openWindows;
 }
 
+// Reopens the mount menu at startup if the player left it showing.
+export function restoreMountsWindow() {
+    if (GetSettings()?.overlaySettings?.mounts?.open && !openWindows['mounts'] && rendererWindow) {
+        openWindows['mounts'] = createWindow(rendererWindow, 'mounts');
+    }
+}
+
+// Only the player's own open/close goes through IPC.Window.Open, so this is the place to
+// remember it: windows closing because the app quits must not count as closing the menu.
+function rememberMountsOpen(open: boolean) {
+    const settings = GetSettings();
+    if (!settings?.overlaySettings?.mounts || settings.overlaySettings.mounts.open === open) { return; }
+    settings.overlaySettings.mounts.open = open;
+    settings.saveConfig();
+}
+
 ipcMain.on(IPC.Window.Open, (event, arg: { show: boolean, path: string }) => {
+    if (arg.path === 'mounts') {
+        rememberMountsOpen(arg.show);
+    }
     if (arg.show) {
         if (!openWindows[arg.path]) {
             openWindows[arg.path] = createWindow(rendererWindow!, arg.path);
@@ -309,6 +371,18 @@ ipcMain.on(IPC.Mounts.DragStart, () => {
         last = c;
         placeMounts(win, { x: c.x - offsetX, y: c.y - offsetY });
     }, 16);
+});
+
+// Settings button: put the menu back in the middle of the primary display and forget the
+// saved position.
+ipcMain.on(IPC.Mounts.ResetPosition, () => {
+    stopMountDrag();
+    mountsHub = null;
+    saveMountsHub();
+    const win = openWindows['mounts'];
+    if (win && !win.isDestroyed()) {
+        placeMounts(win, primaryCentre());
+    }
 });
 
 ipcMain.on(IPC.Mounts.DragEnd, () => {

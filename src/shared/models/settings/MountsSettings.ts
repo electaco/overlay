@@ -22,6 +22,16 @@ export interface IMountSettings {
 
 export interface IMountsSettings {
     mounts: IMountSettings[];
+    /**
+     * Where the player left the menu's hub, in absolute screen coordinates (DIP). Saved when a
+     * drag ends; absent means the primary display's centre.
+     */
+    position?: { x: number; y: number };
+    /**
+     * Whether the player left the menu showing, so it reopens on start. Set when they open or
+     * close it (Electaco menu or the menu's own close button); quitting the app does not change it.
+     */
+    open?: boolean;
 }
 
 // Icons come from the "GW2 Mounts" Stream Deck icon pack (MIT, images by ArenaNet);
@@ -83,7 +93,16 @@ export function NormalizeMountsSettings(current: IMountsSettings | undefined): I
             merged.push(m);
         }
     }
-    return { mounts: merged };
+
+    const result: IMountsSettings = { mounts: merged };
+    const p = current.position;
+    if (p && Number.isFinite(p.x) && Number.isFinite(p.y)) {
+        result.position = { x: p.x, y: p.y };
+    }
+    if (typeof current.open === 'boolean') {
+        result.open = current.open;
+    }
+    return result;
 }
 
 /** Icon URL for a mount, or null when it has none (caller falls back to a letter). */

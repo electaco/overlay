@@ -77,6 +77,9 @@ class App extends React.Component<IProps, IState> {
                 ))}
               </tbody>
             </table>
+            <div className="mt-2">
+              <EventButton text="Reset mount menu position" event={IPC.Mounts.ResetPosition} value={true} />
+            </div>
           </Section>
           <Section title="Development" expanded={false}>
             <Section title="Dev tools">

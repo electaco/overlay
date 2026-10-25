@@ -32,6 +32,8 @@ contextBridge.exposeInMainWorld('electaco', {
                 // based on what is under the cursor, and dragging from its grip.
                 'get-mounts-position', 'set-mounts-clickable',
                 'mounts-drag-start', 'mounts-drag-end',
+                // Settings window: put the mount menu back in the middle of the screen.
+                'mounts-reset-position',
                 // Settings / marker windows
                 'addMarker', 'removeMarker', 'updateMarker', 'newMarkerGroup',
                 'loadmarkergroup', 'removeMarkerGroup', 'savemarkergroup',
