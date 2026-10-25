@@ -333,10 +333,11 @@ is neither hidden nor done is drawn, so hiding it (eye toggle or auto-hide) reve
 "Start over" clears the pack's marker preferences. Sequential packs are listed in pack order in the
 settings, and auto-hide only counts the marker currently drawn.
 
-**Marker arrow** (`render.showArrow`, Configuration): a HUD element at the top centre of the
-overlay (`ts_static/render/ArrowHud.ts`, plain DOM) pointing at the nearest candidate marker, with
-its name, distance, pack and a ▲/▼ hint when it is 5 m or more above or below. The arrow turns
-relative to the camera (up = ahead). Main puts the candidates in the render data
+**Marker arrow** (`render.showArrow`, Configuration): a shaded 3D arrow
+(`ts_static/render/ArrowHud.ts`) floating 3 m ahead of the camera, a little above the middle of
+the view, pointing straight at the nearest candidate marker (up and down included). A DOM label
+under it gives the name, distance, pack and a ▲/▼ hint when the marker is 5 m or more above or
+below. The scene's two lights only affect the arrow; everything else is unlit. Main puts the candidates in the render data
 (`Settings.arrowCandidates()`): every drawn position marker on the map, or with
 `render.arrowTarget` set (the crosshair button on a pack or in a marker's details) that pack's
 drawn markers (the current one of a sequential pack) or that one marker. Hidden while the map is

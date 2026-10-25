@@ -51,7 +51,7 @@ class RenderManager {
     });
 
     this.movieManager = new MovieManager(this.scene);
-    this.arrowHud = new ArrowHud();
+    this.arrowHud = new ArrowHud(this.scene);
     this.positionManager = new CameraPositionManager(this.renderScene.bind(this));
     this.raycaster = new THREE.Raycaster();
     this.raycaster.layers.set(2);
@@ -186,10 +186,10 @@ class RenderManager {
     // the render drew every frame with the previous frame's values, so markers (close ones most,
     // whose size changes fastest) wobbled as the player moved.
     this.updateSceneObjects();
-    this.renderer.render(this.scene, this.camera);
     if (this.positionManager.isReady) {
       this.arrowHud.Update(this.positionManager.GetPosition(), this.camera, this.scene.visible);
     }
+    this.renderer.render(this.scene, this.camera);
 
     if (timerarg) {
       requestAnimationFrame(this.renderScene.bind(this));
