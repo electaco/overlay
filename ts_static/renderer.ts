@@ -97,6 +97,12 @@ class RenderManager {
     this.webSocket.onclose = () => {
       this.logInfo("Disconnected from web socket");
       send(IPC.UseFallbackPositionUpdate, "msg");
+      // Nothing will update the cover any more, and a stale one could keep the top bar (the only
+      // Exit button) hidden. The service resends it after a reconnect.
+      this.minimized = false;
+      this.cover = null;
+      this.applyHidden();
+      this.scaleCover();
     }
     this.webSocket.onerror = (event) => {
       console.log("Error on web socket", event);

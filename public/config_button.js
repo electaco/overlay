@@ -43,6 +43,13 @@ mouseTarget.addEventListener('mouseleave', e => {
     window.config.send("resize", {w: minWidth, h: minHeight});
 });
 
+// Hidden by a covering window or a minimized game while expanded: come back collapsed.
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        window.config.send("resize", {w: minWidth, h: minHeight});
+    }
+});
+
 function exit_program() {
     window.config.send("exit", "");
 }

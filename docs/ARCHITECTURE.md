@@ -293,8 +293,11 @@ again so the next frame's autoClear covers the whole canvas). The arrow HUD labe
 while its box touches a rect. A minimized game hides the scene like a loading screen but, unlike one,
 leaves videos playing so they are still heard. The rects are relayed to main as `IPC.GameCover`
 (`IGameCover`, screen DIP) when they change; the mount menu hides when minimized, and is otherwise cut
-to its parts outside the rects (`setShape`, see mount-menu.md). Marker auto-hide timing ignores all this (the player is still standing there).
-Older services never send it.
+to its parts outside the rects (`setShape`, see mount-menu.md). The ElecTaco bar at the top does the
+same, recut as it expands and collapses on hover, and also hides only when minimized or wholly
+covered (it stays up for the map and loading screens). Marker auto-hide timing ignores all this (the
+player is still standing there). Older services never send it. A lost connection to the service clears
+the cover, since nothing would update it and the bar holds the only Exit button.
 
 ### Video markers
 

@@ -113,7 +113,14 @@ ipcMain.on(IPC.OverlaySetClickable, (event, clickable: boolean) => {
 });
 
 ipcMain.on(IPC.Window.ResizeConfig, (event, arg) => {
-    configButton?.setSize(arg.w, arg.h);
+    if (!configButton || configButton.isDestroyed()) return;
+    const b = configButton.getBounds();
+    const target = { x: b.x, y: b.y, width: arg.w, height: arg.h };
+    // In this order so the bar never shows over another window for a frame, at either size.
+    const growing = arg.w > b.width || arg.h > b.height;
+    if (growing) applyConfigButtonGameVisibility(target);
+    configButton.setSize(arg.w, arg.h);
+    if (!growing) applyConfigButtonGameVisibility(target);
 })
 
 
@@ -362,12 +369,38 @@ function mountsHiddenByGame(b: Rectangle) {
     return gameMapOpen || gameLoadingScreen || gameCover.minimized || (!mountsDrag && uncoveredParts(b).length === 0);
 }
 
-let mountsCut = false;
+// Windows currently cut with setShape.
+const cutWindows = new WeakSet<BrowserWindow>();
 
-// A new menu window is uncut: cut it for where it opened.
-function mountsOpened() {
-    mountsCut = false;
-    applyMountsGameVisibility();
+// Draws (and takes clicks on) only `parts` of a window at `b`, so it looks as if other windows are
+// in front of it. With nothing left the last shape stays: an empty one would mean "uncut".
+function cutWindow(win: BrowserWindow, b: Rectangle, parts: Rectangle[]) {
+    if (parts.length === 0) { return; }
+    const whole = parts.length === 1 && parts[0].width === b.width && parts[0].height === b.height;
+    if (!whole) {
+        win.setShape(parts);
+        cutWindows.add(win);
+    } else if (cutWindows.has(win)) {
+        // An empty shape makes the window rectangular again.
+        win.setShape([]);
+        cutWindows.delete(win);
+    }
+}
+
+// The bar at the top (config button window) sits behind other programs' windows like the mount
+// menu, but stays up for the map and loading screens. `b`: where it is about to be, when resizing.
+function applyConfigButtonGameVisibility(b?: Rectangle) {
+    if (!configButton || configButton.isDestroyed()) { return; }
+    const bounds = b ?? configButton.getBounds();
+    const parts = uncoveredParts(bounds);
+    if (gameCover.minimized || parts.length === 0) {
+        if (configButton.isVisible()) { configButton.hide(); }
+        return;
+    }
+    cutWindow(configButton, bounds, parts);
+    if (!configButton.isVisible()) {
+        configButton.showInactive();
+    }
 }
 
 function applyMountsGameVisibility() {
@@ -381,19 +414,7 @@ function applyMountsGameVisibility() {
     }
     // Like the overlay, the menu looks as if other windows are in front of it: only its uncovered
     // parts are drawn (and clickable), also while it is dragged.
-    const parts = uncoveredParts(bounds);
-    // Wholly covered mid-drag: keep the last shape (an empty one would mean "uncut").
-    if (parts.length > 0) {
-        const whole = parts.length === 1 && parts[0].width === bounds.width && parts[0].height === bounds.height;
-        if (!whole) {
-            win.setShape(parts);
-            mountsCut = true;
-        } else if (mountsCut) {
-            // An empty shape makes the window rectangular again.
-            win.setShape([]);
-            mountsCut = false;
-        }
-    }
+    cutWindow(win, bounds, uncoveredParts(bounds));
     if (!win.isVisible()) {
         win.showInactive();
     }
@@ -415,13 +436,14 @@ ipcMain.on(IPC.GameCover, (event, cover: IGameCover) => {
     gameCover = { minimized: !!cover?.minimized, rects: cover?.rects ?? [] };
     if (gameCover.minimized) overlayClickThrough();
     applyMountsGameVisibility();
+    applyConfigButtonGameVisibility();
 });
 
 // Reopens the mount menu at startup if the player left it showing.
 export function restoreMountsWindow() {
     if (GetSettings()?.overlaySettings?.mounts?.open && !openWindows['mounts'] && rendererWindow) {
         openWindows['mounts'] = createWindow(rendererWindow, 'mounts');
-        mountsOpened();
+        applyMountsGameVisibility();
     }
 }
 
@@ -441,7 +463,7 @@ ipcMain.on(IPC.Window.Open, (event, arg: { show: boolean, path: string }) => {
     if (arg.show) {
         if (!openWindows[arg.path]) {
             openWindows[arg.path] = createWindow(rendererWindow!, arg.path);
-            if (arg.path === 'mounts') { mountsOpened(); }
+            if (arg.path === 'mounts') { applyMountsGameVisibility(); }
         }
     } else {
         const win = openWindows[arg.path];
