@@ -360,6 +360,8 @@ reconciles that player with what *should* be active; nothing else starts, stops 
 - **Size and aspect:** the width comes from `source.ratio[0] × scale`; the height follows the
   video's own `videoWidth/videoHeight` once metadata has loaded, and again on the `resize` event
   when the stream changes resolution. `source.ratio[1]` is used only until the dimensions are known.
+  `source.maxHeight` (marker editor: "Max height", same units as the ratio, 0 = no limit) caps the
+  height: a taller screen shrinks as a whole, keeping its aspect, so tall clips don't fill the view.
 - **Black bars:** letterbox / pillarbox bars baked into the video (a 2:1 film in 16:9, say) are
   made transparent. `render/BlackBars.ts` samples a 160 px wide copy of the playing frame once a
   second and measures the near-black run from each edge. A sample only counts for an axis when
@@ -367,7 +369,9 @@ reconciles that player with what *should* be active; nothing else starts, stops 
   along the top doesn't change it, and frames too dark to judge are skipped. Bars are hidden once
   five counted samples agree. The screen's shader then luma-keys only those bands: near-black
   becomes transparent, so the bars vanish while burned-in subtitles drawn in them stay visible.
-  The picture area itself is never keyed. The info card and status icon are placed inside the
+  Changes fade rather than snap: a detected bar fades out over 1 s (`uBarOut`) and one that went
+  away fades back in over 0.3 s (`uBarIn`). A change detected during a fade waits for it to end. The
+  picture area itself is never keyed. The info card and status icon are placed inside the
   picture, and changes are logged as `Black bars: N% top/bottom, N% left/right`.
 - **Info on hover:** once the cursor has rested on the active screen for 350 ms, a compact card
   fades in (200 ms; out in 250 ms when it leaves) in its top-left corner (a third of the screen's width) shows the state with a coloured dot and a LIVE / FILM

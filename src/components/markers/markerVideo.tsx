@@ -98,6 +98,15 @@ function MarkerVideo(props: IProps) {
                                 max={20}
                             />
                         </div>
+                        <div title="Tallest the screen may get, in the same units as the ratio. A taller video shrinks as a whole and keeps its shape. 0 = no limit.">
+                            Max height: <NumberEditor
+                                path={props.path + "extraData.source.maxHeight"}
+                                value={props.marker.extraData?.source.maxHeight || 0}
+                                step={1}
+                                min={0}
+                                max={100}
+                            />
+                        </div>
                         <div title="Your own volume for this video marker; the overlay's hover bar on the screen changes it too.">
                     Volume (%): <NumberEditor
                         path={MarkerVolumePath(props.pack, props.marker)}

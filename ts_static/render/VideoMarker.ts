@@ -115,6 +115,10 @@ const STATUS_SCREEN_SHARE = 0.16;
 const STATUS_REDRAW_MS = 50;
 // How often the playing video is checked for letterbox / pillarbox bars.
 const BARS_SAMPLE_MS = 1000;
+// How long a detected bar takes to fade out, and a bar that went away to fade back in. A change
+// detected during a fade waits for it to end, so no part of the picture ever jumps.
+const BARS_FADE_OUT_MS = 1000;
+const BARS_FADE_IN_MS = 300;
 // How long the action bar's own volume change outranks render data (it is saved within 250 ms).
 const LOCAL_AUDIO_MS = 2000;
 
@@ -209,7 +213,15 @@ export class MovieManager {
   private suspended = false;
   // Bars baked into the video are made transparent in the screen's shader (see BlackBars.ts).
   private bars = new BlackBarDetector();
-  private barUniforms = { uBarV: { value: 0 }, uBarH: { value: 0 } };
+  // uFrom*: the bars being faded away from, uBar*: the ones being faded to, uBarOut / uBarIn: how far
+  // along the newly detected parts are fading out and the parts no longer in a bar are fading back.
+  private barUniforms = {
+    uBarV: { value: 0 }, uBarH: { value: 0 },
+    uFromV: { value: 0 }, uFromH: { value: 0 },
+    uBarOut: { value: 1 }, uBarIn: { value: 1 },
+  };
+  private barsFadeStart = 0;
+  private barsChanged = false;
   private barsSampled = 0;
   // Waiting for the first fill after loading a source.
   private firstFill = true;
@@ -257,12 +269,15 @@ export class MovieManager {
     screenMaterial.onBeforeCompile = (shader) => {
       Object.assign(shader.uniforms, this.barUniforms);
       shader.fragmentShader = shader.fragmentShader
-        .replace('#include <common>', '#include <common>\nuniform float uBarV;\nuniform float uBarH;')
+        .replace('#include <common>', '#include <common>\nuniform float uBarV;\nuniform float uBarH;\nuniform float uFromV;\nuniform float uFromH;\nuniform float uBarOut;\nuniform float uBarIn;')
         .replace('#include <map_fragment>', [
           '#include <map_fragment>',
-          'if (vMapUv.y < uBarV || vMapUv.y > 1.0 - uBarV || vMapUv.x < uBarH || vMapUv.x > 1.0 - uBarH) {',
+          'float inOldBar = (vMapUv.y < uFromV || vMapUv.y > 1.0 - uFromV || vMapUv.x < uFromH || vMapUv.x > 1.0 - uFromH) ? 1.0 : 0.0;',
+          'float inNewBar = (vMapUv.y < uBarV || vMapUv.y > 1.0 - uBarV || vMapUv.x < uBarH || vMapUv.x > 1.0 - uBarH) ? 1.0 : 0.0;',
+          'float barKeyed = inNewBar > 0.5 ? (inOldBar > 0.5 ? 1.0 : uBarOut) : (inOldBar > 0.5 ? 1.0 - uBarIn : 0.0);',
+          'if (barKeyed > 0.0) {',
           '  float barLuma = dot(diffuseColor.rgb, vec3(0.2126, 0.7152, 0.0722));',
-          '  diffuseColor.a *= smoothstep(0.008, 0.05, barLuma);',
+          '  diffuseColor.a *= mix(1.0, smoothstep(0.008, 0.05, barLuma), barKeyed);',
           '}',
         ].join('\n'));
     };
@@ -406,12 +421,18 @@ export class MovieManager {
   }
 
   // The configured ratio's width sets the screen's size; its height follows the video's actual
-  // aspect when known, so a stream that does not match the configured ratio is not stretched.
+  // aspect when known, so a stream that does not match the configured ratio is not stretched. A
+  // screen taller than the marker's maxHeight shrinks as a whole, keeping that aspect.
   private placeScreen(marker: IVideoData) {
-    const width = marker.source.ratio?.[0] || 16;
+    let width = marker.source.ratio?.[0] || 16;
     let height = marker.source.ratio?.[1] || 9;
     if (this.video.videoWidth > 0 && this.video.videoHeight > 0) {
       height = width * this.video.videoHeight / this.video.videoWidth;
+    }
+    const maxHeight = marker.source.maxHeight;
+    if (maxHeight && height > maxHeight) {
+      width *= maxHeight / height;
+      height = maxHeight;
     }
     this.rig.position.set(marker.position.X, marker.position.Y, marker.position.Z);
     this.rig.rotation.set(marker.rotation.X, marker.rotation.Y, marker.rotation.Z);
@@ -775,6 +796,8 @@ export class MovieManager {
     this.distanceOpacity = opacity;
     const audio = this.AudioOf(mark.key);
     this.video.volume = opacity * (audio.muted ? 0 : audio.volume);
+    this.barUniforms.uBarOut.value = THREE.MathUtils.smoothstep(now - this.barsFadeStart, 0, BARS_FADE_OUT_MS);
+    this.barUniforms.uBarIn.value = THREE.MathUtils.smoothstep(now - this.barsFadeStart, 0, BARS_FADE_IN_MS);
 
     if (this.retryAt) {
       if (now >= this.retryAt) {
@@ -828,7 +851,11 @@ export class MovieManager {
       }
       if (now - this.barsSampled >= BARS_SAMPLE_MS) {
         this.barsSampled = now;
-        if (this.bars.sample(this.video)) this.applyBars(mark);
+        if (this.bars.sample(this.video)) this.barsChanged = true;
+      }
+      if (this.barsChanged && now - this.barsFadeStart >= BARS_FADE_OUT_MS) {
+        this.barsChanged = false;
+        this.applyBars(mark);
       }
       if (this.video.currentTime !== this.lastCurrentTime) {
         this.lastCurrentTime = this.video.currentTime;
@@ -895,8 +922,16 @@ export class MovieManager {
   // Stops playback, audio and network activity for the current source.
   private applyBars(mark: IVideoMark) {
     const { vertical, horizontal } = this.bars.bars;
-    this.barUniforms.uBarV.value = vertical;
-    this.barUniforms.uBarH.value = horizontal;
+    const u = this.barUniforms;
+    // Changed back while waiting for a fade to end: nothing to do.
+    if (vertical === u.uBarV.value && horizontal === u.uBarH.value) return;
+    u.uFromV.value = u.uBarV.value;
+    u.uFromH.value = u.uBarH.value;
+    u.uBarV.value = vertical;
+    u.uBarH.value = horizontal;
+    u.uBarOut.value = 0;
+    u.uBarIn.value = 0;
+    this.barsFadeStart = performance.now();
     this.placeScreen(mark.marker);
     this.log(`Black bars: ${(vertical * 100).toFixed(1)}% top/bottom, ${(horizontal * 100).toFixed(1)}% left/right`);
   }
@@ -905,6 +940,12 @@ export class MovieManager {
     this.bars.reset();
     this.barUniforms.uBarV.value = 0;
     this.barUniforms.uBarH.value = 0;
+    this.barUniforms.uFromV.value = 0;
+    this.barUniforms.uFromH.value = 0;
+    this.barUniforms.uBarOut.value = 1;
+    this.barUniforms.uBarIn.value = 1;
+    this.barsFadeStart = 0;
+    this.barsChanged = false;
     this.retryAt = 0;
     this.buffering = true;
     this.lastCurrentTime = -1;
