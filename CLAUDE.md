@@ -69,7 +69,8 @@ would delete the compiled main process.
   construction, so set **both** `userOptions.chunks` and `options.chunks`.
 - `typings/index.d.ts` must not reference three.js globals — it would shadow `@types/three`.
 - The GW2 maps API returns a raw **array**; `ToMapTable()` normalises it to `{ [id]: map }`.
-- Marker pack `updateurl` must be **https** (localhost exempt) — see `IsUpdateUrlAllowed()`.
+- Marker pack updates only travel over **https** (localhost exempt); `http://` links are tried as
+  `https://` — see `SecureUpdateUrl()`.
 
 ## GW2 integration
 

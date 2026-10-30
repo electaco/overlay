@@ -421,8 +421,9 @@ While the in-game map is open the 3D scene is thrown away (the camera is meaning
 
 Marker packs are `.etmp` files, associated with the app and openable via the `etmp://` scheme
 (`LoadMarkerPacksFromCommandLine()` in `settings.ts`). Packs can declare an `updateurl` for
-self-update; `MarkerGroupSettings.IsUpdateUrlAllowed()` enforces **https only** (localhost is
-exempt) before any fetch.
+self-update; `MarkerGroupSettings.SecureUpdateUrl()` enforces **https only** (localhost is
+exempt) before any fetch. An `http://` link, in the pack or in its update file, is tried as
+`https://` rather than refused; a host without https just fails the fetch and gets no update.
 
 Pack/settings lookups go through `object-path` (`getSetting.tsx`).
 

@@ -68,54 +68,68 @@ export class MarkerGroupSettings implements IMarkerGroupSettings {
     
     // A marker-pack update is downloaded and installed without review, so it must not
     // travel over plaintext http where it could be swapped in transit. Allow localhost
-    // for development, and anything else only over https.
-    static IsUpdateUrlAllowed(url: string): boolean {
+    // for development, and anything else only over https: the url to fetch, with http
+    // links (older packs have them) tried as https, or null if it can't be used. A host
+    // without https then just fails the fetch, and the pack gets no update.
+    static SecureUpdateUrl(url: string): string | null {
         let parsed: URL;
         try {
             parsed = new URL(url);
         } catch {
-            return false;
+            return null;
         }
         if (parsed.protocol === 'https:') {
-            return true;
+            return url;
         }
         if (parsed.protocol === 'http:') {
             const host = parsed.hostname.toLowerCase();
-            return host === 'localhost' || host === '127.0.0.1' || host === '::1';
+            if (host === 'localhost' || host === '127.0.0.1' || host === '[::1]') {
+                return url;
+            }
+            parsed.protocol = 'https:';
+            return parsed.toString();
         }
-        return false;
+        return null;
     }
 
     async CheckForUpdates(): Promise<IUpdateAvailable> {
         if (this.updateurl) {
-            console.log("Checking for updates for " + this.id + " at " + this.updateurl);
-            if (!MarkerGroupSettings.IsUpdateUrlAllowed(this.updateurl)) {
-                console.log("Refusing to check for updates for " + this.id + ": updateurl is not https");
+            const updateUrl = MarkerGroupSettings.SecureUpdateUrl(this.updateurl);
+            if (updateUrl && updateUrl !== this.updateurl) {
+                console.log("updateurl for " + this.id + " is not https, trying " + updateUrl + " instead of " + this.updateurl);
+            }
+            console.log("Checking for updates for " + this.id + " at " + updateUrl);
+            if (!updateUrl) {
+                console.log("Refusing to check for updates for " + this.id + ": updateurl is not usable (" + this.updateurl + ")");
                 return { updateAvailable: false, markerid: this.id };
             }
             try {
-                var response = await fetch(this.updateurl);
+                var response = await fetch(updateUrl);
             } catch (error) {
                 console.log("Error fetching update url for " + this.id + ": " + error);
                 return { updateAvailable: false, markerid: this.id };
             }
             
             if (!response?.ok) {
-                console.log("Failed to check for updates for " + this.id + " at " + this.updateurl);
+                console.log("Failed to check for updates for " + this.id + " at " + updateUrl);
                 const message = `An error has occured: ${response?.status}`;
                 throw new Error(message);
             }
             var json = (await response.json()) as any;
-            if (json.url && !MarkerGroupSettings.IsUpdateUrlAllowed(String(json.url))) {
-                console.log("Refusing update for " + this.id + ": pack url is not https (" + json.url + ")");
+            const packUrl = json.url ? MarkerGroupSettings.SecureUpdateUrl(String(json.url)) : null;
+            if (json.url && !packUrl) {
+                console.log("Refusing update for " + this.id + ": pack url is not usable (" + json.url + ")");
                 return { updateAvailable: false, markerid: this.id };
             }
-            if (json.url && json.version && json.version !== this.version) {
-                console.log("Update found for " + this.id + " at " + json.url);
+            if (packUrl && json.version && json.version !== this.version) {
+                if (packUrl !== json.url) {
+                    console.log("Pack url for " + this.id + " is not https, trying " + packUrl + " instead of " + json.url);
+                }
+                console.log("Update found for " + this.id + " at " + packUrl);
                 return {
                     updateAvailable: true,
                     version: json.version,
-                    url: json.url,
+                    url: packUrl,
                     markerid: this.id
                 }
             } else {
